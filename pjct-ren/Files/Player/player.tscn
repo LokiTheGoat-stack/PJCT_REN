@@ -174,7 +174,6 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_br5jn"]
 resource_name = "Parry"
-length = 0.5599999999999999
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -182,7 +181,7 @@ tracks/0/path = NodePath("TestPlayerSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.033333335, 0.06666667, 0.10000001, 0.13333334, 0.16666667, 0.20000002, 0.23333335, 0.26666668, 0.3, 0.33333334, 0.36666667, 0.40000004, 0.43333337, 0.4666667, 0.5, 0.53333336),
+"times": PackedFloat32Array(0, 0.033333335, 0.06666667, 0.10000001, 0.13333334, 0.16666667, 0.20000002, 0.23333335, 0.26666668, 0.4, 0.43333334, 0.46666667, 0.5, 0.53333336, 0.8666667, 0.9, 0.93333334),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104]
@@ -277,6 +276,9 @@ _data = {
 &"Wall_Slide": SubResource("Animation_usf6g")
 }
 
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_hylex"]
+graph_offset = Vector2(-105.000244, -25.05217)
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hylex"]
 radius = 5.0
 height = 32.0
@@ -298,6 +300,10 @@ frame = 14
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1777526977]
 libraries/ = SubResource("AnimationLibrary_rkjca")
+
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=1926029460]
+tree_root = SubResource("AnimationNodeBlendTree_hylex")
+anim_player = NodePath("../AnimationPlayer")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=826343510]
 visible = false
@@ -328,6 +334,10 @@ script = ExtResource("10_b00hk")
 
 [node name="PlayerStateWall_Jump" type="Node" parent="StateMachine" unique_id=615889732]
 script = ExtResource("11_hklmv")
+
+[node name="PlayerStateGroundAttack" type="Node" parent="StateMachine" unique_id=1106640332]
+
+[node name="PlayerStateAirAttack" type="Node" parent="StateMachine" unique_id=615868126]
 
 [node name="PlayerRayCast" type="Node2D" parent="." unique_id=1611989686]
 visible = false
