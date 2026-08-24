@@ -278,6 +278,9 @@ _data = {
 &"Wall_Slide": SubResource("Animation_usf6g")
 }
 
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_hylex"]
+graph_offset = Vector2(-105.000244, -25.05217)
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hylex"]
 radius = 7.0
 height = 32.0
@@ -302,19 +305,19 @@ editor_draw_limits = true
 editor_draw_drag_margin = true
 
 [node name="TestPlayerSprite" type="Sprite2D" parent="." unique_id=539289879]
-visible = false
 texture = ExtResource("2_oque3")
 hframes = 11
 vframes = 10
+frame = 27
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1777526977]
 libraries/ = SubResource("AnimationLibrary_rkjca")
 
 [node name="AnimationTree" type="AnimationTree" parent="." unique_id=1926029460]
+tree_root = SubResource("AnimationNodeBlendTree_hylex")
 anim_player = NodePath("../AnimationPlayer")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=826343510]
-visible = false
 position = Vector2(2, 5)
 scale = Vector2(1, 1.1199994)
 shape = SubResource("CapsuleShape2D_hylex")

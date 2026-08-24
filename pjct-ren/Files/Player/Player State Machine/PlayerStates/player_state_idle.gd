@@ -25,7 +25,6 @@ func on_input(event: InputEvent) -> void:
 	
 	#Cambiar a Jump
 	if Input.is_action_just_pressed("JUMP"): 
-		controlled_node.velocity.y = PlayerMovementStats.jump_speed
 		state_machine.change_to("PlayerStateJump")
 		PlayerMovementStats.jump_count += 1
 		is_animation_play = false

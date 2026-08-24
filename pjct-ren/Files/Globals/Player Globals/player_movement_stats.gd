@@ -5,10 +5,11 @@ extends Node
 @export var running_decceleration: float = 15000.0
 @export var crouched_speed: float = 300
 @export var jump_speed: float = -500
+@export var drop_jump_speed: float = -1500
 @export var in_air_speed: float = 300
-@export var gravity_low: float = 800.0
-@export var gravity_hig: float = 1600.0
-@export var gravity_release: float = 2000.0
+@export var in_air_acceleration: float = 5000.0
+@export var jump_small_speed: float =-250.0
+@export var jumping_decceleration: float = 5000.0
 @export var wall_jump_speed: float = 500.0
 @export var wall_slide_speed: float = 50
 @export var can_climbing: bool = true
