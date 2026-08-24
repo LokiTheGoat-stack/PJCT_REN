@@ -1,0 +1,307 @@
+[gd_scene format=3 uid="uid://b1grumhnc3myh"]
+
+[ext_resource type="Script" uid="uid://bir65irocjrha" path="res://Files/Player/player.gd" id="1_usf6g"]
+[ext_resource type="Texture2D" uid="uid://26q4pftcvdjs" path="res://Files/Art/Test Art/Player Test/test_player.png" id="2_oque3"]
+[ext_resource type="Script" uid="uid://dhn0u6wgtsapf" path="res://Files/Player/Player State Machine/player_state_machine.gd" id="2_yic5t"]
+[ext_resource type="Script" uid="uid://bpgea6rh0b0lc" path="res://Files/Player/Player State Machine/PlayerStates/player_state_idle.gd" id="3_uuj77"]
+[ext_resource type="Script" uid="uid://bs6hrft1sdpr2" path="res://Files/Player/Player State Machine/PlayerStates/player_state_walk.gd" id="4_g0r71"]
+[ext_resource type="Script" uid="uid://dsm4dxbifs7r1" path="res://Files/Player/Player State Machine/PlayerStates/player_state_jump.gd" id="5_2x3rd"]
+[ext_resource type="Script" uid="uid://cnguv0o3cupx1" path="res://Files/Player/Player State Machine/PlayerStates/player_state_fall.gd" id="6_usf6g"]
+[ext_resource type="Script" uid="uid://drijqoiiv0tip" path="res://Files/Player/Player State Machine/PlayerStates/player_state_dash.gd" id="8_hklmv"]
+[ext_resource type="Script" uid="uid://d1nuocdv63ydr" path="res://Files/Player/Player State Machine/PlayerStates/player_state_wall_slide.gd" id="10_b00hk"]
+[ext_resource type="Script" uid="uid://sufayd1as1ok" path="res://Files/Player/Player State Machine/PlayerStates/player_state_wall_jump.gd" id="11_hklmv"]
+
+[sub_resource type="Animation" id="Animation_oque3"]
+resource_name = "Attack_0"
+length = 0.19999999999999998
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TestPlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.06666667, 0.10000001, 0.13333334, 0.16666667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [55, 56, 57, 58, 59, 60]
+}
+
+[sub_resource type="Animation" id="Animation_cu714"]
+resource_name = "Attack_1"
+length = 0.16666667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TestPlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.06666667, 0.10000001, 0.13333334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [66, 67, 68, 69, 70]
+}
+
+[sub_resource type="Animation" id="Animation_43t50"]
+resource_name = "Attack_2"
+length = 0.19999999999999998
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TestPlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.06666667, 0.10000001, 0.13333334, 0.16666667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [77, 78, 79, 80, 81, 82]
+}
+
+[sub_resource type="Animation" id="Animation_gnyrj"]
+resource_name = "Block"
+length = 0.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TestPlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [88]
+}
+
+[sub_resource type="Animation" id="Animation_b5kvf"]
+resource_name = "Dash"
+length = 0.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TestPlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.06666667, 0.10000001, 0.13333334, 0.16666667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [46, 47, 48, 49, 50, 51]
+}
+
+[sub_resource type="Animation" id="Animation_b00hk"]
+resource_name = "Fall"
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TestPlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.099999994, 0.19999999),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [28, 29, 30]
+}
+
+[sub_resource type="Animation" id="Animation_hklmv"]
+resource_name = "Idle"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TestPlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_rkjca"]
+resource_name = "Jump"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TestPlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.10000001, 0.20000002),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [25, 26, 27]
+}
+
+[sub_resource type="Animation" id="Animation_br5jn"]
+resource_name = "Parry"
+length = 0.5599999999999999
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TestPlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.06666667, 0.10000001, 0.13333334, 0.16666667, 0.20000002, 0.23333335, 0.26666668, 0.3, 0.33333334, 0.36666667, 0.40000004, 0.43333337, 0.4666667, 0.5, 0.53333336),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104]
+}
+
+[sub_resource type="Animation" id="Animation_wagb4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TestPlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_fst78"]
+resource_name = "Walk"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TestPlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.099999994, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [11, 12, 13, 14, 15, 16]
+}
+
+[sub_resource type="Animation" id="Animation_usf6g"]
+resource_name = "Wall_Slide"
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TestPlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.099999994, 0.19999999),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [38, 39, 40]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rkjca"]
+_data = {
+&"Attack_0": SubResource("Animation_oque3"),
+&"Attack_1": SubResource("Animation_cu714"),
+&"Attack_2": SubResource("Animation_43t50"),
+&"Block": SubResource("Animation_gnyrj"),
+&"Dash": SubResource("Animation_b5kvf"),
+&"Fall": SubResource("Animation_b00hk"),
+&"Idle": SubResource("Animation_hklmv"),
+&"Jump": SubResource("Animation_rkjca"),
+&"Parry": SubResource("Animation_br5jn"),
+&"RESET": SubResource("Animation_wagb4"),
+&"Walk": SubResource("Animation_fst78"),
+&"Wall_Slide": SubResource("Animation_usf6g")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hylex"]
+radius = 5.0
+height = 32.0
+
+[node name="Player" type="CharacterBody2D" unique_id=889305067]
+script = ExtResource("1_usf6g")
+
+[node name="TestPlayerSprite" type="Sprite2D" parent="." unique_id=539289879]
+texture = ExtResource("2_oque3")
+hframes = 11
+vframes = 10
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1777526977]
+libraries/ = SubResource("AnimationLibrary_rkjca")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=826343510]
+visible = false
+position = Vector2(0, 8)
+shape = SubResource("CapsuleShape2D_hylex")
+
+[node name="StateMachine" type="Node" parent="." unique_id=1417261840 node_paths=PackedStringArray("default_state")]
+script = ExtResource("2_yic5t")
+default_state = NodePath("PlayerStateIdle")
+
+[node name="PlayerStateIdle" type="Node" parent="StateMachine" unique_id=580396749]
+script = ExtResource("3_uuj77")
+
+[node name="PlayerStateWalk" type="Node" parent="StateMachine" unique_id=1767729316]
+script = ExtResource("4_g0r71")
+
+[node name="PlayerStateJump" type="Node" parent="StateMachine" unique_id=2108439155]
+script = ExtResource("5_2x3rd")
+
+[node name="PlayerStateFall" type="Node" parent="StateMachine" unique_id=520102771]
+script = ExtResource("6_usf6g")
+
+[node name="PlayerStateDash" type="Node" parent="StateMachine" unique_id=884836020]
+script = ExtResource("8_hklmv")
+
+[node name="PlayerStateWall_Slide" type="Node" parent="StateMachine" unique_id=871843932]
+script = ExtResource("10_b00hk")
+
+[node name="PlayerStateWall_Jump" type="Node" parent="StateMachine" unique_id=615889732]
+script = ExtResource("11_hklmv")
+
+[node name="PlayerRayCast" type="Node2D" parent="." unique_id=1611989686]
+visible = false
+
+[node name="Wall_RayCast_Right" type="RayCast2D" parent="PlayerRayCast" unique_id=1810497926]
+position = Vector2(0, 7)
+target_position = Vector2(14, 0)
+collision_mask = 16
+
+[node name="Wall_RayCast_Left" type="RayCast2D" parent="PlayerRayCast" unique_id=1898026732]
+position = Vector2(0, 7)
+target_position = Vector2(-15, 0)
+collision_mask = 16
+
+[node name="Top_RayCast" type="RayCast2D" parent="PlayerRayCast" unique_id=1247020294]
+position = Vector2(0, -3)
+target_position = Vector2(0, -18)
+collision_mask = 16
+
+[node name="Botton_RayCast" type="RayCast2D" parent="PlayerRayCast" unique_id=1827843079]
+position = Vector2(0, 17)
+target_position = Vector2(0, 12)
+collision_mask = 16
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=2063165322]
+visible = false
+position = Vector2(0, -40)
+zoom = Vector2(2.13, 2.13)
+position_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+drag_left_margin = 0.25
+drag_top_margin = 0.96
+drag_right_margin = 0.25
+drag_bottom_margin = 0.27
+editor_draw_limits = true
+editor_draw_drag_margin = true
