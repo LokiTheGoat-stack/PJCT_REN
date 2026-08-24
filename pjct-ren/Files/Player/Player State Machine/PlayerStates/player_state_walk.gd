@@ -36,6 +36,21 @@ func on_input(event: InputEvent) -> void:
 		state_machine.change_to("PlayerStateDash")
 		$"../PlayerStateDash".dash("PlayerStateWalk")
 		is_animation_play = false
+	
+	#Cambiar a Attack
+	if Input.is_action_just_pressed("ATTACK") and Input.is_action_pressed("LEFT"):
+		state_machine.change_to("PlayerStateGroundAttack")
+		$"../PlayerStateGroundAttack".start_attack(-1)
+		is_animation_play = false
+	if Input.is_action_just_pressed("ATTACK") and Input.is_action_pressed("RIGHT"):
+		state_machine.change_to("PlayerStateGroundAttack")
+		$"../PlayerStateGroundAttack".start_attack(1)
+		is_animation_play = false
+	
+	#Cambiar a Block
+	if Input.is_action_pressed("BLOCK"):
+		state_machine.change_to("PlayerStateBlock")
+		is_animation_play = false
 #endregion
 
 func play_animation() -> void: #Control de animacion

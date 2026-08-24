@@ -54,6 +54,12 @@ func on_input(event: InputEvent) -> void:
 		state_machine.change_to("PlayerStateDash")
 		$"../PlayerStateDash".dash("PlayerStateJump")
 		is_animation_play = false
+	
+	#Cambiar a Attack
+	if Input.is_action_just_pressed("ATTACK"):
+		state_machine.change_to("PlayerStateAirAttack")
+		$"../PlayerStateAirAttack".start_attack(0)
+		is_animation_play = false
 #endregion
 
 func play_animation() -> void: #control de animacion

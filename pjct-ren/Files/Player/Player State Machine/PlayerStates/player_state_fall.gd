@@ -8,6 +8,7 @@ var is_animation_play: bool = false
 var is_on_wall = false
 var wall_normal = Vector2.ZERO
 var last_chance_to_jump: bool = false
+var can_attack: bool = true
 
 #control del delay del salto
 func _last_chance_to_jump():
@@ -42,6 +43,7 @@ func on_physics_process(delta):
 		$"../PlayerStateWall_Slide".wall_normal = wall_normal
 		state_machine.change_to("PlayerStateWall_Slide")
 		is_animation_play = false
+		can_attack = true
 	
 	#si estas tocando el suelo cambiar a Walk o Idle
 	if controlled_node.velocity.y >= 0 and controlled_node.is_on_floor():
@@ -50,6 +52,7 @@ func on_physics_process(delta):
 		else: state_machine.change_to("PlayerStateIdle")
 		PlayerMovementStats.jump_count = 0
 		is_animation_play = false
+		can_attack = true
 	
 	handle_gravity(delta)
 	controlled_node.move_and_slide()
@@ -71,6 +74,12 @@ func on_input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("DASH"):
 		state_machine.change_to("PlayerStateDash")
 		$"../PlayerStateDash".dash("PlayerStateFall")
+		is_animation_play = false
+	
+	#Cambiar a Attack
+	if Input.is_action_just_pressed("ATTACK") and can_attack == true:
+		state_machine.change_to("PlayerStateAirAttack")
+		$"../PlayerStateAirAttack".start_attack(0)
 		is_animation_play = false
 #endregion
 
