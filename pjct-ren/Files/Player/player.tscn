@@ -127,6 +127,22 @@ tracks/1/keys = {
 "values": [Rect2(0, 384, 160, 96), Rect2(160, 384, 160, 96), Rect2(320, 384, 160, 96)]
 }
 
+[sub_resource type="Animation" id="Animation_apb16"]
+resource_name = "Fall_Out"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Ren_Sprites:texture:region")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Rect2(0, 480, 160, 96), Rect2(160, 480, 160, 96)]
+}
+
 [sub_resource type="Animation" id="Animation_hklmv"]
 resource_name = "Idle"
 loop_mode = 1
@@ -150,26 +166,30 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("TestPlayerSprite:frame")
+tracks/0/path = NodePath("Ren_Sprites:texture:region")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.10000001, 0.20000002),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [25, 26, 27]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Ren_Sprites:texture:region")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [Rect2(0, 288, 160, 96), Rect2(160, 288, 160, 96), Rect2(320, 288, 160, 96)]
+}
+
+[sub_resource type="Animation" id="Animation_mx6kc"]
+resource_name = "Jump_In"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Ren_Sprites:texture:region")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Rect2(160, 192, 160, 96), Rect2(320, 192, 160, 96)]
 }
 
 [sub_resource type="Animation" id="Animation_br5jn"]
@@ -202,18 +222,6 @@ tracks/0/keys = {
 "update": 0,
 "values": [Rect2(0, 0, 160, 96)]
 }
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("TestPlayerSprite:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [14]
-}
 
 [sub_resource type="Animation" id="Animation_fst78"]
 resource_name = "Walk"
@@ -222,22 +230,10 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("TestPlayerSprite:frame")
+tracks/0/path = NodePath("Ren_Sprites:texture:region")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.099999994, 0.2, 0.3, 0.4, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [11, 12, 13, 14, 15, 16]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Ren_Sprites:texture:region")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
@@ -269,8 +265,10 @@ _data = {
 &"Block": SubResource("Animation_gnyrj"),
 &"Dash": SubResource("Animation_b5kvf"),
 &"Fall": SubResource("Animation_b00hk"),
+&"Fall_Out": SubResource("Animation_apb16"),
 &"Idle": SubResource("Animation_hklmv"),
 &"Jump": SubResource("Animation_rkjca"),
+&"Jump_In": SubResource("Animation_mx6kc"),
 &"Parry": SubResource("Animation_br5jn"),
 &"RESET": SubResource("Animation_wagb4"),
 &"Walk": SubResource("Animation_fst78"),
@@ -278,7 +276,7 @@ _data = {
 }
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hylex"]
-radius = 5.0
+radius = 7.0
 height = 32.0
 
 [node name="Player" type="CharacterBody2D" unique_id=889305067]
@@ -289,19 +287,30 @@ texture = SubResource("AtlasTexture_54hkw")
 region_enabled = true
 region_rect = Rect2(0, 0, 160, 96)
 
+[node name="Camera2D" type="Camera2D" parent="Ren_Sprites" unique_id=2063165322]
+position = Vector2(46, 0)
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+drag_left_margin = 0.25
+drag_top_margin = 0.25
+drag_right_margin = 0.25
+drag_bottom_margin = 0.27
+editor_draw_limits = true
+editor_draw_drag_margin = true
+
 [node name="TestPlayerSprite" type="Sprite2D" parent="." unique_id=539289879]
 visible = false
 texture = ExtResource("2_oque3")
 hframes = 11
 vframes = 10
-frame = 14
+frame = 27
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1777526977]
 libraries/ = SubResource("AnimationLibrary_rkjca")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=826343510]
-visible = false
-position = Vector2(0, 8)
+position = Vector2(2, 5)
+scale = Vector2(1, 1.1199994)
 shape = SubResource("CapsuleShape2D_hylex")
 
 [node name="StateMachine" type="Node" parent="." unique_id=1417261840 node_paths=PackedStringArray("default_state")]
@@ -351,14 +360,3 @@ collision_mask = 16
 position = Vector2(0, 17)
 target_position = Vector2(0, 12)
 collision_mask = 16
-
-[node name="Camera2D" type="Camera2D" parent="." unique_id=2063165322]
-zoom = Vector2(2.13, 2.13)
-position_smoothing_enabled = true
-drag_vertical_enabled = true
-drag_left_margin = 0.25
-drag_top_margin = 0.25
-drag_right_margin = 0.25
-drag_bottom_margin = 0.27
-editor_draw_limits = true
-editor_draw_drag_margin = true
