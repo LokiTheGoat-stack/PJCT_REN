@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://b1grumhnc3myh"]
 
 [ext_resource type="Script" uid="uid://bir65irocjrha" path="res://Files/Player/player.gd" id="1_usf6g"]
+[ext_resource type="Texture2D" uid="uid://br0k6mfygjpli" path="res://Files/Art/Ren/Ren_SpriteSheet.png" id="2_br5jn"]
 [ext_resource type="Texture2D" uid="uid://26q4pftcvdjs" path="res://Files/Art/Test Art/Player Test/test_player.png" id="2_oque3"]
 [ext_resource type="Script" uid="uid://dhn0u6wgtsapf" path="res://Files/Player/Player State Machine/player_state_machine.gd" id="2_yic5t"]
 [ext_resource type="Script" uid="uid://bpgea6rh0b0lc" path="res://Files/Player/Player State Machine/PlayerStates/player_state_idle.gd" id="3_uuj77"]
@@ -11,9 +12,13 @@
 [ext_resource type="Script" uid="uid://d1nuocdv63ydr" path="res://Files/Player/Player State Machine/PlayerStates/player_state_wall_slide.gd" id="10_b00hk"]
 [ext_resource type="Script" uid="uid://sufayd1as1ok" path="res://Files/Player/Player State Machine/PlayerStates/player_state_wall_jump.gd" id="11_hklmv"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_54hkw"]
+atlas = ExtResource("2_br5jn")
+region = Rect2(0, 0, 160, 96)
+
 [sub_resource type="Animation" id="Animation_oque3"]
 resource_name = "Attack_0"
-length = 0.19999999999999998
+length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -45,7 +50,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_43t50"]
 resource_name = "Attack_2"
-length = 0.19999999999999998
+length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -109,27 +114,39 @@ tracks/0/keys = {
 "update": 1,
 "values": [28, 29, 30]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Ren_Sprites:texture:region")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Rect2(0, 384, 160, 96), Rect2(160, 384, 160, 96), Rect2(320, 384, 160, 96)]
+}
 
 [sub_resource type="Animation" id="Animation_hklmv"]
 resource_name = "Idle"
-length = 0.8
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("TestPlayerSprite:frame")
+tracks/0/path = NodePath("Ren_Sprites:texture:region")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3]
+"values": [Rect2(0, 0, 160, 96), Rect2(160, 0, 160, 96), Rect2(320, 0, 160, 96), Rect2(480, 0, 160, 96), Rect2(640, 0, 160, 96)]
 }
 
 [sub_resource type="Animation" id="Animation_rkjca"]
 resource_name = "Jump"
 length = 0.3
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -141,6 +158,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [25, 26, 27]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Ren_Sprites:texture:region")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Rect2(0, 288, 160, 96), Rect2(160, 288, 160, 96), Rect2(320, 288, 160, 96)]
 }
 
 [sub_resource type="Animation" id="Animation_br5jn"]
@@ -164,14 +193,26 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("TestPlayerSprite:frame")
+tracks/0/path = NodePath("Ren_Sprites:texture:region")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(0, 0, 160, 96)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TestPlayerSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [0]
+"values": [14]
 }
 
 [sub_resource type="Animation" id="Animation_fst78"]
@@ -189,6 +230,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [11, 12, 13, 14, 15, 16]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Ren_Sprites:texture:region")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Rect2(0, 96, 160, 96), Rect2(160, 96, 160, 96), Rect2(320, 96, 160, 96), Rect2(480, 96, 160, 96), Rect2(640, 96, 160, 96), Rect2(800, 96, 160, 96)]
 }
 
 [sub_resource type="Animation" id="Animation_usf6g"]
@@ -231,10 +284,17 @@ height = 32.0
 [node name="Player" type="CharacterBody2D" unique_id=889305067]
 script = ExtResource("1_usf6g")
 
+[node name="Ren_Sprites" type="Sprite2D" parent="." unique_id=707467149]
+texture = SubResource("AtlasTexture_54hkw")
+region_enabled = true
+region_rect = Rect2(0, 0, 160, 96)
+
 [node name="TestPlayerSprite" type="Sprite2D" parent="." unique_id=539289879]
+visible = false
 texture = ExtResource("2_oque3")
 hframes = 11
 vframes = 10
+frame = 14
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1777526977]
 libraries/ = SubResource("AnimationLibrary_rkjca")
@@ -293,14 +353,11 @@ target_position = Vector2(0, 12)
 collision_mask = 16
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=2063165322]
-visible = false
-position = Vector2(0, -40)
 zoom = Vector2(2.13, 2.13)
 position_smoothing_enabled = true
-drag_horizontal_enabled = true
 drag_vertical_enabled = true
 drag_left_margin = 0.25
-drag_top_margin = 0.96
+drag_top_margin = 0.25
 drag_right_margin = 0.25
 drag_bottom_margin = 0.27
 editor_draw_limits = true
