@@ -1,7 +1,7 @@
 extends Node
 class_name PlayerStateBase
 
-@onready var controlled_node: CharacterBody2D = self.owner
+@onready var controlled_node: Node = $"."
 
 var state_machine: PlayerStateMachine
 
@@ -13,3 +13,5 @@ func end():
 	pass
 
 #endregion
+
+#!!!!!! No tocar nada para que los estados sigan funcionando
