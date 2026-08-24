@@ -49,7 +49,8 @@ func on_input(event: InputEvent) -> void:
 		is_animation_play = false
 	
 	#Cambiar a Wall_Jump
-	if Input.is_action_just_pressed("JUMP") and not controlled_node.is_on_floor(): 
+	if Input.is_action_just_pressed("JUMP") and not controlled_node.is_on_floor():
+		controlled_node.velocity.y = PlayerMovementStats.jump_speed 
 		state_machine.change_to("PlayerStateWall_Jump")
 		$"../PlayerStateWall_Jump".wall_normal = wall_normal
 		PlayerMovementStats.jump_count = 1

@@ -2,7 +2,6 @@ extends Node
 class_name PlayerStateBase
 
 @onready var controlled_node: Node = $"."
-
 var state_machine: PlayerStateMachine
 
 #region METHODS
