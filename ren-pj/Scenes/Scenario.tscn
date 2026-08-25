@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://c3xldrqpre8th"]
+
+[ext_resource type="PackedScene" uid="uid://disjnracwalpe" path="res://Scenes/ren_char.tscn" id="1_lk46d"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_afhvy"]
+size = Vector2(307, 20)
+
+[node name="Node2D" type="Node2D" unique_id=1277311491]
+
+[node name="Ren_Char" parent="." unique_id=1911630504 instance=ExtResource("1_lk46d")]
+position = Vector2(226, 160)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1414722026]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=816581291]
+position = Vector2(221, 220)
+shape = SubResource("RectangleShape2D_afhvy")
