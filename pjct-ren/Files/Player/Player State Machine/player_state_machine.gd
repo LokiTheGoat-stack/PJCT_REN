@@ -5,6 +5,7 @@ class_name PlayerStateMachine
 @export var default_state: PlayerStateBase
 
 var current_state: PlayerStateBase = null
+var can_change: bool = true
 
 func _ready() -> void:
 	call_deferred("default_state_start")
@@ -21,9 +22,10 @@ func state_start() -> void:
 	current_state.start()
 
 func change_to(new_state:String) -> void:
-	if current_state and current_state.has_method("end"): current_state.end()
-	current_state = get_node(new_state)
-	state_start()
+	if can_change == true:
+		if current_state and current_state.has_method("end"): current_state.end()
+		current_state = get_node(new_state)
+		state_start()
 #endregion
 
 # AUTOMATIC_METHODS controla las funsiones prosses, input y sus variantes de current_state

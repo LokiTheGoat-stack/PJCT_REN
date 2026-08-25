@@ -11,6 +11,10 @@
 [ext_resource type="Script" uid="uid://drijqoiiv0tip" path="res://Files/Player/Player State Machine/PlayerStates/player_state_dash.gd" id="8_hklmv"]
 [ext_resource type="Script" uid="uid://d1nuocdv63ydr" path="res://Files/Player/Player State Machine/PlayerStates/player_state_wall_slide.gd" id="10_b00hk"]
 [ext_resource type="Script" uid="uid://sufayd1as1ok" path="res://Files/Player/Player State Machine/PlayerStates/player_state_wall_jump.gd" id="11_hklmv"]
+[ext_resource type="Script" uid="uid://bc5ipfx8ns3ka" path="res://Files/Player/Player State Machine/PlayerStates/player_state_ground_attack.gd" id="12_43t50"]
+[ext_resource type="Script" uid="uid://cyi0mw0lti0hu" path="res://Files/Player/Player State Machine/PlayerStates/player_state_air_attack.gd" id="13_b5kvf"]
+[ext_resource type="Script" uid="uid://cdhhsikiv25pa" path="res://Files/Player/Player State Machine/PlayerStates/player_state_death.gd" id="14_apb16"]
+[ext_resource type="Script" uid="uid://blvwely6umtfr" path="res://Files/Player/Player State Machine/PlayerStates/player_state_block.gd" id="14_b5kvf"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_54hkw"]
 atlas = ExtResource("2_br5jn")
@@ -34,7 +38,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_cu714"]
 resource_name = "Attack_1"
-length = 0.16666667
+length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -274,9 +278,6 @@ _data = {
 &"Wall_Slide": SubResource("Animation_usf6g")
 }
 
-[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_hylex"]
-graph_offset = Vector2(-105.000244, -25.05217)
-
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hylex"]
 radius = 7.0
 height = 32.0
@@ -290,7 +291,9 @@ region_enabled = true
 region_rect = Rect2(0, 0, 160, 96)
 
 [node name="Camera2D" type="Camera2D" parent="Ren_Sprites" unique_id=2063165322]
+visible = false
 position = Vector2(46, 0)
+enabled = false
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
 drag_left_margin = 0.25
@@ -305,13 +308,11 @@ visible = false
 texture = ExtResource("2_oque3")
 hframes = 11
 vframes = 10
-frame = 27
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1777526977]
 libraries/ = SubResource("AnimationLibrary_rkjca")
 
 [node name="AnimationTree" type="AnimationTree" parent="." unique_id=1926029460]
-tree_root = SubResource("AnimationNodeBlendTree_hylex")
 anim_player = NodePath("../AnimationPlayer")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=826343510]
@@ -345,8 +346,16 @@ script = ExtResource("10_b00hk")
 script = ExtResource("11_hklmv")
 
 [node name="PlayerStateGroundAttack" type="Node" parent="StateMachine" unique_id=1106640332]
+script = ExtResource("12_43t50")
 
 [node name="PlayerStateAirAttack" type="Node" parent="StateMachine" unique_id=615868126]
+script = ExtResource("13_b5kvf")
+
+[node name="PlayerStateBlock" type="Node" parent="StateMachine" unique_id=1161879854]
+script = ExtResource("14_b5kvf")
+
+[node name="PlayerStateDeath" type="Node" parent="StateMachine" unique_id=1686556932]
+script = ExtResource("14_apb16")
 
 [node name="PlayerRayCast" type="Node2D" parent="." unique_id=1611989686]
 visible = false

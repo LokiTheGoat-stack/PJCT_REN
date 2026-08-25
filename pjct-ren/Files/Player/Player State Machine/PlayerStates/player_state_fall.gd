@@ -3,11 +3,12 @@ extends PlayerStateBase
 @onready var raycast_right: RayCast2D = $"../../PlayerRayCast/Wall_RayCast_Right"
 @onready var raycast_left: RayCast2D = $"../../PlayerRayCast/Wall_RayCast_Left"
 
-var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+var gravity: float = 0.0
 var is_animation_play: bool = false
 var is_on_wall = false
 var wall_normal = Vector2.ZERO
 var last_chance_to_jump: bool = false
+var can_attack: bool = true
 
 #control del delay del salto
 func _last_chance_to_jump():
@@ -18,9 +19,16 @@ func _last_chance_to_jump():
 #region ALWAYS_ON_FUNC
 func on_physics_process(delta):
 	#control de direccion de la caida (Eje x,y)
-	controlled_node.velocity.y = 425
+	controlled_node.velocity.y += gravity * delta
 	controlled_node.velocity.x = \
 	Input.get_axis("LEFT","RIGHT") * PlayerMovementStats.in_air_speed
+	
+	#control de la gravedad durante la caida
+	if controlled_node.velocity.y > 0:
+		gravity = PlayerMovementStats.gravity_hig
+	elif controlled_node.velocity.y == 0:
+		gravity = PlayerMovementStats.gravity_low
+	
 	
 	if is_animation_play == false: play_animation()
 	
@@ -42,6 +50,7 @@ func on_physics_process(delta):
 		$"../PlayerStateWall_Slide".wall_normal = wall_normal
 		state_machine.change_to("PlayerStateWall_Slide")
 		is_animation_play = false
+		can_attack = true
 	
 	#si estas tocando el suelo cambiar a Walk o Idle
 	if controlled_node.velocity.y >= 0 and controlled_node.is_on_floor():
@@ -50,13 +59,14 @@ func on_physics_process(delta):
 		else: state_machine.change_to("PlayerStateIdle")
 		PlayerMovementStats.jump_count = 0
 		is_animation_play = false
+		can_attack = true
 	
-	handle_gravity(delta)
 	controlled_node.move_and_slide()
 
 func on_input(event: InputEvent) -> void:
 	#Si despues al caer saltas antes de los 0.09s, cambiar a Jump
 	if Input.is_action_just_pressed("JUMP") and last_chance_to_jump == true: 
+		controlled_node.velocity.y = PlayerMovementStats.jump_speed
 		state_machine.change_to("PlayerStateJump")
 		PlayerMovementStats.jump_count += 1
 		is_animation_play = false
@@ -72,11 +82,14 @@ func on_input(event: InputEvent) -> void:
 		state_machine.change_to("PlayerStateDash")
 		$"../PlayerStateDash".dash("PlayerStateFall")
 		is_animation_play = false
+	
+	#Cambiar a Attack
+	if Input.is_action_just_pressed("ATTACK") and can_attack == true:
+		state_machine.change_to("PlayerStateAirAttack")
+		$"../PlayerStateAirAttack".start_attack(0)
+		is_animation_play = false
 #endregion
 
 func play_animation() -> void: #control de animaciones
 	is_animation_play = true
 	$"../../AnimationPlayer".play("Fall")
-
-func handle_gravity(delta) -> void: #control de gravedad
-	controlled_node.velocity.y += gravity * delta
