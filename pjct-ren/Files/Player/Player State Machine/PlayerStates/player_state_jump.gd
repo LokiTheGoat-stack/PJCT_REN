@@ -5,12 +5,13 @@ extends PlayerStateBase
 @onready var raycast_top: RayCast2D = $"../../PlayerRayCast/Top_RayCast"
 
 var gravity: float = 0.0
-var is_animation_play: bool = false
 var is_on_wall = false
 var wall_normal = Vector2.ZERO
 
 #region ALWAYS_ON_FUNC
 func on_physics_process(delta) -> void:
+	#if is_animation_play == false: play_animation()
+	
 	#control de direccion del salto (Eje x, y)
 	controlled_node.velocity.y += gravity * delta
 	controlled_node.velocity.x = Input.get_axis("LEFT","RIGHT") * PlayerMovementStats.in_air_speed
@@ -22,11 +23,8 @@ func on_physics_process(delta) -> void:
 		else: gravity = PlayerMovementStats.gravity_low
 	
 	elif controlled_node.velocity.y > 0:
+		controlled_node.animation_machine.travel("Fall_Down")
 		state_machine.change_to("PlayerStateFall")
-		is_animation_play = false
-	
-	
-	if is_animation_play == false: play_animation()
 	
 	#control de colision del raycast
 	raycast_left.target_position = Vector2(-15, 0)
@@ -41,14 +39,13 @@ func on_physics_process(delta) -> void:
 	
 	#si se toca techo cambiar a Fall
 	if raycast_top.is_colliding() and not controlled_node.is_on_floor():
+		controlled_node.animation_machine.travel("Fall_Down")
 		state_machine.change_to("PlayerStateFall")
-		is_animation_play = false
 	
 	#si estas pegado a una pared y no estas tocando el suelo cambiar a Wall_Slide
 	elif is_on_wall and not controlled_node.is_on_floor():
 		$"../PlayerStateWall_Slide".wall_normal = wall_normal
 		state_machine.change_to("PlayerStateWall_Slide")
-		is_animation_play = false
 	
 	controlled_node.move_and_slide()
 
@@ -57,15 +54,12 @@ func on_input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("DASH"):
 		state_machine.change_to("PlayerStateDash")
 		$"../PlayerStateDash".dash("PlayerStateJump")
-		is_animation_play = false
 	
 	#Cambiar a Attack
 	if Input.is_action_just_pressed("ATTACK"):
 		state_machine.change_to("PlayerStateAirAttack")
 		$"../PlayerStateAirAttack".start_attack(0)
-		is_animation_play = false
 #endregion
 
 func play_animation() -> void: #control de animacion
-	is_animation_play = true
-	$"../../AnimationPlayer".play("Jump")
+	controlled_node.animation_machine.travel("Jump_Up")

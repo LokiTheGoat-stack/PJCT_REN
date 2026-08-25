@@ -3,6 +3,7 @@ extends PlayerStateBase
 var x_velocity: float = 0
 var direction: Vector2 = Vector2.ZERO
 var can_dash: bool = true
+var phantom_on: bool = false
 
 #region AWAYS_ON_FUNC
 func on_physics_process(delta) -> void:
@@ -43,7 +44,10 @@ func with_velocity():
 #endregion
 
 func finish_dash():
+	phantom_on = true
+	phantom_animation()
 	await get_tree().create_timer(PlayerMovementStats.dash_time).timeout
+	phantom_on = false
 	controlled_node.velocity = Vector2.ZERO
 	x_velocity = 0
 	direction = Vector2.ZERO
@@ -56,3 +60,27 @@ func finish_dash():
 	#cooldown
 	await get_tree().create_timer(PlayerMovementStats.dash_cooldown).timeout
 	can_dash = true
+
+func phantom_animation():
+	while true:
+		await get_tree().create_timer(0.016).timeout
+		add_phantom()
+		if phantom_on == false: 
+			break
+
+func add_phantom():
+	var tween: Tween = create_tween()
+	var phantom: Sprite2D = Sprite2D.new()
+	phantom.texture = controlled_node.ren_sprite.texture
+	phantom.hframes = controlled_node.ren_sprite.hframes
+	phantom.vframes = controlled_node.ren_sprite.vframes
+	phantom.frame = controlled_node.ren_sprite.frame
+	phantom.centered = true
+	if controlled_node.ren_sprite.flip_h: phantom.flip_h = true
+	phantom.global_position = controlled_node.global_position
+	phantom.modulate = Color.BLUE
+	get_parent().add_child(phantom)
+	phantom.z_index = 0
+	tween.tween_property(phantom, "modulate", Color(1.0,1.0,1.0,0.0), 0.5)
+	tween.tween_callback(phantom.queue_free)
+	tween.tween_callback(tween.kill)

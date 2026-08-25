@@ -1,15 +1,14 @@
 [gd_scene format=3 uid="uid://disjnracwalpe"]
 
-[ext_resource type="Script" uid="uid://cv7xlontqp8b4" path="res://Scenes/ren_char.gd" id="1_mb2i3"]
-[ext_resource type="Texture2D" uid="uid://b4kokskxky42t" path="res://Assets/Ren_Char/Ren_Iddle.png" id="1_s2xox"]
-[ext_resource type="Texture2D" uid="uid://beb63awum7mag" path="res://Assets/Ren_Char/Ren_Jump_Into.png" id="2_6jyks"]
-[ext_resource type="Texture2D" uid="uid://bba2pp0yfcaem" path="res://Assets/Ren_Char/Ren_Sprint_Into.png" id="2_gs2od"]
-[ext_resource type="Texture2D" uid="uid://c0qtu8y7ea05m" path="res://Assets/Ren_Char/Ren_Jump_Down.png" id="2_mk7wn"]
-[ext_resource type="Texture2D" uid="uid://b30qmvucmrfkc" path="res://Assets/Ren_Char/Ren_Jump_Mid.png" id="3_m7b20"]
-[ext_resource type="Texture2D" uid="uid://d12fcya8mhtm4" path="res://Assets/Ren_Char/Ren_Sprint_Loop.png" id="3_taali"]
-[ext_resource type="Texture2D" uid="uid://cfxqqln0v5weh" path="res://Assets/Ren_Char/Ren_Sprint_Outo.png" id="4_55bmw"]
-[ext_resource type="Texture2D" uid="uid://cv1dxqebxufje" path="res://Assets/Ren_Char/Ren_Jump_Up.png" id="4_mk7wn"]
-[ext_resource type="Texture2D" uid="uid://bgmtasiwu3s0h" path="res://Assets/Ren_Char/Ren_Jump_Outo.png" id="5_mb2i3"]
+[ext_resource type="Texture2D" uid="uid://b4kokskxky42t" path="res://Files/Art/Ren_Char/Ren_Iddle.png" id="1_s2xox"]
+[ext_resource type="Texture2D" uid="uid://beb63awum7mag" path="res://Files/Art/Ren_Char/Ren_Jump_Into.png" id="2_6jyks"]
+[ext_resource type="Texture2D" uid="uid://bba2pp0yfcaem" path="res://Files/Art/Ren_Char/Ren_Sprint_Into.png" id="2_gs2od"]
+[ext_resource type="Texture2D" uid="uid://c0qtu8y7ea05m" path="res://Files/Art/Ren_Char/Ren_Jump_Down.png" id="2_mk7wn"]
+[ext_resource type="Texture2D" uid="uid://b30qmvucmrfkc" path="res://Files/Art/Ren_Char/Ren_Jump_Mid.png" id="3_m7b20"]
+[ext_resource type="Texture2D" uid="uid://d12fcya8mhtm4" path="res://Files/Art/Ren_Char/Ren_Sprint_Loop.png" id="3_taali"]
+[ext_resource type="Texture2D" uid="uid://cfxqqln0v5weh" path="res://Files/Art/Ren_Char/Ren_Sprint_Outo.png" id="4_55bmw"]
+[ext_resource type="Texture2D" uid="uid://cv1dxqebxufje" path="res://Files/Art/Ren_Char/Ren_Jump_Up.png" id="4_mk7wn"]
+[ext_resource type="Texture2D" uid="uid://bgmtasiwu3s0h" path="res://Files/Art/Ren_Char/Ren_Jump_Outo.png" id="5_mb2i3"]
 
 [sub_resource type="Animation" id="Animation_6jyks"]
 resource_name = "Iddle"
@@ -611,20 +610,19 @@ graph_offset = Vector2(-122, 52.542004)
 height = 36.0
 
 [node name="Ren_Char" type="CharacterBody2D" unique_id=1911630504]
-script = ExtResource("1_mb2i3")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1341438749]
+[node name="Ren_Sprite" type="Sprite2D" parent="." unique_id=1341438749]
 texture = ExtResource("1_s2xox")
 hframes = 5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=209524862]
-root_node = NodePath("../Sprite2D")
+root_node = NodePath("../Ren_Sprite")
 libraries/ = SubResource("AnimationLibrary_6jyks")
 autoplay = &"Iddle"
 speed_scale = 0.5
 
 [node name="AnimationTree" type="AnimationTree" parent="." unique_id=1072079469]
-root_node = NodePath("../Sprite2D")
+root_node = NodePath("../Ren_Sprite")
 tree_root = SubResource("AnimationNodeStateMachine_afhvy")
 anim_player = NodePath("../AnimationPlayer")
 parameters/Fall_Down/TimeScale/scale = 0.5
@@ -638,6 +636,5 @@ parameters/Run_Into/TimeScale/scale = 0.5
 parameters/Run_Outo/TimeScale/scale = 0.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=557684422]
-visible = false
 position = Vector2(0, 5)
 shape = SubResource("CapsuleShape2D_afhvy")

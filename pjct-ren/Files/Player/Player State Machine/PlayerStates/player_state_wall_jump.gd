@@ -6,7 +6,6 @@ extends PlayerStateBase
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var valid_timer: bool = false
 var can_fall: bool = false
-var is_animation_play: bool = false
 var is_on_wall = false
 var wall_normal = Vector2.ZERO
 
@@ -25,7 +24,6 @@ func on_physics_process(delta) -> void:
 	elif controlled_node.velocity.y > 0:
 		can_fall = false
 		state_machine.change_to("PlayerStateFall")
-		is_animation_play = false
 	
 	#control de colision del raycast
 	raycast_left.target_position = Vector2(-15, 0)
@@ -44,7 +42,6 @@ func on_physics_process(delta) -> void:
 	handle_gravity(delta)
 	controlled_node.move_and_slide()
 	if valid_timer == false: start_jump_timer()
-	if is_animation_play == false: play_animation()
 	#endregion
 
 func new_verification(): #verifivar si se puede hacer Wall_Slide 
@@ -57,10 +54,6 @@ func start_jump_timer() -> void: #control de duracion del salto
 	valid_timer = true
 	await get_tree().create_timer(1.0).timeout
 	if valid_timer == true: can_fall = true
-
-func play_animation() -> void: #control de animaciones
-	is_animation_play = true
-	$"../../AnimationPlayer".play("Jump")
 
 func handle_gravity(delta) -> void: #control de gravedad
 	controlled_node.velocity.y += gravity * delta
