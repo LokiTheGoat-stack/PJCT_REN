@@ -11,11 +11,11 @@ var wall_normal = Vector2.ZERO
 #region ALWAYS_ON_FUNC
 func on_physics_process(delta) -> void:
 	#if is_animation_play == false: play_animation()
-	
-	#control de direccion del salto (Eje x, y)
+		#control de direccion del salto (Eje x, y)
+
 	controlled_node.velocity.y += gravity * delta
 	controlled_node.velocity.x = Input.get_axis("LEFT","RIGHT") * PlayerMovementStats.in_air_speed
-	
+		
 	#control de gravedad en el salto (Eje y)
 	if controlled_node.velocity.y < 0:
 		if not Input.is_action_pressed("JUMP"):
@@ -25,7 +25,7 @@ func on_physics_process(delta) -> void:
 	elif controlled_node.velocity.y > 0:
 		controlled_node.animation_machine.travel("Fall_Down")
 		state_machine.change_to("PlayerStateFall")
-	
+
 	#control de colision del raycast
 	raycast_left.target_position = Vector2(-15, 0)
 	raycast_right.target_position = Vector2(15, 0)
@@ -63,3 +63,8 @@ func on_input(event: InputEvent) -> void:
 
 func play_animation() -> void: #control de animacion
 	controlled_node.animation_machine.travel("Jump_Up")
+
+func play_landing_sound(play_sound: bool):
+	if play_sound:
+		$"../../Fall_Sounds".play()
+		play_sound = false

@@ -72,7 +72,7 @@ func velocity(x:float, spd: float): #control de impulso
 		direction_x = x
 		speed = spd
 	else:
-		if $"../../Ren_Sprites".flip_h == true:
+		if $"../../Ren_Sprite".flip_h == true:
 			direction_x = -1
 			speed = spd
 		else:

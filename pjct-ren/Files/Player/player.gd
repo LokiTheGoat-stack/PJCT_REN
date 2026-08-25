@@ -60,12 +60,8 @@ func set_facing_direction() -> void:
 	#control de donde mira el personaje
 	if self.velocity.x < 0:
 		ren_sprite.flip_h = true
-		body.flip_h = true
-		body2.flip_h = true
 	elif self.velocity.x > 0:
 		ren_sprite.flip_h = false
-		body.flip_h = false
-		body2.flip_h = false
 
 func _process(_delta):
 	set_facing_direction()

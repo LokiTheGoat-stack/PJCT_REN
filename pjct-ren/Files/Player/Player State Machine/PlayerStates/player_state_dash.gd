@@ -23,7 +23,7 @@ func dash(state_name: String) -> void:
 
 #region DIRECTION_CONTROL
 func no_velocity():
-	if $"../../TestPlayerSprite".flip_h == true:
+	if $"../../Ren_Sprite".flip_h == true:
 		direction = Vector2.LEFT
 		x_velocity = PlayerMovementStats.dash_speed
 	else:

@@ -1,11 +1,14 @@
 extends PlayerStateBase
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+var movement_enabled = false
 
 #region ALWAYS_ON_FUNC
 func on_physics_process(delta) -> void:
 	#Control de la direccion del personaje
-	controlled_node.velocity.x = Input.get_axis("LEFT", "RIGHT") * PlayerMovementStats.running_speed
+	
+	if (movement_enabled):
+		controlled_node.velocity.x = Input.get_axis("LEFT", "RIGHT") * PlayerMovementStats.running_speed
 	
 	#if is_animation_play == false: play_animation()
 	
@@ -49,5 +52,17 @@ func on_input(event: InputEvent) -> void:
 		state_machine.change_to("PlayerStateBlock")
 #endregion
 
+func play_footsteps(footstep: bool):
+	if footstep:
+		print('footsetp')
+		$"../../Footstep_Sounds".play()
+		footstep = false
+
+func check_can_move(can_move: bool):
+	movement_enabled = can_move
+
 func handle_gravity(delta) -> void: #control de gravedad
 	controlled_node.velocity.y += gravity * delta
+
+func end():
+	movement_enabled = false

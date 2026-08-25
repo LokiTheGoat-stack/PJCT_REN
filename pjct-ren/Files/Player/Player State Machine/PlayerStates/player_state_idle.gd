@@ -1,5 +1,4 @@
 extends PlayerStateBase
-
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 #region AWAYS_ON_FUNC
@@ -25,9 +24,9 @@ func on_input(event: InputEvent) -> void:
 	#Cambiar a Jump
 	if Input.is_action_just_pressed("JUMP"):
 		controlled_node.animation_machine.travel("Jump_Up")
+		PlayerMovementStats.jump_count += 1
 		controlled_node.velocity.y = PlayerMovementStats.jump_speed
 		state_machine.change_to("PlayerStateJump")
-		PlayerMovementStats.jump_count += 1
 	
 	#Cambiar a Dash
 	if Input.is_action_just_pressed("DASH"):
