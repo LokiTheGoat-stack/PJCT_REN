@@ -21,6 +21,7 @@ PlayerMovementStats="*uid://cfc6a0yfxhyyl"
 InputGlobalComponent="*uid://cgsbbk5vs1kim"
 VideoGlobalComponent="*uid://dvspa826y625x"
 PlayerStatsComponent="*uid://dx6fgrph03vbe"
+PhantomCameraManager="*uid://duq6jhf6unyis"
 
 [display]
 
@@ -28,6 +29,10 @@ window/size/viewport_width=480
 window/size/viewport_height=270
 window/size/mode=3
 window/stretch/mode="canvas_items"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/phantom_camera/plugin.cfg")
 
 [input]
 

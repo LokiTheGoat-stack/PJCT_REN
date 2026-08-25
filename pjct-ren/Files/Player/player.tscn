@@ -291,7 +291,9 @@ region_enabled = true
 region_rect = Rect2(0, 0, 160, 96)
 
 [node name="Camera2D" type="Camera2D" parent="Ren_Sprites" unique_id=2063165322]
+visible = false
 position = Vector2(46, 0)
+enabled = false
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
 drag_left_margin = 0.25
@@ -314,7 +316,6 @@ libraries/ = SubResource("AnimationLibrary_rkjca")
 anim_player = NodePath("../AnimationPlayer")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=826343510]
-visible = false
 position = Vector2(2, 5)
 scale = Vector2(1, 1.1199994)
 shape = SubResource("CapsuleShape2D_hylex")
