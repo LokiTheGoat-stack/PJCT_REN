@@ -10,7 +10,6 @@ func start():
 
 func end():
 	pass
-
 #endregion
 
 #!!!!!! No tocar nada para que los estados sigan funcionando

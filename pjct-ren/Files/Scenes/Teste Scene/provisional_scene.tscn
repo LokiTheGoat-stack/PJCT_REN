@@ -367,7 +367,7 @@ tile_map_data = PackedByteArray("AAAAABIAAQABAAEAAAABABIAAQABAAEAAAACABIAAQABAAE
 tile_set = SubResource("TileSet_hylex")
 
 [node name="Player" parent="." unique_id=889305067 instance=ExtResource("2_57m1b")]
-position = Vector2(174, 553)
+position = Vector2(173, 505)
 collision_mask = 48
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=1545592130]
