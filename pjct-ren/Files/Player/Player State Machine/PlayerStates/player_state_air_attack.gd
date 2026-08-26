@@ -71,7 +71,7 @@ func velocity(x:float, spd: float): #control de impulso
 		direction_x = x
 		speed = spd
 	else:
-		if $"../../Ren_Sprites".flip_h == true:
+		if $"../../Ren_Sprite".flip_h == true:
 			direction_x = -1
 			speed = spd
 		else:
@@ -84,7 +84,7 @@ func velocity(x:float, spd: float): #control de impulso
 
 func play_animation(animation:String) -> void: #control de animacion
 	is_animation_play = true
-	$"../../AnimationPlayer2".play(animation)
+	#$"../../AnimationPlayer2".play(animation)
 
 func handle_gravity(delta) -> void: #control de gravedad
 	controlled_node.velocity.y += gravity * delta

@@ -20,15 +20,39 @@ func on_physics_process(delta) -> void:
 	controlled_node.move_and_slide()
 
 func on_input(event: InputEvent) -> void:
-	#Continuar Combo
-	if Input.is_action_just_pressed("ATTACK") and can_press_attack == true:
-		match combo_count:
-			0:
-				attack_1()
-			1:
-				attack_2()
-			_: pass
-		combo_count += 1
+	#Continuar Combo o hacer otra accion
+	match can_press_attack:
+		true:
+			if Input.is_action_just_pressed("ATTACK") and Input.is_action_pressed("LEFT"):
+				direction_x = -1.0
+				match combo_count:
+					0:
+						attack_1()
+					1:
+						attack_2()
+					_: pass
+			elif Input.is_action_just_pressed("ATTACK") and Input.is_action_pressed("RIGHT"):
+				direction_x = 1.0
+				match combo_count:
+					0:
+						attack_1()
+					1:
+						attack_2()
+					_: pass
+			if Input.is_action_just_pressed("ATTACK"):
+				match combo_count:
+					0:
+						attack_1()
+					1:
+						attack_2()
+					_: pass
+				combo_count += 1
+			elif Input.is_action_pressed("LEFT") or Input.is_action_pressed("LEFT"):
+				controlled_node.animation_machine.travel("Run")
+				state_machine.change_to("PlayerStateWalk")
+				is_animation_play = false
+				combo_count = 0
+		_: pass
 #endregion
 
 #region ATTACK_FUNC
@@ -37,8 +61,9 @@ func start_attack(x:float): #activador inicial
 	attack_0()
 
 func attack_0(): #control del ataque 0
+	combo_count += 1
 	play_animation("Attack_0")
-	await $"../../AnimationPlayer2".animation_finished
+	await get_tree().create_timer(0.4).timeout
 	can_press_attack = true
 	await get_tree().create_timer(0.35).timeout
 	if can_press_attack == true:
@@ -47,10 +72,11 @@ func attack_0(): #control del ataque 0
 		combo_count = 0
 
 func attack_1(): #control del ataque 1
-	velocity(0,1000)
+	combo_count += 1
+	velocity(direction_x,1000)
 	can_press_attack = false
 	play_animation("Attack_1")
-	await $"../../AnimationPlayer2".animation_finished
+	await get_tree().create_timer(0.4).timeout
 	can_press_attack = true
 	await get_tree().create_timer(0.35).timeout
 	if can_press_attack == true:
@@ -59,10 +85,11 @@ func attack_1(): #control del ataque 1
 		combo_count = 0
 
 func attack_2(): #control del ataque 2
-	velocity(0,2000)
+	combo_count += 1
+	velocity(direction_x,2000)
 	can_press_attack = false
 	play_animation("Attack_2")
-	await $"../../AnimationPlayer2".animation_finished
+	await get_tree().create_timer(0.4).timeout
 	can_press_attack = false
 	state_machine.change_to("PlayerStateIdle")
 	combo_count = 0
@@ -85,7 +112,7 @@ func velocity(x:float, spd: float): #control de impulso
 
 func play_animation(animation:String) -> void: #control de animacion
 	is_animation_play = true
-	$"../../AnimationPlayer2".play(animation)
+	#$"../../AnimationPlayer2".play(animation)
 
 func handle_gravity(delta) -> void: #control de gravedad
 	controlled_node.velocity.y += gravity * delta

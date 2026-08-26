@@ -26,7 +26,7 @@ func on_input(event: InputEvent) -> void:
 
 func play_animation() -> void: #control de animacion
 	is_animation_play = true
-	$"../../AnimationPlayer".play("Block")
+	#$"../../AnimationPlayer".play("Block")
 
 func handle_gravity(delta) -> void: #control de gravedad
 	controlled_node.velocity.y += gravity * delta

@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://d0xeyay21yihf"
+path="res://.godot/imported/Rust, Dust  Guts.ogg-247a1cab92a0b922b7e523f9398dd715.oggvorbisstr"
+
+[deps]
+
+source_file="res://Files/Sounds/Test/Rust, Dust  Guts.ogg"
+dest_files=["res://.godot/imported/Rust, Dust  Guts.ogg-247a1cab92a0b922b7e523f9398dd715.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

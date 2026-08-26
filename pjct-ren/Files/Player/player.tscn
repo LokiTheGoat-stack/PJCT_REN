@@ -28,6 +28,11 @@
 [ext_resource type="AudioStream" uid="uid://bc2sd521q5jgg" path="res://Files/Sounds/footsteps/Tile_Mono_02.wav" id="25_xkakj"]
 [ext_resource type="AudioStream" uid="uid://x6pino7ky5wb" path="res://Files/Sounds/footsteps/Tile_Mono_03.wav" id="26_ftc0o"]
 [ext_resource type="AudioStream" uid="uid://c6qyv0t4f48y3" path="res://Files/Sounds/footsteps/Tile_Mono_04.wav" id="27_fq8mf"]
+[ext_resource type="Script" uid="uid://dyn556nl5d32h" path="res://Files/Player/hud.gd" id="29_ftc0o"]
+[ext_resource type="Texture2D" uid="uid://bkok3k7elhyyp" path="res://Files/Art/Test Art/Hpbar/Hp bar.png" id="30_fq8mf"]
+[ext_resource type="Texture2D" uid="uid://cvy88aquyjqif" path="res://Files/Art/Test Art/Hpbar/Blue bar.png" id="30_rc42w"]
+[ext_resource type="Texture2D" uid="uid://dnfk4xk0l01gp" path="res://Files/Art/Test Art/Hpbar/yellow bar.png" id="31_k01om"]
+[ext_resource type="Texture2D" uid="uid://ddym4ax82iydj" path="res://Files/Art/Test Art/Hpbar/red bar.png" id="32_3t4bl"]
 
 [sub_resource type="Animation" id="Animation_6jyks"]
 resource_name = "Iddle"
@@ -720,6 +725,7 @@ stream_2/stream = ExtResource("26_ftc0o")
 stream_3/stream = ExtResource("27_fq8mf")
 
 [node name="Player" type="CharacterBody2D" unique_id=889305067]
+collision_mask = 16
 script = ExtResource("1_usf6g")
 
 [node name="Ren_Sprite" type="Sprite2D" parent="." unique_id=18123284]
@@ -819,12 +825,57 @@ script = ExtResource("24_xkakj")
 
 [node name="Footstep_Sounds" type="AudioStreamPlayer2D" parent="Sounds" unique_id=1706123221]
 stream = SubResource("AudioStreamRandomizer_bjw75")
+volume_db = 5.0
 max_polyphony = 3
 bus = &"SFX"
 
 [node name="Fall_Sounds" type="AudioStreamPlayer2D" parent="Sounds" unique_id=1597173253]
 stream = SubResource("AudioStreamRandomizer_bjw75")
-volume_db = 1.0
+volume_db = 7.0
 pitch_scale = 0.8
 max_polyphony = 3
 bus = &"SFX"
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=617106871]
+script = ExtResource("29_ftc0o")
+
+[node name="manaBar" type="TextureProgressBar" parent="HUD" unique_id=1042558563]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 74.0
+offset_top = -19.0
+offset_right = 123.0
+offset_bottom = -13.0
+grow_vertical = 0
+value = 100.0
+texture_progress = ExtResource("30_rc42w")
+
+[node name="exbar" type="TextureProgressBar" parent="HUD" unique_id=397015000]
+offset_left = 77.0
+offset_top = 243.0
+offset_right = 109.0
+offset_bottom = 247.0
+value = 100.0
+texture_progress = ExtResource("31_k01om")
+
+[node name="hpbar" type="TextureProgressBar" parent="HUD" unique_id=1587768190]
+offset_left = 15.0
+offset_top = 200.0
+offset_right = 71.0
+offset_bottom = 254.0
+value = 100.0
+fill_mode = 3
+texture_progress = ExtResource("32_3t4bl")
+
+[node name="HUDsprite" type="TextureRect" parent="HUD" unique_id=1453139192]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 11.0
+offset_top = -74.0
+offset_right = 127.0
+offset_bottom = -10.0
+grow_vertical = 0
+texture = ExtResource("30_fq8mf")
+metadata/_edit_lock_ = true
