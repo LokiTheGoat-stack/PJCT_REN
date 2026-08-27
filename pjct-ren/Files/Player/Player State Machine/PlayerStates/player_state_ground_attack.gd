@@ -37,10 +37,9 @@ func start_attack(x:float): #activador inicial
 	attack_0()
 
 func attack_0(): #control del ataque 0
-	play_animation("Attack_0")
-	await $"../../AnimationPlayer2".animation_finished
+	controlled_node.animation_machine.travel("Attack_1")
 	can_press_attack = true
-	await get_tree().create_timer(0.35).timeout
+	await get_tree().create_timer(0.75).timeout
 	if can_press_attack == true:
 		can_press_attack = false
 		state_machine.change_to("PlayerStateIdle")
@@ -49,10 +48,9 @@ func attack_0(): #control del ataque 0
 func attack_1(): #control del ataque 1
 	velocity(0,1000)
 	can_press_attack = false
-	play_animation("Attack_1")
-	await $"../../AnimationPlayer2".animation_finished
+	controlled_node.animation_machine.travel("Attack_2")
 	can_press_attack = true
-	await get_tree().create_timer(0.35).timeout
+	await get_tree().create_timer(0.75).timeout
 	if can_press_attack == true:
 		can_press_attack = false
 		state_machine.change_to("PlayerStateIdle")
@@ -61,8 +59,7 @@ func attack_1(): #control del ataque 1
 func attack_2(): #control del ataque 2
 	velocity(0,2000)
 	can_press_attack = false
-	play_animation("Attack_2")
-	await $"../../AnimationPlayer2".animation_finished
+	controlled_node.animation_machine.travel("Attack_3")
 	can_press_attack = false
 	state_machine.change_to("PlayerStateIdle")
 	combo_count = 0
@@ -85,7 +82,7 @@ func velocity(x:float, spd: float): #control de impulso
 
 func play_animation(animation:String) -> void: #control de animacion
 	is_animation_play = true
-	$"../../AnimationPlayer2".play(animation)
+	$"../../AnimationPlayer".play(animation)
 
 func handle_gravity(delta) -> void: #control de gravedad
 	controlled_node.velocity.y += gravity * delta
