@@ -978,8 +978,8 @@ stream_1/stream = ExtResource("25_xkakj")
 stream_2/stream = ExtResource("26_ftc0o")
 stream_3/stream = ExtResource("27_fq8mf")
 
-[node name="Player" type="CharacterBody2D" unique_id=889305067]
-collision_mask = 16
+[node name="Player" type="CharacterBody2D" unique_id=889305067 groups=["Player"]]
+collision_mask = 22
 script = ExtResource("1_usf6g")
 
 [node name="Ren_Sprite" type="Sprite2D" parent="." unique_id=18123284]

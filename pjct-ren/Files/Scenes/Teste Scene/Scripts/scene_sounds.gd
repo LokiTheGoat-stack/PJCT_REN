@@ -5,23 +5,19 @@ class_name SceneSounds
 
 var is_calm: bool = true
 
+
 func _ready() -> void:
 	music_player.play()
 
-
-func _on_center_area_body_entered(body: Node2D) -> void:
+#region COMBAT
+func _on_area_enemie_detect_body_entered(body: Node2D) -> void:
 	if is_calm:
-		music_player["parameters/switch_to_clip"] = "Transicion"
 		is_calm = false
-
-
-func _on_center_area_body_exited(body: Node2D) -> void:
-	if not is_calm:
-		music_player["parameters/switch_to_clip"] = "Calma"
+		music_player["parameters/switch_to_clip"] = "Transicion"
+func _on_area_enemie_detect_body_exited(body: Node2D) -> void:
+	await get_tree().create_timer(5.0).timeout
+	var nodes_in_area: Array = $"../Player/AreaEnemieDetect".get_overlapping_bodies()
+	if nodes_in_area.size() == 0:
 		is_calm = true
-
-
-func _on_center_area_2_body_entered(body: Node2D) -> void:
-	if is_calm:
-		music_player["parameters/switch_to_clip"] = "Transicion"
-		is_calm = false
+		music_player["parameters/switch_to_clip"] = "Calma"
+#endregion

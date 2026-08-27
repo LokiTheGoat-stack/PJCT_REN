@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://d37kn8mjhxirj"]
+
+[ext_resource type="Texture2D" uid="uid://4654i0mvrku1" path="res://Files/Art/Test Art/GandalfHardcore FREE Platformer Assets/sun.png" id="1_1xv5l"]
+[ext_resource type="Script" uid="uid://byl6jcsdspdq7" path="res://Files/Scenes/Teste Scene/Characters/Enemies/Bullet/projectile.gd" id="1_31f5o"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hylex"]
+radius = 16.124516
+
+[node name="Projectile" type="Area2D" unique_id=197713768]
+visible = false
+collision_layer = 4
+collision_mask = 17
+script = ExtResource("1_31f5o")
+
+[node name="Sun" type="Sprite2D" parent="." unique_id=1574118645]
+texture = ExtResource("1_1xv5l")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=943144893]
+shape = SubResource("CircleShape2D_hylex")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

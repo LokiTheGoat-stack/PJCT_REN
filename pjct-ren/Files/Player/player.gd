@@ -13,6 +13,9 @@ class_name Player
 
 var phantom_on: bool = false
 
+func _ready() -> void:
+	add_to_group("Player")
+
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("PARTY") and phantom_on == false:
 		phantom_on = true
@@ -73,4 +76,6 @@ func _process(_delta):
 		state_machine.can_change = false
 		state_machine.current_state = get_node("PlayerStateDeath")
 		state_machine.state_start()
-	
+
+func take_damage(damage, node):
+	PlayerStatsComponent.current_hp -= damage
