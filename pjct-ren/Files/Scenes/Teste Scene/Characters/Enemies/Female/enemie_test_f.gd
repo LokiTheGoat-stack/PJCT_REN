@@ -29,6 +29,7 @@ var min_distance: float = 15
 var is_waiting: bool = false
 var direction: Vector2
 var current_distance: float
+var dying: bool = false
 
 func _ready() -> void:
 	add_to_group("Enemies")
@@ -38,23 +39,31 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	#cambiar la animacion detectando la velocidad
-	if can_change_scale:
+	if patrol_mode:
 		if velocity.x == 0: animation_player.play("Idle")
 		else: 
 			if speed <= 50: animation_player.play("Walk")
 			elif speed > 50: animation_player.play("Run")
 	
 	#detectar la direccion y voltear el sprite
-	if can_change_scale:
+	if patrol_mode:
 		if velocity.x > 0:
 			body.scale.x = -1
 		elif velocity.x < 0:
 			body.scale.x = 1
-	elif not can_change_scale:
+	elif not patrol_mode:
 		if player.global_position.x > global_position.x:
 			body.scale.x = -1
 		elif player.global_position.x < global_position.x:
 			body.scale.x = 1
+	
+	if hp <= 0:
+		$Body/AgroArea/CollisionPolygon2D.disabled = true
+		patrol_mode = false
+		is_dying()
+		animation_player.play("Death")
+		await animation_player.animation_finished
+		queue_free()
 
 func _physics_process(delta: float) -> void:
 	#control del movimiento
@@ -92,17 +101,10 @@ func check_can_move(can_move:bool):
 	if can_move == false: velocity = Vector2.ZERO
 func is_dying():
 	check_can_move(false)
-	collision.disabled = true
 
 #control del recivimiento de damage
 func take_damage(damage, node):
 	hp -= damage
-	can_change_scale = false
-	if node.global_position < global_position and body.scale.x == -1:
-		body.scale.x = 1
-	elif node.global_position > global_position and body.scale.x == 1:
-		body.scale.x = -1
-	can_change_scale = true
 
 #region SIGNALS
 func _on_waiting_timer_timeout() -> void:
@@ -113,9 +115,9 @@ func _on_attack_timer_timeout() -> void:
 
 func _on_agro_area_body_entered(body: Node2D) -> void:
 	patrol_mode = false
+	animation_player.play("Idle")
 	check_can_move(false)
 	attack_timer.start()
-	attack()
 func _on_agro_area_body_exited(body: Node2D) -> void:
 	attack_timer.stop()
 	patrol_mode = true

@@ -51,6 +51,14 @@ func _process(delta: float) -> void:
 			body.scale.x = -1
 		elif velocity.x < 0:
 			body.scale.x = 1
+	if hp <= 0:
+		$Body/AgroArea/CollisionPolygon2D.disabled = true
+		$Body/AttackArea/CollisionShape2D.disabled = true
+		is_attack = true
+		is_dying()
+		animation_player.play("Death")
+		await animation_player.animation_finished
+		queue_free()
 
 func _physics_process(delta: float) -> void:
 	#control del movimiento
@@ -91,17 +99,10 @@ func check_can_move(can_move:bool):
 	if can_move == false: velocity = Vector2.ZERO
 func is_dying():
 	check_can_move(false)
-	collision.disabled = true
 
 #control del recivimiento de damage
 func take_damage(damage, node):
 	hp -= damage
-	can_change_scale = false
-	if node.global_position < global_position and body.scale.x == -1:
-		body.scale.x = 1
-	elif node.global_position > global_position and body.scale.x == 1:
-		body.scale.x = -1
-	can_change_scale = true
 
 #region SIGNALS
 func _on_waiting_timer_timeout() -> void:

@@ -41,14 +41,9 @@ func on_input(event: InputEvent) -> void:
 		$"../PlayerStateDash".dash("PlayerStateWalk")
 	
 	#Cambiar a Attack
-	if Input.is_action_just_pressed("ATTACK") and Input.is_action_pressed("LEFT"):
-		movement_enabled = false
-		state_machine.change_to("PlayerStateGroundAttack")
-		$"../PlayerStateGroundAttack".start_attack(-1)
-	if Input.is_action_just_pressed("ATTACK") and Input.is_action_pressed("RIGHT"):
-		movement_enabled = false
-		state_machine.change_to("PlayerStateGroundAttack")
-		$"../PlayerStateGroundAttack".start_attack(1)
+	if Input.is_action_just_pressed("ATTACK"):
+			state_machine.change_to("PlayerStateGroundAttack")
+			$"../PlayerStateGroundAttack".on_enter()
 	
 	#Cambiar a Block
 	if Input.is_action_pressed("BLOCK"):

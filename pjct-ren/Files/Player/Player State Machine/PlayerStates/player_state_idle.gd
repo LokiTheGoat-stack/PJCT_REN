@@ -34,8 +34,8 @@ func on_input(event: InputEvent) -> void:
 	
 	#Cambiar a Attack
 	if Input.is_action_just_pressed("ATTACK"):
-		state_machine.change_to("PlayerStateGroundAttack")
-		$"../PlayerStateGroundAttack".start_attack(0)
+			state_machine.change_to("PlayerStateGroundAttack")
+			$"../PlayerStateGroundAttack".on_enter()
 	
 	#Cambiar a Block
 	if Input.is_action_pressed("BLOCK"):

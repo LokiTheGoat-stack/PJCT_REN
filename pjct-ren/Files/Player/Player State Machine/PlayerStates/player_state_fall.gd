@@ -82,7 +82,7 @@ func on_input(event: InputEvent) -> void:
 		$"../PlayerStateDash".dash("PlayerStateFall")
 	
 	#Cambiar a Attack
-	if Input.is_action_just_pressed("ATTACK") and can_attack == true:
+	if Input.is_action_just_pressed("ATTACK"):
 		state_machine.change_to("PlayerStateAirAttack")
-		$"../PlayerStateAirAttack".start_attack(0)
+		$"../PlayerStateAirAttack".on_enter()
 #endregion

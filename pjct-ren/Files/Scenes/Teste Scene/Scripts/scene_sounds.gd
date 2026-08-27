@@ -21,3 +21,7 @@ func _on_area_enemie_detect_body_exited(body: Node2D) -> void:
 		is_calm = true
 		music_player["parameters/switch_to_clip"] = "Calma"
 #endregion
+
+
+func _on_area_combate_body_entered(body: Node2D) -> void:
+	music_player["parameters/switch_to_clip"] = "Transicion"

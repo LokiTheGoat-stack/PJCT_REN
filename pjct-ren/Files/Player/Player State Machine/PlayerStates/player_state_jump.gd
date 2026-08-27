@@ -63,7 +63,7 @@ func on_input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("ATTACK"):
 		check_can_jump(false)
 		state_machine.change_to("PlayerStateAirAttack")
-		$"../PlayerStateAirAttack".start_attack(0)
+		$"../PlayerStateAirAttack".on_enter()
 #endregion
 
 func check_can_jump(can_jump:bool):

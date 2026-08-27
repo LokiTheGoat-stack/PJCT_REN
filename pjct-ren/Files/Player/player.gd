@@ -79,3 +79,11 @@ func _process(_delta):
 
 func take_damage(damage, node):
 	PlayerStatsComponent.current_hp -= damage
+
+
+
+
+func _on_attack_area_body_entered(body: Node2D) -> void:
+	$Sounds.flesh_slice()
+	$StateMachine/PlayerStateGroundAttack.show_combo_effect()
+	body.take_damage(40,self)
