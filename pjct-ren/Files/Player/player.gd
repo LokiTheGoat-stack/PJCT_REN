@@ -8,6 +8,8 @@ class_name Player
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var animation_machine: AnimationNodeStateMachinePlayback = $AnimationTree["parameters/playback"]
 @onready var state_machine: PlayerStateMachine = $StateMachine
+@onready var sounds: PlayerSounds = $Sounds
+
 
 var phantom_on: bool = false
 

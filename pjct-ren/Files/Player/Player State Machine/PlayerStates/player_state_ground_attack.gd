@@ -20,15 +20,39 @@ func on_physics_process(delta) -> void:
 	controlled_node.move_and_slide()
 
 func on_input(event: InputEvent) -> void:
-	#Continuar Combo
-	if Input.is_action_just_pressed("ATTACK") and can_press_attack == true:
-		match combo_count:
-			0:
-				attack_1()
-			1:
-				attack_2()
-			_: pass
-		combo_count += 1
+	#Continuar Combo o hacer otra accion
+	match can_press_attack:
+		true:
+			if Input.is_action_just_pressed("ATTACK") and Input.is_action_pressed("LEFT"):
+				direction_x = -1.0
+				match combo_count:
+					0:
+						attack_1()
+					1:
+						attack_2()
+					_: pass
+			elif Input.is_action_just_pressed("ATTACK") and Input.is_action_pressed("RIGHT"):
+				direction_x = 1.0
+				match combo_count:
+					0:
+						attack_1()
+					1:
+						attack_2()
+					_: pass
+			if Input.is_action_just_pressed("ATTACK"):
+				match combo_count:
+					0:
+						attack_1()
+					1:
+						attack_2()
+					_: pass
+				combo_count += 1
+			elif Input.is_action_pressed("LEFT") or Input.is_action_pressed("LEFT"):
+				controlled_node.animation_machine.travel("Run")
+				state_machine.change_to("PlayerStateWalk")
+				is_animation_play = false
+				combo_count = 0
+		_: pass
 #endregion
 
 #region ATTACK_FUNC
@@ -38,6 +62,7 @@ func start_attack(x:float): #activador inicial
 
 func attack_0(): #control del ataque 0
 	controlled_node.animation_machine.travel("Attack_1")
+	combo_count += 1
 	can_press_attack = true
 	await get_tree().create_timer(0.75).timeout
 	if can_press_attack == true:
@@ -46,7 +71,8 @@ func attack_0(): #control del ataque 0
 		combo_count = 0
 
 func attack_1(): #control del ataque 1
-	velocity(0,1000)
+	combo_count += 1
+	velocity(direction_x,1000)
 	can_press_attack = false
 	controlled_node.animation_machine.travel("Attack_2")
 	can_press_attack = true
@@ -57,7 +83,8 @@ func attack_1(): #control del ataque 1
 		combo_count = 0
 
 func attack_2(): #control del ataque 2
-	velocity(0,2000)
+	combo_count += 1
+	velocity(direction_x,2000)
 	can_press_attack = false
 	controlled_node.animation_machine.travel("Attack_3")
 	can_press_attack = false

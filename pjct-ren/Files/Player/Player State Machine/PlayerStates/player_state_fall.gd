@@ -51,6 +51,7 @@ func on_physics_process(delta):
 	#si estas tocando el suelo cambiar a Walk o Idle
 	if controlled_node.velocity.y >= 0 and controlled_node.is_on_floor():
 		if Input.is_action_pressed("LEFT") or Input.is_action_pressed("RIGHT"):
+			controlled_node.velocity.x = 0
 			controlled_node.animation_machine.travel("Run")
 			state_machine.change_to("PlayerStateWalk")
 		else:
@@ -70,10 +71,10 @@ func on_input(event: InputEvent) -> void:
 		PlayerMovementStats.jump_count += 1
 	
 	#Hacer doble salto
-	elif Input.is_action_just_pressed("JUMP") and PlayerMovementStats.jump_count == 1:
-		controlled_node.animation_machine.travel("Jump_Up") 
-		state_machine.change_to("PlayerStateJump")
-		PlayerMovementStats.jump_count += 1
+	#elif Input.is_action_just_pressed("JUMP") and PlayerMovementStats.jump_count == 1:
+	#	controlled_node.animation_machine.travel("Jump_Up") 
+	#	state_machine.change_to("PlayerStateJump")
+	#	PlayerMovementStats.jump_count += 1
 	
 	#Cambiar a Dash
 	if Input.is_action_just_pressed("DASH"):

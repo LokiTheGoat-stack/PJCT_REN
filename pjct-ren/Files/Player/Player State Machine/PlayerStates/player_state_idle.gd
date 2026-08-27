@@ -25,7 +25,6 @@ func on_input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("JUMP"):
 		controlled_node.animation_machine.travel("Jump_Up")
 		PlayerMovementStats.jump_count += 1
-		controlled_node.velocity.y = PlayerMovementStats.jump_speed
 		state_machine.change_to("PlayerStateJump")
 	
 	#Cambiar a Dash
