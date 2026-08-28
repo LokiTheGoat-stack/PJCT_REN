@@ -9,7 +9,7 @@ radius = 16.124516
 [node name="Projectile" type="Area2D" unique_id=197713768]
 visible = false
 collision_layer = 4
-collision_mask = 17
+collision_mask = 19
 script = ExtResource("1_31f5o")
 
 [node name="Sun" type="Sprite2D" parent="." unique_id=1574118645]

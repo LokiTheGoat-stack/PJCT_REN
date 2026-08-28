@@ -29,7 +29,9 @@ var min_distance: float = 15
 var is_waiting: bool = false
 var direction: Vector2
 var current_distance: float
+
 var dying: bool = false
+var dying_position: Vector2
 
 func _ready() -> void:
 	add_to_group("Enemies")
@@ -58,6 +60,7 @@ func _process(delta: float) -> void:
 			body.scale.x = 1
 	
 	if hp <= 0:
+		dying = true
 		$Body/AgroArea/CollisionPolygon2D.disabled = true
 		patrol_mode = false
 		is_dying()
@@ -67,17 +70,17 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	#control del movimiento
-	if patrol_mode: 
-		set_waypoint_direction()
-		if is_waiting == false:
-			velocity.x = direction.x * speed
-			get_next_waypoint()
-	else:
-		velocity = Vector2.ZERO
-	
+	if not dying:
+		if patrol_mode: 
+			set_waypoint_direction()
+			if is_waiting == false:
+				velocity.x = direction.x * speed
+				get_next_waypoint()
+		else: velocity = Vector2.ZERO
+	else: velocity = Vector2.ZERO
 	
 	#control de gravedad
-	velocity.y += 1600 * delta
+	if not dying: velocity.y += 1600 * delta
 	move_and_slide()
 
 #actualizar la direccion si esta en modo patrulla
@@ -101,6 +104,7 @@ func check_can_move(can_move:bool):
 	if can_move == false: velocity = Vector2.ZERO
 func is_dying():
 	check_can_move(false)
+	collision.disabled = true
 
 #control del recivimiento de damage
 func take_damage(damage, node):

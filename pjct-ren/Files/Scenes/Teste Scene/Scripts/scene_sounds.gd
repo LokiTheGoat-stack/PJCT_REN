@@ -24,4 +24,6 @@ func _on_area_enemie_detect_body_exited(body: Node2D) -> void:
 
 
 func _on_area_combate_body_entered(body: Node2D) -> void:
-	music_player["parameters/switch_to_clip"] = "Transicion"
+	if is_calm:
+		is_calm = false
+		music_player["parameters/switch_to_clip"] = "Transicion"

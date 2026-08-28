@@ -30,6 +30,9 @@ var is_waiting: bool = false
 var direction: Vector2
 var current_distance: float
 
+var can_parry_me: bool = false
+var dying: bool = false
+
 func _ready() -> void:
 	add_to_group("Enemies")
 	var skin_array: Array[CompressedTexture2D] = [MALE_SKIN_1,MALE_SKIN_2,MALE_SKIN_3,MALE_SKIN_4,MALE_SKIN_5]
@@ -37,6 +40,7 @@ func _ready() -> void:
 	player = get_tree().get_first_node_in_group("Player")
 	$Body/AttackArea/CollisionShape2D.disabled = false
 
+#region PROCESS
 func _process(delta: float) -> void:
 	#cambiar la animacion detectando la velocidad
 	if can_change_scale:
@@ -52,6 +56,7 @@ func _process(delta: float) -> void:
 		elif velocity.x < 0:
 			body.scale.x = 1
 	if hp <= 0:
+		dying = true
 		$Body/AgroArea/CollisionPolygon2D.disabled = true
 		$Body/AttackArea/CollisionShape2D.disabled = true
 		is_attack = true
@@ -62,21 +67,24 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	#control del movimiento
-	if not is_attack:
-		if patrol_mode: 
-			set_waypoint_direction()
-			if is_waiting == false:
+	if not dying:
+		if not is_attack:
+			if patrol_mode: 
+				set_waypoint_direction()
+				if is_waiting == false:
+					velocity.x = direction.x * speed
+					get_next_waypoint()
+			else:
+				direction = (player.global_position - global_position).normalized()
 				velocity.x = direction.x * speed
-				get_next_waypoint()
-		else:
-			direction = (player.global_position - global_position).normalized()
-			velocity.x = direction.x * speed
-	
+	else: velocity = Vector2.ZERO
 	
 	#control de gravedad
-	velocity.y += 1600 * delta
+	if not dying: velocity.y += 1600 * delta
 	move_and_slide()
+#endregion
 
+#region WAYPOINTS_&_MOVEMENT
 #actualizar la direccion si esta en modo patrulla
 func set_waypoint_direction():
 	var target_position: Vector2 = waypints[current_waypoint].global_position
@@ -86,7 +94,6 @@ func set_waypoint_direction():
 
 func get_next_waypoint():
 	if current_distance < min_distance:
-		print("WERA")
 		current_waypoint += 1
 		velocity = Vector2.ZERO
 		is_waiting = true
@@ -97,12 +104,22 @@ func get_next_waypoint():
 func check_can_move(can_move:bool):
 	can_change_scale = can_move
 	if can_move == false: velocity = Vector2.ZERO
+
+#endregion
+
+
 func is_dying():
 	check_can_move(false)
+	collision.disabled = true
 
-#control del recivimiento de damage
 func take_damage(damage, node):
 	hp -= damage
+
+func _can_parry_me(can_parry:bool):
+	can_parry_me = can_parry
+	if PlayerStatsComponent.parry_time:
+		player.execute_parry()
+		player.stamina_gift()
 
 #region SIGNALS
 func _on_waiting_timer_timeout() -> void:
