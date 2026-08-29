@@ -3,6 +3,8 @@ class_name PlayerSounds
 
 @onready var footstep_sounds: AudioStreamPlayer2D = $Footstep_Sounds
 @onready var fall_sounds: AudioStreamPlayer2D = $Fall_Sounds
+@onready var swing: AudioStreamPlayer2D = $Swing
+@onready var hit_flesh: AudioStreamPlayer2D = $HitFlesh
 
 func play_2D_sound(sound:AudioStreamPlayer2D, volume:float, pitch:float):
 	sound.volume_db = volume
@@ -20,5 +22,11 @@ func footstep():
 
 func fall():
 	fall_sounds.play()
+
+func sword_swing():
+	swing.play()
+
+func flesh_slice():
+	hit_flesh.play()
 
 #endregion

@@ -14,14 +14,28 @@ func on_physics_process(delta) -> void:
 #endregion
 
 #activacion manual del Dash
-func dash(state_name: String) -> void:
+func dash(state_name: String, back:bool) -> void:
 	if can_dash == true:
 		can_dash = false
-		if controlled_node.velocity.x == 0: no_velocity()
+		if back: back_dash()
+		elif controlled_node.velocity.x == 0: no_velocity()
 		else: with_velocity()
+		PlayerMovementStats.is_dash = true
 	else: state_machine.change_to(state_name)
 
 #region DIRECTION_CONTROL
+func back_dash():
+	if $"../../Ren_Sprite".flip_h == true:
+		print("VItos")
+		direction = Vector2.RIGHT
+		x_velocity = PlayerMovementStats.dash_speed
+	else:
+		print("WEBOSSS")
+		direction = Vector2.LEFT
+		x_velocity = PlayerMovementStats.dash_speed
+	$"../../AnimationPlayer".play("Dash")
+	finish_dash()
+
 func no_velocity():
 	if $"../../Ren_Sprite".flip_h == true:
 		direction = Vector2.LEFT
@@ -44,9 +58,11 @@ func with_velocity():
 #endregion
 
 func finish_dash():
+	PlayerStatsComponent.stamia -= 20
 	phantom_on = true
 	phantom_animation()
 	await get_tree().create_timer(PlayerMovementStats.dash_time).timeout
+	PlayerMovementStats.is_dash = false
 	phantom_on = false
 	controlled_node.velocity = Vector2.ZERO
 	x_velocity = 0
@@ -54,7 +70,13 @@ func finish_dash():
 	
 	#cambio de estado segun la situacion
 	if controlled_node.is_on_floor():
-		state_machine.change_to("PlayerStateIdle")
+		if Input.is_action_pressed("LEFT") or Input.is_action_pressed("RIGHT"):
+			controlled_node.velocity.x = Input.get_axis("LEFT", "RIGHT") * PlayerMovementStats.running_speed
+			controlled_node.animation_machine.travel("Run")
+			state_machine.change_to("PlayerStateWalk")
+		else:
+			controlled_node.animation_machine.travel("Idle")
+			state_machine.change_to("PlayerStateIdle")
 	else: state_machine.change_to("PlayerStateFall")
 	
 	#cooldown

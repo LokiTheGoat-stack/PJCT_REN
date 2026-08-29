@@ -76,13 +76,15 @@ func on_input(event: InputEvent) -> void:
 	#	state_machine.change_to("PlayerStateJump")
 	#	PlayerMovementStats.jump_count += 1
 	
-	#Cambiar a Dash
-	if Input.is_action_just_pressed("DASH"):
-		state_machine.change_to("PlayerStateDash")
-		$"../PlayerStateDash".dash("PlayerStateFall")
-	
-	#Cambiar a Attack
-	if Input.is_action_just_pressed("ATTACK") and can_attack == true:
-		state_machine.change_to("PlayerStateAirAttack")
-		$"../PlayerStateAirAttack".start_attack(0)
+	if PlayerStatsComponent.stamia > 0:
+		#Cambiar a Dash
+		if Input.is_action_just_pressed("DASH"):
+			state_machine.change_to("PlayerStateDash")
+			$"../PlayerStateDash".dash("PlayerStateFall",false)
+		
+		#Cambiar a Attack
+		if Input.is_action_just_pressed("ATTACK") and can_attack:
+			can_attack = false
+			state_machine.change_to("PlayerStateAttack")
+			$"../PlayerStateAttack".on_enter(true)
 #endregion

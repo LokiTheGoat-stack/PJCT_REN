@@ -28,32 +28,28 @@ func on_input(event: InputEvent) -> void:
 	
 	#Cambiar a Jump
 	if Input.is_action_just_pressed("JUMP"):
-		movement_enabled = false 
-		controlled_node.velocity.x = 0
+		PlayerMovementStats.jump_count += 1
+		controlled_node.velocity.y = PlayerMovementStats.jump_speed
 		controlled_node.animation_machine.travel("Jump_Up")
 		state_machine.change_to("PlayerStateJump")
-		PlayerMovementStats.jump_count += 1
 	
-	#Cambiar a Dash
-	if Input.is_action_just_pressed("DASH"):
-		movement_enabled = false
-		state_machine.change_to("PlayerStateDash")
-		$"../PlayerStateDash".dash("PlayerStateWalk")
-	
-	#Cambiar a Attack
-	if Input.is_action_just_pressed("ATTACK") and Input.is_action_pressed("LEFT"):
-		movement_enabled = false
-		state_machine.change_to("PlayerStateGroundAttack")
-		$"../PlayerStateGroundAttack".start_attack(-1)
-	if Input.is_action_just_pressed("ATTACK") and Input.is_action_pressed("RIGHT"):
-		movement_enabled = false
-		state_machine.change_to("PlayerStateGroundAttack")
-		$"../PlayerStateGroundAttack".start_attack(1)
-	
-	#Cambiar a Block
-	if Input.is_action_pressed("BLOCK"):
-		movement_enabled = false
-		state_machine.change_to("PlayerStateBlock")
+	if PlayerStatsComponent.stamia > 0:
+		#Cambiar a Dash
+		if Input.is_action_just_pressed("DASH"):
+			movement_enabled = false
+			state_machine.change_to("PlayerStateDash")
+			$"../PlayerStateDash".dash("PlayerStateWalk",false)
+		
+		#Cambiar a Attack
+		if Input.is_action_just_pressed("ATTACK"):
+				state_machine.change_to("PlayerStateAttack")
+				$"../PlayerStateAttack".on_enter(false)
+		
+		#Cambiar a Block
+		if Input.is_action_pressed("BLOCK"):
+			$"../PlayerStateBlock".charge_last_state("PlayerStateWalk")
+			state_machine.change_to("PlayerStateBlock")
+			$"../PlayerStateBlock".time_for_parry()
 #endregion
 
 func check_can_move(can_move: bool):

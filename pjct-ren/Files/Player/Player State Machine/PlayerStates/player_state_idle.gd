@@ -23,23 +23,27 @@ func on_input(event: InputEvent) -> void:
 	
 	#Cambiar a Jump
 	if Input.is_action_just_pressed("JUMP"):
-		controlled_node.animation_machine.travel("Jump_Up")
 		PlayerMovementStats.jump_count += 1
+		controlled_node.velocity.y = PlayerMovementStats.jump_speed
+		controlled_node.animation_machine.travel("Jump_Up")
 		state_machine.change_to("PlayerStateJump")
 	
-	#Cambiar a Dash
-	if Input.is_action_just_pressed("DASH"):
-		state_machine.change_to("PlayerStateDash")
-		$"../PlayerStateDash".dash("PlayerStateIdle")
-	
-	#Cambiar a Attack
-	if Input.is_action_just_pressed("ATTACK"):
-		state_machine.change_to("PlayerStateGroundAttack")
-		$"../PlayerStateGroundAttack".start_attack(0)
-	
-	#Cambiar a Block
-	if Input.is_action_pressed("BLOCK"):
-		state_machine.change_to("PlayerStateBlock")
+	if PlayerStatsComponent.stamia > 0:
+		#Cambiar a Dash
+		if Input.is_action_just_pressed("DASH"):
+			state_machine.change_to("PlayerStateDash")
+			$"../PlayerStateDash".dash("PlayerStateIdle",false)
+		
+		#Cambiar a Attack
+		if Input.is_action_just_pressed("ATTACK"):
+				state_machine.change_to("PlayerStateAttack")
+				$"../PlayerStateAttack".on_enter(false)
+		
+		#Cambiar a Block
+		if Input.is_action_pressed("BLOCK"):
+			$"../PlayerStateBlock".charge_last_state("PlayerStateIdle")
+			state_machine.change_to("PlayerStateBlock")
+			$"../PlayerStateBlock".time_for_parry()
 #endregion
 
 func handle_gravity(delta) -> void: #control de gravedad

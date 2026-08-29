@@ -18,4 +18,7 @@ extends Node
 @export var dash_time: float = 0.1
 @export var dash_cooldown: float = 0.5
 
+@export var is_dash: bool = false
+@export var is_block: bool = false 
+
 @export var jump_count: int = 0

@@ -13,10 +13,69 @@ class_name Player
 
 var phantom_on: bool = false
 
+func _ready() -> void:
+	add_to_group("Player")
+
+func _process(_delta):
+	set_facing_direction()
+	
+	#detectar si el jugador murio
+	if PlayerStatsComponent.is_death == true:
+		state_machine.can_change = false
+		state_machine.current_state = get_node("PlayerStateDeath")
+		state_machine.state_start()
+
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("PARTY") and phantom_on == false:
 		phantom_on = true
 		start_party()
+
+func set_facing_direction() -> void:
+	#control de donde mira el personaje
+	if self.velocity.x < 0:
+		ren_sprite.flip_h = true
+	elif self.velocity.x > 0:
+		ren_sprite.flip_h = false
+
+#region BODY_CALL
+func take_damage(damage, node): #control del damage
+	await get_tree().create_timer(0.1).timeout
+	if not PlayerMovementStats.is_dash and PlayerStatsComponent.can_recive_damage:
+		if PlayerMovementStats.is_block and PlayerStatsComponent.stamia > 0:
+			if damage < 30: PlayerStatsComponent.stamia -= damage * 1.5
+			elif damage >= 30 and damage < 50: PlayerStatsComponent.stamia -= 40
+			elif damage >= 50: PlayerStatsComponent.stamia -= 50
+			PlayerStatsComponent.current_hp -= (damage * 10) / 100
+		else: PlayerStatsComponent.current_hp -= damage
+	elif PlayerStatsComponent.parry_time: node.take_damage(damage * 5, self)
+
+func stamina_gift(): #aumento de stamina por parry
+	PlayerStatsComponent.stamia += 50
+
+func execute_parry():
+	PlayerStatsComponent.can_recive_damage = false
+	await activate_slow_motion(0.3,0.2)
+	PlayerStatsComponent.can_recive_damage = true
+#endregion
+
+#region SIGNALS
+#colision de los ataques
+func _on_attack_area_body_entered(body: Node2D) -> void:
+	$Sounds.flesh_slice()
+	$StateMachine/PlayerStateAttack.show_combo_effect()
+	body.take_damage(40,self)
+
+#endregion
+
+#region USEFUL
+
+func activate_slow_motion(duration:float, scale:float):
+	var original_scale = Engine.time_scale
+	Engine.time_scale = scale
+	await get_tree().create_timer(duration,false).timeout
+	Engine.time_scale = original_scale
+
+#endregion
 
 #region PARTY_MODE
 func start_party():
@@ -57,20 +116,3 @@ func add_phantom():
 	tween.tween_callback(phantom.queue_free)
 	tween.tween_callback(tween.kill)
 #endregion
-
-func set_facing_direction() -> void:
-	#control de donde mira el personaje
-	if self.velocity.x < 0:
-		ren_sprite.flip_h = true
-	elif self.velocity.x > 0:
-		ren_sprite.flip_h = false
-
-func _process(_delta):
-	set_facing_direction()
-	
-	#detectar si el jugador murio
-	if PlayerStatsComponent.is_death == true:
-		state_machine.can_change = false
-		state_machine.current_state = get_node("PlayerStateDeath")
-		state_machine.state_start()
-	
