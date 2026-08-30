@@ -122,19 +122,21 @@ func execute_attack(attack_index: int):
 			controlled_node.animation_machine.travel("Attack_1")
 			current_attack_duration = attack_1_duration
 			apply_dash(current_direction, attack_dash_speed)
+			PlayerStatsComponent.stamia -= 30
 		1:
 			controlled_node.animation_machine.travel("Attack_2")
 			current_attack_duration = attack_2_duration
 			apply_dash(current_direction, attack_dash_speed)
+			PlayerStatsComponent.stamia -= 30
 		2:
 			controlled_node.animation_machine.travel("Attack_3")
 			current_attack_duration = attack_3_duration
 			apply_dash(current_direction, attack_dash_speed)
+			PlayerStatsComponent.stamia -= 30
 		_:
 			pass
 	
 	attack_timer = current_attack_duration
-	PlayerStatsComponent.stamia -= 15
 	
 	if attack_index == 2:
 		can_combo = false
