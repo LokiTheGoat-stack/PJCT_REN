@@ -6051,13 +6051,13 @@ position = Vector2(-1329, -351)
 position = Vector2(-625, -353)
 
 [node name="Player" parent="." unique_id=889305067 instance=ExtResource("2_57m1b")]
-position = Vector2(-34, 553)
+position = Vector2(5998, 600)
 collision_mask = 48
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=1545592130]
 physics_interpolation_mode = 1
 top_level = true
-position = Vector2(-33.998653, 494)
+position = Vector2(6000.129, 620.4931)
 editor_draw_limits = true
 
 [node name="PhantomCameraHost" type="Node" parent="Player/Camera2D" unique_id=1346573263]
@@ -6081,7 +6081,7 @@ script = ExtResource("7_76w4k")
 
 [node name="PathCamera" type="Node2D" parent="Cameras" unique_id=1911750126 node_paths=PackedStringArray("follow_target", "follow_path")]
 top_level = true
-position = Vector2(-33.998653, 494)
+position = Vector2(6000.129, 620.4931)
 script = ExtResource("7_ds81a")
 priority = 5
 follow_mode = 4
@@ -6132,7 +6132,7 @@ shape = SubResource("RectangleShape2D_hylex")
 
 [node name="GroupCamera" type="Node2D" parent="Cameras" unique_id=1201260551 node_paths=PackedStringArray("follow_targets")]
 top_level = true
-position = Vector2(6, 513)
+position = Vector2(6038, 560)
 script = ExtResource("7_ds81a")
 follow_mode = 3
 follow_targets = [NodePath("../../Player")]

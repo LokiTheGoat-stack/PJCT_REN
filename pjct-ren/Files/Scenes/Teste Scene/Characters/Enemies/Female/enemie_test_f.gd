@@ -122,6 +122,7 @@ func _on_agro_area_body_entered(body: Node2D) -> void:
 	animation_player.play("Idle")
 	check_can_move(false)
 	attack_timer.start()
+	attack()
 func _on_agro_area_body_exited(body: Node2D) -> void:
 	attack_timer.stop()
 	patrol_mode = true
@@ -142,5 +143,6 @@ func shoot():
 		(player.global_position - $Body/Start.global_position).normalized(),
 		150,
 		30,
-		self
+		self,
+		true
 	)

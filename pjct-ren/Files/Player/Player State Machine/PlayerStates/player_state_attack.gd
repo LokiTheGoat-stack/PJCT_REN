@@ -7,7 +7,7 @@ const gravity = 980.0
 @export var attack_2_duration: float = 0.333
 @export var attack_3_duration: float = 0.333
 @export var combo_window: float = 0.6        #tiempo para encadenar el siguiente golpe
-@export var attack_dash_speed: float = 800.0  #velocidad del pequeño impulso
+@export var attack_dash_speed: float = 500.0  #velocidad del pequeño impulso
 @export var attack_dash_duration: float = 0.1 #duración del impulso
 @export var open_rate_trigger: float = 0.75 # % de tiempo omitido en la animacion
 
@@ -121,7 +121,7 @@ func execute_attack(attack_index: int):
 		0:
 			controlled_node.animation_machine.travel("Attack_1")
 			current_attack_duration = attack_1_duration
-			apply_dash(current_direction, attack_dash_speed * 1.1)
+			apply_dash(current_direction, attack_dash_speed)
 		1:
 			controlled_node.animation_machine.travel("Attack_2")
 			current_attack_duration = attack_2_duration
@@ -134,7 +134,7 @@ func execute_attack(attack_index: int):
 			pass
 	
 	attack_timer = current_attack_duration
-	PlayerStatsComponent.stamia -= 30
+	PlayerStatsComponent.stamia -= 15
 	
 	if attack_index == 2:
 		can_combo = false
@@ -161,16 +161,3 @@ func finish_attack(): #terminar combo
 			state_machine.change_to("PlayerStateIdle")
 	else:
 		state_machine.change_to("PlayerStateFall")
-
-
-func show_combo_effect():
-	var label = Label.new()
-	label.text = "x" + str(combo_count + 1) + " COMBO!"
-	label.position = controlled_node.global_position - Vector2(0, 50)
-	label.modulate = Color.YELLOW
-	label.add_theme_font_size_override("font_size", 24)
-	controlled_node.get_parent().add_child(label)
-	
-	var tween = create_tween()
-	tween.tween_property(label, "modulate:a", 0.0, 0.8)
-	tween.tween_callback(label.queue_free)

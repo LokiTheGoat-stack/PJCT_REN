@@ -6,7 +6,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_hylex"]
 radius = 16.124516
 
-[node name="Projectile" type="Area2D" unique_id=197713768]
+[node name="Projectile" type="Area2D" unique_id=197713768 groups=["Enemie_Bullet"]]
 visible = false
 collision_layer = 4
 collision_mask = 19

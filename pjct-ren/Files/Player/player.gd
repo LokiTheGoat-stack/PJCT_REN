@@ -47,7 +47,9 @@ func take_damage(damage, node): #control del damage
 			elif damage >= 50: PlayerStatsComponent.stamia -= 50
 			PlayerStatsComponent.current_hp -= (damage * 10) / 100
 		else: PlayerStatsComponent.current_hp -= damage
-	elif PlayerStatsComponent.parry_time: node.take_damage(damage * 5, self)
+	if PlayerStatsComponent.parry_time: 
+		node.take_damage(damage * 5, self)
+		show_combo_effect(damage * 5,node)
 
 func stamina_gift(): #aumento de stamina por parry
 	PlayerStatsComponent.stamia += 50
@@ -62,9 +64,11 @@ func execute_parry():
 #colision de los ataques
 func _on_attack_area_body_entered(body: Node2D) -> void:
 	$Sounds.flesh_slice()
-	$StateMachine/PlayerStateAttack.show_combo_effect()
-	body.take_damage(40,self)
-
+	show_combo_effect(PlayerStatsComponent.damage,body)
+	body.take_damage(PlayerStatsComponent.damage,self)
+func _on_attack_area_area_entered(area: Area2D) -> void:
+	if area.is_in_group("Enemie_Bullet") and area.can_parry:
+		area.counter(self)
 #endregion
 
 #region USEFUL
@@ -74,6 +78,18 @@ func activate_slow_motion(duration:float, scale:float):
 	Engine.time_scale = scale
 	await get_tree().create_timer(duration,false).timeout
 	Engine.time_scale = original_scale
+
+func show_combo_effect(damage:int,target):
+	var label = Label.new()
+	label.text = str(int(damage))
+	label.position = target.global_position - Vector2(0, 50)
+	label.modulate = Color.YELLOW
+	label.add_theme_font_size_override("font_size", 24)
+	get_parent().add_child(label)
+	
+	var tween = create_tween()
+	tween.tween_property(label, "modulate:a", 0.0, 0.8)
+	tween.tween_callback(label.queue_free)
 
 #endregion
 

@@ -1105,7 +1105,7 @@ texture = ExtResource("2_qdpqe")
 hframes = 5
 
 [node name="AttackArea" type="Area2D" parent="Ren_Sprite" unique_id=1539410476]
-collision_mask = 2
+collision_mask = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ren_Sprite/AttackArea" unique_id=1078341602]
 position = Vector2(15.5, 2)
@@ -1268,4 +1268,6 @@ offset_bottom = -10.0
 grow_vertical = 0
 texture = ExtResource("30_fq8mf")
 
+[connection signal="area_entered" from="Ren_Sprite/AttackArea" to="." method="_on_attack_area_area_entered"]
+[connection signal="area_shape_entered" from="Ren_Sprite/AttackArea" to="." method="_on_attack_area_area_shape_entered"]
 [connection signal="body_entered" from="Ren_Sprite/AttackArea" to="." method="_on_attack_area_body_entered"]

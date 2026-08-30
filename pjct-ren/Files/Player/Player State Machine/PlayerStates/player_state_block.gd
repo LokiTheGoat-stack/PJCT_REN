@@ -8,7 +8,7 @@ var last_state: String
 
 func time_for_parry():
 	PlayerStatsComponent.parry_time = true
-	await get_tree().create_timer(0.2).timeout
+	await get_tree().create_timer(0.35).timeout
 	PlayerStatsComponent.parry_time = false
 
 #region AWAYS_ON_FUNC
