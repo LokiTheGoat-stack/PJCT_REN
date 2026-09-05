@@ -1,10 +1,10 @@
 extends Node
-class_name PlayerStateMachine
+class_name EnemieStateMachine
 
 @onready var controlled_node: Node = self.owner
-@export var default_state: PlayerStateBase
+@export var default_state: EnemieStateBase
 
-var current_state: PlayerStateBase = null
+var current_state: EnemieStateBase = null
 var can_change: bool = true
 
 func _ready() -> void:

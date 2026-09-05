@@ -1,8 +1,8 @@
 extends Node
-class_name PlayerStateBase
+class_name EnemieStateBase
 
 @onready var controlled_node: Node = self.owner
-var state_machine: PlayerStateMachine
+var state_machine: EnemieStateMachine
 
 #region METHODS
 func start():

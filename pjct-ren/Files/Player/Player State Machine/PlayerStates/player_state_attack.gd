@@ -37,7 +37,8 @@ func on_enter(air:bool):
 	var sprite = controlled_node.get_node("Ren_Sprite")
 	if Input.is_action_pressed("LEFT"): current_direction = -1
 	elif Input.is_action_pressed("RIGHT"): current_direction = 1
-	else: current_direction = -1 if sprite.flip_h else 1
+	elif $"../../Ren_Sprite".scale.x < 0: current_direction = -1
+	elif $"../../Ren_Sprite".scale.x > 0: current_direction = 1
 	execute_attack(0)
 
 #resetear parametros para salir
@@ -109,6 +110,18 @@ func on_input(event: InputEvent) -> void:
 				
 				state_machine.change_to("PlayerStateDash")
 				$"../PlayerStateDash".dash("PlayerStateIdle",true)
+		
+		elif Input.is_action_pressed("DASH"):
+			if can_combo and combo_timer > 0:
+				is_attacking = false
+				can_combo = false
+				combo_count = 0
+				is_dashing = false
+				controlled_node.velocity.x = 0
+				
+				$"../PlayerStateBlock".charge_last_state("PlayerStateIdle")
+				state_machine.change_to("PlayerStateBlock")
+				$"../PlayerStateBlock".time_for_parry()
 
 
 func execute_attack(attack_index: int):

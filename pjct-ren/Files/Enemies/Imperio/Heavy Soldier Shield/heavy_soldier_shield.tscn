@@ -1,0 +1,1795 @@
+[gd_scene format=3 uid="uid://iin83nsp4sqg"]
+
+[ext_resource type="Script" uid="uid://bhwuv5hhwpbvq" path="res://Files/Enemies/Imperio/Heavy Soldier Shield/heavy_soldier_shield.gd" id="1_dkjc0"]
+[ext_resource type="Texture2D" uid="uid://dr3fgoeixu6o1" path="res://Files/Art/Test Art/Enemies/Heavy Soldier/R_arm.png" id="2_vjmbt"]
+[ext_resource type="Texture2D" uid="uid://cvcvnkasp547f" path="res://Files/Art/Test Art/Enemies/Heavy Soldier/R_forearm.png" id="3_sky3g"]
+[ext_resource type="Texture2D" uid="uid://cu6sm82veo2mr" path="res://Files/Art/Test Art/Enemies/Heavy Soldier/R_h.png" id="4_1yw6v"]
+[ext_resource type="Texture2D" uid="uid://i47pxfmfvufx" path="res://Files/Art/Test Art/Enemies/Heavy Soldier/R_lerg.png" id="6_j6cyh"]
+[ext_resource type="Texture2D" uid="uid://cnfsfpbxc7qye" path="res://Files/Art/Test Art/Enemies/Heavy Soldier/Foot.png" id="7_7rkp4"]
+[ext_resource type="Texture2D" uid="uid://dbtaul5flefp3" path="res://Files/Art/Test Art/Enemies/Heavy Soldier/Chest.png" id="8_trnfh"]
+[ext_resource type="Texture2D" uid="uid://b7as3lhmcfrps" path="res://Files/Art/Test Art/Enemies/Heavy Soldier/head.png" id="9_bl74r"]
+[ext_resource type="Texture2D" uid="uid://n7uu5ul4vsq3" path="res://Files/Art/Test Art/Enemies/Heavy Soldier/L_lerg.png" id="10_3iufl"]
+[ext_resource type="Texture2D" uid="uid://cfis1rx4hc8gw" path="res://Files/Art/Test Art/Enemies/Heavy Soldier/L_arm.png" id="11_4fvi7"]
+[ext_resource type="Texture2D" uid="uid://b5kfkw35rtry8" path="res://Files/Art/Test Art/Enemies/Heavy Soldier/L_forearm.png" id="12_4mljo"]
+[ext_resource type="Texture2D" uid="uid://d4en5m4nafyyn" path="res://Files/Art/Test Art/Enemies/Heavy Soldier/L_h.png" id="13_p7e3p"]
+[ext_resource type="Texture2D" uid="uid://bnbpdwvgj41he" path="res://Files/Art/Test Art/Enemies/Heavy Soldier/shield.png" id="13_y8sfi"]
+[ext_resource type="Script" uid="uid://bgk5hwr4bnut7" path="res://Files/Enemies/Enemies State Machine/enemie_state_machine.gd" id="14_rpuvn"]
+[ext_resource type="Script" uid="uid://cfofjnei3vv7l" path="res://Files/Enemies/Imperio/Heavy Soldier Shield/States/HSS_patrol_state.gd" id="15_qluqb"]
+[ext_resource type="Script" uid="uid://cp0lvquvbxeuq" path="res://Files/Enemies/Imperio/Heavy Soldier Shield/States/HSS_idle_state.gd" id="16_43322"]
+[ext_resource type="Script" uid="uid://ci0pixowfmspm" path="res://Files/Enemies/Imperio/Heavy Soldier Shield/States/HSS_agro_state.gd" id="17_0lado"]
+[ext_resource type="Script" uid="uid://bkvf5xiluujp1" path="res://Files/Enemies/Imperio/Heavy Soldier Shield/States/HSS_run_away_state.gd" id="18_l4fho"]
+[ext_resource type="Script" uid="uid://bpuhkhc0uw2rj" path="res://Files/Enemies/Imperio/Heavy Soldier Shield/States/HSS_nock_back_state.gd" id="19_bp2pe"]
+[ext_resource type="Script" uid="uid://bml1a2xhlwtgl" path="res://Files/Enemies/Imperio/Heavy Soldier Shield/States/HSS_attack_state.gd" id="19_p3f3a"]
+[ext_resource type="Script" uid="uid://cf5couw3c8amg" path="res://Files/Enemies/Imperio/Heavy Soldier Shield/States/HSS_death_state.gd" id="20_qaivx"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vbsen"]
+radius = 53.998524
+height = 316.00253
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1beug"]
+size = Vector2(71, 69.5)
+
+[sub_resource type="Animation" id="Animation_ujls3"]
+resource_name = "Attack"
+length = 1.5333333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body/Skeleton2D/Cadera:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.7333333, 1.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [2.9524407, 2.9524407]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Body/Skeleton2D/Cadera/Torso:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.26666668, 0.4, 0.7333333, 1.0333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [-0.021031559, -0.021031559, 0.76652396, 0.76652396]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Body/Skeleton2D/Cadera/Torso/RArm:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.26666668, 0.4, 0.7333333, 1.0333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.21966386, 0.21966386, 2.3173745, 2.3173745]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Body/Skeleton2D/Cadera/Torso/RArm/RForearm:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.7518427, 1.0518427),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.86269, 0.86269]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Body/Skeleton2D/Cadera/Torso/RArm/RForearm/Shield:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.26666668, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-0.26602238, -0.26602238]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Body/Skeleton2D/Cadera/Torso/RArm/RPad:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Body/Skeleton2D/Cadera/Torso/LArm:rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.26666668, 0.4, 0.7333333, 1.0333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.44247544, 0.44247544, 1.4326482, 1.4326482]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Body/Skeleton2D/Cadera/Torso/LArm/LFoream:rotation")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0.7333333, 1.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-0.4164776, -0.4164776]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Body/Skeleton2D/Cadera/Torso/LArm/LPad:rotation")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0.26666668, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-0.5845842, -0.5845842]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Body/Skeleton2D/Cadera/Torso/Head:rotation")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0.26666668, 0.4, 0.7333333, 0.7518427, 1.0333333, 1.0518427),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [1.5988822, 1.5988822, 1.5988822, 1.5952376, 1.5988822, 1.5952376]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Body/Skeleton2D/Cadera/LThigh:rotation")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0.26666668, 0.4, 0.7333333, 1.0333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [-0.09625602, -0.09625602, -1.6888577, -1.6888577]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Body/Skeleton2D/Cadera/LThigh/LFoot:rotation")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0.26666668, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.1559464, 1.1559464]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("Body/Skeleton2D/Cadera/RThigh:rotation")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0.26666668, 0.4, 0.7333333, 1.0333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.011416674, 0.011416674, -2.1756833, -2.1756833]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("Body/Skeleton2D/Cadera/RThigh/RFoot:rotation")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0.26666668, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.97867835, 0.97867835]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("Body/AttackArea/CollisionShape2D:disabled")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0.26666668, 0.6666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/15/type = "method"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("StateMachine/Attack")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(0.26666668, 0.6666666, 1.0325419, 1.5333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"values": [{
+"args": [800.0],
+"method": &"dash"
+}, {
+"args": [true],
+"method": &"damage"
+}, {
+"args": [false],
+"method": &"damage"
+}, {
+"args": [],
+"method": &"attack_count"
+}]
+}
+tracks/16/type = "method"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath(".")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"times": PackedFloat32Array(0.33333334, 0.8666667),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [true],
+"method": &"_can_parry_me"
+}, {
+"args": [false],
+"method": &"_can_parry_me"
+}]
+}
+tracks/17/type = "value"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath("Body:modulate")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/keys = {
+"times": PackedFloat32Array(0.3268691, 0.33333334, 0.45108178, 0.45754603),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0, 1, 0, 1), Color(0, 1, 0, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_1beug"]
+resource_name = "Base"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body/Skeleton2D/Cadera:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Body/Skeleton2D/Cadera/Torso:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Body/Skeleton2D/Cadera/Torso/RArm:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Body/Skeleton2D/Cadera/Torso/RArm/RForearm:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Body/Skeleton2D/Cadera/Torso/RArm/RForearm/Shield:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Body/Skeleton2D/Cadera/Torso/RArm/RPad:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Body/Skeleton2D/Cadera/Torso/LArm:rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Body/Skeleton2D/Cadera/Torso/LArm/LFoream:rotation")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Body/Skeleton2D/Cadera/Torso/LArm/LPad:rotation")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Body/Skeleton2D/Cadera/Torso/Head:rotation")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Body/Skeleton2D/Cadera/LThigh:rotation")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Body/Skeleton2D/Cadera/LThigh/LFoot:rotation")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("Body/Skeleton2D/Cadera/RThigh:rotation")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("Body/Skeleton2D/Cadera/RThigh/RFoot:rotation")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+
+[sub_resource type="Animation" id="Animation_5ibis"]
+resource_name = "Death"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body/Skeleton2D/Cadera:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Body/Skeleton2D/Cadera/Torso:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.66),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.4366002, -0.08453989]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Body/Skeleton2D/Cadera/Torso/RArm:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-4.5379715]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Body/Skeleton2D/Cadera/Torso/RArm/RForearm:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.064831674]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Body/Skeleton2D/Cadera/Torso/RArm/RForearm/Shield:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.36901128]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Body/Skeleton2D/Cadera/Torso/RArm/RPad:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Body/Skeleton2D/Cadera/Torso/LArm:rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.9509429]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Body/Skeleton2D/Cadera/Torso/LArm/LFoream:rotation")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-1.217685]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Body/Skeleton2D/Cadera/Torso/LArm/LPad:rotation")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Body/Skeleton2D/Cadera/Torso/Head:rotation")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 1.66),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.7387946, 0.7826451]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Body/Skeleton2D/Cadera/LThigh:rotation")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0, 1.05),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-1.1976001, -1.4267898]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Body/Skeleton2D/Cadera/LThigh/LFoot:rotation")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0, 1.05),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.26912928, 1.9221548]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("Body/Skeleton2D/Cadera/RThigh:rotation")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0, 1.05),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-1.5079542, -1.4337579]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("Body/Skeleton2D/Cadera/RThigh/RFoot:rotation")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0, 1.05),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.14236367, 1.8192105]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("Body/Skeleton2D/Cadera:position")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0, 1.05, 1.66),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1.9999998, 14), Vector2(2, 21), Vector2(1.9999995, 23.999998)]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("Body:modulate")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(1.0666667, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_vbsen"]
+resource_name = "Idle"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body/Skeleton2D/Cadera:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [2.7318265]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Body/Skeleton2D/Cadera/Torso:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.339816, 0.2705089]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Body/Skeleton2D/Cadera/Torso/RArm:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-2.4084272]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Body/Skeleton2D/Cadera/Torso/RArm/RForearm:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-1.11292]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Body/Skeleton2D/Cadera/Torso/RArm/RForearm/Shield:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.41135323]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Body/Skeleton2D/Cadera/Torso/RArm/RPad:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Body/Skeleton2D/Cadera/Torso/LArm:rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 1.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [3.07603, 3.1294725]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Body/Skeleton2D/Cadera/Torso/LArm/LFoream:rotation")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 1.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-0.44834083, -0.3586963]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Body/Skeleton2D/Cadera/Torso/LArm/LPad:rotation")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Body/Skeleton2D/Cadera/Torso/Head:rotation")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 1.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [2.2132964, 2.151352]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Body/Skeleton2D/Cadera/LThigh:rotation")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Body/Skeleton2D/Cadera/LThigh/LFoot:rotation")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("Body/Skeleton2D/Cadera/RThigh:rotation")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("Body/Skeleton2D/Cadera/RThigh/RFoot:rotation")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("Body/AttackArea/CollisionShape2D:disabled")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_njwwk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body/Skeleton2D/Cadera:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [2.7318265]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Body/Skeleton2D/Cadera/Torso:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.26111814]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Body/Skeleton2D/Cadera/Torso/RArm:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-2.7136936]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Body/Skeleton2D/Cadera/Torso/RArm/RForearm:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.839031]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Body/Skeleton2D/Cadera/Torso/RArm/RForearm/Shield:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.5027779]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Body/Skeleton2D/Cadera/Torso/RArm/RPad:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.61895895]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Body/Skeleton2D/Cadera/Torso/LArm:rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [3.12767]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Body/Skeleton2D/Cadera/Torso/LArm/LFoream:rotation")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.33584303]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Body/Skeleton2D/Cadera/Torso/LArm/LPad:rotation")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.4359058]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Body/Skeleton2D/Cadera/Torso/Head:rotation")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [2.150589]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Body/Skeleton2D/Cadera/LThigh:rotation")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-1.1172625]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Body/Skeleton2D/Cadera/LThigh/LFoot:rotation")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("Body/Skeleton2D/Cadera/RThigh:rotation")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-1.0202811]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("Body/Skeleton2D/Cadera/RThigh/RFoot:rotation")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.014959842]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("Body/AttackArea/CollisionShape2D:disabled")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("Body:modulate")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("Body/Skeleton2D/Cadera:position")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1.9999998, 14)]
+}
+
+[sub_resource type="Animation" id="Animation_u3td0"]
+resource_name = "Run"
+length = 3.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body/Skeleton2D/Cadera:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Body/Skeleton2D/Cadera/Torso:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.992651, 2.26514),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.08594486, 0.39931586, 0.03160651]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Body/Skeleton2D/Cadera/Torso/RArm:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-1.953045]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Body/Skeleton2D/Cadera/Torso/RArm/RForearm:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-1.39242]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Body/Skeleton2D/Cadera/Torso/RArm/RForearm/Shield:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.48613185]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Body/Skeleton2D/Cadera/Torso/RArm/RPad:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Body/Skeleton2D/Cadera/Torso/LArm:rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.7808908]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Body/Skeleton2D/Cadera/Torso/LArm/LFoream:rotation")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.47850072]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Body/Skeleton2D/Cadera/Torso/LArm/LPad:rotation")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Body/Skeleton2D/Cadera/Torso/Head:rotation")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(1.38, 2.59),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.536345, 2.0730515]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Body/Skeleton2D/Cadera/LThigh:rotation")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0, 0.25941372, 0.539861, 0.91846484, 1.2304624, 1.6125718, 1.8930191, 2.0939083, 2.447973),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [-1.3831724, -1.1677325, -1.0782413, -0.85009813, -0.7941408, -1.0557421, -1.6084036, -2.0255666, -2.2919762]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Body/Skeleton2D/Cadera/LThigh/LFoot:rotation")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0, 0.25941372, 0.539861, 0.91846484, 1.2304624, 1.6125718, 1.8930191, 2.0939083, 2.447973),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.32426247, 0.43425074, 0.49402136, 0.96354437, 1.1976143, 1.3757038, 1.9420938, 1.7902732, 0.67836326]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("Body/Skeleton2D/Cadera/RThigh:rotation")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0, 0.25941372, 0.539861, 0.91846484, 1.2304624, 1.6125718, 1.8930191, 2.0939083, 2.447973),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [-1.1310451, -1.4332043, -1.5448394, -1.839828, -1.6569452, -1.3369043, -0.8015628, -0.50788474, -0.1189138]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("Body/Skeleton2D/Cadera/RThigh/RFoot:rotation")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0, 0.25941372, 0.539861, 0.91846484, 1.2304624, 1.6125718, 1.8930191, 2.0939083, 2.447973),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [1.4900702, 1.1840929, 0.62331444, 0.16430503, 0.3586636, 0.3586636, 0.043146014, -0.149049, 0.4980151]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("Body/AttackArea/CollisionShape2D:disabled")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_voens"]
+resource_name = "Walk"
+length = 3.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body/Skeleton2D/Cadera:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Body/Skeleton2D/Cadera/Torso:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.992651, 2.26514),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.08594486, 0.39931586, 0.03160651]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Body/Skeleton2D/Cadera/Torso/RArm:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.01),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-2.30563, -2.5529292]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Body/Skeleton2D/Cadera/Torso/RArm/RForearm:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1.01, 2.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [-1.1673456, -1.3166084, -1.017596]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Body/Skeleton2D/Cadera/Torso/RArm/RForearm/Shield:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.68966734]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Body/Skeleton2D/Cadera/Torso/RArm/RPad:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Body/Skeleton2D/Cadera/Torso/LArm:rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.9718182, 2.3893576),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [3.2867668, 1.8770015, 4.396659]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Body/Skeleton2D/Cadera/Torso/LArm/LFoream:rotation")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.9718182, 2.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [-1.4397862, -1.9223492, -0.5455271]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Body/Skeleton2D/Cadera/Torso/LArm/LPad:rotation")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Body/Skeleton2D/Cadera/Torso/Head:rotation")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Body/Skeleton2D/Cadera/LThigh:rotation")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0, 0.25941372, 0.539861, 0.91846484, 1.2304624, 1.6125718, 1.8930191, 2.0939083, 2.447973),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [-1.3831724, -1.1677325, -1.0782413, -0.85009813, -0.7941408, -1.0557421, -1.6084036, -2.0255666, -2.2919762]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Body/Skeleton2D/Cadera/LThigh/LFoot:rotation")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0, 0.25941372, 0.539861, 0.91846484, 1.2304624, 1.6125718, 1.8930191, 2.0939083, 2.447973),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.32426247, 0.43425074, 0.49402136, 0.96354437, 1.1976143, 1.3757038, 1.9420938, 1.7902732, 0.67836326]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("Body/Skeleton2D/Cadera/RThigh:rotation")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0, 0.25941372, 0.539861, 0.91846484, 1.2304624, 1.6125718, 1.8930191, 2.0939083, 2.447973),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [-1.1310451, -1.4332043, -1.5448394, -1.839828, -1.6569452, -1.3369043, -0.8015628, -0.50788474, -0.1189138]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("Body/Skeleton2D/Cadera/RThigh/RFoot:rotation")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0, 0.25941372, 0.539861, 0.91846484, 1.2304624, 1.6125718, 1.8930191, 2.0939083, 2.447973),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [1.4900702, 1.1840929, 0.62331444, 0.16430503, 0.3586636, 0.3586636, 0.043146014, -0.149049, 0.4980151]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("Body/AttackArea/CollisionShape2D:disabled")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ujls3"]
+_data = {
+&"Attack": SubResource("Animation_ujls3"),
+&"Base": SubResource("Animation_1beug"),
+&"Death": SubResource("Animation_5ibis"),
+&"Idle": SubResource("Animation_vbsen"),
+&"RESET": SubResource("Animation_njwwk"),
+&"Run": SubResource("Animation_u3td0"),
+&"Walk": SubResource("Animation_voens")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_o07l6"]
+animation = &"Attack"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_voens"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_5ibis"]
+graph_offset = Vector2(-324.76825, 2.3146973)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_o07l6")
+nodes/Animation/position = Vector2(-263.74515, 137.8462)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_voens")
+nodes/TimeScale/position = Vector2(33.254936, 134.5462)
+node_connections = [&"output", 0, &"TimeScale", &"TimeScale", 0, &"Animation"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_u338e"]
+animation = &"Death"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_t7drt"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_2afuu"]
+graph_offset = Vector2(-149.32623, -4.7590027)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_u338e")
+nodes/Animation/position = Vector2(-118.05888, 199.36514)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_t7drt")
+nodes/TimeScale/position = Vector2(127.24117, 131.16513)
+node_connections = [&"output", 0, &"TimeScale", &"TimeScale", 0, &"Animation"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_46c7w"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_juabq"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_u338e"]
+graph_offset = Vector2(-264.583, 5.902313)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_46c7w")
+nodes/Animation/position = Vector2(-160, 140)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_juabq")
+nodes/TimeScale/position = Vector2(80, 120)
+node_connections = [&"output", 0, &"TimeScale", &"TimeScale", 0, &"Animation"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_t7drt"]
+animation = &"Run"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_2afuu"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_ipmr0"]
+graph_offset = Vector2(-115.66709, -28.447128)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_t7drt")
+nodes/Animation/position = Vector2(-144.72647, 156.1428)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_2afuu")
+nodes/TimeScale/position = Vector2(80, 100)
+node_connections = [&"output", 0, &"TimeScale", &"TimeScale", 0, &"Animation"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5ibis"]
+animation = &"Walk"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_46c7w"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_juabq"]
+graph_offset = Vector2(-265.04803, -23.675552)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_5ibis")
+nodes/Animation/position = Vector2(-227.7529, 124.65693)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_46c7w")
+nodes/TimeScale/position = Vector2(59.34718, 94.956924)
+node_connections = [&"output", 0, &"TimeScale", &"TimeScale", 0, &"Animation"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fdewm"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_m42iw"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jcloc"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_nemew"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_t7drt"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2afuu"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ipmr0"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ndum4"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_51cfq"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_t3j1k"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_p365n"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4mxj6"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_y57uj"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_bp2pe"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_mgr2m"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_hylex"]
+states/Attack/node = SubResource("AnimationNodeBlendTree_5ibis")
+states/Attack/position = Vector2(744, 5.5)
+states/Death/node = SubResource("AnimationNodeBlendTree_2afuu")
+states/Death/position = Vector2(922, 87.5)
+states/End/position = Vector2(218, 226)
+states/Idle/node = SubResource("AnimationNodeBlendTree_u338e")
+states/Idle/position = Vector2(521, 5.5)
+states/Run/node = SubResource("AnimationNodeBlendTree_ipmr0")
+states/Run/position = Vector2(521, 165.5)
+states/Start/position = Vector2(218, 87.5)
+states/Walk/node = SubResource("AnimationNodeBlendTree_juabq")
+states/Walk/position = Vector2(376, 87.5)
+transitions = ["Idle", "Run", SubResource("AnimationNodeStateMachineTransition_fdewm"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_m42iw"), "Idle", "Attack", SubResource("AnimationNodeStateMachineTransition_jcloc"), "Run", "Attack", SubResource("AnimationNodeStateMachineTransition_nemew"), "Start", "Walk", SubResource("AnimationNodeStateMachineTransition_t7drt"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_2afuu"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_ipmr0"), "Run", "Walk", SubResource("AnimationNodeStateMachineTransition_ndum4"), "Walk", "Run", SubResource("AnimationNodeStateMachineTransition_51cfq"), "Attack", "Death", SubResource("AnimationNodeStateMachineTransition_t3j1k"), "Idle", "Death", SubResource("AnimationNodeStateMachineTransition_p365n"), "Run", "Death", SubResource("AnimationNodeStateMachineTransition_4mxj6"), "Walk", "Death", SubResource("AnimationNodeStateMachineTransition_y57uj"), "Attack", "Idle", SubResource("AnimationNodeStateMachineTransition_bp2pe"), "Attack", "Run", SubResource("AnimationNodeStateMachineTransition_mgr2m")]
+graph_offset = Vector2(0, -69.63088)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ujls3"]
+radius = 20.0
+height = 68.0
+
+[node name="HeavySoldierShield" type="CharacterBody2D" unique_id=515751673]
+collision_layer = 2
+collision_mask = 21
+script = ExtResource("1_dkjc0")
+
+[node name="Body" type="Node2D" parent="." unique_id=523702474]
+
+[node name="RArm" type="Polygon2D" parent="Body" unique_id=421917304]
+position = Vector2(7, -6)
+texture = ExtResource("2_vjmbt")
+skeleton = NodePath("../Skeleton2D")
+polygon = PackedVector2Array(8.005638, -0.029441178, -0.045972824, 0.017921269, -0.093336105, 13.516211, 2.5218782, 17.01437, 8.256501, 16.984962, 10.021003, 14.19117, 10.003861, 8.599694, 9.125652, 3.3363862)
+uv = PackedVector2Array(8.005638, -0.029441178, -0.045972824, 0.017921269, -0.093336105, 13.516211, 2.5218782, 17.01437, 8.256501, 16.984962, 10.021003, 14.19117, 10.003861, 8.599694, 9.125652, 3.3363862)
+bones = ["Cadera", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm", PackedFloat32Array(0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51), "Cadera/Torso/RArm/RForearm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm/RForearm/Sword", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm/RPad", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/LArm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/LArm/LFoream", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/LArm/LPad", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/Head", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "Cadera/LThigh", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "Cadera/LThigh/LFoot", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "Cadera/RThigh", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "Cadera/RThigh/RFoot", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0)]
+
+[node name="RForearm" type="Polygon2D" parent="Body" unique_id=125682832]
+position = Vector2(7.239684, 10.051971)
+texture = ExtResource("3_sky3g")
+skeleton = NodePath("../Skeleton2D")
+polygon = PackedVector2Array(-0.06565666, -0.051971674, 8.047514, -0.051971674, 10.680737, 3.5420203, 12.046556, 8.609745, 12.078905, 13.073931, 11.37533, 15.178873, 9.240284, 16.673405, 8.208345, 16.958076, 4.543186, 16.922493, -0.0115766525, 11.9407215)
+uv = PackedVector2Array(-0.06565666, -0.051971674, 8.047514, -0.051971674, 10.680737, 3.5420203, 12.046556, 8.609745, 12.078905, 13.073931, 11.37533, 15.178873, 9.240284, 16.673405, 8.208345, 16.958076, 4.543186, 16.922493, -0.0115766525, 11.9407215)
+bones = ["Cadera", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm/RForearm", PackedFloat32Array(0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51), "Cadera/Torso/RArm/RForearm/Sword", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm/RPad", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/LArm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/LArm/LFoream", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/LArm/LPad", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/Head", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/LThigh", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/LThigh/LFoot", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/RThigh", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/RThigh/RFoot", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0)]
+
+[node name="RPad" type="Polygon2D" parent="Body" unique_id=1453371057]
+position = Vector2(9.093336, -8.913294)
+texture = ExtResource("4_1yw6v")
+skeleton = NodePath("../Skeleton2D")
+polygon = PackedVector2Array(0.026644707, -0.08670616, 8.068647, 0.055630207, 8.993834, 3.8275428, 9.029417, 8.275553, 8.246567, 8.916066, 6.040354, 8.987234, 0.026644707, 2.8667727)
+uv = PackedVector2Array(0.026644707, -0.08670616, 8.068647, 0.055630207, 8.993834, 3.8275428, 9.029417, 8.275553, 8.246567, 8.916066, 6.040354, 8.987234, 0.026644707, 2.8667727)
+bones = ["Cadera", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0), "Cadera/Torso", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm/RForearm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm/RForearm/Sword", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm/RPad", PackedFloat32Array(0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51), "Cadera/Torso/LArm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/LArm/LFoream", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/LArm/LPad", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/Head", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0), "Cadera/LThigh", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0), "Cadera/LThigh/LFoot", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0), "Cadera/RThigh", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0), "Cadera/RThigh/RFoot", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0)]
+
+[node name="RThigh" type="Polygon2D" parent="Body" unique_id=1928509386]
+position = Vector2(2, 7)
+texture = ExtResource("6_j6cyh")
+skeleton = NodePath("../Skeleton2D")
+polygon = PackedVector2Array(8.758186, -0.0030810833, 5.023329, -0.0030810833, 1.3472872, 1.6437852, 0.02391243, 3.8200018, -0.050974846, 10.121681, 0.90343857, 14.169962, 2.203803, 18.180693, 5.08288, 20.024595, 9.094175, 19.992247, 10.226397, 18.924725, 13.008425, 12.713684, 13.047583, 4.8266687)
+uv = PackedVector2Array(8.758186, -0.0030810833, 5.023329, -0.0030810833, 1.3472872, 1.6437852, 0.02391243, 3.8200018, -0.050974846, 10.121681, 0.90343857, 14.169962, 2.203803, 18.180693, 5.08288, 20.024595, 9.094175, 19.992247, 10.226397, 18.924725, 13.008425, 12.713684, 13.047583, 4.8266687)
+bones = ["Cadera", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm/RForearm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm/RForearm/Sword", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm/RPad", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/LArm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/LArm/LFoream", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/LArm/LPad", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/Head", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/LThigh", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/LThigh/LFoot", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/RThigh", PackedFloat32Array(0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51), "Cadera/RThigh/RFoot", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)]
+
+[node name="RFoot" type="Polygon2D" parent="Body" unique_id=842685754]
+position = Vector2(3, 22)
+texture = ExtResource("7_7rkp4")
+skeleton = NodePath("../Skeleton2D")
+polygon = PackedVector2Array(11.698006, -0.14831543, 7.6552887, -0.14831543, 1.5530777, 4.428344, 0.10380173, 7.860838, -0.04875183, 21.972204, 5.0618515, 24.0317, 12.079395, 24.0317, 13.147282, 22.963814, 13.147282, 20.14154)
+uv = PackedVector2Array(11.698006, -0.14831543, 7.6552887, -0.14831543, 1.5530777, 4.428344, 0.10380173, 7.860838, -0.04875183, 21.972204, 5.0618515, 24.0317, 12.079395, 24.0317, 13.147282, 22.963814, 13.147282, 20.14154)
+bones = ["Cadera", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm/RForearm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm/RForearm/Sword", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm/RPad", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/LArm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/LArm/LFoream", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/LArm/LPad", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/Head", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/LThigh", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/LThigh/LFoot", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/RThigh", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/RThigh/RFoot", PackedFloat32Array(0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51)]
+
+[node name="Chest" type="Polygon2D" parent="Body" unique_id=1863310510]
+position = Vector2(-13, -14)
+texture = ExtResource("8_trnfh")
+skeleton = NodePath("../Skeleton2D")
+polygon = PackedVector2Array(8.142555, 31.139994, 19.192421, 31.03862, 21.45646, 28.605621, 23.007368, 25.631313, 22.976648, 23.14302, 22.423695, 21.36128, 24.11098, 17.442604, 23.999466, 10.566005, 22.03815, 4.3883553, 17.061563, 0.026162267, 8.859411, -0.004557371, 6.893353, 1.4699868, 5.510968, 3.0981293, 5.5609074, 6.278644, 3.2505846, 6.151703, -0.024487495, 7.9542623, -0.03251362, 15.268784, 5.591329, 21.204216, 4.9243994, 23.30082, 4.791055, 24.877426, 5.4968114, 25.640408, 5.634727, 28.754322)
+uv = PackedVector2Array(8.142555, 31.139994, 19.192421, 31.03862, 21.45646, 28.605621, 23.007368, 25.631313, 22.976648, 23.14302, 22.423695, 21.36128, 24.11098, 17.442604, 23.999466, 10.566005, 22.03815, 4.3883553, 17.061563, 0.026162267, 8.859411, -0.004557371, 6.893353, 1.4699868, 5.510968, 3.0981293, 5.5609074, 6.278644, 3.2505846, 6.151703, -0.024487495, 7.9542623, -0.03251362, 15.268784, 5.591329, 21.204216, 4.9243994, 23.30082, 4.791055, 24.877426, 5.4968114, 25.640408, 5.634727, 28.754322)
+bones = ["Cadera", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso", PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), "Cadera/Torso/RArm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm/RForearm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm/RForearm/Sword", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm/RPad", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/LArm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/LArm/LFoream", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/LArm/LPad", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/Head", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/LThigh", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/LThigh/LFoot", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/RThigh", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/RThigh/RFoot", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)]
+
+[node name="Head" type="Polygon2D" parent="Body" unique_id=360989974]
+position = Vector2(-11, -25)
+texture = ExtResource("9_bl74r")
+skeleton = NodePath("../Skeleton2D")
+polygon = PackedVector2Array(19.421516, 22.197372, 21.465672, 20.368391, 21.519466, 11.008305, 19.582897, 9.179323, 21.680847, 6.5972304, 21.478168, 2.1392152, 19.65945, -0.20490909, 14.0416355, -0.32615685, 12.505829, 1.0075691, 10.687113, -0.5686524, 7.898413, -0.6090684, 7.736749, 1.0479848, 3.6951556, 1.0884011, 2.967669, 5.0895786, 1.3510313, 3.3112772, -0.14435816, 3.8771002, -0.5081017, 9.333251, 1.5935268, 11.63696, 5.473457, 11.919871, 5.43952, 15.291699, 8.746279, 19.667309, 11.050989, 19.800915, 16.228237, 22.40624)
+uv = PackedVector2Array(19.421516, 22.197372, 21.465672, 20.368391, 21.519466, 11.008305, 19.582897, 9.179323, 21.680847, 6.5972304, 21.478168, 2.1392152, 19.65945, -0.20490909, 14.0416355, -0.32615685, 12.505829, 1.0075691, 10.687113, -0.5686524, 7.898413, -0.6090684, 7.736749, 1.0479848, 3.6951556, 1.0884011, 2.967669, 5.0895786, 1.3510313, 3.3112772, -0.14435816, 3.8771002, -0.5081017, 9.333251, 1.5935268, 11.63696, 5.473457, 11.919871, 5.43952, 15.291699, 8.746279, 19.667309, 11.050989, 19.800915, 16.228237, 22.40624)
+bones = ["Cadera", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm/RForearm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm/RForearm/Sword", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm/RPad", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/LArm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/LArm/LFoream", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/LArm/LPad", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/Head", PackedFloat32Array(0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51), "Cadera/LThigh", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/LThigh/LFoot", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/RThigh", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/RThigh/RFoot", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)]
+
+[node name="LThigh" type="Polygon2D" parent="Body" unique_id=933204578]
+position = Vector2(-12, 9)
+texture = ExtResource("10_3iufl")
+skeleton = NodePath("../Skeleton2D")
+polygon = PackedVector2Array(7.9379215, -0.052273512, 3.7496738, -0.013131142, 0.89227104, 4.292543, -0.06457901, 8.76027, 0.013706207, 11.304533, 1.9878159, 16.811703, 2.7628365, 19.222881, 3.9684258, 19.997902, 8.101873, 19.954845, 9.824142, 17.93118, 12.192265, 14.013014, 13.0534, 10.094851, 13.033861, 3.6530135, 9.941605, 0.5998988)
+uv = PackedVector2Array(7.9379215, -0.052273512, 3.7496738, -0.013131142, 0.89227104, 4.292543, -0.06457901, 8.76027, 0.013706207, 11.304533, 1.9878159, 16.811703, 2.7628365, 19.222881, 3.9684258, 19.997902, 8.101873, 19.954845, 9.824142, 17.93118, 12.192265, 14.013014, 13.0534, 10.094851, 13.033861, 3.6530135, 9.941605, 0.5998988)
+bones = ["Cadera", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm/RForearm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm/RForearm/Sword", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm/RPad", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/LArm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/LArm/LFoream", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/LArm/LPad", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/Head", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/LThigh", PackedFloat32Array(0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51), "Cadera/LThigh/LFoot", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/RThigh", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/RThigh/RFoot", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)]
+
+[node name="LFoot" type="Polygon2D" parent="Body" unique_id=1697880092]
+position = Vector2(-13, 23)
+texture = ExtResource("7_7rkp4")
+skeleton = NodePath("../Skeleton2D")
+polygon = PackedVector2Array(11.698006, -0.14831543, 7.6552887, -0.14831543, 1.5530777, 4.428344, 0.10380173, 7.860838, -0.04875183, 21.972204, 5.0618515, 24.0317, 12.079395, 24.0317, 13.147282, 22.963814, 13.147282, 20.14154)
+uv = PackedVector2Array(11.698006, -0.14831543, 7.6552887, -0.14831543, 1.5530777, 4.428344, 0.10380173, 7.860838, -0.04875183, 21.972204, 5.0618515, 24.0317, 12.079395, 24.0317, 13.147282, 22.963814, 13.147282, 20.14154)
+bones = ["Cadera", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm/RForearm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm/RForearm/Sword", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm/RPad", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/LArm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/LArm/LFoream", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/LArm/LPad", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/Head", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/LThigh", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/LThigh/LFoot", PackedFloat32Array(0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51), "Cadera/RThigh", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/RThigh/RFoot", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0)]
+
+[node name="LArm" type="Polygon2D" parent="Body" unique_id=1710766421]
+position = Vector2(-17, -5)
+texture = ExtResource("11_4fvi7")
+skeleton = NodePath("../Skeleton2D")
+polygon = PackedVector2Array(2.1042023, 16.98426, 7.619734, 17.019844, 9.149849, 14.778048, 9.149849, 11.361976, 10.003868, 11.361976, 10.097032, 1.797588, 9.3237095, -0.05838442, 2.894091, -0.014194608, 0.77297974, 2.9686184, -0.028770447, 9.101315, -0.06791258, 13.8766985, -0.10705519, 15.990394)
+uv = PackedVector2Array(2.1042023, 16.98426, 7.619734, 17.019844, 9.149849, 14.778048, 9.149849, 11.361976, 10.003868, 11.361976, 10.097032, 1.797588, 9.3237095, -0.05838442, 2.894091, -0.014194608, 0.77297974, 2.9686184, -0.028770447, 9.101315, -0.06791258, 13.8766985, -0.10705519, 15.990394)
+bones = ["Cadera", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm/RForearm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm/RForearm/Sword", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm/RPad", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/LArm", PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), "Cadera/Torso/LArm/LFoream", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/LArm/LPad", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/Head", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/LThigh", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/LThigh/LFoot", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/RThigh", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/RThigh/RFoot", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)]
+
+[node name="LForearm" type="Polygon2D" parent="Body" unique_id=1785098561]
+position = Vector2(-18, 11)
+texture = ExtResource("12_4mljo")
+skeleton = NodePath("../Skeleton2D")
+polygon = PackedVector2Array(7.6178064, -0.03859949, 2.1378584, 0.03256893, 0.0028123856, 3.235136, -0.03574562, 11.84851, 4.6872206, 16.938202, 8.259515, 16.988646, 10.10083, 15.068724, 12.022369, 12.115244, 11.986786, 8.592421, 10.682291, 3.022958)
+uv = PackedVector2Array(7.6178064, -0.03859949, 2.1378584, 0.03256893, 0.0028123856, 3.235136, -0.03574562, 11.84851, 4.6872206, 16.938202, 8.259515, 16.988646, 10.10083, 15.068724, 12.022369, 12.115244, 11.986786, 8.592421, 10.682291, 3.022958)
+bones = ["Cadera", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm/RForearm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm/RForearm/Sword", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm/RPad", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/LArm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/LArm/LFoream", PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1), "Cadera/Torso/LArm/LPad", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/Head", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/LThigh", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/LThigh/LFoot", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/RThigh", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/RThigh/RFoot", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0)]
+
+[node name="LPad" type="Polygon2D" parent="Body" unique_id=1970526675]
+position = Vector2(-17, -9)
+texture = ExtResource("13_p7e3p")
+skeleton = NodePath("../Skeleton2D")
+polygon = PackedVector2Array(3.3032165, 8.956051, 8.959263, 3.4110198, 8.949604, 0.62381804, 7.847952, -0.040191352, 2.7018793, -0.025100231, 1.0344296, 0.9277917, -0.0106601715, 4.3304095, -0.03496456, 8.097593, 0.7728882, 8.950264)
+uv = PackedVector2Array(3.3032165, 8.956051, 8.959263, 3.4110198, 8.949604, 0.62381804, 7.847952, -0.040191352, 2.7018793, -0.025100231, 1.0344296, 0.9277917, -0.0106601715, 4.3304095, -0.03496456, 8.097593, 0.7728882, 8.950264)
+bones = ["Cadera", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm/RForearm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm/RForearm/Sword", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm/RPad", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/LArm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/LArm/LFoream", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/LArm/LPad", PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1), "Cadera/Torso/Head", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/LThigh", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/LThigh/LFoot", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/RThigh", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/RThigh/RFoot", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0)]
+
+[node name="Shield" type="Polygon2D" parent="Body" unique_id=339104670]
+position = Vector2(14.146347, 23.965265)
+rotation = 1.5690811
+offset = Vector2(-7.138788, -27.945074)
+texture = ExtResource("13_y8sfi")
+skeleton = NodePath("../Skeleton2D")
+polygon = PackedVector2Array(13.841582, 54.96593, 17.198944, 55.085835, 20.670118, 50.33555, 22.425661, 43.39318, 23.002613, 37.231106, 23.028849, 17.367968, 21.327503, 6.5422344, 19.407188, 1.905394, 16.97393, 0.0035364628, 13.9813, 0.0035364628, 11.238385, 2.388341, 8.567574, 10.83891, 7.9862337, 18.439232, 7.990377, 22.85524, 4.937837, 22.966919, 3.8582797, 23.897572, 3.9066725, 31.793846, 5.1760836, 33.02231, 7.919647, 33.02231, 8.176222, 44.517063, 11.256323, 53.544952)
+uv = PackedVector2Array(13.841582, 54.96593, 17.198944, 55.085835, 20.670118, 50.33555, 22.425661, 43.39318, 23.002613, 37.231106, 23.028849, 17.367968, 21.327503, 6.5422344, 19.407188, 1.905394, 16.97393, 0.0035364628, 13.9813, 0.0035364628, 11.238385, 2.388341, 8.567574, 10.83891, 7.9862337, 18.439232, 7.990377, 22.85524, 4.937837, 22.966919, 3.8582797, 23.897572, 3.9066725, 31.793846, 5.1760836, 33.02231, 7.919647, 33.02231, 8.176222, 44.517063, 11.256323, 53.544952)
+bones = ["Cadera", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm/RForearm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm/RForearm/Shield", PackedFloat32Array(0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5), "Cadera/Torso/RArm/RPad", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/LArm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/LArm/LFoream", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/LArm/LPad", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/Head", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/LThigh", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/LThigh/LFoot", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/RThigh", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/RThigh/RFoot", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)]
+
+[node name="Skeleton2D" type="Skeleton2D" parent="Body" unique_id=1886921888]
+visible = false
+
+[node name="Cadera" type="Bone2D" parent="Body/Skeleton2D" unique_id=1989467747]
+position = Vector2(1.9999998, 14)
+rotation = 2.7318265
+scale = Vector2(0.9999991, 0.9999991)
+rest = Transform2D(-0.91721404, 0.39839482, -0.39839482, -0.91721404, 1.9999998, 14)
+
+[node name="Torso" type="Bone2D" parent="Body/Skeleton2D/Cadera" unique_id=1704226481]
+position = Vector2(-2.2699375, 7.736109)
+rotation = 0.26111814
+scale = Vector2(0.9999962, 0.9999962)
+rest = Transform2D(0.96610194, 0.25816095, -0.25816095, 0.96610194, -2.2699375, 7.736109)
+
+[node name="RArm" type="Bone2D" parent="Body/Skeleton2D/Cadera/Torso" unique_id=1443106549]
+position = Vector2(-12.211616, 7.271637)
+rotation = -2.7136936
+scale = Vector2(0.9999991, 0.9999991)
+rest = Transform2D(-0.9098396, -0.41496018, 0.41496018, -0.9098396, -12.211616, 7.271637)
+
+[node name="RForearm" type="Bone2D" parent="Body/Skeleton2D/Cadera/Torso/RArm" unique_id=1740131684]
+position = Vector2(6.0570555, 13.8676605)
+rotation = 0.839031
+scale = Vector2(0.9999974, 0.9999974)
+rest = Transform2D(0.66818404, 0.7439959, -0.7439959, 0.66818404, 6.0570555, 13.8676605)
+
+[node name="Shield" type="Bone2D" parent="Body/Skeleton2D/Cadera/Torso/RArm/RForearm" unique_id=1513441599]
+position = Vector2(12.12879, 4.784615)
+rotation = 0.5027779
+scale = Vector2(0.9999991, 0.9999991)
+rest = Transform2D(0.8762474, 0.4818615, -0.4818615, 0.8762474, 12.12879, 4.784615)
+
+[node name="RPad" type="Bone2D" parent="Body/Skeleton2D/Cadera/Torso/RArm" unique_id=724360830]
+position = Vector2(3.0181382, -3.986327)
+rotation = 0.61895895
+rest = Transform2D(0.8144829, 0.58018756, -0.58018756, 0.8144829, 3.0181382, -3.986327)
+
+[node name="LArm" type="Bone2D" parent="Body/Skeleton2D/Cadera/Torso" unique_id=170506854]
+position = Vector2(9.397674, 11.518836)
+rotation = 3.12767
+scale = Vector2(0.99999726, 0.99999726)
+rest = Transform2D(-0.9999031, 0.013922154, -0.013922154, -0.9999031, 9.397674, 11.518836)
+
+[node name="LFoream" type="Bone2D" parent="Body/Skeleton2D/Cadera/Torso/LArm" unique_id=1019397549]
+position = Vector2(-5.550131, 15.303469)
+rotation = -0.33584303
+scale = Vector2(0.9999962, 0.9999962)
+rest = Transform2D(0.9441328, -0.32956523, 0.32956523, 0.9441328, -5.550131, 15.303469)
+
+[node name="LPad" type="Bone2D" parent="Body/Skeleton2D/Cadera/Torso/LArm" unique_id=1143982065]
+position = Vector2(-1.6499178, -2.2973382)
+rotation = -0.4359058
+scale = Vector2(0.99999964, 0.99999964)
+rest = Transform2D(0.9064878, -0.4222316, 0.4222316, 0.9064878, -1.6499178, -2.2973382)
+
+[node name="Head" type="Bone2D" parent="Body/Skeleton2D/Cadera/Torso" unique_id=522395231]
+position = Vector2(-1.676857, 17.949602)
+rotation = 2.150589
+scale = Vector2(0.99999964, 0.99999964)
+rest = Transform2D(-0.5478505, 0.8365763, -0.8365763, -0.5478505, -1.676857, 17.949602)
+
+[node name="LThigh" type="Bone2D" parent="Body/Skeleton2D/Cadera" unique_id=678071]
+position = Vector2(7.736107, 2.2699437)
+rotation = -1.1172625
+scale = Vector2(0.9999971, 0.9999971)
+rest = Transform2D(0.43814486, -0.8989044, 0.8989044, 0.43814486, 7.736107, 2.2699437)
+
+[node name="LFoot" type="Bone2D" parent="Body/Skeleton2D/Cadera/LThigh" unique_id=712935319]
+position = Vector2(11.988508, -0.5250449)
+scale = Vector2(0.9999984, 0.9999984)
+rest = Transform2D(1, 0, 0, 1, 11.988508, -0.5250449)
+
+[node name="RThigh" type="Bone2D" parent="Body/Skeleton2D/Cadera" unique_id=854487886]
+position = Vector2(-6.0221043, -3.7059784)
+rotation = -1.0202811
+scale = Vector2(0.99999785, 0.99999785)
+rest = Transform2D(0.5231264, -0.8522551, 0.8522551, 0.5231264, -6.0221043, -3.7059784)
+
+[node name="RFoot" type="Bone2D" parent="Body/Skeleton2D/Cadera/RThigh" unique_id=975889362]
+position = Vector2(10.610651, -3.5233536)
+rotation = -0.014959842
+scale = Vector2(0.9999976, 0.9999976)
+rest = Transform2D(0.9998881, -0.014959284, 0.014959284, 0.9998881, 10.610651, -3.5233536)
+
+[node name="AgroArea" type="Area2D" parent="Body" unique_id=102770492]
+visible = false
+collision_layer = 2
+
+[node name="CollisionPolygon2D" type="CollisionShape2D" parent="Body/AgroArea" unique_id=654540977]
+position = Vector2(74, 0)
+rotation = 1.572218
+shape = SubResource("CapsuleShape2D_vbsen")
+debug_color = Color(0.8928958, 0.322748, 0, 0.41960785)
+
+[node name="AttackArea" type="Area2D" parent="Body" unique_id=962303195]
+visible = false
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/AttackArea" unique_id=2039905197]
+position = Vector2(45.5, 9.25)
+shape = SubResource("RectangleShape2D_1beug")
+disabled = true
+debug_color = Color(0.97429806, 0, 0.43122897, 0.41960785)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=650987868]
+libraries/ = SubResource("AnimationLibrary_ujls3")
+
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=1816329515]
+tree_root = SubResource("AnimationNodeStateMachine_hylex")
+anim_player = NodePath("../AnimationPlayer")
+parameters/Attack/TimeScale/scale = 1.0
+parameters/Death/TimeScale/scale = 1.0
+parameters/Idle/TimeScale/scale = 1.0
+parameters/Run/TimeScale/scale = 1.0
+parameters/Walk/TimeScale/scale = 1.0
+
+[node name="Collision" type="CollisionShape2D" parent="." unique_id=946154291]
+visible = false
+position = Vector2(1, 12)
+shape = SubResource("CapsuleShape2D_ujls3")
+
+[node name="WaitingTimer" type="Timer" parent="." unique_id=327423588]
+wait_time = 3.0
+
+[node name="StateMachine" type="Node" parent="." unique_id=61409474 node_paths=PackedStringArray("default_state")]
+script = ExtResource("14_rpuvn")
+default_state = NodePath("Patrol")
+
+[node name="Patrol" type="Node" parent="StateMachine" unique_id=414748296]
+script = ExtResource("15_qluqb")
+
+[node name="Idle" type="Node" parent="StateMachine" unique_id=1528711429]
+script = ExtResource("16_43322")
+
+[node name="Agro" type="Node" parent="StateMachine" unique_id=1893551683]
+script = ExtResource("17_0lado")
+
+[node name="RunAway" type="Node" parent="StateMachine" unique_id=283880987]
+script = ExtResource("18_l4fho")
+
+[node name="NockBack" type="Node" parent="StateMachine" unique_id=690497279]
+script = ExtResource("19_bp2pe")
+
+[node name="Attack" type="Node" parent="StateMachine" unique_id=870579401]
+script = ExtResource("19_p3f3a")
+
+[node name="Death" type="Node" parent="StateMachine" unique_id=502191193]
+script = ExtResource("20_qaivx")
+
+[connection signal="body_entered" from="Body/AgroArea" to="." method="_on_agro_area_body_entered"]
+[connection signal="body_exited" from="Body/AgroArea" to="." method="_on_agro_area_body_exited"]
+[connection signal="body_entered" from="Body/AttackArea" to="." method="_on_attack_area_body_entered"]
+[connection signal="timeout" from="WaitingTimer" to="." method="_on_waiting_timer_timeout"]

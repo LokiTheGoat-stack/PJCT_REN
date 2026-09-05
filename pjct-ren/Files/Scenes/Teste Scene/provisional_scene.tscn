@@ -71,7 +71,8 @@
 [ext_resource type="Texture2D" uid="uid://dm2hpnx5wjsq" path="res://Files/Art/Test Art/GandalfHardcore FREE Platformer Assets/Animated Sprites/GandalfHardcore Animated Water Tiles.png" id="54_vnr0a"]
 [ext_resource type="Texture2D" uid="uid://con7lnfe1j5ki" path="res://Files/Art/Test Art/GandalfHardcore FREE Platformer Assets/Animated Sprites/GandalfHardcore Portal sheet.png" id="55_1102u"]
 [ext_resource type="Texture2D" uid="uid://c656flqur1107" path="res://Files/Art/Test Art/GandalfHardcore FREE Platformer Assets/Animated Sprites/GandalfHardcore Water Tiles sheet.png" id="56_4mik6"]
-[ext_resource type="PackedScene" uid="uid://d1bpshr0qgnqy" path="res://Files/Scenes/Teste Scene/Characters/Enemies/Male/enemie_test_m.tscn" id="63_yn63s"]
+[ext_resource type="PackedScene" uid="uid://8b2meufplv01" path="res://Files/Enemies/Imperio/Heavy Soldier/heavy_soldier.tscn" id="61_1102u"]
+[ext_resource type="PackedScene" uid="uid://iin83nsp4sqg" path="res://Files/Enemies/Imperio/Heavy Soldier Shield/heavy_soldier_shield.tscn" id="62_1102u"]
 [ext_resource type="PackedScene" uid="uid://6wymnrsl05ap" path="res://Files/Scenes/Teste Scene/Characters/Enemies/Female/enemie_test_f.tscn" id="73_vnr0a"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yaisq"]
@@ -6006,12 +6007,12 @@ tile_set = SubResource("TileSet_vir06")
 
 [node name="Enemies" type="Node2D" parent="." unique_id=759772386]
 
-[node name="EnemieTestM" parent="Enemies" unique_id=1049165901 node_paths=PackedStringArray("waypints") instance=ExtResource("63_yn63s")]
-position = Vector2(6924, 640)
+[node name="HeavySoldier" parent="Enemies" unique_id=515751673 node_paths=PackedStringArray("waypints") groups=["Enemies"] instance=ExtResource("61_1102u")]
+position = Vector2(6859, 619)
 waypints = [NodePath("../WaypointsE1/Marker2D"), NodePath("../WaypointsE1/Marker2D2")]
 
-[node name="EnemieTestM2" parent="Enemies" unique_id=2077909666 node_paths=PackedStringArray("waypints") instance=ExtResource("63_yn63s")]
-position = Vector2(7971, 640)
+[node name="HeavySoldierShield" parent="Enemies" unique_id=329179893 node_paths=PackedStringArray("waypints") instance=ExtResource("62_1102u")]
+position = Vector2(7871, 620)
 waypints = [NodePath("../WaypointsE2/Marker2D"), NodePath("../WaypointsE2/Marker2D2")]
 
 [node name="WaypointsE1" type="Node2D" parent="Enemies" unique_id=1378350268]
@@ -6051,13 +6052,13 @@ position = Vector2(-1329, -351)
 position = Vector2(-625, -353)
 
 [node name="Player" parent="." unique_id=889305067 instance=ExtResource("2_57m1b")]
-position = Vector2(5998, 600)
+position = Vector2(7441, 606)
 collision_mask = 48
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=1545592130]
 physics_interpolation_mode = 1
 top_level = true
-position = Vector2(6000.129, 620.4931)
+position = Vector2(7440.982, 622.077)
 editor_draw_limits = true
 
 [node name="PhantomCameraHost" type="Node" parent="Player/Camera2D" unique_id=1346573263]
@@ -6081,7 +6082,7 @@ script = ExtResource("7_76w4k")
 
 [node name="PathCamera" type="Node2D" parent="Cameras" unique_id=1911750126 node_paths=PackedStringArray("follow_target", "follow_path")]
 top_level = true
-position = Vector2(6000.129, 620.4931)
+position = Vector2(7440.982, 622.077)
 script = ExtResource("7_ds81a")
 priority = 5
 follow_mode = 4
@@ -6132,7 +6133,7 @@ shape = SubResource("RectangleShape2D_hylex")
 
 [node name="GroupCamera" type="Node2D" parent="Cameras" unique_id=1201260551 node_paths=PackedStringArray("follow_targets")]
 top_level = true
-position = Vector2(6038, 560)
+position = Vector2(7481, 566)
 script = ExtResource("7_ds81a")
 follow_mode = 3
 follow_targets = [NodePath("../../Player")]

@@ -33,9 +33,9 @@ func _input(event: InputEvent) -> void:
 func set_facing_direction() -> void:
 	#control de donde mira el personaje
 	if self.velocity.x < 0:
-		ren_sprite.flip_h = true
+		ren_sprite.scale.x = -1
 	elif self.velocity.x > 0:
-		ren_sprite.flip_h = false
+		ren_sprite.scale.x = 1
 
 #region BODY_CALL
 func take_damage(damage, node): #control del damage

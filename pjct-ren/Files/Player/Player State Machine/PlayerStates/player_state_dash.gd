@@ -25,19 +25,17 @@ func dash(state_name: String, back:bool) -> void:
 
 #region DIRECTION_CONTROL
 func back_dash():
-	if $"../../Ren_Sprite".flip_h == true:
-		print("VItos")
+	if $"../../Ren_Sprite".scale.x < 0:
 		direction = Vector2.RIGHT
 		x_velocity = PlayerMovementStats.dash_speed
 	else:
-		print("WEBOSSS")
 		direction = Vector2.LEFT
 		x_velocity = PlayerMovementStats.dash_speed
 	$"../../AnimationPlayer".play("Dash")
 	finish_dash()
 
 func no_velocity():
-	if $"../../Ren_Sprite".flip_h == true:
+	if $"../../Ren_Sprite".scale.x < 0:
 		direction = Vector2.LEFT
 		x_velocity = PlayerMovementStats.dash_speed
 	else:
