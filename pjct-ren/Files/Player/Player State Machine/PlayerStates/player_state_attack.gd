@@ -134,17 +134,17 @@ func execute_attack(attack_index: int):
 		0:
 			controlled_node.animation_machine.travel("Attack_1")
 			current_attack_duration = attack_1_duration
-			apply_dash(current_direction, attack_dash_speed)
+			#apply_dash(current_direction, attack_dash_speed)
 			PlayerStatsComponent.stamia -= 10
 		1:
 			controlled_node.animation_machine.travel("Attack_2")
 			current_attack_duration = attack_2_duration
-			apply_dash(current_direction, attack_dash_speed)
+			#apply_dash(current_direction, attack_dash_speed)
 			PlayerStatsComponent.stamia -= 10
 		2:
 			controlled_node.animation_machine.travel("Attack_3")
 			current_attack_duration = attack_3_duration
-			apply_dash(current_direction, attack_dash_speed)
+			#apply_dash(current_direction, attack_dash_speed)
 			PlayerStatsComponent.stamia -= 10
 		_:
 			pass
@@ -156,9 +156,12 @@ func execute_attack(attack_index: int):
 		await get_tree().create_timer(current_attack_duration).timeout
 		finish_attack()
 
+func apply_dash_signal():
+	apply_dash(current_direction, attack_dash_speed)
+
 func apply_dash(direction: int, speed: float):
 	is_dashing = true
-	#controlled_node.velocity.x = direction * speed
+	controlled_node.velocity.x = direction * speed
 	dash_timer = attack_dash_duration
 
 func finish_attack(): #terminar combo

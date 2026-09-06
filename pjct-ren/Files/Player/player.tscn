@@ -109,6 +109,20 @@ tracks/4/keys = {
 "method": &"sword_swing"
 }]
 }
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("../StateMachine/PlayerStateAttack")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.13333334),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"apply_dash_signal"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_8brd3"]
 resource_name = "Attack_1_Out"
@@ -215,6 +229,20 @@ tracks/4/keys = {
 "method": &"sword_swing"
 }]
 }
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("../StateMachine/PlayerStateAttack")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.06666667),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"apply_dash_signal"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_lj38e"]
 resource_name = "Attack_2_Out"
@@ -319,6 +347,20 @@ tracks/4/keys = {
 "values": [{
 "args": [],
 "method": &"sword_swing"
+}]
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("../StateMachine/PlayerStateAttack")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.13333334),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"apply_dash_signal"
 }]
 }
 
