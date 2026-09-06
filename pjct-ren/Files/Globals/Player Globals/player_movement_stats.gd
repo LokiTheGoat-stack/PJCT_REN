@@ -1,6 +1,6 @@
 extends Node
 
-@export var running_speed: float = 250
+@export var running_speed: float = 200
 @export var running_acceleration: float = 1000.0
 @export var running_decceleration: float = 15000.0
 @export var crouched_speed: float = 300
