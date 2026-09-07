@@ -1,7 +1,7 @@
 extends PlayerStateBase
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-var min_speed: float = 0
+var min_speed: float = 100
 
 #region ALWAYS_ON_FUNC
 func on_physics_process(delta) -> void:
