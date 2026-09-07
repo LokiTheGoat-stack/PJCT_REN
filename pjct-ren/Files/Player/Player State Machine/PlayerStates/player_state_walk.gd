@@ -1,28 +1,18 @@
 extends PlayerStateBase
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-<<<<<<< Updated upstream
-=======
 var min_speed: float = 0
->>>>>>> Stashed changes
 
 #region ALWAYS_ON_FUNC
 func on_physics_process(delta) -> void:
 	#Control de la direccion del personaje
 	
-<<<<<<< Updated upstream
-	controlled_node.velocity.x = Input.get_axis("LEFT", "RIGHT") * PlayerMovementStats.running_speed
-	
-	#Si no hay piso cambiar a Fall
-	if controlled_node.is_on_floor() == false:
-=======
 	controlled_node.velocity.x = Input.get_axis("LEFT", "RIGHT") * min_speed
-	if min_speed < PlayerMovementStats.running_speed: min_speed += 400 * delta
+	if min_speed < PlayerMovementStats.running_speed: min_speed += 500 * delta
 	
 	#Si no hay piso cambiar a Fall
 	if controlled_node.is_on_floor() == false:
 		min_speed = 0
->>>>>>> Stashed changes
 		controlled_node.animation_machine.travel("Fall_Down")
 		state_machine.change_to("PlayerStateFall")
 		$"../PlayerStateFall"._last_chance_to_jump()
@@ -48,10 +38,7 @@ func on_input(event: InputEvent) -> void:
 	if PlayerStatsComponent.stamia > 0:
 		#Cambiar a Dash
 		if Input.is_action_just_pressed("DASH"):
-<<<<<<< Updated upstream
-=======
 			min_speed = 0
->>>>>>> Stashed changes
 			state_machine.change_to("PlayerStateDash")
 			$"../PlayerStateDash".dash("PlayerStateWalk",false)
 		

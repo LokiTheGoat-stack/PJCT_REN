@@ -14,6 +14,7 @@ class_name HeavySoldierShield
 @export var walk_speed: float = 30
 @export var run_speed: float = 45
 @export var hp: float = 600
+@export var attack_damage: float = 60
 @export var waypints: Array[Marker2D]
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -116,5 +117,5 @@ func _on_attack_area_body_entered(body: Node2D) -> void:
 	if is_attack == false:
 		state_machine.change_to("Attack")
 		$StateMachine/Attack.start_attack()
-	if can_damage: body.take_damage(60,self)
+	if can_damage: body.take_damage(attack_damage,self)
 #endregion
