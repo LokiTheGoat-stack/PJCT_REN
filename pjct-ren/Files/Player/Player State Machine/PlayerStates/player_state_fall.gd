@@ -51,7 +51,8 @@ func on_physics_process(delta):
 	#si estas tocando el suelo cambiar a Walk o Idle
 	if controlled_node.velocity.y >= 0 and controlled_node.is_on_floor():
 		if Input.is_action_pressed("LEFT") or Input.is_action_pressed("RIGHT"):
-			controlled_node.velocity.x = 100
+			controlled_node.velocity.x = 0
+			$"../PlayerStateWalk".min_speed = PlayerMovementStats.running_speed
 			controlled_node.animation_machine.travel("Run")
 			state_machine.change_to("PlayerStateWalk")
 		else:

@@ -3,6 +3,7 @@ class_name Soldier
 
 #region VAR
 @onready var body: Node2D = $Body
+@onready var body_sprite: Sprite2D = $Body/MaleSkin1
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var animation_machine: AnimationNodeStateMachinePlayback = $AnimationTree["parameters/playback"]
 @onready var agro_collision: CollisionShape2D = $Body/AgroArea/CollisionPolygon2D
@@ -22,6 +23,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var current_waypoint: int = 0
 var player: Node
 var is_attack: bool = false
+var cant_block: bool = false
 var can_damage: bool
 var can_parry_me: bool = false
 var run_away: bool = false
@@ -68,13 +70,19 @@ func take_damage(damage, node):
 	player.show_combo_effect(damage_count,self)
 
 func _can_parry_me(can_parry:bool):
-	can_parry_me = can_parry
 	if PlayerStatsComponent.parry_time and can_parry_me:
 		can_damage = false
 		take_damage(attack_damage * 5, self)
 		player.show_combo_effect(attack_damage * 5,self)
 		player.execute_parry()
 		player.stamina_gift()
+	else: can_parry_me = can_parry
+
+func change_shader_parameters(color:Color, mix:float, alpha:float):
+	var sprite_material = body_sprite.material
+	sprite_material.set_shader_parameter("Color", color)
+	sprite_material.set_shader_parameter("Mix", mix)
+	sprite_material.set_shader_parameter("Alpha", alpha)
 
 #endregion
 

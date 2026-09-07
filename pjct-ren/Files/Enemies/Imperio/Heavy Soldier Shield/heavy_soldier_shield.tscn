@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cu6sm82veo2mr" path="res://Files/Art/Test Art/Enemies/Heavy Soldier/R_h.png" id="4_1yw6v"]
 [ext_resource type="Texture2D" uid="uid://i47pxfmfvufx" path="res://Files/Art/Test Art/Enemies/Heavy Soldier/R_lerg.png" id="6_j6cyh"]
 [ext_resource type="Texture2D" uid="uid://cnfsfpbxc7qye" path="res://Files/Art/Test Art/Enemies/Heavy Soldier/Foot.png" id="7_7rkp4"]
+[ext_resource type="Material" uid="uid://b1aggpw8msfe2" path="res://Files/Enemies/Imperio/Heavy Soldier Shield/Shaders/HSS_shader_material.tres" id="7_mgr2m"]
 [ext_resource type="Texture2D" uid="uid://dbtaul5flefp3" path="res://Files/Art/Test Art/Enemies/Heavy Soldier/Chest.png" id="8_trnfh"]
 [ext_resource type="Texture2D" uid="uid://b7as3lhmcfrps" path="res://Files/Art/Test Art/Enemies/Heavy Soldier/head.png" id="9_bl74r"]
 [ext_resource type="Texture2D" uid="uid://n7uu5ul4vsq3" path="res://Files/Art/Test Art/Enemies/Heavy Soldier/L_lerg.png" id="10_3iufl"]
@@ -251,17 +252,22 @@ tracks/16/keys = {
 "method": &"_can_parry_me"
 }]
 }
-tracks/17/type = "value"
+tracks/17/type = "method"
 tracks/17/imported = false
 tracks/17/enabled = true
-tracks/17/path = NodePath("Body:modulate")
+tracks/17/path = NodePath(".")
 tracks/17/interp = 1
 tracks/17/loop_wrap = true
 tracks/17/keys = {
-"times": PackedFloat32Array(0.3268691, 0.33333334, 0.45108178, 0.45754603),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(0, 1, 0, 1), Color(0, 1, 0, 1), Color(1, 1, 1, 1)]
+"times": PackedFloat32Array(0.33333334, 0.46666667),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [Color(0, 0.68235296, 0, 1), 0.7, 1.0],
+"method": &"change_shader_parameters"
+}, {
+"args": [Color(0, 0.68235296, 0, 1), 0.0, 1.0],
+"method": &"change_shader_parameters"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_1beug"]
@@ -1517,10 +1523,15 @@ height = 68.0
 collision_layer = 2
 collision_mask = 21
 script = ExtResource("1_dkjc0")
+walk_speed = null
+run_speed = null
+hp = null
+attack_damage = null
 
 [node name="Body" type="Node2D" parent="." unique_id=523702474]
 
 [node name="RArm" type="Polygon2D" parent="Body" unique_id=421917304]
+material = ExtResource("7_mgr2m")
 position = Vector2(7, -6)
 texture = ExtResource("2_vjmbt")
 skeleton = NodePath("../Skeleton2D")
@@ -1529,6 +1540,7 @@ uv = PackedVector2Array(8.005638, -0.029441178, -0.045972824, 0.017921269, -0.09
 bones = ["Cadera", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm", PackedFloat32Array(0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51), "Cadera/Torso/RArm/RForearm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm/RForearm/Sword", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm/RPad", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/LArm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/LArm/LFoream", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/LArm/LPad", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/Head", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "Cadera/LThigh", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "Cadera/LThigh/LFoot", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "Cadera/RThigh", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "Cadera/RThigh/RFoot", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0)]
 
 [node name="RForearm" type="Polygon2D" parent="Body" unique_id=125682832]
+material = ExtResource("7_mgr2m")
 position = Vector2(7.239684, 10.051971)
 texture = ExtResource("3_sky3g")
 skeleton = NodePath("../Skeleton2D")
@@ -1537,6 +1549,7 @@ uv = PackedVector2Array(-0.06565666, -0.051971674, 8.047514, -0.051971674, 10.68
 bones = ["Cadera", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm/RForearm", PackedFloat32Array(0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51), "Cadera/Torso/RArm/RForearm/Sword", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm/RPad", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/LArm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/LArm/LFoream", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/LArm/LPad", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/Head", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/LThigh", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/LThigh/LFoot", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/RThigh", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/RThigh/RFoot", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0)]
 
 [node name="RPad" type="Polygon2D" parent="Body" unique_id=1453371057]
+material = ExtResource("7_mgr2m")
 position = Vector2(9.093336, -8.913294)
 texture = ExtResource("4_1yw6v")
 skeleton = NodePath("../Skeleton2D")
@@ -1545,6 +1558,7 @@ uv = PackedVector2Array(0.026644707, -0.08670616, 8.068647, 0.055630207, 8.99383
 bones = ["Cadera", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0), "Cadera/Torso", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm/RForearm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm/RForearm/Sword", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm/RPad", PackedFloat32Array(0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51), "Cadera/Torso/LArm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/LArm/LFoream", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/LArm/LPad", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/Head", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0), "Cadera/LThigh", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0), "Cadera/LThigh/LFoot", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0), "Cadera/RThigh", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0), "Cadera/RThigh/RFoot", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0)]
 
 [node name="RThigh" type="Polygon2D" parent="Body" unique_id=1928509386]
+material = ExtResource("7_mgr2m")
 position = Vector2(2, 7)
 texture = ExtResource("6_j6cyh")
 skeleton = NodePath("../Skeleton2D")
@@ -1553,6 +1567,7 @@ uv = PackedVector2Array(8.758186, -0.0030810833, 5.023329, -0.0030810833, 1.3472
 bones = ["Cadera", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm/RForearm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm/RForearm/Sword", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm/RPad", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/LArm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/LArm/LFoream", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/LArm/LPad", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/Head", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/LThigh", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/LThigh/LFoot", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/RThigh", PackedFloat32Array(0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51), "Cadera/RThigh/RFoot", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)]
 
 [node name="RFoot" type="Polygon2D" parent="Body" unique_id=842685754]
+material = ExtResource("7_mgr2m")
 position = Vector2(3, 22)
 texture = ExtResource("7_7rkp4")
 skeleton = NodePath("../Skeleton2D")
@@ -1561,6 +1576,7 @@ uv = PackedVector2Array(11.698006, -0.14831543, 7.6552887, -0.14831543, 1.553077
 bones = ["Cadera", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm/RForearm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm/RForearm/Sword", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm/RPad", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/LArm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/LArm/LFoream", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/LArm/LPad", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/Head", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/LThigh", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/LThigh/LFoot", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/RThigh", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/RThigh/RFoot", PackedFloat32Array(0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51)]
 
 [node name="Chest" type="Polygon2D" parent="Body" unique_id=1863310510]
+material = ExtResource("7_mgr2m")
 position = Vector2(-13, -14)
 texture = ExtResource("8_trnfh")
 skeleton = NodePath("../Skeleton2D")
@@ -1569,6 +1585,7 @@ uv = PackedVector2Array(8.142555, 31.139994, 19.192421, 31.03862, 21.45646, 28.6
 bones = ["Cadera", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso", PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), "Cadera/Torso/RArm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm/RForearm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm/RForearm/Sword", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm/RPad", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/LArm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/LArm/LFoream", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/LArm/LPad", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/Head", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/LThigh", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/LThigh/LFoot", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/RThigh", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/RThigh/RFoot", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)]
 
 [node name="Head" type="Polygon2D" parent="Body" unique_id=360989974]
+material = ExtResource("7_mgr2m")
 position = Vector2(-11, -25)
 texture = ExtResource("9_bl74r")
 skeleton = NodePath("../Skeleton2D")
@@ -1577,6 +1594,7 @@ uv = PackedVector2Array(19.421516, 22.197372, 21.465672, 20.368391, 21.519466, 1
 bones = ["Cadera", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm/RForearm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm/RForearm/Sword", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm/RPad", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/LArm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/LArm/LFoream", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/LArm/LPad", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/Head", PackedFloat32Array(0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51), "Cadera/LThigh", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/LThigh/LFoot", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/RThigh", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/RThigh/RFoot", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)]
 
 [node name="LThigh" type="Polygon2D" parent="Body" unique_id=933204578]
+material = ExtResource("7_mgr2m")
 position = Vector2(-12, 9)
 texture = ExtResource("10_3iufl")
 skeleton = NodePath("../Skeleton2D")
@@ -1585,6 +1603,7 @@ uv = PackedVector2Array(7.9379215, -0.052273512, 3.7496738, -0.013131142, 0.8922
 bones = ["Cadera", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm/RForearm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm/RForearm/Sword", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm/RPad", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/LArm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/LArm/LFoream", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/LArm/LPad", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/Head", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/LThigh", PackedFloat32Array(0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51), "Cadera/LThigh/LFoot", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/RThigh", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/RThigh/RFoot", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)]
 
 [node name="LFoot" type="Polygon2D" parent="Body" unique_id=1697880092]
+material = ExtResource("7_mgr2m")
 position = Vector2(-13, 23)
 texture = ExtResource("7_7rkp4")
 skeleton = NodePath("../Skeleton2D")
@@ -1593,6 +1612,7 @@ uv = PackedVector2Array(11.698006, -0.14831543, 7.6552887, -0.14831543, 1.553077
 bones = ["Cadera", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm/RForearm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm/RForearm/Sword", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm/RPad", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/LArm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/LArm/LFoream", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/LArm/LPad", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/Head", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/LThigh", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/LThigh/LFoot", PackedFloat32Array(0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51, 0.51), "Cadera/RThigh", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/RThigh/RFoot", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0)]
 
 [node name="LArm" type="Polygon2D" parent="Body" unique_id=1710766421]
+material = ExtResource("7_mgr2m")
 position = Vector2(-17, -5)
 texture = ExtResource("11_4fvi7")
 skeleton = NodePath("../Skeleton2D")
@@ -1601,6 +1621,7 @@ uv = PackedVector2Array(2.1042023, 16.98426, 7.619734, 17.019844, 9.149849, 14.7
 bones = ["Cadera", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm/RForearm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm/RForearm/Sword", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm/RPad", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/LArm", PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), "Cadera/Torso/LArm/LFoream", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/LArm/LPad", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/Head", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/LThigh", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/LThigh/LFoot", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/RThigh", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/RThigh/RFoot", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)]
 
 [node name="LForearm" type="Polygon2D" parent="Body" unique_id=1785098561]
+material = ExtResource("7_mgr2m")
 position = Vector2(-18, 11)
 texture = ExtResource("12_4mljo")
 skeleton = NodePath("../Skeleton2D")
@@ -1609,6 +1630,7 @@ uv = PackedVector2Array(7.6178064, -0.03859949, 2.1378584, 0.03256893, 0.0028123
 bones = ["Cadera", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm/RForearm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm/RForearm/Sword", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm/RPad", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/LArm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/LArm/LFoream", PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1), "Cadera/Torso/LArm/LPad", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/Head", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/LThigh", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/LThigh/LFoot", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/RThigh", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/RThigh/RFoot", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0)]
 
 [node name="LPad" type="Polygon2D" parent="Body" unique_id=1970526675]
+material = ExtResource("7_mgr2m")
 position = Vector2(-17, -9)
 texture = ExtResource("13_p7e3p")
 skeleton = NodePath("../Skeleton2D")
@@ -1617,6 +1639,7 @@ uv = PackedVector2Array(3.3032165, 8.956051, 8.959263, 3.4110198, 8.949604, 0.62
 bones = ["Cadera", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm/RForearm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm/RForearm/Sword", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/RArm/RPad", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/LArm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/LArm/LFoream", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/Torso/LArm/LPad", PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1), "Cadera/Torso/Head", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/LThigh", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/LThigh/LFoot", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/RThigh", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "Cadera/RThigh/RFoot", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0)]
 
 [node name="Shield" type="Polygon2D" parent="Body" unique_id=339104670]
+material = ExtResource("7_mgr2m")
 position = Vector2(14.146347, 23.965265)
 rotation = 1.5690811
 offset = Vector2(-7.138788, -27.945074)
@@ -1632,25 +1655,25 @@ visible = false
 [node name="Cadera" type="Bone2D" parent="Body/Skeleton2D" unique_id=1989467747]
 position = Vector2(1.9999998, 14)
 rotation = 2.7318265
-scale = Vector2(0.9999991, 0.9999991)
+scale = Vector2(0.9999983, 0.9999983)
 rest = Transform2D(-0.91721404, 0.39839482, -0.39839482, -0.91721404, 1.9999998, 14)
 
 [node name="Torso" type="Bone2D" parent="Body/Skeleton2D/Cadera" unique_id=1704226481]
 position = Vector2(-2.2699375, 7.736109)
 rotation = 0.26111814
-scale = Vector2(0.99999505, 0.99999505)
+scale = Vector2(0.99999446, 0.99999446)
 rest = Transform2D(0.96610194, 0.25816095, -0.25816095, 0.96610194, -2.2699375, 7.736109)
 
 [node name="RArm" type="Bone2D" parent="Body/Skeleton2D/Cadera/Torso" unique_id=1443106549]
 position = Vector2(-12.211616, 7.271637)
 rotation = -2.7136936
-scale = Vector2(0.9999987, 0.9999987)
+scale = Vector2(0.9999983, 0.9999983)
 rest = Transform2D(-0.9098396, -0.41496018, 0.41496018, -0.9098396, -12.211616, 7.271637)
 
 [node name="RForearm" type="Bone2D" parent="Body/Skeleton2D/Cadera/Torso/RArm" unique_id=1740131684]
 position = Vector2(6.0570555, 13.8676605)
 rotation = 0.839031
-scale = Vector2(0.99999684, 0.99999684)
+scale = Vector2(0.9999968, 0.9999968)
 rest = Transform2D(0.66818404, 0.7439959, -0.7439959, 0.66818404, 6.0570555, 13.8676605)
 
 [node name="Shield" type="Bone2D" parent="Body/Skeleton2D/Cadera/Torso/RArm/RForearm" unique_id=1513441599]
@@ -1667,13 +1690,13 @@ rest = Transform2D(0.8144829, 0.58018756, -0.58018756, 0.8144829, 3.0181382, -3.
 [node name="LArm" type="Bone2D" parent="Body/Skeleton2D/Cadera/Torso" unique_id=170506854]
 position = Vector2(9.397674, 11.518836)
 rotation = 3.12767
-scale = Vector2(0.9999966, 0.9999966)
+scale = Vector2(0.9999964, 0.9999964)
 rest = Transform2D(-0.9999031, 0.013922154, -0.013922154, -0.9999031, 9.397674, 11.518836)
 
 [node name="LFoream" type="Bone2D" parent="Body/Skeleton2D/Cadera/Torso/LArm" unique_id=1019397549]
 position = Vector2(-5.550131, 15.303469)
 rotation = -0.33584303
-scale = Vector2(0.9999951, 0.9999951)
+scale = Vector2(0.99999475, 0.99999475)
 rest = Transform2D(0.9441328, -0.32956523, 0.32956523, 0.9441328, -5.550131, 15.303469)
 
 [node name="LPad" type="Bone2D" parent="Body/Skeleton2D/Cadera/Torso/LArm" unique_id=1143982065]
@@ -1691,27 +1714,28 @@ rest = Transform2D(-0.5478505, 0.8365763, -0.8365763, -0.5478505, -1.676857, 17.
 [node name="LThigh" type="Bone2D" parent="Body/Skeleton2D/Cadera" unique_id=678071]
 position = Vector2(7.736107, 2.2699437)
 rotation = -1.1172625
-scale = Vector2(0.9999957, 0.9999957)
+scale = Vector2(0.99999577, 0.99999577)
 rest = Transform2D(0.43814486, -0.8989044, 0.8989044, 0.43814486, 7.736107, 2.2699437)
 
 [node name="LFoot" type="Bone2D" parent="Body/Skeleton2D/Cadera/LThigh" unique_id=712935319]
 position = Vector2(11.988508, -0.5250449)
-scale = Vector2(0.999998, 0.999998)
+scale = Vector2(0.9999979, 0.9999979)
 rest = Transform2D(1, 0, 0, 1, 11.988508, -0.5250449)
 
 [node name="RThigh" type="Bone2D" parent="Body/Skeleton2D/Cadera" unique_id=854487886]
 position = Vector2(-6.0221043, -3.7059784)
 rotation = -1.0202811
-scale = Vector2(0.99999696, 0.99999696)
+scale = Vector2(0.9999969, 0.9999969)
 rest = Transform2D(0.5231264, -0.8522551, 0.8522551, 0.5231264, -6.0221043, -3.7059784)
 
 [node name="RFoot" type="Bone2D" parent="Body/Skeleton2D/Cadera/RThigh" unique_id=975889362]
 position = Vector2(10.610651, -3.5233536)
 rotation = -0.014959842
-scale = Vector2(0.99999696, 0.99999696)
+scale = Vector2(0.99999666, 0.99999666)
 rest = Transform2D(0.9998881, -0.014959284, 0.014959284, 0.9998881, 10.610651, -3.5233536)
 
 [node name="AgroArea" type="Area2D" parent="Body" unique_id=102770492]
+visible = false
 collision_layer = 2
 
 [node name="CollisionPolygon2D" type="CollisionShape2D" parent="Body/AgroArea" unique_id=654540977]
@@ -1725,6 +1749,7 @@ collision_layer = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/AttackArea" unique_id=2039905197]
 position = Vector2(45.5, 9.25)
 shape = SubResource("RectangleShape2D_1beug")
+disabled = true
 debug_color = Color(0.97429806, 0, 0.43122897, 0.41960785)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=650987868]

@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://b1aggpw8msfe2"]
+
+[ext_resource type="Shader" uid="uid://dap1anphmi847" path="res://Files/Enemies/Imperio/Heavy Soldier Shield/Shaders/HSS_texture_shader.gdshader" id="1_27ft1"]
+
+[resource]
+shader = ExtResource("1_27ft1")
+shader_parameter/Color = Color(0, 0.69803923, 0, 1)
+shader_parameter/Mix = 0.0
+shader_parameter/Alpha = 1.0
