@@ -18,6 +18,7 @@ func on_physics_process(delta) -> void:
 func on_input(event: InputEvent) -> void:
 	#Cambiar a Walk
 	if Input.is_action_pressed("LEFT") or Input.is_action_pressed("RIGHT"):
+		$"../PlayerStateWalk".min_speed = 0
 		controlled_node.animation_machine.travel("Run")
 		state_machine.change_to("PlayerStateWalk")
 	
