@@ -1,8 +1,8 @@
 extends EnemieStateBase
 
 func die():
-	controlled_node.agro_collision.disabled = true
-	controlled_node.attack_collision.disabled = true
+	$"../../Body/AttackArea".set_deferred("monitoring",false)
+	$"../../Body/AgroArea".set_deferred("monitoring",false)
 	controlled_node.body_collision.disabled = true
 	controlled_node.is_attack = true
 	controlled_node.velocity = Vector2.ZERO

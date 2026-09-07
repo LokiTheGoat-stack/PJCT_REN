@@ -1,21 +1,20 @@
-[gd_scene format=3 uid="uid://dh6eur2jk6sw0"]
+[gd_scene format=3 uid="uid://s7ugs5vsltb3"]
 
-[ext_resource type="Script" uid="uid://ljwbqmygpq44" path="res://Files/Enemies/Imperio/Soldier/soldier.gd" id="1_fn2wu"]
-[ext_resource type="Texture2D" uid="uid://bo061ym46bidc" path="res://Files/Art/Test Art/Male/Male Skin1.png" id="2_bxqdo"]
-[ext_resource type="Material" uid="uid://b3f4sb66we7vw" path="res://Files/Enemies/Imperio/Soldier/Shaders/soldier_shader_material.tres" id="2_p77gp"]
-[ext_resource type="Texture2D" uid="uid://djgauveb5s1dp" path="res://Files/Art/Test Art/Male/Male Sword.png" id="3_p77gp"]
-[ext_resource type="Script" uid="uid://braw48ne1jkm3" path="res://Files/Enemies/Imperio/Soldier/States/soldier_patrol_state.gd" id="5_6dcxu"]
-[ext_resource type="Script" uid="uid://bb38rowsmn6hq" path="res://Files/Enemies/Imperio/Soldier/States/soldier_idle_state.gd" id="6_v7f6j"]
-[ext_resource type="Script" uid="uid://dem83kgvjvrnf" path="res://Files/Enemies/Imperio/Soldier/States/soldier_agro_state.gd" id="7_vr3ep"]
-[ext_resource type="Script" uid="uid://m35jd5c6at00" path="res://Files/Enemies/Imperio/Soldier/States/soldier_run_away_state.gd" id="8_bxqdo"]
-[ext_resource type="Script" uid="uid://dr6d3a1osqpqk" path="res://Files/Enemies/Imperio/Soldier/States/soldier_attack_state.gd" id="9_p77gp"]
-[ext_resource type="Script" uid="uid://e8a4jcorkr82" path="res://Files/Enemies/Imperio/Soldier/States/soldier_death_state.gd" id="10_sirgr"]
-[ext_resource type="Script" uid="uid://bgk5hwr4bnut7" path="res://Files/Enemies/Enemies State Machine/enemie_state_machine.gd" id="14_55dvi"]
+[ext_resource type="Script" uid="uid://01o01dnh10da" path="res://Files/Enemies/Imperio/Crossbow Soldier/crossbow_soldier.gd" id="1_ckcut"]
+[ext_resource type="Material" uid="uid://b1354y6dsjibm" path="res://Files/Enemies/Imperio/Crossbow Soldier/Shaders/crossbowS_shader_material.tres" id="2_fj007"]
+[ext_resource type="Texture2D" uid="uid://bo061ym46bidc" path="res://Files/Art/Test Art/Male/Male Skin1.png" id="3_txwlo"]
+[ext_resource type="Script" uid="uid://bmsaqkiq5ub0g" path="res://Files/Enemies/Imperio/Crossbow Soldier/States/crossbowS_patrol_state.gd" id="5_fj007"]
+[ext_resource type="Script" uid="uid://bgk5hwr4bnut7" path="res://Files/Enemies/Enemies State Machine/enemie_state_machine.gd" id="5_op27g"]
+[ext_resource type="Script" uid="uid://xvy80qlauohr" path="res://Files/Enemies/Imperio/Crossbow Soldier/States/crossbowS_idle_state.gd" id="6_fj007"]
+[ext_resource type="Script" uid="uid://c75suwfa28ncu" path="res://Files/Enemies/Imperio/Crossbow Soldier/States/crossbowS_agro_state.gd" id="7_fj007"]
+[ext_resource type="Script" uid="uid://cblrq8n3gadme" path="res://Files/Enemies/Imperio/Crossbow Soldier/States/crossbowS_run_away_state.gd" id="8_fj007"]
+[ext_resource type="Script" uid="uid://c3fqebx4m3hmj" path="res://Files/Enemies/Imperio/Crossbow Soldier/States/crossbowS_attack_state.gd" id="9_fj007"]
+[ext_resource type="Script" uid="uid://carsl017ldmi7" path="res://Files/Enemies/Imperio/Crossbow Soldier/States/crossbowS_death_state.gd" id="10_fj007"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_ts7x6"]
-radius = 220.51077
+[sub_resource type="CircleShape2D" id="CircleShape2D_gofhq"]
+radius = 282.1436
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_r2b36"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jekn3"]
 size = Vector2(20, 43)
 
 [sub_resource type="Animation" id="Animation_q68xb"]
@@ -33,71 +32,18 @@ tracks/0/keys = {
 "update": 1,
 "values": [50, 51, 52, 53, 52, 53, 54, 55]
 }
-tracks/1/type = "value"
+tracks/1/type = "method"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Body/MaleSword:frame")
+tracks/1/path = NodePath("StateMachine/Attack")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.100000024, 0.19999999, 0.3, 0.4, 0.5, 0.6, 0.70000005),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [50, 51, 52, 53, 52, 53, 54, 55]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Body/AttackArea/CollisionShape2D:disabled")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.6),
+"times": PackedFloat32Array(0.6, 0.8),
 "transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-tracks/3/type = "method"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath(".")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0.3, 0.43333334, 0.6, 0.7),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
 "values": [{
-"args": [Color(1, 1, 0, 1), 0.7, 1.0],
-"method": &"change_shader_parameters"
-}, {
-"args": [Color(1, 1, 0, 1), 0.0, 1.0],
-"method": &"change_shader_parameters"
-}, {
-"args": [true],
-"method": &"_can_parry_me"
-}, {
-"args": [false],
-"method": &"_can_parry_me"
-}]
-}
-tracks/4/type = "method"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("StateMachine/Attack")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0.43333334, 0.6, 0.73333335, 0.8),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"values": [{
-"args": [800.0],
-"method": &"dash"
-}, {
-"args": [true],
-"method": &"damage"
-}, {
-"args": [false],
-"method": &"damage"
+"args": [],
+"method": &"shoot"
 }, {
 "args": [],
 "method": &"attack_count"
@@ -122,34 +68,22 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Body/MaleSword:frame")
+tracks/1/path = NodePath("Body:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.099999994, 0.19999999, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [60, 61, 62, 63, 64, 65, 66, 67, 68, 69]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Body:modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "times": PackedFloat32Array(0, 1, 1.2),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
-tracks/3/type = "method"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath(".")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "values": [{
@@ -174,18 +108,6 @@ tracks/0/keys = {
 "update": 1,
 "values": [0, 1, 2, 3, 4]
 }
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Body/MaleSword:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4]
-}
 
 [sub_resource type="Animation" id="Animation_okaie"]
 length = 0.001
@@ -204,34 +126,10 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Body/MaleSword:frame")
+tracks/1/path = NodePath("Body:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Body/AttackArea/CollisionShape2D:disabled")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Body:modulate")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -254,18 +152,6 @@ tracks/0/keys = {
 "update": 1,
 "values": [20, 21, 22, 23, 24, 25, 26, 27]
 }
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Body/MaleSword:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.100000024, 0.19999999, 0.3, 0.4, 0.5, 0.6, 0.7),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [20, 21, 22, 23, 24, 25, 26, 27]
-}
 
 [sub_resource type="Animation" id="Animation_gqg0m"]
 resource_name = "Walk"
@@ -283,20 +169,8 @@ tracks/0/keys = {
 "update": 1,
 "values": [10, 11, 12, 13, 14, 15, 16, 17]
 }
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Body/MaleSword:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.099999994, 0.19999999, 0.3, 0.4, 0.5, 0.6, 0.70000005),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [10, 11, 12, 13, 14, 15, 16, 17]
-}
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_mf0j0"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_a8fq4"]
 _data = {
 &"Attack": SubResource("Animation_q68xb"),
 &"Death": SubResource("Animation_hpbv2"),
@@ -401,7 +275,7 @@ advance_mode = 2
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qxd25"]
 advance_mode = 2
 
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_bxqdo"]
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_w0ygu"]
 states/Attack/node = SubResource("AnimationNodeBlendTree_p77gp")
 states/Attack/position = Vector2(786, 17)
 states/Death/node = SubResource("AnimationNodeBlendTree_sirgr")
@@ -416,51 +290,49 @@ states/Run/position = Vector2(510, 197)
 transitions = ["Patrol", "Idle", SubResource("AnimationNodeStateMachineTransition_bxqdo"), "Patrol", "Run", SubResource("AnimationNodeStateMachineTransition_p77gp"), "Idle", "Patrol", SubResource("AnimationNodeStateMachineTransition_sirgr"), "Run", "Patrol", SubResource("AnimationNodeStateMachineTransition_r2b36"), "Idle", "Attack", SubResource("AnimationNodeStateMachineTransition_mf0j0"), "Run", "Attack", SubResource("AnimationNodeStateMachineTransition_1hetk"), "Attack", "Idle", SubResource("AnimationNodeStateMachineTransition_kft6k"), "Attack", "Run", SubResource("AnimationNodeStateMachineTransition_lllir"), "Patrol", "Death", SubResource("AnimationNodeStateMachineTransition_c2sd0"), "Idle", "Death", SubResource("AnimationNodeStateMachineTransition_6478u"), "Run", "Death", SubResource("AnimationNodeStateMachineTransition_a71a3"), "Attack", "Death", SubResource("AnimationNodeStateMachineTransition_epsse"), "Start", "Patrol", SubResource("AnimationNodeStateMachineTransition_qxd25")]
 graph_offset = Vector2(0, -63.71429)
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8emse"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xlld4"]
 radius = 9.0
 height = 46.0
 
-[node name="Soldier" type="CharacterBody2D" unique_id=558479106]
+[node name="CrossbowSoldier" type="CharacterBody2D" unique_id=587620325]
 collision_layer = 2
 collision_mask = 21
-script = ExtResource("1_fn2wu")
+script = ExtResource("1_ckcut")
 
-[node name="Body" type="Node2D" parent="." unique_id=327935035]
+[node name="Body" type="Node2D" parent="." unique_id=1594308918]
 
-[node name="MaleSkin1" type="Sprite2D" parent="Body" unique_id=911477455]
-material = ExtResource("2_p77gp")
-texture = ExtResource("2_bxqdo")
+[node name="MaleSkin1" type="Sprite2D" parent="Body" unique_id=1014713983]
+material = ExtResource("2_fj007")
+texture = ExtResource("3_txwlo")
 hframes = 10
 vframes = 7
 
-[node name="MaleSword" type="Sprite2D" parent="Body" unique_id=838076525]
-material = ExtResource("2_p77gp")
-texture = ExtResource("3_p77gp")
-hframes = 10
-vframes = 7
-
-[node name="AgroArea" type="Area2D" parent="Body" unique_id=2090674972]
-visible = false
+[node name="AgroArea" type="Area2D" parent="Body" unique_id=957648464]
 collision_layer = 2
 
-[node name="CollisionPolygon2D" type="CollisionShape2D" parent="Body/AgroArea" unique_id=1580352892]
-shape = SubResource("CircleShape2D_ts7x6")
+[node name="CollisionPolygon2D" type="CollisionShape2D" parent="Body/AgroArea" unique_id=1726337696]
+shape = SubResource("CircleShape2D_gofhq")
 debug_color = Color(0.8928958, 0.322748, 0, 0.41960785)
 
-[node name="AttackArea" type="Area2D" parent="Body" unique_id=918089589]
+[node name="AttackArea" type="Area2D" parent="Body" unique_id=709882805]
 visible = false
 collision_layer = 2
+monitoring = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/AttackArea" unique_id=732618698]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/AttackArea" unique_id=722832258]
 position = Vector2(-28, 10.5)
-shape = SubResource("RectangleShape2D_r2b36")
+shape = SubResource("RectangleShape2D_jekn3")
+disabled = true
 debug_color = Color(0.97429806, 0, 0.43122897, 0.41960785)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=430539060]
-libraries/ = SubResource("AnimationLibrary_mf0j0")
+[node name="Start" type="Marker2D" parent="Body" unique_id=1579650160]
+position = Vector2(-15, 8)
 
-[node name="AnimationTree" type="AnimationTree" parent="." unique_id=2045070175]
-tree_root = SubResource("AnimationNodeStateMachine_bxqdo")
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1610030835]
+libraries/ = SubResource("AnimationLibrary_a8fq4")
+
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=786419379]
+tree_root = SubResource("AnimationNodeStateMachine_w0ygu")
 anim_player = NodePath("../AnimationPlayer")
 parameters/Attack/TimeScale/scale = 1.0
 parameters/Death/TimeScale/scale = 1.0
@@ -468,37 +340,41 @@ parameters/Idle/TimeScale/scale = 1.0
 parameters/Patrol/TimeScale/scale = 1.0
 parameters/Run/TimeScale/scale = 1.0
 
-[node name="Collision" type="CollisionShape2D" parent="." unique_id=105257140]
+[node name="Collision" type="CollisionShape2D" parent="." unique_id=1508390682]
 visible = false
 position = Vector2(0, 10)
-shape = SubResource("CapsuleShape2D_8emse")
+shape = SubResource("CapsuleShape2D_xlld4")
 
-[node name="WaitingTimer" type="Timer" parent="." unique_id=1989057521]
+[node name="WaitingTimer" type="Timer" parent="." unique_id=589130996]
 wait_time = 3.0
 
-[node name="StateMachine" type="Node" parent="." unique_id=1756472651 node_paths=PackedStringArray("default_state")]
-script = ExtResource("14_55dvi")
+[node name="Attack Timer" type="Timer" parent="." unique_id=435004077]
+wait_time = 3.0
+
+[node name="StateMachine" type="Node" parent="." unique_id=1645475274 node_paths=PackedStringArray("default_state")]
+script = ExtResource("5_op27g")
 default_state = NodePath("Patrol")
 
-[node name="Patrol" type="Node" parent="StateMachine" unique_id=1853103600]
-script = ExtResource("5_6dcxu")
+[node name="Patrol" type="Node" parent="StateMachine" unique_id=210944152]
+script = ExtResource("5_fj007")
 
-[node name="Idle" type="Node" parent="StateMachine" unique_id=1999378787]
-script = ExtResource("6_v7f6j")
+[node name="Idle" type="Node" parent="StateMachine" unique_id=314618048]
+script = ExtResource("6_fj007")
 
-[node name="Agro" type="Node" parent="StateMachine" unique_id=349643836]
-script = ExtResource("7_vr3ep")
+[node name="Agro" type="Node" parent="StateMachine" unique_id=54027667]
+script = ExtResource("7_fj007")
 
-[node name="RunAway" type="Node" parent="StateMachine" unique_id=431626657]
-script = ExtResource("8_bxqdo")
+[node name="RunAway" type="Node" parent="StateMachine" unique_id=1174904105]
+script = ExtResource("8_fj007")
 
-[node name="Attack" type="Node" parent="StateMachine" unique_id=507329902]
-script = ExtResource("9_p77gp")
+[node name="Attack" type="Node" parent="StateMachine" unique_id=143628435]
+script = ExtResource("9_fj007")
 
-[node name="Death" type="Node" parent="StateMachine" unique_id=1610356130]
-script = ExtResource("10_sirgr")
+[node name="Death" type="Node" parent="StateMachine" unique_id=525543892]
+script = ExtResource("10_fj007")
 
 [connection signal="body_entered" from="Body/AgroArea" to="." method="_on_agro_area_body_entered"]
 [connection signal="body_exited" from="Body/AgroArea" to="." method="_on_agro_area_body_exited"]
 [connection signal="body_entered" from="Body/AttackArea" to="." method="_on_attack_area_body_entered"]
 [connection signal="timeout" from="WaitingTimer" to="." method="_on_waiting_timer_timeout"]
+[connection signal="timeout" from="Attack Timer" to="." method="_on_attack_timer_timeout"]

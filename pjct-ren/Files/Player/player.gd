@@ -40,7 +40,8 @@ func set_facing_direction() -> void:
 #region BODY_CALL
 func take_damage(damage, node): #control del damage
 	await get_tree().create_timer(0.1).timeout
-	if not PlayerMovementStats.is_dash and \
+	if node.cant_block: PlayerStatsComponent.current_hp -= damage
+	elif not PlayerMovementStats.is_dash and \
 	PlayerStatsComponent.can_recive_damage and \
 	not PlayerStatsComponent.parry_time:
 		if PlayerMovementStats.is_block and PlayerStatsComponent.stamia > 0:

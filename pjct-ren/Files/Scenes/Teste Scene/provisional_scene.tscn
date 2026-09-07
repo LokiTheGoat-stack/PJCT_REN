@@ -73,7 +73,7 @@
 [ext_resource type="Texture2D" uid="uid://c656flqur1107" path="res://Files/Art/Test Art/GandalfHardcore FREE Platformer Assets/Animated Sprites/GandalfHardcore Water Tiles sheet.png" id="56_4mik6"]
 [ext_resource type="PackedScene" uid="uid://8b2meufplv01" path="res://Files/Enemies/Imperio/Heavy Soldier/heavy_soldier.tscn" id="61_1102u"]
 [ext_resource type="PackedScene" uid="uid://iin83nsp4sqg" path="res://Files/Enemies/Imperio/Heavy Soldier Shield/heavy_soldier_shield.tscn" id="62_1102u"]
-[ext_resource type="PackedScene" uid="uid://6wymnrsl05ap" path="res://Files/Scenes/Teste Scene/Characters/Enemies/Female/enemie_test_f.tscn" id="73_vnr0a"]
+[ext_resource type="PackedScene" uid="uid://s7ugs5vsltb3" path="res://Files/Enemies/Imperio/Crossbow Soldier/crossbow_soldier.tscn" id="64_4mik6"]
 [ext_resource type="PackedScene" uid="uid://dh6eur2jk6sw0" path="res://Files/Enemies/Imperio/Soldier/soldier.tscn" id="75_4mik6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yaisq"]
@@ -6024,6 +6024,14 @@ waypints = [NodePath("../WaypointsE1/Marker2D"), NodePath("../WaypointsE1/Marker
 position = Vector2(8148, 626)
 waypints = [NodePath("../WaypointsE2/Marker2D"), NodePath("../WaypointsE2/Marker2D2")]
 
+[node name="CrossbowSoldier" parent="Enemies" unique_id=587620325 node_paths=PackedStringArray("waypints") instance=ExtResource("64_4mik6")]
+position = Vector2(6824, 244)
+waypints = [NodePath("../WaypointsE4/Marker2D"), NodePath("../WaypointsE4/Marker2D2")]
+
+[node name="CrossbowSoldier2" parent="Enemies" unique_id=1523279520 node_paths=PackedStringArray("waypints") instance=ExtResource("64_4mik6")]
+position = Vector2(7941, 240)
+waypints = [NodePath("../WaypointsE3/Marker2D"), NodePath("../WaypointsE3/Marker2D2")]
+
 [node name="WaypointsE1" type="Node2D" parent="Enemies" unique_id=1378350268]
 position = Vector2(7888, 640)
 
@@ -6167,14 +6175,6 @@ visible = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SceneSounds/AreaCombate" unique_id=364167541]
 position = Vector2(7323.75, 345.5)
 shape = SubResource("RectangleShape2D_vir06")
-
-[node name="EnemieTestF" parent="." unique_id=1941127111 node_paths=PackedStringArray("waypints") instance=ExtResource("73_vnr0a")]
-position = Vector2(6842, 288)
-waypints = [NodePath("../Enemies/WaypointsE4/Marker2D"), NodePath("../Enemies/WaypointsE4/Marker2D2")]
-
-[node name="EnemieTestF2" parent="." unique_id=1060942535 node_paths=PackedStringArray("waypints") instance=ExtResource("73_vnr0a")]
-position = Vector2(7936, 288)
-waypints = [NodePath("../Enemies/WaypointsE3/Marker2D"), NodePath("../Enemies/WaypointsE3/Marker2D2")]
 
 [connection signal="body_entered" from="Player/AreaEnemieDetect" to="Cameras" method="_on_area_enemie_detect_body_entered"]
 [connection signal="body_exited" from="Player/AreaEnemieDetect" to="Cameras" method="_on_area_enemie_detect_body_exited"]
