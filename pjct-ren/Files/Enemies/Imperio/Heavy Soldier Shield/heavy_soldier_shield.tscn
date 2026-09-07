@@ -22,9 +22,8 @@
 [ext_resource type="Script" uid="uid://bml1a2xhlwtgl" path="res://Files/Enemies/Imperio/Heavy Soldier Shield/States/HSS_attack_state.gd" id="19_p3f3a"]
 [ext_resource type="Script" uid="uid://cf5couw3c8amg" path="res://Files/Enemies/Imperio/Heavy Soldier Shield/States/HSS_death_state.gd" id="20_qaivx"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vbsen"]
-radius = 53.998524
-height = 316.00253
+[sub_resource type="CircleShape2D" id="CircleShape2D_46c7w"]
+radius = 175.55911
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1beug"]
 size = Vector2(71, 69.5)
@@ -991,34 +990,22 @@ tracks/13/keys = {
 tracks/14/type = "value"
 tracks/14/imported = false
 tracks/14/enabled = true
-tracks/14/path = NodePath("Body/AttackArea/CollisionShape2D:disabled")
+tracks/14/path = NodePath("Body:modulate")
 tracks/14/interp = 1
 tracks/14/loop_wrap = true
 tracks/14/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
 }
 tracks/15/type = "value"
 tracks/15/imported = false
 tracks/15/enabled = true
-tracks/15/path = NodePath("Body:modulate")
+tracks/15/path = NodePath("Body/Skeleton2D/Cadera:position")
 tracks/15/interp = 1
 tracks/15/loop_wrap = true
 tracks/15/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-tracks/16/type = "value"
-tracks/16/imported = false
-tracks/16/enabled = true
-tracks/16/path = NodePath("Body/Skeleton2D/Cadera:position")
-tracks/16/interp = 1
-tracks/16/loop_wrap = true
-tracks/16/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -1651,19 +1638,19 @@ rest = Transform2D(-0.91721404, 0.39839482, -0.39839482, -0.91721404, 1.9999998,
 [node name="Torso" type="Bone2D" parent="Body/Skeleton2D/Cadera" unique_id=1704226481]
 position = Vector2(-2.2699375, 7.736109)
 rotation = 0.26111814
-scale = Vector2(0.9999962, 0.9999962)
+scale = Vector2(0.9999952, 0.9999952)
 rest = Transform2D(0.96610194, 0.25816095, -0.25816095, 0.96610194, -2.2699375, 7.736109)
 
 [node name="RArm" type="Bone2D" parent="Body/Skeleton2D/Cadera/Torso" unique_id=1443106549]
 position = Vector2(-12.211616, 7.271637)
 rotation = -2.7136936
-scale = Vector2(0.9999991, 0.9999991)
+scale = Vector2(0.99999875, 0.99999875)
 rest = Transform2D(-0.9098396, -0.41496018, 0.41496018, -0.9098396, -12.211616, 7.271637)
 
 [node name="RForearm" type="Bone2D" parent="Body/Skeleton2D/Cadera/Torso/RArm" unique_id=1740131684]
 position = Vector2(6.0570555, 13.8676605)
 rotation = 0.839031
-scale = Vector2(0.9999974, 0.9999974)
+scale = Vector2(0.999997, 0.999997)
 rest = Transform2D(0.66818404, 0.7439959, -0.7439959, 0.66818404, 6.0570555, 13.8676605)
 
 [node name="Shield" type="Bone2D" parent="Body/Skeleton2D/Cadera/Torso/RArm/RForearm" unique_id=1513441599]
@@ -1680,13 +1667,13 @@ rest = Transform2D(0.8144829, 0.58018756, -0.58018756, 0.8144829, 3.0181382, -3.
 [node name="LArm" type="Bone2D" parent="Body/Skeleton2D/Cadera/Torso" unique_id=170506854]
 position = Vector2(9.397674, 11.518836)
 rotation = 3.12767
-scale = Vector2(0.99999726, 0.99999726)
+scale = Vector2(0.9999967, 0.9999967)
 rest = Transform2D(-0.9999031, 0.013922154, -0.013922154, -0.9999031, 9.397674, 11.518836)
 
 [node name="LFoream" type="Bone2D" parent="Body/Skeleton2D/Cadera/Torso/LArm" unique_id=1019397549]
 position = Vector2(-5.550131, 15.303469)
 rotation = -0.33584303
-scale = Vector2(0.9999962, 0.9999962)
+scale = Vector2(0.9999951, 0.9999951)
 rest = Transform2D(0.9441328, -0.32956523, 0.32956523, 0.9441328, -5.550131, 15.303469)
 
 [node name="LPad" type="Bone2D" parent="Body/Skeleton2D/Cadera/Torso/LArm" unique_id=1143982065]
@@ -1704,34 +1691,31 @@ rest = Transform2D(-0.5478505, 0.8365763, -0.8365763, -0.5478505, -1.676857, 17.
 [node name="LThigh" type="Bone2D" parent="Body/Skeleton2D/Cadera" unique_id=678071]
 position = Vector2(7.736107, 2.2699437)
 rotation = -1.1172625
-scale = Vector2(0.9999971, 0.9999971)
+scale = Vector2(0.9999958, 0.9999958)
 rest = Transform2D(0.43814486, -0.8989044, 0.8989044, 0.43814486, 7.736107, 2.2699437)
 
 [node name="LFoot" type="Bone2D" parent="Body/Skeleton2D/Cadera/LThigh" unique_id=712935319]
 position = Vector2(11.988508, -0.5250449)
-scale = Vector2(0.9999984, 0.9999984)
+scale = Vector2(0.9999981, 0.9999981)
 rest = Transform2D(1, 0, 0, 1, 11.988508, -0.5250449)
 
 [node name="RThigh" type="Bone2D" parent="Body/Skeleton2D/Cadera" unique_id=854487886]
 position = Vector2(-6.0221043, -3.7059784)
 rotation = -1.0202811
-scale = Vector2(0.99999785, 0.99999785)
+scale = Vector2(0.9999971, 0.9999971)
 rest = Transform2D(0.5231264, -0.8522551, 0.8522551, 0.5231264, -6.0221043, -3.7059784)
 
 [node name="RFoot" type="Bone2D" parent="Body/Skeleton2D/Cadera/RThigh" unique_id=975889362]
 position = Vector2(10.610651, -3.5233536)
 rotation = -0.014959842
-scale = Vector2(0.9999976, 0.9999976)
+scale = Vector2(0.999997, 0.999997)
 rest = Transform2D(0.9998881, -0.014959284, 0.014959284, 0.9998881, 10.610651, -3.5233536)
 
 [node name="AgroArea" type="Area2D" parent="Body" unique_id=102770492]
-visible = false
 collision_layer = 2
 
 [node name="CollisionPolygon2D" type="CollisionShape2D" parent="Body/AgroArea" unique_id=654540977]
-position = Vector2(74, 0)
-rotation = 1.572218
-shape = SubResource("CapsuleShape2D_vbsen")
+shape = SubResource("CircleShape2D_46c7w")
 debug_color = Color(0.8928958, 0.322748, 0, 0.41960785)
 
 [node name="AttackArea" type="Area2D" parent="Body" unique_id=962303195]
@@ -1741,7 +1725,6 @@ collision_layer = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/AttackArea" unique_id=2039905197]
 position = Vector2(45.5, 9.25)
 shape = SubResource("RectangleShape2D_1beug")
-disabled = true
 debug_color = Color(0.97429806, 0, 0.43122897, 0.41960785)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=650987868]

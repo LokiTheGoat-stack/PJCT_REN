@@ -119,8 +119,13 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0.13333334),
 "transitions": PackedFloat32Array(1),
 "values": [{
+<<<<<<< Updated upstream
 "args": [],
 "method": &"apply_dash_signal"
+=======
+"args": [0, 0.0],
+"method": &"apply_dash"
+>>>>>>> Stashed changes
 }]
 }
 
@@ -239,8 +244,13 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0.06666667),
 "transitions": PackedFloat32Array(1),
 "values": [{
+<<<<<<< Updated upstream
 "args": [],
 "method": &"apply_dash_signal"
+=======
+"args": [0, 0.0],
+"method": &"apply_dash"
+>>>>>>> Stashed changes
 }]
 }
 
@@ -359,8 +369,13 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0.13333334),
 "transitions": PackedFloat32Array(1),
 "values": [{
+<<<<<<< Updated upstream
 "args": [],
 "method": &"apply_dash_signal"
+=======
+"args": [0, 0.0],
+"method": &"apply_dash"
+>>>>>>> Stashed changes
 }]
 }
 

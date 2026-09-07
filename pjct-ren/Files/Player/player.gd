@@ -40,23 +40,23 @@ func set_facing_direction() -> void:
 #region BODY_CALL
 func take_damage(damage, node): #control del damage
 	await get_tree().create_timer(0.1).timeout
-	if not PlayerMovementStats.is_dash and PlayerStatsComponent.can_recive_damage:
+	if PlayerStatsComponent.parry_time: 
+		node.take_damage(damage * 5, self)
+		show_combo_effect(damage * 5,node)
+	elif not PlayerMovementStats.is_dash and PlayerStatsComponent.can_recive_damage:
 		if PlayerMovementStats.is_block and PlayerStatsComponent.stamia > 0:
 			if damage < 30: PlayerStatsComponent.stamia -= damage * 1.5
 			elif damage >= 30 and damage < 50: PlayerStatsComponent.stamia -= 40
 			elif damage >= 50: PlayerStatsComponent.stamia -= 50
 			PlayerStatsComponent.current_hp -= (damage * 10) / 100
 		else: PlayerStatsComponent.current_hp -= damage
-	if PlayerStatsComponent.parry_time: 
-		node.take_damage(damage * 5, self)
-		show_combo_effect(damage * 5,node)
 
 func stamina_gift(): #aumento de stamina por parry
 	PlayerStatsComponent.stamia += 50
 
 func execute_parry():
 	PlayerStatsComponent.can_recive_damage = false
-	await activate_slow_motion(0.3,0.2)
+	await activate_slow_motion(0.1,0.2)
 	PlayerStatsComponent.can_recive_damage = true
 #endregion
 
@@ -64,7 +64,6 @@ func execute_parry():
 #colision de los ataques
 func _on_attack_area_body_entered(body: Node2D) -> void:
 	$Sounds.flesh_slice()
-	show_combo_effect(PlayerStatsComponent.damage,body)
 	body.take_damage(PlayerStatsComponent.damage,self)
 func _on_attack_area_area_entered(area: Area2D) -> void:
 	if area.is_in_group("Enemie_Bullet") and area.can_parry:

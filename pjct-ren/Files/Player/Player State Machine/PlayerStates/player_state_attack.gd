@@ -7,7 +7,7 @@ const gravity = 980.0
 @export var attack_2_duration: float = 0.4
 @export var attack_3_duration: float = 0.4
 @export var combo_window: float = 0.6        #tiempo para encadenar el siguiente golpe
-@export var attack_dash_speed: float = 500.0  #velocidad del pequeño impulso
+@export var attack_dash_speed: float = 200.0  #velocidad del pequeño impulso
 @export var attack_dash_duration: float = 0.1 #duración del impulso
 @export var open_rate_trigger: float = 0.75 # % de tiempo omitido en la animacion
 
@@ -134,6 +134,7 @@ func execute_attack(attack_index: int):
 		0:
 			controlled_node.animation_machine.travel("Attack_1")
 			current_attack_duration = attack_1_duration
+<<<<<<< Updated upstream
 			#apply_dash(current_direction, attack_dash_speed)
 			PlayerStatsComponent.stamia -= 10
 		1:
@@ -146,6 +147,17 @@ func execute_attack(attack_index: int):
 			current_attack_duration = attack_3_duration
 			#apply_dash(current_direction, attack_dash_speed)
 			PlayerStatsComponent.stamia -= 10
+=======
+			PlayerStatsComponent.stamia -= 15
+		1:
+			controlled_node.animation_machine.travel("Attack_2")
+			current_attack_duration = attack_2_duration
+			PlayerStatsComponent.stamia -= 15
+		2:
+			controlled_node.animation_machine.travel("Attack_3")
+			current_attack_duration = attack_3_duration
+			PlayerStatsComponent.stamia -= 15
+>>>>>>> Stashed changes
 		_:
 			pass
 	
@@ -161,7 +173,7 @@ func apply_dash_signal():
 
 func apply_dash(direction: int, speed: float):
 	is_dashing = true
-	controlled_node.velocity.x = direction * speed
+	controlled_node.velocity.x = current_direction * attack_dash_speed
 	dash_timer = attack_dash_duration
 
 func finish_attack(): #terminar combo

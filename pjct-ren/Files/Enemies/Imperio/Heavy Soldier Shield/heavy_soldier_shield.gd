@@ -71,17 +71,23 @@ func _process(delta: float) -> void:
 
 #region USEFUL
 func take_damage(damage, node):
+	var damage_count: float = 0
 	if is_block:
+		damage_count = (damage * 5) / 100
 		hp -= (damage * 5) / 100
-	elif can_parry_me: 
+	elif can_parry_me:
+		damage_count = damage 
 		hp -= damage
+		player.activate_slow_motion(0.1,0.2)
 		state_machine.change_to("NockBack")
 		$StateMachine/NockBack.nock_back()
 	elif is_nockback:
+		damage_count = damage * 3
 		hp -= damage * 3
 	elif not is_block:
+		damage_count = damage
 		hp -= damage
-	
+	player.show_combo_effect(damage_count,self)
 
 func _can_parry_me(can_parry:bool):
 	can_parry_me = can_parry

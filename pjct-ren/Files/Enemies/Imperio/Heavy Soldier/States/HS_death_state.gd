@@ -8,4 +8,4 @@ func die():
 	controlled_node.velocity = Vector2.ZERO
 	controlled_node.animation_machine.travel("Death")
 	await controlled_node.animation_player.animation_finished
-	queue_free()
+	controlled_node.queue_free()

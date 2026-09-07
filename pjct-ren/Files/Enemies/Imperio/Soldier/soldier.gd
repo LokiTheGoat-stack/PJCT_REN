@@ -1,5 +1,5 @@
 extends CharacterBody2D
-class_name HeavySoldier
+class_name Soldier
 
 #region VAR
 @onready var body: Node2D = $Body
@@ -8,12 +8,12 @@ class_name HeavySoldier
 @onready var agro_collision: CollisionShape2D = $Body/AgroArea/CollisionPolygon2D
 @onready var attack_collision: CollisionShape2D = $Body/AttackArea/CollisionShape2D
 @onready var body_collision: CollisionShape2D = $Collision
-@onready var waiting_timer: Timer = $WaitingTimer
 @onready var state_machine: EnemieStateMachine = $StateMachine
+@onready var waiting_timer: Timer = $WaitingTimer
 
-@export var walk_speed: float = 30
-@export var run_speed: float = 85
-@export var hp: float = 600
+@export var walk_speed: float = 50
+@export var run_speed: float = 100
+@export var hp: float = 100
 @export var waypints: Array[Marker2D]
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -44,14 +44,14 @@ func _process(delta: float) -> void:
 	#detectar la direccion y voltear el sprite
 	if not run_away:
 		if velocity.x < 0:
-			body.scale.x = -1
-		elif velocity.x > 0:
 			body.scale.x = 1
+		elif velocity.x > 0:
+			body.scale.x = -1
 	else:
 		if velocity.x > 0:
-				body.scale.x = -1
+			body.scale.x = 1
 		elif velocity.x < 0:
-				body.scale.x = 1
+			body.scale.x = -1
 	
 	if hp <= 0:
 		state_machine.change_to("Death")
@@ -93,5 +93,5 @@ func _on_attack_area_body_entered(body: Node2D) -> void:
 	if is_attack == false:
 		state_machine.change_to("Attack")
 		$StateMachine/Attack.start_attack()
-	if can_damage: body.take_damage(60,self)
+	if can_damage: body.take_damage(25,self)
 #endregion
