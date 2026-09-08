@@ -136,17 +136,14 @@ func execute_attack(attack_index: int):
 			print("ataque 1")
 			controlled_node.animation_machine.travel("Attack_1")
 			current_attack_duration = attack_1_duration
-			PlayerStatsComponent.stamia -= 15
 		1:
 			print("ataque 2")
 			controlled_node.animation_machine.travel("Attack_2")
 			current_attack_duration = attack_2_duration
-			PlayerStatsComponent.stamia -= 15
 		2:
 			print("ataque 3")
 			controlled_node.animation_machine.travel("Attack_3")
 			current_attack_duration = attack_3_duration
-			PlayerStatsComponent.stamia -= 15
 		_:
 			pass
 	
@@ -162,6 +159,7 @@ func apply_dash(direction: int, speed: float):
 	is_dashing = true
 	controlled_node.velocity.x = current_direction * attack_dash_speed
 	dash_timer = attack_dash_duration
+	PlayerStatsComponent.stamia -= 5
 
 func finish_attack(combo_finished:bool): #terminar combo
 	print("FINISH")
