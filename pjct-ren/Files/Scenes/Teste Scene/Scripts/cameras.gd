@@ -6,11 +6,12 @@ class_name CameraDirector
 @onready var center_camera_2: PhantomCamera2D = $CenterArea2/CenterCamera2
 @onready var group_camera: PhantomCamera2D = $GroupCamera
 
-
 #region CENTER_CAMERA
 func _on_center_area_body_entered(body: Node2D) -> void:
+	GlobalParameters.current_camera = center_camera
 	center_camera.set_priority(10)
 func _on_center_area_body_exited(body: Node2D) -> void:
+	GlobalParameters.current_camera = path_camera
 	center_camera.set_priority(0)
 #endregion
 
@@ -23,9 +24,11 @@ func _on_center_area_2_body_exited(body: Node2D) -> void:
 
 
 func _on_area_enemie_detect_body_entered(body: Node2D) -> void:
+	GlobalParameters.current_camera = group_camera
 	group_camera.set_priority(10)
 	group_camera.append_follow_targets(body)
 func _on_area_enemie_detect_body_exited(body: Node2D) -> void:
+	GlobalParameters.current_camera = path_camera
 	group_camera.erase_follow_targets(body)
 	if group_camera.follow_targets.size() == 1:
 		group_camera.set_priority(0)

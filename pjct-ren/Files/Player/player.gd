@@ -40,7 +40,9 @@ func set_facing_direction() -> void:
 #region BODY_CALL
 func take_damage(damage, node): #control del damage
 	await get_tree().create_timer(0.1).timeout
-	if node.cant_block: PlayerStatsComponent.current_hp -= damage
+	if node.cant_block: 
+		PlayerStatsComponent.current_hp -= damage
+		shake_camera("player_hurt")
 	elif not PlayerMovementStats.is_dash and \
 	PlayerStatsComponent.can_recive_damage and \
 	not PlayerStatsComponent.parry_time:
@@ -49,7 +51,10 @@ func take_damage(damage, node): #control del damage
 			elif damage >= 30 and damage < 50: PlayerStatsComponent.stamia -= 40
 			elif damage >= 50: PlayerStatsComponent.stamia -= 50
 			PlayerStatsComponent.current_hp -= (damage * 10) / 100
-		else: PlayerStatsComponent.current_hp -= damage
+			shake_camera("player_small_hurt")
+		else: 
+			PlayerStatsComponent.current_hp -= damage
+			shake_camera("player_hurt")
 
 func stamina_gift(): #aumento de stamina por parry
 	PlayerStatsComponent.stamia += 50
@@ -64,7 +69,6 @@ func execute_parry():
 #region SIGNALS
 #colision de los ataques
 func _on_attack_area_body_entered(body: Node2D) -> void:
-	$Sounds.flesh_slice()
 	body.take_damage(PlayerStatsComponent.damage,self)
 func _on_attack_area_area_entered(area: Area2D) -> void:
 	if area.is_in_group("Enemie_Bullet") and area.can_parry:
@@ -79,11 +83,20 @@ func activate_slow_motion(duration:float, scale:float):
 	await get_tree().create_timer(duration,false).timeout
 	Engine.time_scale = original_scale
 
+func shake_camera(type:String):
+	match type:
+		"player_small_hit": GlobalParameters.player_camera.apply_trauma(0.1,1.0)
+		"player_hit": GlobalParameters.player_camera.apply_trauma(0.18,1.0)
+		"player_critical_hit": GlobalParameters.player_camera.apply_trauma(0.3,1.0)
+		"player_small_hurt": GlobalParameters.player_camera.apply_trauma(0.1,1.0)
+		"player_hurt": GlobalParameters.player_camera.apply_trauma(0.3,1.0)
+
 func show_combo_effect(damage:int,target):
 	var label = Label.new()
 	label.text = str(int(damage))
 	label.position = target.global_position - Vector2(0, 50)
-	label.modulate = Color.YELLOW
+	if damage > 100: label.modulate = Color.RED
+	else: label.modulate = Color.WHITE
 	label.add_theme_font_size_override("font_size", 24)
 	get_parent().add_child(label)
 	

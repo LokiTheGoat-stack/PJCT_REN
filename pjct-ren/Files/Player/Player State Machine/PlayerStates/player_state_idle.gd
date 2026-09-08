@@ -9,6 +9,7 @@ func on_physics_process(delta) -> void:
 	
 	# Si no estas en el piso cambiar al estado Fall
 	if controlled_node.is_on_floor() == false:
+		print("idle_fall")
 		controlled_node.animation_machine.travel("Fall_Down")
 		state_machine.change_to("PlayerStateFall")
 	
@@ -24,6 +25,7 @@ func on_input(event: InputEvent) -> void:
 	
 	#Cambiar a Jump
 	if Input.is_action_just_pressed("JUMP"):
+		print("idle_jump")
 		PlayerMovementStats.jump_count += 1
 		controlled_node.velocity.y = PlayerMovementStats.jump_speed
 		controlled_node.animation_machine.travel("Jump_Up")

@@ -22,6 +22,7 @@ func on_physics_process(delta) -> void:
 		else: gravity = PlayerMovementStats.gravity_low
 	
 	elif controlled_node.velocity.y > 0:
+		print("jump_fall")
 		controlled_node.animation_machine.travel("Fall_Down")
 		state_machine.change_to("PlayerStateFall")
 
@@ -38,6 +39,7 @@ func on_physics_process(delta) -> void:
 	
 	#si se toca techo cambiar a Fall
 	if raycast_top.is_colliding() and not controlled_node.is_on_floor():
+		print("jump_top_fall")
 		controlled_node.animation_machine.travel("Fall_Down")
 		state_machine.change_to("PlayerStateFall")
 	

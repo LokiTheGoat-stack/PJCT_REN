@@ -28,9 +28,6 @@ func on_physics_process(delta):
 	elif controlled_node.velocity.y == 0:
 		gravity = PlayerMovementStats.gravity_low
 	
-	
-	#if is_animation_play == false: play_animation()
-	
 	#control de colision del raycast
 	raycast_left.target_position = Vector2(-15, 0)
 	raycast_right.target_position = Vector2(15, 0)
@@ -44,6 +41,7 @@ func on_physics_process(delta):
 	
 	#si estas pegado a una pared y no estas tocando suelo cambiar a Wall_Slide
 	if is_on_wall and not controlled_node.is_on_floor():
+		print("wall_slide")
 		$"../PlayerStateWall_Slide".wall_normal = wall_normal
 		state_machine.change_to("PlayerStateWall_Slide")
 		can_attack = true
@@ -66,6 +64,7 @@ func on_physics_process(delta):
 func on_input(event: InputEvent) -> void:
 	#Si despues al caer saltas antes de los 0.09s, cambiar a Jump
 	if Input.is_action_just_pressed("JUMP") and last_chance_to_jump == true:
+		print("Last chance taked")
 		controlled_node.animation_machine.travel("Jump_Up") 
 		controlled_node.velocity.y = PlayerMovementStats.jump_speed
 		state_machine.change_to("PlayerStateJump")
