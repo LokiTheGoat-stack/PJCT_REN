@@ -112,7 +112,7 @@ func on_input(event: InputEvent) -> void:
 				state_machine.change_to("PlayerStateDash")
 				$"../PlayerStateDash".dash("PlayerStateIdle",true)
 		
-		elif Input.is_action_pressed("DASH"):
+		elif Input.is_action_pressed("BLOCK"):
 			if can_combo and combo_timer > 0:
 				is_attacking = false
 				can_combo = false
@@ -136,17 +136,17 @@ func execute_attack(attack_index: int):
 			print("ataque 1")
 			controlled_node.animation_machine.travel("Attack_1")
 			current_attack_duration = attack_1_duration
-			PlayerStatsComponent.stamia -= 1
+			PlayerStatsComponent.stamia -= 15
 		1:
 			print("ataque 2")
 			controlled_node.animation_machine.travel("Attack_2")
 			current_attack_duration = attack_2_duration
-			PlayerStatsComponent.stamia -= 1
+			PlayerStatsComponent.stamia -= 15
 		2:
 			print("ataque 3")
 			controlled_node.animation_machine.travel("Attack_3")
 			current_attack_duration = attack_3_duration
-			PlayerStatsComponent.stamia -= 1
+			PlayerStatsComponent.stamia -= 15
 		_:
 			pass
 	
@@ -179,6 +179,10 @@ func finish_attack(combo_finished:bool): #terminar combo
 			elif Input.is_action_pressed("DASH"):
 				state_machine.change_to("PlayerStateDash")
 				$"../PlayerStateDash".dash("PlayerStateIdle",true)
+			elif Input.is_action_pressed("BLOCK"):
+				$"../PlayerStateBlock".charge_last_state("PlayerStateIdle")
+				state_machine.change_to("PlayerStateBlock")
+				$"../PlayerStateBlock".time_for_parry()
 			else:
 				state_machine.change_to("PlayerStateIdle")
 		else:
