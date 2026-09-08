@@ -69,6 +69,7 @@ func finish_dash():
 	#cambio de estado segun la situacion
 	if controlled_node.is_on_floor():
 		if Input.is_action_pressed("LEFT") or Input.is_action_pressed("RIGHT"):
+			$"../PlayerStateWalk".min_speed = PlayerMovementStats.running_speed
 			controlled_node.velocity.x = Input.get_axis("LEFT", "RIGHT") * PlayerMovementStats.running_speed
 			controlled_node.animation_machine.travel("Run")
 			state_machine.change_to("PlayerStateWalk")
@@ -96,6 +97,7 @@ func add_phantom():
 	phantom.vframes = controlled_node.ren_sprite.vframes
 	phantom.frame = controlled_node.ren_sprite.frame
 	phantom.centered = true
+	phantom.scale.x = controlled_node.ren_sprite.scale.x
 	if controlled_node.ren_sprite.flip_h: phantom.flip_h = true
 	phantom.global_position = controlled_node.global_position
 	phantom.modulate = Color.BLUE

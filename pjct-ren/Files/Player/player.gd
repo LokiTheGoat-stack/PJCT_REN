@@ -56,6 +56,7 @@ func stamina_gift(): #aumento de stamina por parry
 
 func execute_parry():
 	PlayerStatsComponent.can_recive_damage = false
+	sounds._parry()
 	await activate_slow_motion(0.1,0.2)
 	PlayerStatsComponent.can_recive_damage = true
 #endregion

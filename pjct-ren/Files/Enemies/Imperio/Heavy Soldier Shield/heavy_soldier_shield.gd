@@ -81,6 +81,7 @@ func take_damage(damage, node):
 	elif can_parry_me:
 		damage_count = damage 
 		hp -= damage
+		player.sounds._parry()
 		player.activate_slow_motion(0.1,0.2)
 		state_machine.change_to("NockBack")
 		$StateMachine/NockBack.nock_back()

@@ -32,6 +32,7 @@ func counter(body):
 	if not current_shooter.cant_block:
 		counter_projectile = true
 		player = body
+		player.sounds._parry()
 		player.activate_slow_motion(0.3,0.2)
 		player.stamina_gift()
 		direction = (current_shooter.global_position - global_position).normalized()
