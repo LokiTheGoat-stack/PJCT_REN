@@ -1523,10 +1523,6 @@ height = 68.0
 collision_layer = 2
 collision_mask = 21
 script = ExtResource("1_dkjc0")
-walk_speed = null
-run_speed = null
-hp = null
-attack_damage = null
 
 [node name="Body" type="Node2D" parent="." unique_id=523702474]
 
@@ -1655,13 +1651,13 @@ visible = false
 [node name="Cadera" type="Bone2D" parent="Body/Skeleton2D" unique_id=1989467747]
 position = Vector2(1.9999998, 14)
 rotation = 2.7318265
-scale = Vector2(0.9999983, 0.9999983)
+scale = Vector2(0.9999982, 0.9999982)
 rest = Transform2D(-0.91721404, 0.39839482, -0.39839482, -0.91721404, 1.9999998, 14)
 
 [node name="Torso" type="Bone2D" parent="Body/Skeleton2D/Cadera" unique_id=1704226481]
 position = Vector2(-2.2699375, 7.736109)
 rotation = 0.26111814
-scale = Vector2(0.99999446, 0.99999446)
+scale = Vector2(0.99999434, 0.99999434)
 rest = Transform2D(0.96610194, 0.25816095, -0.25816095, 0.96610194, -2.2699375, 7.736109)
 
 [node name="RArm" type="Bone2D" parent="Body/Skeleton2D/Cadera/Torso" unique_id=1443106549]
@@ -1673,7 +1669,7 @@ rest = Transform2D(-0.9098396, -0.41496018, 0.41496018, -0.9098396, -12.211616, 
 [node name="RForearm" type="Bone2D" parent="Body/Skeleton2D/Cadera/Torso/RArm" unique_id=1740131684]
 position = Vector2(6.0570555, 13.8676605)
 rotation = 0.839031
-scale = Vector2(0.9999968, 0.9999968)
+scale = Vector2(0.99999666, 0.99999666)
 rest = Transform2D(0.66818404, 0.7439959, -0.7439959, 0.66818404, 6.0570555, 13.8676605)
 
 [node name="Shield" type="Bone2D" parent="Body/Skeleton2D/Cadera/Torso/RArm/RForearm" unique_id=1513441599]
@@ -1690,7 +1686,7 @@ rest = Transform2D(0.8144829, 0.58018756, -0.58018756, 0.8144829, 3.0181382, -3.
 [node name="LArm" type="Bone2D" parent="Body/Skeleton2D/Cadera/Torso" unique_id=170506854]
 position = Vector2(9.397674, 11.518836)
 rotation = 3.12767
-scale = Vector2(0.9999964, 0.9999964)
+scale = Vector2(0.9999965, 0.9999965)
 rest = Transform2D(-0.9999031, 0.013922154, -0.013922154, -0.9999031, 9.397674, 11.518836)
 
 [node name="LFoream" type="Bone2D" parent="Body/Skeleton2D/Cadera/Torso/LArm" unique_id=1019397549]
@@ -1714,7 +1710,7 @@ rest = Transform2D(-0.5478505, 0.8365763, -0.8365763, -0.5478505, -1.676857, 17.
 [node name="LThigh" type="Bone2D" parent="Body/Skeleton2D/Cadera" unique_id=678071]
 position = Vector2(7.736107, 2.2699437)
 rotation = -1.1172625
-scale = Vector2(0.99999577, 0.99999577)
+scale = Vector2(0.9999957, 0.9999957)
 rest = Transform2D(0.43814486, -0.8989044, 0.8989044, 0.43814486, 7.736107, 2.2699437)
 
 [node name="LFoot" type="Bone2D" parent="Body/Skeleton2D/Cadera/LThigh" unique_id=712935319]
@@ -1749,7 +1745,6 @@ collision_layer = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/AttackArea" unique_id=2039905197]
 position = Vector2(45.5, 9.25)
 shape = SubResource("RectangleShape2D_1beug")
-disabled = true
 debug_color = Color(0.97429806, 0, 0.43122897, 0.41960785)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=650987868]

@@ -260,10 +260,6 @@ node_connections = [&"output", 0, &"TimeScale", &"TimeScale", 0, &"Animation"]
 switch_mode = 2
 advance_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lllir"]
-switch_mode = 2
-advance_mode = 2
-
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_c2sd0"]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6478u"]
@@ -287,7 +283,7 @@ states/Patrol/node = SubResource("AnimationNodeBlendTree_r2b36")
 states/Patrol/position = Vector2(310, 102)
 states/Run/node = SubResource("AnimationNodeBlendTree_mf0j0")
 states/Run/position = Vector2(510, 197)
-transitions = ["Patrol", "Idle", SubResource("AnimationNodeStateMachineTransition_bxqdo"), "Patrol", "Run", SubResource("AnimationNodeStateMachineTransition_p77gp"), "Idle", "Patrol", SubResource("AnimationNodeStateMachineTransition_sirgr"), "Run", "Patrol", SubResource("AnimationNodeStateMachineTransition_r2b36"), "Idle", "Attack", SubResource("AnimationNodeStateMachineTransition_mf0j0"), "Run", "Attack", SubResource("AnimationNodeStateMachineTransition_1hetk"), "Attack", "Idle", SubResource("AnimationNodeStateMachineTransition_kft6k"), "Attack", "Run", SubResource("AnimationNodeStateMachineTransition_lllir"), "Patrol", "Death", SubResource("AnimationNodeStateMachineTransition_c2sd0"), "Idle", "Death", SubResource("AnimationNodeStateMachineTransition_6478u"), "Run", "Death", SubResource("AnimationNodeStateMachineTransition_a71a3"), "Attack", "Death", SubResource("AnimationNodeStateMachineTransition_epsse"), "Start", "Patrol", SubResource("AnimationNodeStateMachineTransition_qxd25")]
+transitions = ["Patrol", "Idle", SubResource("AnimationNodeStateMachineTransition_bxqdo"), "Patrol", "Run", SubResource("AnimationNodeStateMachineTransition_p77gp"), "Idle", "Patrol", SubResource("AnimationNodeStateMachineTransition_sirgr"), "Run", "Patrol", SubResource("AnimationNodeStateMachineTransition_r2b36"), "Idle", "Attack", SubResource("AnimationNodeStateMachineTransition_mf0j0"), "Run", "Attack", SubResource("AnimationNodeStateMachineTransition_1hetk"), "Attack", "Idle", SubResource("AnimationNodeStateMachineTransition_kft6k"), "Patrol", "Death", SubResource("AnimationNodeStateMachineTransition_c2sd0"), "Idle", "Death", SubResource("AnimationNodeStateMachineTransition_6478u"), "Run", "Death", SubResource("AnimationNodeStateMachineTransition_a71a3"), "Attack", "Death", SubResource("AnimationNodeStateMachineTransition_epsse"), "Start", "Patrol", SubResource("AnimationNodeStateMachineTransition_qxd25")]
 graph_offset = Vector2(0, -63.71429)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xlld4"]

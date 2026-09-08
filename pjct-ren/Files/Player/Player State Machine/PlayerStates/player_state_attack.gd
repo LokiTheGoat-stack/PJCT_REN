@@ -66,14 +66,10 @@ func on_physics_process(delta: float) -> void:
 	attack_timer -= delta
 	combo_timer -= delta
 	
-	#verificacion de la apertura en la duracion del ataque
-	if attack_timer <= (current_attack_duration * (1 - open_rate_trigger)) and is_attacking:
-		can_combo = true
-	
 	#verificar si expiro el combo para pasar a idle
 	if attack_timer <= 0 and is_attacking:
 		if combo_timer <= 0:
-			finish_attack()
+			finish_attack(false)
 	
 	controlled_node.move_and_slide()
 	
@@ -91,14 +87,19 @@ func on_input(event: InputEvent) -> void:
 		if Input.is_action_just_pressed("ATTACK"):
 			if Input.is_action_pressed("LEFT"): current_direction = -1
 			elif Input.is_action_pressed("RIGHT"): current_direction = 1
-			if can_combo and combo_timer > 0:
+			if can_combo:
+				can_combo = false
+				print("combo false")
 				combo_count += 1
+				print("combo x" + str(combo_count))
 				if combo_count <= 2:
 					execute_attack(combo_count)
 				else:
-					finish_attack()
+					print("El combo exede el max")
+					finish_attack(true)
 			else:
-				finish_attack()
+				print("can_combo o combo_timer no cumplen")
+				finish_attack(false)
 		
 		elif Input.is_action_pressed("DASH"):
 			if can_combo and combo_timer > 0:
@@ -111,7 +112,7 @@ func on_input(event: InputEvent) -> void:
 				state_machine.change_to("PlayerStateDash")
 				$"../PlayerStateDash".dash("PlayerStateIdle",true)
 		
-		elif Input.is_action_pressed("DASH"):
+		elif Input.is_action_pressed("BLOCK"):
 			if can_combo and combo_timer > 0:
 				is_attacking = false
 				can_combo = false
@@ -125,21 +126,24 @@ func on_input(event: InputEvent) -> void:
 
 
 func execute_attack(attack_index: int):
+	print("execute attack")
 	combo_timer = combo_window
-	
 	is_dashing = false
 	controlled_node.velocity.x = 0
 	
 	match attack_index:
 		0:
+			print("ataque 1")
 			controlled_node.animation_machine.travel("Attack_1")
 			current_attack_duration = attack_1_duration
 			PlayerStatsComponent.stamia -= 15
 		1:
+			print("ataque 2")
 			controlled_node.animation_machine.travel("Attack_2")
 			current_attack_duration = attack_2_duration
 			PlayerStatsComponent.stamia -= 15
 		2:
+			print("ataque 3")
 			controlled_node.animation_machine.travel("Attack_3")
 			current_attack_duration = attack_3_duration
 			PlayerStatsComponent.stamia -= 15
@@ -147,29 +151,39 @@ func execute_attack(attack_index: int):
 			pass
 	
 	attack_timer = current_attack_duration
-	
-	if attack_index == 2:
-		can_combo = false
-		await get_tree().create_timer(current_attack_duration).timeout
-		finish_attack()
+	_attack_timer_func()
+
+func _attack_timer_func():
+	await get_tree().create_timer(0.3).timeout
+	print("combo true")
+	can_combo = true 
 
 func apply_dash(direction: int, speed: float):
 	is_dashing = true
 	controlled_node.velocity.x = current_direction * attack_dash_speed
 	dash_timer = attack_dash_duration
 
-func finish_attack(): #terminar combo
+func finish_attack(combo_finished:bool): #terminar combo
+	print("FINISH")
 	is_attacking = false
 	can_combo = false
 	combo_count = 0
 	is_dashing = false
 	controlled_node.velocity.x = 0
 	
-	if controlled_node.is_on_floor():
-		if Input.is_action_pressed("LEFT") or Input.is_action_pressed("RIGHT"):
-			controlled_node.animation_machine.travel("Run")
-			state_machine.change_to("PlayerStateWalk")
+	if not combo_finished:
+		if controlled_node.is_on_floor():
+			if Input.is_action_pressed("LEFT") or Input.is_action_pressed("RIGHT"):
+				controlled_node.animation_machine.travel("Run")
+				state_machine.change_to("PlayerStateWalk")
+			elif Input.is_action_pressed("DASH"):
+				state_machine.change_to("PlayerStateDash")
+				$"../PlayerStateDash".dash("PlayerStateIdle",true)
+			elif Input.is_action_pressed("BLOCK"):
+				$"../PlayerStateBlock".charge_last_state("PlayerStateIdle")
+				state_machine.change_to("PlayerStateBlock")
+				$"../PlayerStateBlock".time_for_parry()
+			else:
+				state_machine.change_to("PlayerStateIdle")
 		else:
-			state_machine.change_to("PlayerStateIdle")
-	else:
-		state_machine.change_to("PlayerStateFall")
+			state_machine.change_to("PlayerStateFall")

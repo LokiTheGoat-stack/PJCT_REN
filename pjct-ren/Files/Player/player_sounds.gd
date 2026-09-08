@@ -5,6 +5,8 @@ class_name PlayerSounds
 @onready var fall_sounds: AudioStreamPlayer2D = $Fall_Sounds
 @onready var swing: AudioStreamPlayer2D = $Swing
 @onready var hit_flesh: AudioStreamPlayer2D = $HitFlesh
+@onready var parry: AudioStreamPlayer2D = $Parry
+
 
 func play_2D_sound(sound:AudioStreamPlayer2D, volume:float, pitch:float):
 	sound.volume_db = volume
@@ -29,4 +31,6 @@ func sword_swing():
 func flesh_slice():
 	hit_flesh.play()
 
+func _parry():
+	parry.play()
 #endregion

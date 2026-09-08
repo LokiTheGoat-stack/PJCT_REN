@@ -47,16 +47,16 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	
 	#detectar la direccion y voltear el sprite
-	if not run_away:
+	if not is_attack:
 		if velocity.x < 0:
 			body.scale.x = 1
 		elif velocity.x > 0:
 			body.scale.x = -1
 	else:
-		if velocity.x > 0:
-			body.scale.x = 1
-		elif velocity.x < 0:
+		if player.global_position.x > global_position.x:
 			body.scale.x = -1
+		else:
+			body.scale.x = 1
 	
 	if hp <= 0:
 		state_machine.change_to("Death")
@@ -96,10 +96,12 @@ func _on_attack_timer_timeout() -> void:
 	$StateMachine/Attack.start_attack()
 
 func _on_agro_area_body_entered(body: Node2D) -> void:
+	is_attack = true
 	state_machine.change_to("Attack")
 	$StateMachine/Attack.start_attack()
 	attack_timer.start()
 func _on_agro_area_body_exited(body: Node2D) -> void:
+	is_attack = false
 	attack_timer.stop()
 	animation_machine.travel("Idle")
 	state_machine.change_to("Idle")

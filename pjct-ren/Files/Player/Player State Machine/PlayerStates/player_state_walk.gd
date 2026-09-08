@@ -11,10 +11,11 @@ func on_physics_process(delta) -> void:
 	if min_speed < PlayerMovementStats.running_speed: min_speed += 500 * delta
 	
 	#Si no hay piso cambiar a Fall
-	if controlled_node.is_on_floor() == false:
+	if not controlled_node.is_on_floor() and controlled_node.velocity.y > 0:
 		controlled_node.animation_machine.travel("Fall_Down")
 		state_machine.change_to("PlayerStateFall")
 		$"../PlayerStateFall"._last_chance_to_jump()
+	
 	
 	handle_gravity(delta)
 	controlled_node.move_and_slide()
