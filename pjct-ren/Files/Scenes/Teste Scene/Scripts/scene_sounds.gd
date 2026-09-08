@@ -7,7 +7,8 @@ var is_calm: bool = true
 
 
 func _ready() -> void:
-	music_player.play()
+	#music_player.play()
+	pass
 
 #region COMBAT
 func _on_area_enemie_detect_body_entered(body: Node2D) -> void:

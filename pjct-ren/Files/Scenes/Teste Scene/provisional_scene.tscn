@@ -6171,6 +6171,7 @@ volume_db = -17.0
 
 [node name="AreaCombate" type="Area2D" parent="SceneSounds" unique_id=2056830270]
 visible = false
+monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SceneSounds/AreaCombate" unique_id=364167541]
 position = Vector2(7323.75, 345.5)
