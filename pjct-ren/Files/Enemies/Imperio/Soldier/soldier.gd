@@ -67,6 +67,7 @@ func take_damage(damage, node):
 	var damage_count: float = 0
 	damage_count = damage
 	hp -= damage
+	damage_effect(damage)
 	player.show_combo_effect(damage_count,self)
 
 func _can_parry_me(can_parry:bool):
@@ -77,6 +78,19 @@ func _can_parry_me(can_parry:bool):
 		player.execute_parry()
 		player.stamina_gift()
 	else: can_parry_me = can_parry
+
+func damage_effect(damage:float):
+	player.sounds.flesh_slice()
+	if damage > 10: player.shake_camera("player_hit")
+	elif damage <= 10: player.shake_camera("player_small_hit")
+	elif damage > 100: player.shake_camera("player_critical_hit")
+	change_shader_parameters(Color.WHITE,1,1)
+	await get_tree().create_timer(0.08).timeout
+	body.visible = false
+	await get_tree().create_timer(0.03).timeout
+	body.visible = true
+	await get_tree().create_timer(0.08).timeout
+	change_shader_parameters(Color.WHITE,0,1)
 
 func change_shader_parameters(color:Color, mix:float, alpha:float):
 	var sprite_material = body_sprite.material

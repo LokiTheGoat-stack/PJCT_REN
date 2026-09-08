@@ -23,6 +23,7 @@ func on_physics_process(delta) -> void:
 	
 	elif controlled_node.velocity.y > 0:
 		can_fall = false
+		print("wall_jump_fall")
 		state_machine.change_to("PlayerStateFall")
 	
 	#control de colision del raycast
@@ -41,12 +42,13 @@ func on_physics_process(delta) -> void:
 	
 	handle_gravity(delta)
 	controlled_node.move_and_slide()
-	if valid_timer == false: start_jump_timer()
+	#if valid_timer == false: start_jump_timer()
 	#endregion
 
 func new_verification(): #verifivar si se puede hacer Wall_Slide 
 	await get_tree().create_timer(0.1).timeout
 	if is_on_wall and not controlled_node.is_on_floor():
+		print("wll_jump_-> wall_slide")
 		$"../PlayerStateWall_Slide".wall_normal = wall_normal
 		state_machine.change_to("PlayerStateWall_Slide")
 

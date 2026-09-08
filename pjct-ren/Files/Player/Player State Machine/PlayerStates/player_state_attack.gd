@@ -102,15 +102,14 @@ func on_input(event: InputEvent) -> void:
 				finish_attack(false)
 		
 		elif Input.is_action_pressed("DASH"):
-			if can_combo and combo_timer > 0:
-				is_attacking = false
-				can_combo = false
-				combo_count = 0
-				is_dashing = false
-				controlled_node.velocity.x = 0
+			is_attacking = false
+			can_combo = false
+			combo_count = 0
+			is_dashing = false
+			controlled_node.velocity.x = 0
 				
-				state_machine.change_to("PlayerStateDash")
-				$"../PlayerStateDash".dash("PlayerStateIdle",true)
+			state_machine.change_to("PlayerStateDash")
+			$"../PlayerStateDash".dash("PlayerStateIdle",true)
 		
 		elif Input.is_action_pressed("BLOCK"):
 			if can_combo and combo_timer > 0:

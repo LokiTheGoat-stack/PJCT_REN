@@ -1316,7 +1316,6 @@ parameters/Run_Into/TimeScale/scale = 1.0
 parameters/Run_Outo/TimeScale/scale = 1.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=826343510]
-visible = false
 position = Vector2(0, 5)
 scale = Vector2(1, 1.1199994)
 shape = SubResource("CapsuleShape2D_hylex")
