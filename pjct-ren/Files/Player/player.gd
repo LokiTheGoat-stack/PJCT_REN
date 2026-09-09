@@ -72,7 +72,7 @@ func execute_parry():
 #region SIGNALS
 #colision de los ataques
 func _on_attack_area_body_entered(body: Node2D) -> void:
-	body.take_damage(PlayerStatsComponent.damage,self)
+	body.take_damage(PlayerStatsComponent.damage,self,$StateMachine/PlayerStateAttack.hitstun)
 	GlobalParameters.hit_effect(body,preload("uid://buokwrn26gvmp"))
 func _on_attack_area_area_entered(area: Area2D) -> void:
 	if area.is_in_group("Enemie_Bullet") and area.can_parry:

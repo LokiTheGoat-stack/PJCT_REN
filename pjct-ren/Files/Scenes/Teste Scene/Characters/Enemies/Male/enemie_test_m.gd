@@ -112,7 +112,7 @@ func is_dying():
 	check_can_move(false)
 	collision.disabled = true
 
-func take_damage(damage, node):
+func take_damage(damage, node, hitstun):
 	hp -= damage
 
 func _can_parry_me(can_parry:bool):

@@ -21,6 +21,7 @@ var dash_timer: float = 0.0
 var is_dashing: bool = false
 var current_attack_duration: float = 0.0
 var air_combo: bool
+var hitstun: float = 0
 
 func _ready():
 	pass
@@ -135,14 +136,17 @@ func execute_attack(attack_index: int):
 			print("ataque 1")
 			controlled_node.animation_machine.travel("Attack_1")
 			current_attack_duration = attack_1_duration
+			hitstun = 0.09
 		1:
 			print("ataque 2")
 			controlled_node.animation_machine.travel("Attack_2")
 			current_attack_duration = attack_2_duration
+			hitstun = 0.09
 		2:
 			print("ataque 3")
 			controlled_node.animation_machine.travel("Attack_3")
 			current_attack_duration = attack_3_duration
+			hitstun = 0.09
 		_:
 			pass
 	
@@ -155,13 +159,13 @@ func _attack_timer_func():
 	can_combo = true 
 
 func rest_stamina():
-	PlayerStatsComponent.stamia -= 15
+	PlayerStatsComponent.stamia -= 0
 
 func apply_dash(direction: int, speed: float):
 	is_dashing = true
 	controlled_node.velocity.x = current_direction * attack_dash_speed
 	dash_timer = attack_dash_duration
-	PlayerStatsComponent.stamia -= 5
+	PlayerStatsComponent.stamia -= 0
 
 func finish_attack(combo_finished:bool): #terminar combo
 	print("FINISH")

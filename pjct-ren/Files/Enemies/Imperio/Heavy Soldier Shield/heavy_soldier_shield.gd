@@ -73,16 +73,16 @@ func _process(delta: float) -> void:
 #endregion
 
 #region USEFUL
-func take_damage(damage, node):
+func take_damage(damage, node, hitstun):
 	var damage_count: float = 0
 	if is_block:
 		damage_count = (damage * 5) / 100
 		hp -= (damage * 5) / 100
-		damage_effect((damage * 5) / 100)
+		damage_effect((damage * 5) / 100, hitstun)
 	elif can_parry_me:
 		damage_count = damage 
 		hp -= damage
-		damage_effect(damage)
+		damage_effect(damage, hitstun)
 		player.sounds._parry()
 		player.activate_slow_motion(0.1,0.2)
 		state_machine.change_to("NockBack")
@@ -90,11 +90,11 @@ func take_damage(damage, node):
 	elif is_nockback:
 		damage_count = damage * 3
 		hp -= damage * 3
-		damage_effect(damage * 3)
+		damage_effect(damage * 3, hitstun)
 	elif not is_block:
 		damage_count = damage
 		hp -= damage
-		damage_effect(damage)
+		damage_effect(damage, hitstun)
 	player.show_combo_effect(damage_count,self)
 
 func _can_parry_me(can_parry:bool):
@@ -103,13 +103,13 @@ func _can_parry_me(can_parry:bool):
 	#	player.execute_parry()
 	#	player.stamina_gift()
 
-func damage_effect(damage:float):
+func damage_effect(damage:float, hitstun):
 	player.sounds.flesh_slice()
 	if damage > 10: player.shake_camera("player_hit")
 	elif damage <= 10: player.shake_camera("player_small_hit")
 	elif damage > 100: player.shake_camera("player_critical_hit")
 	change_shader_parameters(Color.WHITE,1,1)
-	await  player.activate_slow_motion(0.09,0.001)
+	await  player.activate_slow_motion(hitstun,0.001)
 	await get_tree().create_timer(0.08).timeout
 	body.visible = false
 	await get_tree().create_timer(0.03).timeout

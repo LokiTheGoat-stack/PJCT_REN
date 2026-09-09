@@ -935,7 +935,7 @@ animation = &"Atack_1"
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_22qu7"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_rc42w"]
-graph_offset = Vector2(-153.65169, -50.712967)
+graph_offset = Vector2(-215.17543, 148.83353)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_mw2cn")
 nodes/Animation/position = Vector2(-206, 105)
 nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_22qu7")
@@ -961,7 +961,7 @@ animation = &"Attack_2"
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_3t4bl"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_j3p64"]
-graph_offset = Vector2(-242, -67)
+graph_offset = Vector2(-86.67021, 127.47728)
 nodes/output/position = Vector2(380, 120)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_k01om")
 nodes/Animation/position = Vector2(-22, 102)
@@ -1254,7 +1254,7 @@ states/Run_Outo/node = SubResource("AnimationNodeBlendTree_jfhdu")
 states/Run_Outo/position = Vector2(592, 100)
 states/Start/position = Vector2(141, 100)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_jfhdu"), "Jump_In", "Jump_Up", SubResource("AnimationNodeStateMachineTransition_b7mps"), "Fall_In", "Fall_Down", SubResource("AnimationNodeStateMachineTransition_nq61r"), "Idle", "Jump_In", SubResource("AnimationNodeStateMachineTransition_wupy3"), "Jump_Up", "Fall_In", SubResource("AnimationNodeStateMachineTransition_d2je2"), "Fall_Down", "Fall_Land", SubResource("AnimationNodeStateMachineTransition_o5t8f"), "Fall_Land", "Idle", SubResource("AnimationNodeStateMachineTransition_7gb7o"), "Idle", "Run_Into", SubResource("AnimationNodeStateMachineTransition_ymdj2"), "Run_Into", "Run", SubResource("AnimationNodeStateMachineTransition_8g5nk"), "Run_Outo", "Idle", SubResource("AnimationNodeStateMachineTransition_4y4ix"), "Run", "Run_Outo", SubResource("AnimationNodeStateMachineTransition_mxxul"), "Fall_Land", "Run_Into", SubResource("AnimationNodeStateMachineTransition_mb2i3"), "Run", "Jump_In", SubResource("AnimationNodeStateMachineTransition_xkakj"), "Idle", "Attack_1", SubResource("AnimationNodeStateMachineTransition_lj38e"), "Attack_1", "Attack_2", SubResource("AnimationNodeStateMachineTransition_006p8"), "Attack_2", "Attack_3", SubResource("AnimationNodeStateMachineTransition_ubu71"), "Attack_3", "Attack_3_Out", SubResource("AnimationNodeStateMachineTransition_5vfry"), "Attack_3_Out", "Idle", SubResource("AnimationNodeStateMachineTransition_0binv"), "Idle", "Fall_Down", SubResource("AnimationNodeStateMachineTransition_w2g86"), "Attack_1", "Run_Into", SubResource("AnimationNodeStateMachineTransition_lr0x8"), "Attack_2", "Run_Into", SubResource("AnimationNodeStateMachineTransition_w1wgp"), "Attack_3", "Run_Into", SubResource("AnimationNodeStateMachineTransition_8brd3"), "Run", "Fall_Down", SubResource("AnimationNodeStateMachineTransition_68gp7"), "Jump_Up", "Attack_1", SubResource("AnimationNodeStateMachineTransition_n7hf0"), "Attack_1", "Attack_1_Out", SubResource("AnimationNodeStateMachineTransition_bjujb"), "Attack_1_Out", "Idle", SubResource("AnimationNodeStateMachineTransition_67kig"), "Attack_2_Out", "Idle", SubResource("AnimationNodeStateMachineTransition_0aer2"), "Run_Into", "Idle", SubResource("AnimationNodeStateMachineTransition_u7sdf"), "Run", "Attack_1", SubResource("AnimationNodeStateMachineTransition_2j8k4"), "Fall_Down", "Attack_1", SubResource("AnimationNodeStateMachineTransition_3wgls"), "Attack_2", "Attack_2_Out", SubResource("AnimationNodeStateMachineTransition_dlm32")]
-graph_offset = Vector2(109.01123, 150.02467)
+graph_offset = Vector2(94.01123, 282.02466)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hylex"]
 radius = 7.0
@@ -1307,11 +1307,11 @@ speed_scale = 0.5
 root_node = NodePath("../Ren_Sprite")
 tree_root = SubResource("AnimationNodeStateMachine_k01om")
 anim_player = NodePath("../AnimationPlayer")
-parameters/Attack_1/TimeScale/scale = 1.0
+parameters/Attack_1/TimeScale/scale = 1.25
 parameters/Attack_1_Out/TimeScale/scale = 1.0
-parameters/Attack_2/TimeScale/scale = 1.0
+parameters/Attack_2/TimeScale/scale = 1.25
 parameters/Attack_2_Out/TimeScale/scale = 1.0
-parameters/Attack_3/TimeScale/scale = 1.0
+parameters/Attack_3/TimeScale/scale = 1.25
 parameters/Attack_3_Out/TimeScale/scale = 1.0
 parameters/Fall_Down/TimeScale/scale = 0.5
 parameters/Fall_In/TimeScale/scale = 1.0
