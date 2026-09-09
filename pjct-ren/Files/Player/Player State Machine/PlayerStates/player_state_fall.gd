@@ -80,7 +80,7 @@ func on_input(event: InputEvent) -> void:
 		#Cambiar a Dash
 		if Input.is_action_just_pressed("DASH"):
 			state_machine.change_to("PlayerStateDash")
-			$"../PlayerStateDash".dash("PlayerStateFall",false)
+			$"../PlayerStateDash".dash("PlayerStateFall",false,false)
 		
 		#Cambiar a Attack
 		if Input.is_action_just_pressed("ATTACK") and can_attack:

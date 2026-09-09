@@ -1,14 +1,14 @@
 extends PlayerStateBase
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-var min_speed: float = 100
+
+var phantom_on: bool = false
 
 #region ALWAYS_ON_FUNC
 func on_physics_process(delta) -> void:
 	#Control de la direccion del personaje
 	
-	controlled_node.velocity.x = Input.get_axis("LEFT", "RIGHT") * min_speed
-	if min_speed < PlayerMovementStats.running_speed: min_speed += 500 * delta
+	controlled_node.velocity.x = Input.get_axis("LEFT", "RIGHT") * (PlayerMovementStats.running_speed * 1.5)
 	
 	#Si no hay piso cambiar a Fall
 	if not controlled_node.is_on_floor() and controlled_node.velocity.y > 0:
@@ -24,40 +24,65 @@ func on_physics_process(delta) -> void:
 func on_input(event: InputEvent) -> void:
 	#Si no esta caminando cambiar a Idle
 	if not Input.is_action_pressed("LEFT") and not Input.is_action_pressed("RIGHT"):
-		min_speed = 0
 		controlled_node.animation_machine.travel("Idle")
 		state_machine.change_to("PlayerStateIdle")
+		phantom_on = false
 	
 	#Cambiar a Jump
 	if Input.is_action_just_pressed("JUMP"):
 		print("walk_jump")
-		min_speed = 0
 		PlayerMovementStats.jump_count += 1
 		controlled_node.velocity.y = PlayerMovementStats.jump_speed
+		$"../PlayerStateJump".x_speed = PlayerMovementStats.in_air_speed * 2
 		controlled_node.animation_machine.travel("Jump_Up")
 		state_machine.change_to("PlayerStateJump")
+		phantom_on = false
 	
 	if PlayerStatsComponent.stamia > 0:
 		#Cambiar a Dash
 		if Input.is_action_just_pressed("DASH"):
-			min_speed = 0
 			state_machine.change_to("PlayerStateDash")
 			$"../PlayerStateDash".dash("PlayerStateWalk",false,true)
+			phantom_on = false
 		
 		#Cambiar a Attack
 		if Input.is_action_just_pressed("ATTACK"):
-			min_speed = 0
 			state_machine.change_to("PlayerStateAttack")
 			$"../PlayerStateAttack".on_enter(false)
+			phantom_on = false
 		
 		#Cambiar a Block
 		if Input.is_action_pressed("BLOCK"):
-			min_speed = 0
 			$"../PlayerStateBlock".charge_last_state("PlayerStateWalk")
 			state_machine.change_to("PlayerStateBlock")
 			$"../PlayerStateBlock".time_for_parry()
+			phantom_on = false
 #endregion
 
+func phantom_animation():
+	while true:
+		await get_tree().create_timer(0.02).timeout
+		add_phantom()
+		if phantom_on == false: 
+			break
+
+func add_phantom():
+	var tween: Tween = create_tween()
+	var phantom: Sprite2D = Sprite2D.new()
+	phantom.texture = controlled_node.ren_sprite.texture
+	phantom.hframes = controlled_node.ren_sprite.hframes
+	phantom.vframes = controlled_node.ren_sprite.vframes
+	phantom.frame = controlled_node.ren_sprite.frame
+	phantom.centered = true
+	phantom.scale.x = controlled_node.ren_sprite.scale.x
+	if controlled_node.ren_sprite.flip_h: phantom.flip_h = true
+	phantom.global_position = controlled_node.global_position
+	phantom.modulate = Color(0.27, 0.27, 0.27, 1.0)
+	controlled_node.get_parent().add_child(phantom)
+	phantom.z_index = 0
+	tween.tween_property(phantom, "modulate", Color(1.0,1.0,1.0,0.0), 0.5)
+	tween.tween_callback(phantom.queue_free)
+	tween.tween_callback(tween.kill)
 
 func handle_gravity(delta) -> void: #control de gravedad
 	controlled_node.velocity.y += gravity * delta

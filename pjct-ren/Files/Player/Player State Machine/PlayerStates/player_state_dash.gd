@@ -4,6 +4,7 @@ var x_velocity: float = 0
 var direction: Vector2 = Vector2.ZERO
 var can_dash: bool = true
 var phantom_on: bool = false
+var dash_speed: float
 
 #region AWAYS_ON_FUNC
 func on_physics_process(delta) -> void:
@@ -14,9 +15,11 @@ func on_physics_process(delta) -> void:
 #endregion
 
 #activacion manual del Dash
-func dash(state_name: String, back:bool) -> void:
+func dash(state_name: String, back:bool, ground_dash:bool) -> void:
 	if can_dash == true:
 		can_dash = false
+		if ground_dash: dash_speed = PlayerMovementStats.dash_speed - 200
+		else: dash_speed = PlayerMovementStats.dash_speed
 		if back: back_dash()
 		elif controlled_node.velocity.x == 0: no_velocity()
 		else: with_velocity()
@@ -27,30 +30,30 @@ func dash(state_name: String, back:bool) -> void:
 func back_dash():
 	if $"../../Ren_Sprite".scale.x < 0:
 		direction = Vector2.RIGHT
-		x_velocity = PlayerMovementStats.dash_speed
+		x_velocity = dash_speed
 	else:
 		direction = Vector2.LEFT
-		x_velocity = PlayerMovementStats.dash_speed
+		x_velocity = dash_speed
 	$"../../AnimationPlayer".play("Dash")
 	finish_dash()
 
 func no_velocity():
 	if $"../../Ren_Sprite".scale.x < 0:
 		direction = Vector2.LEFT
-		x_velocity = PlayerMovementStats.dash_speed
+		x_velocity = dash_speed
 	else:
 		direction = Vector2.RIGHT
-		x_velocity = PlayerMovementStats.dash_speed
+		x_velocity = dash_speed
 	$"../../AnimationPlayer".play("Dash")
 	finish_dash()
 
 func with_velocity():
 	if controlled_node.velocity.x < 0:
 		direction = Vector2.LEFT
-		x_velocity = PlayerMovementStats.dash_speed
+		x_velocity = dash_speed
 	elif controlled_node.velocity.x > 0:
 		direction = Vector2.RIGHT
-		x_velocity = PlayerMovementStats.dash_speed
+		x_velocity = dash_speed
 	$"../../AnimationPlayer".play("Dash")
 	finish_dash()
 #endregion
@@ -72,7 +75,9 @@ func finish_dash():
 			$"../PlayerStateWalk".min_speed = PlayerMovementStats.running_speed
 			controlled_node.velocity.x = Input.get_axis("LEFT", "RIGHT") * PlayerMovementStats.running_speed
 			controlled_node.animation_machine.travel("Run")
-			state_machine.change_to("PlayerStateWalk")
+			$"../PlayerStateSprint".phantom_on = true
+			state_machine.change_to("PlayerStateSprint")
+			$"../PlayerStateSprint".phantom_animation()
 		else:
 			controlled_node.animation_machine.travel("Idle")
 			state_machine.change_to("PlayerStateIdle")

@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_c4jdt")
-amplitude = 35.0
+amplitude = 35.555
 frequency = 0.17
 rotational_multiplier = 0.41
 metadata/_custom_type_script = "uid://dimvdouy8g0sv"

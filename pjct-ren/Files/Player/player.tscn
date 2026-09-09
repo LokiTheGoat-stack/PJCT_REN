@@ -27,6 +27,7 @@
 [ext_resource type="Script" uid="uid://bc5ipfx8ns3ka" path="res://Files/Player/Player State Machine/PlayerStates/player_state_attack.gd" id="12_43t50"]
 [ext_resource type="Script" uid="uid://cdhhsikiv25pa" path="res://Files/Player/Player State Machine/PlayerStates/player_state_death.gd" id="14_apb16"]
 [ext_resource type="Script" uid="uid://blvwely6umtfr" path="res://Files/Player/Player State Machine/PlayerStates/player_state_block.gd" id="14_b5kvf"]
+[ext_resource type="Script" uid="uid://dcqcokhxxpj5w" path="res://Files/Player/Player State Machine/PlayerStates/player_state_sprint.gd" id="20_006p8"]
 [ext_resource type="AudioStream" uid="uid://3axhs4u8o5yq" path="res://Files/Sounds/footsteps/Tile_Mono_01.wav" id="24_qdpqe"]
 [ext_resource type="Script" uid="uid://ckan080tpm011" path="res://Files/Player/player_sounds.gd" id="24_xkakj"]
 [ext_resource type="Script" uid="uid://brlwljm87rv4a" path="res://Files/Player/Player State Machine/PlayerStates/player_state_parry.gd" id="25_kkssc"]
@@ -1279,6 +1280,7 @@ stream_0/stream = ExtResource("34_w1wgp")
 
 [node name="Player" type="CharacterBody2D" unique_id=889305067 groups=["Player"]]
 process_mode = 3
+z_index = 2
 collision_mask = 22
 floor_snap_length = 32.0
 safe_margin = 0.5
@@ -1337,6 +1339,9 @@ script = ExtResource("3_uuj77")
 
 [node name="PlayerStateWalk" type="Node" parent="StateMachine" unique_id=1767729316]
 script = ExtResource("4_g0r71")
+
+[node name="PlayerStateSprint" type="Node" parent="StateMachine" unique_id=308387456]
+script = ExtResource("20_006p8")
 
 [node name="PlayerStateJump" type="Node" parent="StateMachine" unique_id=2108439155]
 script = ExtResource("5_2x3rd")

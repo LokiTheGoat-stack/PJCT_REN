@@ -110,7 +110,8 @@ func on_input(event: InputEvent) -> void:
 			controlled_node.velocity.x = 0
 				
 			state_machine.change_to("PlayerStateDash")
-			$"../PlayerStateDash".dash("PlayerStateIdle",true)
+			if controlled_node.velocity.y != 0: $"../PlayerStateDash".dash("PlayerStateIdle",true,false)
+			else: $"../PlayerStateDash".dash("PlayerStateIdle",true,true)
 		
 		elif Input.is_action_pressed("BLOCK"):
 			if can_combo and combo_timer > 0:
@@ -182,7 +183,8 @@ func finish_attack(combo_finished:bool): #terminar combo
 				state_machine.change_to("PlayerStateWalk")
 			elif Input.is_action_pressed("DASH"):
 				state_machine.change_to("PlayerStateDash")
-				$"../PlayerStateDash".dash("PlayerStateIdle",true)
+				if controlled_node.velocity.y != 0: $"../PlayerStateDash".dash("PlayerStateIdle",true,false)
+				else: $"../PlayerStateDash".dash("PlayerStateIdle",true,true)
 			elif Input.is_action_pressed("BLOCK"):
 				$"../PlayerStateBlock".charge_last_state("PlayerStateIdle")
 				state_machine.change_to("PlayerStateBlock")
