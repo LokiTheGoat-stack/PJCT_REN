@@ -53,8 +53,7 @@ func _on_body_entered(body: Node2D) -> void:
 		if body.is_in_group("Player"):
 			await get_tree().create_timer(0.2).timeout
 			if not PlayerMovementStats.is_dash and not counter_projectile:
-				body.take_damage(damage,current_shooter)
-				GlobalParameters.hit_effect(body,preload("uid://buokwrn26gvmp"))
+				body.take_damage(damage,current_shooter,preload("uid://buokwrn26gvmp"))
 				queue_free()
 		elif body.is_in_group("Enemies"): return
 		else: queue_free()
