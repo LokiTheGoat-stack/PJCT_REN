@@ -38,7 +38,7 @@ func set_facing_direction() -> void:
 		ren_sprite.scale.x = 1
 
 #region BODY_CALL
-func take_damage(damage, node): #control del damage
+func take_damage(damage, node, sprite): #control del damage
 	await get_tree().create_timer(0.1).timeout
 	if node.cant_block: 
 		PlayerStatsComponent.current_hp -= damage
@@ -55,6 +55,9 @@ func take_damage(damage, node): #control del damage
 		else: 
 			PlayerStatsComponent.current_hp -= damage
 			shake_camera("player_hurt")
+	GlobalParameters.hit_effect(self,sprite)
+	activate_slow_motion(0.12,0.001)
+	
 
 func stamina_gift(): #aumento de stamina por parry
 	PlayerStatsComponent.stamia += 50
@@ -62,7 +65,7 @@ func stamina_gift(): #aumento de stamina por parry
 func execute_parry():
 	PlayerStatsComponent.can_recive_damage = false
 	sounds._parry()
-	await activate_slow_motion(0.1,0.2)
+	await activate_slow_motion(2.0,0.2)
 	PlayerStatsComponent.can_recive_damage = true
 #endregion
 
@@ -70,6 +73,7 @@ func execute_parry():
 #colision de los ataques
 func _on_attack_area_body_entered(body: Node2D) -> void:
 	body.take_damage(PlayerStatsComponent.damage,self)
+	GlobalParameters.hit_effect(body,preload("uid://buokwrn26gvmp"))
 func _on_attack_area_area_entered(area: Area2D) -> void:
 	if area.is_in_group("Enemie_Bullet") and area.can_parry:
 		area.counter(self)
@@ -79,9 +83,10 @@ func _on_attack_area_area_entered(area: Area2D) -> void:
 
 func activate_slow_motion(duration:float, scale:float):
 	var original_scale = Engine.time_scale
-	Engine.time_scale = scale
-	await get_tree().create_timer(duration,false).timeout
-	Engine.time_scale = original_scale
+	if Engine.time_scale == 1:
+		Engine.time_scale = scale
+		await get_tree().create_timer(duration,true,false,true).timeout
+		Engine.time_scale = original_scale
 
 func shake_camera(type:String):
 	match type:

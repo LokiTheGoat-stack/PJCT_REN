@@ -154,6 +154,9 @@ func _attack_timer_func():
 	print("combo true")
 	can_combo = true 
 
+func rest_stamina():
+	PlayerStatsComponent.stamia -= 15
+
 func apply_dash(direction: int, speed: float):
 	is_dashing = true
 	controlled_node.velocity.x = current_direction * attack_dash_speed

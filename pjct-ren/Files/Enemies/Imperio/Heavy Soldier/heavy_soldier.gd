@@ -85,6 +85,7 @@ func damage_effect(damage:float):
 	elif damage <= 10: player.shake_camera("player_small_hit")
 	elif damage > 100: player.shake_camera("player_critical_hit")
 	change_shader_parameters(Color.WHITE,1,1)
+	await  player.activate_slow_motion(0.09,0.001)
 	await get_tree().create_timer(0.08).timeout
 	body.visible = false
 	await get_tree().create_timer(0.03).timeout
@@ -119,5 +120,6 @@ func _on_attack_area_body_entered(body: Node2D) -> void:
 	if is_attack == false:
 		state_machine.change_to("Attack")
 		$StateMachine/Attack.start_attack()
-	if can_damage: body.take_damage(attack_damage,self)
+	if can_damage: body.take_damage(attack_damage,self,preload("uid://buokwrn26gvmp"))
+	
 #endregion
