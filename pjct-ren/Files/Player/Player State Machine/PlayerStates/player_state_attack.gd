@@ -128,7 +128,7 @@ func execute_attack(attack_index: int):
 	print("execute attack")
 	combo_timer = combo_window
 	is_dashing = false
-	controlled_node.velocity.x = 0
+	#controlled_node.velocity.x = 0
 	
 	match attack_index:
 		0:
