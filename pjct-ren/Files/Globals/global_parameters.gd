@@ -15,3 +15,9 @@ func hit_effect(target:Node,sprite:Texture2D):
 	target.z_index = 10
 	await get_tree().create_timer(0.2).timeout
 	effect.queue_free()
+
+func change_shader_parameters(color:Color, mix:float, alpha:float, sprite):
+	var sprite_material = sprite.material
+	sprite_material.set_shader_parameter("Color", color)
+	sprite_material.set_shader_parameter("Mix", mix)
+	sprite_material.set_shader_parameter("Alpha", alpha)

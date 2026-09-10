@@ -29,6 +29,7 @@ var cant_block: bool = true
 var can_damage: bool
 var can_parry_me: bool = false
 var run_away: bool = false
+var player_in: bool = false
 
 var min_distance: float = 25
 var is_waiting: bool = false
@@ -141,9 +142,12 @@ func _on_agro_area_body_exited(body: Node2D) -> void:
 
 
 func _on_attack_area_body_entered(body: Node2D) -> void:
+	player_in = true
 	if is_attack == false:
 		state_machine.change_to("Attack")
 		$StateMachine/Attack.start_attack()
-	if can_damage: body.take_damage(attack_damage,self,preload("uid://buokwrn26gvmp"))
-	
+	if can_damage: body.take_damage(attack_damage,self,preload("uid://buokwrn26gvmp"),0.012)
+
+func _on_attack_area_body_exited(body: Node2D) -> void:
+	player_in = false
 #endregion

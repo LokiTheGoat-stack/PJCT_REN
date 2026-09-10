@@ -38,26 +38,29 @@ func set_facing_direction() -> void:
 		ren_sprite.scale.x = 1
 
 #region BODY_CALL
-func take_damage(damage, node, sprite): #control del damage
+func take_damage(damage, node, sprite, hitstun): #control del damage
 	await get_tree().create_timer(0.1).timeout
+	var final_damage: float
 	if node.cant_block: 
+		can_combat(false)
+		final_damage = damage
 		PlayerStatsComponent.current_hp -= damage
-		shake_camera("player_hurt")
 	elif not PlayerMovementStats.is_dash and \
 	PlayerStatsComponent.can_recive_damage and \
 	not PlayerStatsComponent.parry_time:
+		can_combat(false)
 		if PlayerMovementStats.is_block and PlayerStatsComponent.stamia > 0:
 			if damage < 30: PlayerStatsComponent.stamia -= damage * 1.5
 			elif damage >= 30 and damage < 50: PlayerStatsComponent.stamia -= 40
 			elif damage >= 50: PlayerStatsComponent.stamia -= 50
+			final_damage = (damage * 10) / 100
 			PlayerStatsComponent.current_hp -= (damage * 10) / 100
-			shake_camera("player_small_hurt")
 		else: 
+			final_damage = damage
 			PlayerStatsComponent.current_hp -= damage
-			shake_camera("player_hurt")
 	GlobalParameters.hit_effect(self,sprite)
-	activate_slow_motion(0.12,0.001)
-	
+	damage_effect(final_damage,hitstun)
+	PlayerStatsComponent.can_recive_damage = true
 
 func stamina_gift(): #aumento de stamina por parry
 	PlayerStatsComponent.stamia += 50
@@ -81,6 +84,36 @@ func _on_attack_area_area_entered(area: Area2D) -> void:
 
 #region USEFUL
 
+func damage_effect(damage:float, hitstun):
+	sounds.flesh_slice()
+	show_combo_effect(damage,self)
+	if damage <= PlayerStatsComponent.max_hp / 2.5: shake_camera("player_small_hurt")
+	else: shake_camera("player_hurt")
+	GlobalParameters.change_shader_parameters(Color.WHITE,1,1,ren_sprite)
+	await  activate_slow_motion(hitstun,0.001)
+	await get_tree().create_timer(0.08).timeout
+	ren_sprite.visible = false
+	await get_tree().create_timer(0.03).timeout
+	ren_sprite.visible = true
+	await get_tree().create_timer(0.08).timeout
+	GlobalParameters.change_shader_parameters(Color.WHITE,0,1,ren_sprite)
+	for i in 15:
+		ren_sprite.visible = false
+		await get_tree().create_timer(0.03).timeout
+		ren_sprite.visible = true
+		await get_tree().create_timer(0.08).timeout
+	can_combat(true)
+
+func can_combat(can:bool):
+	if not can:
+		set_collision_layer_value(1,false)
+		$Ren_Sprite/AttackArea.set_collision_mask_value(2,false)
+		$Ren_Sprite/AttackArea.set_collision_mask_value(3,false)
+	else:
+		set_collision_layer_value(1,true)
+		$Ren_Sprite/AttackArea.set_collision_mask_value(2,true)
+		$Ren_Sprite/AttackArea.set_collision_mask_value(3,true)
+
 func activate_slow_motion(duration:float, scale:float):
 	var original_scale = Engine.time_scale
 	if Engine.time_scale == 1:
@@ -96,7 +129,7 @@ func shake_camera(type:String):
 		"player_small_hurt": GlobalParameters.player_camera.apply_trauma(0.1,1.0)
 		"player_hurt": GlobalParameters.player_camera.apply_trauma(0.3,1.0)
 
-func show_combo_effect(damage:int,target):
+func show_combo_effect(damage,target):
 	var label = Label.new()
 	label.text = str(int(damage))
 	label.position = target.global_position - Vector2(0, 50)

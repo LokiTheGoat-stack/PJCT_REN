@@ -80,7 +80,7 @@ func add_phantom():
 	phantom.modulate = Color(0.27, 0.27, 0.27, 1.0)
 	controlled_node.get_parent().add_child(phantom)
 	phantom.z_index = 0
-	tween.tween_property(phantom, "modulate", Color(1.0,1.0,1.0,0.0), 0.5)
+	tween.tween_property(phantom, "modulate", Color(1.0,1.0,1.0,0.0), 0.2)
 	tween.tween_callback(phantom.queue_free)
 	tween.tween_callback(tween.kill)
 

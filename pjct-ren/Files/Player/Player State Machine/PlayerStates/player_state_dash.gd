@@ -18,7 +18,7 @@ func on_physics_process(delta) -> void:
 func dash(state_name: String, back:bool, ground_dash:bool) -> void:
 	if can_dash == true:
 		can_dash = false
-		if ground_dash: dash_speed = PlayerMovementStats.dash_speed - 200
+		if ground_dash: dash_speed = PlayerMovementStats.dash_speed / 1.5
 		else: dash_speed = PlayerMovementStats.dash_speed
 		if back: back_dash()
 		elif controlled_node.velocity.x == 0: no_velocity()

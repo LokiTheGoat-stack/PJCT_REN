@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://tvndjc42kayr"]
+
+[ext_resource type="Shader" uid="uid://4ovf7r7m6rx7" path="res://Files/Player/Shaders/player_texture_shader.gdshader" id="1_70a35"]
+
+[resource]
+shader = ExtResource("1_70a35")
+shader_parameter/Color = Color(0, 1, 0, 1)
+shader_parameter/Mix = 0.0
+shader_parameter/Alpha = 1.0

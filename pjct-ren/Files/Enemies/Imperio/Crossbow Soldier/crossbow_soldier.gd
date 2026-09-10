@@ -29,6 +29,7 @@ var cant_block: bool = false
 var can_damage: bool
 var can_parry_me: bool = false
 var run_away: bool = false
+var player_in: bool = false
 
 var min_distance: float = 25
 var is_waiting: bool = false
@@ -65,29 +66,31 @@ func _process(delta: float) -> void:
 #endregion
 
 #region USEFUL
-func take_damage(damage, node):
+func take_damage(damage, node, hitstun):
 	var damage_count: float = 0
 	damage_count = damage
 	hp -= damage
-	damage_effect(damage)
+	damage_effect(damage, hitstun)
 	player.show_combo_effect(damage_count,self)
 
 func _can_parry_me(can_parry:bool):
-	if PlayerStatsComponent.parry_time and can_parry_me:
+	can_parry_me = can_parry
+
+func parry():
+	if PlayerStatsComponent.parry_time and can_parry_me and player_in:
 		can_damage = false
-		take_damage(attack_damage * 5, self)
-		player.show_combo_effect(attack_damage * 5,self)
+		take_damage(attack_damage * 5, self, 0.5)
+		#player.show_combo_effect(attack_damage * 5,self)
 		player.execute_parry()
 		player.stamina_gift()
-	else: can_parry_me = can_parry
 
-func damage_effect(damage:float):
+func damage_effect(damage:float, hitstun):
 	player.sounds.flesh_slice()
 	if damage > 10: player.shake_camera("player_hit")
 	elif damage <= 10: player.shake_camera("player_small_hit")
 	elif damage > 100: player.shake_camera("player_critical_hit")
 	change_shader_parameters(Color.WHITE,1,1)
-	await  player.activate_slow_motion(0.09,0.001)
+	await  player.activate_slow_motion(hitstun,0.001)
 	await get_tree().create_timer(0.08).timeout
 	body.visible = false
 	await get_tree().create_timer(0.03).timeout
@@ -123,8 +126,15 @@ func _on_agro_area_body_exited(body: Node2D) -> void:
 
 
 func _on_attack_area_body_entered(body: Node2D) -> void:
+	player_in = true
 	if is_attack == false:
 		state_machine.change_to("Attack")
 		$StateMachine/Attack.start_attack()
-	if can_damage: body.take_damage(attack_damage,self,preload("uid://buokwrn26gvmp"))
+	if can_damage:
+		if can_parry_me and PlayerStatsComponent.parry_time: 
+			parry()
+		else: body.take_damage(attack_damage,self,preload("uid://buokwrn26gvmp"),0.012)
+
+func _on_attack_area_body_exited(body: Node2D) -> void:
+	player_in = false
 #endregion

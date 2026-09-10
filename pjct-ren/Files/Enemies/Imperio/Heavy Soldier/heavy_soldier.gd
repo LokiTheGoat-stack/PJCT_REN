@@ -27,6 +27,7 @@ var cant_block: bool = false
 var can_damage: bool
 var can_parry_me: bool = false
 var run_away: bool = false
+var player_in: bool = false
 
 var min_distance: float = 25
 var is_waiting: bool = false
@@ -71,13 +72,15 @@ func take_damage(damage, node, hitstun):
 	player.show_combo_effect(damage_count,self)
 
 func _can_parry_me(can_parry:bool):
-	if PlayerStatsComponent.parry_time and can_parry_me:
+	can_parry_me = can_parry
+
+func parry():
+	if PlayerStatsComponent.parry_time and can_parry_me and player_in:
 		can_damage = false
 		take_damage(attack_damage * 5, self, PlayerStatsComponent.parry_hitstun)
 		#player.show_combo_effect(attack_damage * 5,self)
 		player.execute_parry()
 		player.stamina_gift()
-	else: can_parry_me = can_parry
 
 func damage_effect(damage:float, hitstun):
 	player.sounds.flesh_slice()
@@ -117,9 +120,15 @@ func _on_agro_area_body_exited(body: Node2D) -> void:
 
 
 func _on_attack_area_body_entered(body: Node2D) -> void:
+	player_in = true
 	if is_attack == false:
 		state_machine.change_to("Attack")
 		$StateMachine/Attack.start_attack()
-	if can_damage: body.take_damage(attack_damage,self,preload("uid://buokwrn26gvmp"))
-	
+	if can_damage:
+		if can_parry_me and PlayerStatsComponent.parry_time: 
+			parry()
+		else: body.take_damage(attack_damage,self,preload("uid://buokwrn26gvmp"),0.012)
+
+func _on_attack_area_body_exited(body: Node2D) -> void:
+	player_in = false
 #endregion

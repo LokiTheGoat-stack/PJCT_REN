@@ -43,7 +43,7 @@ func _on_body_entered(body: Node2D) -> void:
 	if counter_projectile: 
 		if body.is_in_group("Player"): return
 		elif body.is_in_group("Enemies"):
-			body.take_damage(damage * 2,current_shooter)
+			body.take_damage(damage * 2,current_shooter, 0.012)
 			GlobalParameters.hit_effect(body,preload("uid://buokwrn26gvmp"))
 			player.show_combo_effect(damage * 2, current_shooter)
 			await  player.activate_slow_motion(0.09,0.001)
@@ -53,7 +53,7 @@ func _on_body_entered(body: Node2D) -> void:
 		if body.is_in_group("Player"):
 			await get_tree().create_timer(0.2).timeout
 			if not PlayerMovementStats.is_dash and not counter_projectile:
-				body.take_damage(damage,current_shooter,preload("uid://buokwrn26gvmp"))
+				body.take_damage(damage,current_shooter,preload("uid://buokwrn26gvmp"),0.012)
 				queue_free()
 		elif body.is_in_group("Enemies"): return
 		else: queue_free()
