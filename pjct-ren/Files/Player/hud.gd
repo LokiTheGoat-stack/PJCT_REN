@@ -13,18 +13,18 @@ var umbral_color: float = 33
 
 func _process(delta: float) -> void:
 	#visuales
-	mana_bar.value = PlayerStatsComponent.stamia
+	mana_bar.value = PlayerStatsComponent.current_stamina
 	hpbar.value = PlayerStatsComponent.current_hp
 	
 	#STAMINA
-	if PlayerStatsComponent.stamia < mana_bar.max_value:
-		PlayerStatsComponent.stamia += 20 * delta
+	if PlayerStatsComponent.current_stamina < PlayerStatsComponent.max_stamina:
+		PlayerStatsComponent.current_stamina += 20 * delta
 		update_stamina_color()
 	
 	
 
 func update_stamina_color():
-	var rate = PlayerStatsComponent.stamia / mana_bar.max_value
+	var rate = PlayerStatsComponent.current_stamina / PlayerStatsComponent.max_stamina
 	var umbral33 = 50 / mana_bar.max_value
 	var umbral66 = 100 / mana_bar.max_value
 	

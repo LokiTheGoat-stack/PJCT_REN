@@ -16,6 +16,7 @@ func on_physics_process(delta) -> void:
 		controlled_node.animation_machine.travel("Fall_Down")
 		state_machine.change_to("PlayerStateFall")
 		$"../PlayerStateFall"._last_chance_to_jump()
+		phantom_on = false
 	
 	
 	handle_gravity(delta)
@@ -38,7 +39,7 @@ func on_input(event: InputEvent) -> void:
 		state_machine.change_to("PlayerStateJump")
 		phantom_on = false
 	
-	if PlayerStatsComponent.stamia > 0:
+	if PlayerStatsComponent.current_stamina > 0:
 		#Cambiar a Dash
 		if Input.is_action_just_pressed("DASH"):
 			state_machine.change_to("PlayerStateDash")

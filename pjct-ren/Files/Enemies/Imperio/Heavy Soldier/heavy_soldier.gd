@@ -127,7 +127,7 @@ func _on_attack_area_body_entered(body: Node2D) -> void:
 	if can_damage:
 		if can_parry_me and PlayerStatsComponent.parry_time: 
 			parry()
-		else: body.take_damage(attack_damage,self,preload("uid://buokwrn26gvmp"),0.012)
+		else: body.take_damage(attack_damage,self,GlobalParameters.HIT,0.012)
 
 func _on_attack_area_body_exited(body: Node2D) -> void:
 	player_in = false

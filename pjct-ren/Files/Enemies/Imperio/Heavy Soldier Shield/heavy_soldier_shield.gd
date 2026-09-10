@@ -85,6 +85,7 @@ func take_damage(damage, node, hitstun):
 		hp -= damage
 		damage_effect(damage, hitstun)
 		player.sounds._parry()
+		player.stamina_gift()
 		player.activate_slow_motion(0.1,0.2)
 		state_machine.change_to("NockBack")
 		$StateMachine/NockBack.nock_back()
@@ -146,7 +147,7 @@ func _on_attack_area_body_entered(body: Node2D) -> void:
 	if is_attack == false:
 		state_machine.change_to("Attack")
 		$StateMachine/Attack.start_attack()
-	if can_damage: body.take_damage(attack_damage,self,preload("uid://buokwrn26gvmp"),0.012)
+	if can_damage: body.take_damage(attack_damage,self,GlobalParameters.HIT,0.012)
 
 func _on_attack_area_body_exited(body: Node2D) -> void:
 	player_in = false

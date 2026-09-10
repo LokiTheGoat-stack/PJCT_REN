@@ -6070,14 +6070,14 @@ position = Vector2(-1329, -351)
 position = Vector2(-625, -353)
 
 [node name="Player" parent="." unique_id=889305067 instance=ExtResource("2_57m1b")]
-position = Vector2(5870, 166)
+position = Vector2(6008, 597)
 collision_mask = 48
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=1545592130]
 physics_interpolation_mode = 1
 top_level = true
-position = Vector2(5869.0566, 102.47019)
-offset = Vector2(-1.1746925, -7.0766754)
+position = Vector2(6010.33, 619.4333)
+offset = Vector2(-1.2228764, -2.55266)
 editor_draw_limits = true
 script = ExtResource("66_kl4qj")
 
@@ -6088,6 +6088,7 @@ script = ExtResource("5_bq7kq")
 metadata/_custom_type_script = "uid://bd046eokvcnu2"
 
 [node name="AreaEnemieDetect" type="Area2D" parent="Player" unique_id=1351578029]
+visible = false
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player/AreaEnemieDetect" unique_id=1996659698]
@@ -6101,7 +6102,7 @@ script = ExtResource("7_76w4k")
 
 [node name="PathCamera" type="Node2D" parent="Cameras" unique_id=1911750126 node_paths=PackedStringArray("follow_target", "follow_path")]
 top_level = true
-position = Vector2(5869.0566, 102.47019)
+position = Vector2(6010.33, 619.4333)
 script = ExtResource("7_ds81a")
 priority = 5
 follow_mode = 4
@@ -6151,7 +6152,7 @@ shape = SubResource("RectangleShape2D_hylex")
 
 [node name="GroupCamera" type="Node2D" parent="Cameras" unique_id=1201260551 node_paths=PackedStringArray("follow_targets")]
 top_level = true
-position = Vector2(5910, 126)
+position = Vector2(6048, 557)
 script = ExtResource("7_ds81a")
 follow_mode = 3
 follow_targets = [NodePath("../../Player")]

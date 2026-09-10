@@ -17,8 +17,8 @@ func on_physics_process(delta) -> void:
 	
 	#control de la caida de resistencia
 	
-	if PlayerStatsComponent.stamia > mana_bar.min_value:PlayerStatsComponent.stamia -= 50 * delta
-	elif PlayerStatsComponent.stamia <= mana_bar.min_value:
+	if PlayerStatsComponent.current_stamina > 0:PlayerStatsComponent.current_stamina -= 50 * delta
+	elif PlayerStatsComponent.current_stamina <= 0:
 		PlayerStatsComponent.stamia = 0
 		mana_bar.modulate = Color(1.0, 0.0, 0.0)
 		state_machine.change_to(last_state)

@@ -31,7 +31,7 @@ func on_input(event: InputEvent) -> void:
 		controlled_node.animation_machine.travel("Jump_Up")
 		state_machine.change_to("PlayerStateJump")
 	
-	if PlayerStatsComponent.stamia > 0:
+	if PlayerStatsComponent.current_stamina > 0:
 		#Cambiar a Dash
 		if Input.is_action_just_pressed("DASH"):
 			state_machine.change_to("PlayerStateDash")

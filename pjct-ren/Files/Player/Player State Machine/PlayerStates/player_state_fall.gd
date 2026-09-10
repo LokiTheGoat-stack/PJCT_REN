@@ -76,7 +76,7 @@ func on_input(event: InputEvent) -> void:
 	#	state_machine.change_to("PlayerStateJump")
 	#	PlayerMovementStats.jump_count += 1
 	
-	if PlayerStatsComponent.stamia > 0:
+	if PlayerStatsComponent.current_stamina > 0:
 		#Cambiar a Dash
 		if Input.is_action_just_pressed("DASH"):
 			state_machine.change_to("PlayerStateDash")

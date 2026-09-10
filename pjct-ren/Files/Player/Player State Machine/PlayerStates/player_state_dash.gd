@@ -59,7 +59,7 @@ func with_velocity():
 #endregion
 
 func finish_dash():
-	PlayerStatsComponent.stamia -= 20
+	PlayerStatsComponent.current_stamina -= 20
 	phantom_on = true
 	phantom_animation()
 	await get_tree().create_timer(PlayerMovementStats.dash_time).timeout

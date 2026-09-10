@@ -84,7 +84,7 @@ func on_input(event: InputEvent) -> void:
 		return
 	
 	#inputs del ataque
-	if PlayerStatsComponent.stamia > 0:
+	if PlayerStatsComponent.current_stamina > 0:
 		if Input.is_action_just_pressed("ATTACK"):
 			if Input.is_action_pressed("LEFT"): current_direction = -1
 			elif Input.is_action_pressed("RIGHT"): current_direction = 1
@@ -159,14 +159,13 @@ func _attack_timer_func():
 	print("combo true")
 	can_combo = true 
 
-func rest_stamina():
-	PlayerStatsComponent.stamia -= 0
+func rest_stamina(value:float):
+	PlayerStatsComponent.current_stamina -= value
 
 func apply_dash(direction: int, speed: float):
 	is_dashing = true
 	controlled_node.velocity.x = current_direction * attack_dash_speed
 	dash_timer = attack_dash_duration
-	PlayerStatsComponent.stamia -= 0
 
 func finish_attack(combo_finished:bool): #terminar combo
 	print("FINISH")
@@ -181,11 +180,11 @@ func finish_attack(combo_finished:bool): #terminar combo
 			if Input.is_action_pressed("LEFT") or Input.is_action_pressed("RIGHT"):
 				controlled_node.animation_machine.travel("Run")
 				state_machine.change_to("PlayerStateWalk")
-			elif Input.is_action_pressed("DASH"):
+			elif Input.is_action_pressed("DASH") and PlayerStatsComponent.current_stamina > 0:
 				state_machine.change_to("PlayerStateDash")
 				if controlled_node.velocity.y != 0: $"../PlayerStateDash".dash("PlayerStateIdle",true,false)
 				else: $"../PlayerStateDash".dash("PlayerStateIdle",true,false)
-			elif Input.is_action_pressed("BLOCK"):
+			elif Input.is_action_pressed("BLOCK") and PlayerStatsComponent.current_stamina > 0:
 				$"../PlayerStateBlock".charge_last_state("PlayerStateIdle")
 				state_machine.change_to("PlayerStateBlock")
 				$"../PlayerStateBlock".time_for_parry()

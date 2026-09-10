@@ -57,7 +57,7 @@ func on_physics_process(delta) -> void:
 	controlled_node.move_and_slide()
 
 func on_input(event: InputEvent) -> void:
-	if PlayerStatsComponent.stamia > 0:
+	if PlayerStatsComponent.current_stamina > 0:
 		#Cambiar a Dash
 		if Input.is_action_just_pressed("DASH"):
 			x_speed = PlayerMovementStats.in_air_speed

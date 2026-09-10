@@ -5,7 +5,8 @@ extends Node
 @export var armor: bool = false
 @export var defense: float = 50
 
-@export var stamia: float = 100
+@export var max_stamina: float = 100
+@export var current_stamina: float = 100
 
 @export var damage: float = 40
 @export var critic_damage: float = 50

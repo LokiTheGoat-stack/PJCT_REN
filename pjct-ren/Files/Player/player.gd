@@ -39,7 +39,6 @@ func set_facing_direction() -> void:
 
 #region BODY_CALL
 func take_damage(damage, node, sprite, hitstun): #control del damage
-	await get_tree().create_timer(0.1).timeout
 	var final_damage: float
 	if node.cant_block: 
 		can_combat(false)
@@ -49,10 +48,10 @@ func take_damage(damage, node, sprite, hitstun): #control del damage
 	PlayerStatsComponent.can_recive_damage and \
 	not PlayerStatsComponent.parry_time:
 		can_combat(false)
-		if PlayerMovementStats.is_block and PlayerStatsComponent.stamia > 0:
-			if damage < 30: PlayerStatsComponent.stamia -= damage * 1.5
-			elif damage >= 30 and damage < 50: PlayerStatsComponent.stamia -= 40
-			elif damage >= 50: PlayerStatsComponent.stamia -= 50
+		if PlayerMovementStats.is_block and PlayerStatsComponent.current_stamina > 0:
+			if damage < 30: PlayerStatsComponent.current_stamina -= damage * 1.5
+			elif damage >= 30 and damage < 50: PlayerStatsComponent.current_stamina -= 40
+			elif damage >= 50: PlayerStatsComponent.current_stamina -= 50
 			final_damage = (damage * 10) / 100
 			PlayerStatsComponent.current_hp -= (damage * 10) / 100
 		else: 
@@ -63,7 +62,24 @@ func take_damage(damage, node, sprite, hitstun): #control del damage
 	PlayerStatsComponent.can_recive_damage = true
 
 func stamina_gift(): #aumento de stamina por parry
-	PlayerStatsComponent.stamia += 50
+	if PlayerStatsComponent.max_stamina > PlayerStatsComponent.current_stamina + 50:
+		PlayerStatsComponent.current_stamina += 50
+	else: PlayerStatsComponent.current_stamina = PlayerStatsComponent.max_stamina
+	
+	
+	
+	var label = Label.new()
+	label.text = "STAMINA + 50"
+	label.global_position = global_position - Vector2(0, 100)
+	label.modulate = Color(0.0, 0.401, 0.829, 1.0)
+	label.add_theme_font_size_override("font_size", 30)
+	label.z_index = 10
+	
+	get_parent().add_child(label)
+	
+	var tween = create_tween()
+	tween.tween_property(label, "modulate:a", 0.0, 0.8)
+	tween.tween_callback(label.queue_free)
 
 func execute_parry():
 	PlayerStatsComponent.can_recive_damage = false
@@ -76,7 +92,7 @@ func execute_parry():
 #colision de los ataques
 func _on_attack_area_body_entered(body: Node2D) -> void:
 	body.take_damage(PlayerStatsComponent.damage,self,$StateMachine/PlayerStateAttack.hitstun)
-	GlobalParameters.hit_effect(body,preload("uid://buokwrn26gvmp"))
+	GlobalParameters.hit_effect(body,GlobalParameters.HIT)
 func _on_attack_area_area_entered(area: Area2D) -> void:
 	if area.is_in_group("Enemie_Bullet") and area.can_parry:
 		area.counter(self)
@@ -133,8 +149,12 @@ func show_combo_effect(damage,target):
 	var label = Label.new()
 	label.text = str(int(damage))
 	label.position = target.global_position - Vector2(0, 50)
-	if damage > 100: label.modulate = Color.RED
-	else: label.modulate = Color.WHITE
+	if target != self:
+		if damage > 100: label.modulate = Color.RED
+		else: label.modulate = Color.WHITE
+	else:
+		if damage >= PlayerStatsComponent.max_hp / 2: label.modulate = Color.RED
+		else: label.modulate = Color.WHITE
 	label.add_theme_font_size_override("font_size", 24)
 	get_parent().add_child(label)
 	
