@@ -15,6 +15,7 @@ var phantom_on: bool = false
 
 func _ready() -> void:
 	add_to_group("Player")
+	PlayerStatsComponent.set_all_default()
 
 func _process(_delta):
 	set_facing_direction()
@@ -86,6 +87,10 @@ func execute_parry():
 	sounds._parry()
 	await activate_slow_motion(2.0,0.2)
 	PlayerStatsComponent.can_recive_damage = true
+
+func show_HUD(value:bool):
+	if value: $HUD.show()
+	else: $HUD.hide()
 #endregion
 
 #region SIGNALS

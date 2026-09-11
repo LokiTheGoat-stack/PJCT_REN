@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://begpoo2wyu8xj"
+path="res://.godot/imported/Menu y base (No se que nombre ponerle).ogg-14ca77b36e72f665c2587f9d1d12691b.oggvorbisstr"
+
+[deps]
+
+source_file="res://Files/Sounds/Music/Test/Menu y base (No se que nombre ponerle).ogg"
+dest_files=["res://.godot/imported/Menu y base (No se que nombre ponerle).ogg-14ca77b36e72f665c2587f9d1d12691b.oggvorbisstr"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=120.0
+beat_count=0
+bar_beats=4

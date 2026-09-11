@@ -1423,6 +1423,7 @@ stream = SubResource("AudioStreamRandomizer_w1wgp")
 stream = ExtResource("36_lj38e")
 
 [node name="HUD" type="CanvasLayer" parent="." unique_id=617106871]
+visible = false
 script = ExtResource("29_ftc0o")
 
 [node name="manaBar" type="TextureProgressBar" parent="HUD" unique_id=1042558563]

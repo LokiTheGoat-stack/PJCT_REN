@@ -5870,8 +5870,7 @@ transition = 7
 clip_count = 1
 clip_0/name = &"Menu"
 clip_0/stream = ExtResource("74_1102u")
-clip_0/auto_advance = 1
-clip_0/next_clip = 0
+clip_0/auto_advance = 0
 _transitions = {
 Vector2i(0, 0): {
 "fade_beats": 1.0,
@@ -6189,7 +6188,6 @@ script = ExtResource("11_0bwlu")
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="SceneSounds" unique_id=1891334047]
 stream = SubResource("AudioStreamInteractive_3xx2f")
-volume_db = -5.0
 
 [node name="AreaCombate" type="Area2D" parent="SceneSounds" unique_id=2056830270]
 visible = false

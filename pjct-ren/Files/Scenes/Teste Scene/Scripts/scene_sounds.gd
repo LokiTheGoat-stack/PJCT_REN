@@ -7,7 +7,7 @@ var is_calm: bool = true
 
 
 func _ready() -> void:
-	#music_player.play()
+	music_player.play()
 	pass
 
 #region COMBAT

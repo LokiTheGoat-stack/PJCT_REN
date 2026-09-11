@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="PJCT_REN"
-run/main_scene="uid://dgs1d2e6s3i16"
+run/main_scene="uid://cwsr4yf05dejo"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 

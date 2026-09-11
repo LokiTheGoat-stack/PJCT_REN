@@ -1,14 +1,15 @@
 [gd_scene format=3 uid="uid://most64kuhy7h"]
 
 [ext_resource type="Script" uid="uid://ct14ydqs10ihp" path="res://Files/Scenes/Teste Scene/Scripts/pause_menu.gd" id="1_465im"]
+[ext_resource type="Texture2D" uid="uid://d2xiexb462nq7" path="res://Files/Art/Test Art/Titulo.png" id="2_xot18"]
 
 [node name="PauseMenu" type="CanvasLayer" unique_id=531329687]
-process_mode = 3
+process_mode = 4
 visible = false
 script = ExtResource("1_465im")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1563834026]
-offset_right = 478.0
+offset_right = 480.0
 offset_bottom = 269.0
 color = Color(0, 0.07450981, 0.10980392, 0.81960785)
 
@@ -18,22 +19,27 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -52.0
-offset_top = -33.0
-offset_right = 52.0
-offset_bottom = 33.0
+offset_left = -191.0
+offset_top = 21.0
+offset_right = -17.0
+offset_bottom = 87.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="ResumeButton" type="Button" parent="VBoxContainer" unique_id=905031571]
 layout_mode = 2
 theme_override_font_sizes/font_size = 16
-text = "RESUME"
+text = "RESUME 🥵🥵🥵"
 
 [node name="MainButton" type="Button" parent="VBoxContainer" unique_id=1319093051]
 layout_mode = 2
 theme_override_font_sizes/font_size = 16
-text = "MAIN MENU"
+text = "MAIN MENU 🥶🥶🥶"
+
+[node name="Titulo" type="Sprite2D" parent="." unique_id=1296324600]
+modulate = Color(0.49019608, 0.6, 0.7294118, 1)
+position = Vector2(153, 78)
+texture = ExtResource("2_xot18")
 
 [connection signal="pressed" from="VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/MainButton" to="." method="_on_main_button_pressed"]
