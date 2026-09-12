@@ -11,9 +11,10 @@ var can_attack: bool = true
 
 #control del delay del salto
 func _last_chance_to_jump():
-	last_chance_to_jump = true
-	await get_tree().create_timer(0.09).timeout
-	last_chance_to_jump = false
+	if PlayerMovementStats.jump_count == 0:
+		last_chance_to_jump = true
+		await get_tree().create_timer(0.09).timeout
+		last_chance_to_jump = false
 
 #region ALWAYS_ON_FUNC
 func on_physics_process(delta):
@@ -43,6 +44,7 @@ func on_physics_process(delta):
 	if is_on_wall and not controlled_node.is_on_floor():
 		print("wall_slide")
 		$"../PlayerStateWall_Slide".wall_normal = wall_normal
+		last_chance_to_jump = false
 		state_machine.change_to("PlayerStateWall_Slide")
 		can_attack = true
 	
@@ -56,6 +58,7 @@ func on_physics_process(delta):
 		else:
 			controlled_node.animation_machine.travel("Idle")
 			state_machine.change_to("PlayerStateIdle")
+		last_chance_to_jump = false
 		PlayerMovementStats.jump_count = 0
 		can_attack = true
 	
@@ -64,6 +67,7 @@ func on_physics_process(delta):
 func on_input(event: InputEvent) -> void:
 	#Si despues al caer saltas antes de los 0.09s, cambiar a Jump
 	if Input.is_action_just_pressed("JUMP") and last_chance_to_jump == true:
+		last_chance_to_jump = false
 		print("Last chance taked")
 		controlled_node.animation_machine.travel("Jump_Up") 
 		controlled_node.velocity.y = PlayerMovementStats.jump_speed
@@ -83,8 +87,13 @@ func on_input(event: InputEvent) -> void:
 			$"../PlayerStateDash".dash("PlayerStateFall",false,false)
 		
 		#Cambiar a Attack
-		if Input.is_action_just_pressed("ATTACK") and can_attack and PlayerStatsComponent.can_attack:
-			can_attack = false
-			state_machine.change_to("PlayerStateAttack")
-			$"../PlayerStateAttack".on_enter(true)
+		if Input.is_action_just_pressed("ATTACK") and PlayerStatsComponent.can_attack:
+			if Input.is_action_pressed("DOWN"):
+				state_machine.change_to("PlayerStateAttack")
+				$"../PlayerStateAttack".on_enter(false,"down")
+			else:
+				can_attack = false
+				state_machine.change_to("PlayerStateAttack")
+				$"../PlayerStateAttack".on_enter(true,"normal")
+		
 #endregion

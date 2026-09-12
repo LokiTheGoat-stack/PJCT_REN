@@ -21,13 +21,17 @@ var dash_timer: float = 0.0
 var is_dashing: bool = false
 var current_attack_duration: float = 0.0
 var air_combo: bool
+var down_attack: bool = false
+var up_attack: bool = false
 var hitstun: float = 0
 
 func _ready():
 	pass
 
 #examinar parametros del estado
-func on_enter(air:bool):
+func on_enter(air:bool, attack_type:String):
+	if attack_type == "down": down_attack = true
+	elif attack_type == "up": up_attack = true
 	combo_count = 0
 	can_combo = true
 	is_attacking = true
@@ -35,12 +39,18 @@ func on_enter(air:bool):
 	combo_timer = 0.0
 	is_dashing = false
 	air_combo = air
-	var sprite = controlled_node.get_node("Ren_Sprite")
 	if Input.is_action_pressed("LEFT"): current_direction = -1
 	elif Input.is_action_pressed("RIGHT"): current_direction = 1
 	elif $"../../Ren_Sprite".scale.x < 0: current_direction = -1
 	elif $"../../Ren_Sprite".scale.x > 0: current_direction = 1
-	execute_attack(0)
+	
+	
+	match attack_type:
+		"normal": execute_attack(0)
+		"down": execute_down_attack()
+		"up": execute_up_attack()
+		_: pass
+	
 
 #resetear parametros para salir
 func on_exit():
@@ -51,7 +61,9 @@ func on_exit():
 
 func on_physics_process(delta: float) -> void:
 	#control de gravedad
-	if not air_combo: controlled_node.velocity.y += gravity * delta
+	if down_attack:
+		controlled_node.velocity.y = 2000
+	elif not air_combo: controlled_node.velocity.y += gravity * delta
 	else: controlled_node.velocity.y = 20
 	
 	#impulso del ataque
@@ -75,7 +87,9 @@ func on_physics_process(delta: float) -> void:
 	controlled_node.move_and_slide()
 	
 	# si caes cambiar a fall
-	if not controlled_node.is_on_floor() and not air_combo:
+	if down_attack and controlled_node.is_on_floor():
+		finish_attack(false)
+	elif not controlled_node.is_on_floor() and not air_combo and not down_attack:
 		state_machine.change_to("PlayerStateFall")
 
 func on_input(event: InputEvent) -> void:
@@ -125,6 +139,12 @@ func on_input(event: InputEvent) -> void:
 				state_machine.change_to("PlayerStateBlock")
 				$"../PlayerStateBlock".time_for_parry()
 
+func execute_down_attack():
+	controlled_node.velocity.y = 5000
+	is_dashing = false
+	#controlled_node.velocity.x = 0
+
+func execute_up_attack():pass
 
 func execute_attack(attack_index: int):
 	print("execute attack")
@@ -169,6 +189,8 @@ func apply_dash(direction: int, speed: float):
 
 func finish_attack(combo_finished:bool): #terminar combo
 	print("FINISH")
+	down_attack = false
+	up_attack = false
 	is_attacking = false
 	can_combo = false
 	combo_count = 0

@@ -8,6 +8,7 @@ var valid_timer: bool = false
 var can_fall: bool = false
 var is_on_wall = false
 var wall_normal = Vector2.ZERO
+var verifying: bool = false
 
 #region ALWAYS_ON_FUNC
 func on_physics_process(delta) -> void:
@@ -24,7 +25,9 @@ func on_physics_process(delta) -> void:
 	elif controlled_node.velocity.y > 0:
 		can_fall = false
 		print("wall_jump_fall")
+		PlayerMovementStats.jump_count = 0
 		state_machine.change_to("PlayerStateFall")
+		verifying = false
 	
 	#control de colision del raycast
 	raycast_left.target_position = Vector2(-15, 0)
@@ -46,11 +49,14 @@ func on_physics_process(delta) -> void:
 	#endregion
 
 func new_verification(): #verifivar si se puede hacer Wall_Slide 
-	await get_tree().create_timer(0.1).timeout
-	if is_on_wall and not controlled_node.is_on_floor():
-		print("wll_jump_-> wall_slide")
-		$"../PlayerStateWall_Slide".wall_normal = wall_normal
-		state_machine.change_to("PlayerStateWall_Slide")
+	if not verifying:
+		verifying = true
+		await get_tree().create_timer(0.1).timeout
+		if is_on_wall and not controlled_node.is_on_floor():
+			print("wll_jump_-> wall_slide")
+			$"../PlayerStateWall_Slide".wall_normal = wall_normal
+			state_machine.change_to("PlayerStateWall_Slide")
+			verifying = false
 
 func start_jump_timer() -> void: #control de duracion del salto
 	valid_timer = true
