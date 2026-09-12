@@ -43,8 +43,7 @@ func _on_body_entered(body: Node2D) -> void:
 	if counter_projectile: 
 		if body.is_in_group("Player"): return
 		elif body.is_in_group("Enemies"):
-			body.take_damage(damage * 2,current_shooter, 0.012)
-			GlobalParameters.hit_effect(body,GlobalParameters.HIT)
+			body.take_damage(damage * 2,current_shooter, 0.012, GlobalParameters.HIT)
 			player.show_combo_effect(damage * 2, current_shooter)
 			await  player.activate_slow_motion(0.09,0.001)
 			queue_free()

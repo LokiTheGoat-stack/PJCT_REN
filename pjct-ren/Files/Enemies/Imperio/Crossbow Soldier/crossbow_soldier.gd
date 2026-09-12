@@ -66,11 +66,11 @@ func _process(delta: float) -> void:
 #endregion
 
 #region USEFUL
-func take_damage(damage, node, hitstun):
+func take_damage(damage, node, hitstun, HIT_sprite):
 	var damage_count: float = 0
 	damage_count = damage
 	hp -= damage
-	damage_effect(damage, hitstun)
+	damage_effect(damage, hitstun, HIT_sprite)
 	player.show_combo_effect(damage_count,self)
 
 func _can_parry_me(can_parry:bool):
@@ -79,17 +79,18 @@ func _can_parry_me(can_parry:bool):
 func parry():
 	if PlayerStatsComponent.parry_time and can_parry_me and player_in:
 		can_damage = false
-		take_damage(attack_damage * 5, self, 0.5)
+		take_damage(attack_damage * 5, self, 0.5, GlobalParameters.HIT)
 		#player.show_combo_effect(attack_damage * 5,self)
 		player.execute_parry()
 		player.stamina_gift()
 
-func damage_effect(damage:float, hitstun):
+func damage_effect(damage:float, hitstun, HIT_sprite: Texture2D):
 	player.sounds.flesh_slice()
 	if damage > 10: player.shake_camera("player_hit")
 	elif damage <= 10: player.shake_camera("player_small_hit")
 	elif damage > 100: player.shake_camera("player_critical_hit")
 	change_shader_parameters(Color.WHITE,1,1)
+	GlobalParameters.hit_effect(self,HIT_sprite)
 	await  player.activate_slow_motion(hitstun,0.001)
 	await get_tree().create_timer(0.08).timeout
 	body.visible = false
@@ -99,10 +100,7 @@ func damage_effect(damage:float, hitstun):
 	change_shader_parameters(Color.WHITE,0,1)
 
 func change_shader_parameters(color:Color, mix:float, alpha:float):
-	var sprite_material = body_sprite.material
-	sprite_material.set_shader_parameter("Color", color)
-	sprite_material.set_shader_parameter("Mix", mix)
-	sprite_material.set_shader_parameter("Alpha", alpha)
+	GlobalParameters.change_shader_parameters(color,mix,alpha,body_sprite)
 
 #endregion
 

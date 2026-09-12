@@ -58,8 +58,7 @@ func take_damage(damage, node, sprite, hitstun): #control del damage
 		else: 
 			final_damage = damage
 			PlayerStatsComponent.current_hp -= damage
-	GlobalParameters.hit_effect(self,sprite)
-	damage_effect(final_damage,hitstun)
+	damage_effect(final_damage,hitstun, sprite)
 	PlayerStatsComponent.can_recive_damage = true
 
 func stamina_gift(): #aumento de stamina por parry
@@ -96,8 +95,7 @@ func show_HUD(value:bool):
 #region SIGNALS
 #colision de los ataques
 func _on_attack_area_body_entered(body: Node2D) -> void:
-	body.take_damage(PlayerStatsComponent.damage,self,$StateMachine/PlayerStateAttack.hitstun)
-	GlobalParameters.hit_effect(body,GlobalParameters.HIT)
+	body.take_damage(PlayerStatsComponent.damage,self,$StateMachine/PlayerStateAttack.hitstun,GlobalParameters.HIT)
 func _on_attack_area_area_entered(area: Area2D) -> void:
 	if area.is_in_group("Enemie_Bullet") and area.can_parry:
 		area.counter(self)
@@ -105,12 +103,13 @@ func _on_attack_area_area_entered(area: Area2D) -> void:
 
 #region USEFUL
 
-func damage_effect(damage:float, hitstun):
+func damage_effect(damage:float, hitstun, sprite):
 	sounds.flesh_slice()
 	show_combo_effect(damage,self)
 	if damage <= PlayerStatsComponent.max_hp / 2.5: shake_camera("player_small_hurt")
 	else: shake_camera("player_hurt")
 	GlobalParameters.change_shader_parameters(Color.WHITE,1,1,ren_sprite)
+	GlobalParameters.hit_effect(self,sprite)
 	await  activate_slow_motion(hitstun,0.001)
 	await get_tree().create_timer(0.08).timeout
 	ren_sprite.visible = false

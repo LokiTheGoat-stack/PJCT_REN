@@ -14,7 +14,7 @@ func hit_effect(target:Node,sprite:Texture2D):
 	effect.global_position = target.global_position
 	target.get_parent().add_child(effect)
 	target.z_index = 10
-	await get_tree().create_timer(0.2).timeout
+	await get_tree().create_timer(0.03).timeout
 	effect.queue_free()
 
 func change_shader_parameters(color:Color, mix:float, alpha:float, sprite):
