@@ -85,7 +85,7 @@ func on_input(event: InputEvent) -> void:
 	
 	#inputs del ataque
 	if PlayerStatsComponent.current_stamina > 0:
-		if Input.is_action_just_pressed("ATTACK"):
+		if Input.is_action_just_pressed("ATTACK") and PlayerStatsComponent.can_attack:
 			if Input.is_action_pressed("LEFT"): current_direction = -1
 			elif Input.is_action_pressed("RIGHT"): current_direction = 1
 			if can_combo:
@@ -113,7 +113,7 @@ func on_input(event: InputEvent) -> void:
 			if controlled_node.velocity.y != 0: $"../PlayerStateDash".dash("PlayerStateIdle",true,false)
 			else: $"../PlayerStateDash".dash("PlayerStateIdle",true,false)
 		
-		elif Input.is_action_pressed("BLOCK"):
+		elif Input.is_action_pressed("BLOCK") and PlayerStatsComponent.can_attack:
 			if can_combo and combo_timer > 0:
 				is_attacking = false
 				can_combo = false
@@ -184,7 +184,7 @@ func finish_attack(combo_finished:bool): #terminar combo
 				state_machine.change_to("PlayerStateDash")
 				if controlled_node.velocity.y != 0: $"../PlayerStateDash".dash("PlayerStateIdle",true,false)
 				else: $"../PlayerStateDash".dash("PlayerStateIdle",true,false)
-			elif Input.is_action_pressed("BLOCK") and PlayerStatsComponent.current_stamina > 0:
+			elif Input.is_action_pressed("BLOCK") and PlayerStatsComponent.current_stamina > 0 and PlayerStatsComponent.can_attack:
 				$"../PlayerStateBlock".charge_last_state("PlayerStateIdle")
 				state_machine.change_to("PlayerStateBlock")
 				$"../PlayerStateBlock".time_for_parry()

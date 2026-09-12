@@ -126,10 +126,12 @@ func damage_effect(damage:float, hitstun, sprite):
 
 func can_combat(can:bool):
 	if not can:
+		PlayerStatsComponent.can_attack = false
 		set_collision_layer_value(1,false)
 		$Ren_Sprite/AttackArea.set_collision_mask_value(2,false)
 		$Ren_Sprite/AttackArea.set_collision_mask_value(3,false)
 	else:
+		PlayerStatsComponent.can_attack = true
 		set_collision_layer_value(1,true)
 		$Ren_Sprite/AttackArea.set_collision_mask_value(2,true)
 		$Ren_Sprite/AttackArea.set_collision_mask_value(3,true)

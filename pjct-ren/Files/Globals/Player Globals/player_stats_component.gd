@@ -13,6 +13,7 @@ extends Node
 @export var is_death: bool = false
 @export var parry_time: bool = false
 @export var can_recive_damage: bool = true
+@export var can_attack: bool = true
 @export var can_play: bool = false
 
 @export var parry_hitstun: float = 0.12

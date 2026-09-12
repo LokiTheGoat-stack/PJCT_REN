@@ -83,7 +83,7 @@ func on_input(event: InputEvent) -> void:
 			$"../PlayerStateDash".dash("PlayerStateFall",false,false)
 		
 		#Cambiar a Attack
-		if Input.is_action_just_pressed("ATTACK") and can_attack:
+		if Input.is_action_just_pressed("ATTACK") and can_attack and PlayerStatsComponent.can_attack:
 			can_attack = false
 			state_machine.change_to("PlayerStateAttack")
 			$"../PlayerStateAttack".on_enter(true)
