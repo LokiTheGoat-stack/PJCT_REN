@@ -6118,6 +6118,7 @@ metadata/_custom_type_script = "uid://bd046eokvcnu2"
 [node name="AreaEnemieDetect" type="Area2D" parent="Player" unique_id=1351578029]
 visible = false
 collision_mask = 2
+monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player/AreaEnemieDetect" unique_id=1996659698]
 position = Vector2(1, -25)
@@ -6213,7 +6214,7 @@ script = ExtResource("11_0bwlu")
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="SceneSounds" unique_id=1891334047]
 stream = SubResource("AudioStreamInteractive_3xx2f")
-volume_db = -5.0
+volume_db = -10.0
 
 [node name="AreaCombate" type="Area2D" parent="SceneSounds" unique_id=2056830270]
 visible = false

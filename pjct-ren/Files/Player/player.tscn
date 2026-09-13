@@ -38,12 +38,14 @@
 [ext_resource type="AudioStream" uid="uid://c6qyv0t4f48y3" path="res://Files/Sounds/footsteps/Tile_Mono_04.wav" id="27_fq8mf"]
 [ext_resource type="Script" uid="uid://dyn556nl5d32h" path="res://Files/Player/hud.gd" id="29_ftc0o"]
 [ext_resource type="Texture2D" uid="uid://bkok3k7elhyyp" path="res://Files/Art/Test Art/Hpbar/Hp bar.png" id="30_fq8mf"]
-[ext_resource type="Texture2D" uid="uid://cvy88aquyjqif" path="res://Files/Art/Test Art/Hpbar/Blue bar.png" id="30_rc42w"]
 [ext_resource type="Texture2D" uid="uid://dnfk4xk0l01gp" path="res://Files/Art/Test Art/Hpbar/yellow bar.png" id="31_k01om"]
-[ext_resource type="Texture2D" uid="uid://ddym4ax82iydj" path="res://Files/Art/Test Art/Hpbar/red bar.png" id="32_3t4bl"]
 [ext_resource type="AudioStream" uid="uid://clk1fa08ll0g3" path="res://Files/Sounds/Test/blandido.ogg" id="33_lr0x8"]
 [ext_resource type="AudioStream" uid="uid://cchi7bui0uxly" path="res://Files/Sounds/Test/hitFlesh.ogg" id="34_w1wgp"]
 [ext_resource type="AudioStream" uid="uid://dh7bny4e0qck3" path="res://Files/Sounds/Test/Parry test sound.ogg" id="36_lj38e"]
+[ext_resource type="Texture2D" uid="uid://cdpq43sccosuu" path="res://Files/Art/Ren_Char/HUD/stamina_bar.png" id="41_5vfry"]
+[ext_resource type="Texture2D" uid="uid://cx2nsaf65d0tr" path="res://Files/Art/Ren_Char/HUD/stamina_bar_base.png" id="41_bjujb"]
+[ext_resource type="Texture2D" uid="uid://cg3nq8xys7v18" path="res://Files/Art/Ren_Char/HUD/hp_bar.png" id="43_0binv"]
+[ext_resource type="Texture2D" uid="uid://bsa78mp2qnlg3" path="res://Files/Art/Ren_Char/HUD/hp_bar_base.png" id="44_67kig"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w2g86"]
 size = Vector2(66, 43)
@@ -425,7 +427,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_0binv"]
 resource_name = "Down_Attack"
-length = 0.19999999999999998
+length = 0.2
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -1506,15 +1508,17 @@ script = ExtResource("29_ftc0o")
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 74.0
-offset_top = -19.0
-offset_right = 123.0
-offset_bottom = -13.0
+offset_left = 235.0
+offset_top = -35.0
+offset_right = 374.0
+offset_bottom = -7.0
 grow_vertical = 0
 value = 100.0
-texture_progress = ExtResource("30_rc42w")
+texture_under = ExtResource("41_bjujb")
+texture_progress = ExtResource("41_5vfry")
 
 [node name="exbar" type="TextureProgressBar" parent="HUD" unique_id=397015000]
+visible = false
 offset_left = 77.0
 offset_top = 243.0
 offset_right = 109.0
@@ -1523,22 +1527,24 @@ value = 100.0
 texture_progress = ExtResource("31_k01om")
 
 [node name="hpbar" type="TextureProgressBar" parent="HUD" unique_id=1587768190]
-offset_left = 15.0
-offset_top = 200.0
-offset_right = 71.0
-offset_bottom = 254.0
+offset_left = 99.0
+offset_top = 235.0
+offset_right = 238.0
+offset_bottom = 263.0
 value = 100.0
-fill_mode = 3
-texture_progress = ExtResource("32_3t4bl")
+fill_mode = 1
+texture_under = ExtResource("44_67kig")
+texture_progress = ExtResource("43_0binv")
 
 [node name="HUDsprite" type="TextureRect" parent="HUD" unique_id=1453139192]
+visible = false
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 11.0
-offset_top = -74.0
-offset_right = 127.0
-offset_bottom = -10.0
+offset_left = 18.0
+offset_top = -73.0
+offset_right = 134.0
+offset_bottom = -9.0
 grow_vertical = 0
 texture = ExtResource("30_fq8mf")
 

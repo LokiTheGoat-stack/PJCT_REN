@@ -44,7 +44,7 @@ func _on_center_area_2_body_exited(body: Node2D) -> void:
 
 func _on_area_enemie_detect_body_entered(body: Node2D) -> void:
 	GlobalParameters.current_camera = group_camera
-	#group_camera.set_priority(10)
+	group_camera.set_priority(10)
 	group_camera.append_follow_targets(body)
 func _on_area_enemie_detect_body_exited(body: Node2D) -> void:
 	GlobalParameters.current_camera = path_camera
