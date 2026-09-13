@@ -18,6 +18,7 @@ func _ready():
 	noise.frequency = 1.0
 
 func _process(delta):
+	
 	# Decaer el trauma con el tiempo
 	if trauma > 0:
 		trauma = max(trauma - trauma_decay * delta, 0)

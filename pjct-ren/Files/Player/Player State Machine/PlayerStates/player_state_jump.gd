@@ -68,15 +68,14 @@ func on_input(event: InputEvent) -> void:
 			$"../PlayerStateDash".dash("PlayerStateJump",false,false)
 		
 		#Cambiar a Attack
-		if Input.is_action_just_pressed("ATTACK") and PlayerStatsComponent.can_attack:
+		if Input.is_action_just_pressed("ATTACK") and PlayerStatsComponent.can_combat:
 			if Input.is_action_pressed("DOWN"):
 				x_speed = PlayerMovementStats.in_air_speed
 				check_can_jump(false)
 				state_machine.change_to("PlayerStateAttack")
 				$"../PlayerStateAttack".on_enter(false,"down")
-			else:
+			elif PlayerStatsComponent.can_attack:
 				x_speed = PlayerMovementStats.in_air_speed
-				$"../PlayerStateFall".can_attack = false
 				check_can_jump(false)
 				state_machine.change_to("PlayerStateAttack")
 				$"../PlayerStateAttack".on_enter(true,"normal")

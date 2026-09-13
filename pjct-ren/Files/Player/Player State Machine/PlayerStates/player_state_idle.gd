@@ -32,6 +32,7 @@ func on_input(event: InputEvent) -> void:
 			controlled_node.animation_machine.travel("Jump_Up")
 			state_machine.change_to("PlayerStateJump")
 		
+		
 		if PlayerStatsComponent.current_stamina > 0:
 			#Cambiar a Dash
 			if Input.is_action_just_pressed("DASH"):
@@ -39,12 +40,12 @@ func on_input(event: InputEvent) -> void:
 				$"../PlayerStateDash".dash("PlayerStateIdle",false,true)
 			
 			#Cambiar a Attack
-			if Input.is_action_just_pressed("ATTACK") and PlayerStatsComponent.can_attack:
+			if Input.is_action_just_pressed("ATTACK") and PlayerStatsComponent.can_combat:
 					state_machine.change_to("PlayerStateAttack")
 					$"../PlayerStateAttack".on_enter(false,"normal")
 			
 			#Cambiar a Block
-			if Input.is_action_pressed("BLOCK") and PlayerStatsComponent.can_attack:
+			if Input.is_action_pressed("BLOCK") and PlayerStatsComponent.can_combat:
 				$"../PlayerStateBlock".charge_last_state("PlayerStateIdle")
 				state_machine.change_to("PlayerStateBlock")
 				$"../PlayerStateBlock".time_for_parry()

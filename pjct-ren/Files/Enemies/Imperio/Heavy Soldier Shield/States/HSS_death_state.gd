@@ -4,6 +4,7 @@ func die():
 	$"../../Body/AttackArea".set_deferred("monitoring",false)
 	$"../../Body/AgroArea".set_deferred("monitoring",false)
 	controlled_node.body_collision.disabled = true
+	controlled_node.is_nockback = false
 	controlled_node.is_attack = true
 	controlled_node.velocity = Vector2.ZERO
 	controlled_node.animation_machine.travel("Death")
