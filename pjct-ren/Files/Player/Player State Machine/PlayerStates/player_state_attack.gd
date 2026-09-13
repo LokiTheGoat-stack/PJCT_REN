@@ -61,9 +61,8 @@ func on_exit():
 
 func on_physics_process(delta: float) -> void:
 	#control de gravedad
-	if down_attack:
-		controlled_node.velocity.y = 2000
-	elif not air_combo: controlled_node.velocity.y += gravity * delta
+	if down_attack: controlled_node.velocity.y = 2000
+	elif not air_combo: pass #controlled_node.velocity.y += gravity * delta
 	else: controlled_node.velocity.y = 20
 	
 	#impulso del ataque
@@ -80,7 +79,7 @@ func on_physics_process(delta: float) -> void:
 	combo_timer -= delta
 	
 	#verificar si expiro el combo para pasar a idle
-	if attack_timer <= 0 and is_attacking:
+	if attack_timer <= 0 and is_attacking and not down_attack:
 		if combo_timer <= 0:
 			finish_attack(false)
 	
@@ -89,8 +88,8 @@ func on_physics_process(delta: float) -> void:
 	# si caes cambiar a fall
 	if down_attack and controlled_node.is_on_floor():
 		finish_attack(false)
-	elif not controlled_node.is_on_floor() and not air_combo and not down_attack:
-		state_machine.change_to("PlayerStateFall")
+	#elif not controlled_node.is_on_floor() and not down_attack:
+	#	state_machine.change_to("PlayerStateFall")
 
 func on_input(event: InputEvent) -> void:
 	#solo procesar input si se ataca
@@ -104,16 +103,12 @@ func on_input(event: InputEvent) -> void:
 			elif Input.is_action_pressed("RIGHT"): current_direction = 1
 			if can_combo:
 				can_combo = false
-				print("combo false")
 				combo_count += 1
-				print("combo x" + str(combo_count))
 				if combo_count <= 2:
 					execute_attack(combo_count)
 				else:
-					print("El combo exede el max")
 					finish_attack(true)
 			else:
-				print("can_combo o combo_timer no cumplen")
 				finish_attack(false)
 		
 		elif Input.is_action_pressed("DASH"):
@@ -122,10 +117,24 @@ func on_input(event: InputEvent) -> void:
 			combo_count = 0
 			is_dashing = false
 			controlled_node.velocity.x = 0
-				
+			if air_combo: PlayerStatsComponent.can_attack = false
+			
 			state_machine.change_to("PlayerStateDash")
 			if controlled_node.velocity.y != 0: $"../PlayerStateDash".dash("PlayerStateIdle",true,false)
 			else: $"../PlayerStateDash".dash("PlayerStateIdle",true,false)
+		
+		elif Input.is_action_just_pressed("JUMP") and can_combo:
+			is_attacking = false
+			can_combo = false
+			combo_count = 0
+			is_dashing = false
+			controlled_node.velocity.x = 0
+			if air_combo: PlayerStatsComponent.can_attack = false
+			
+			PlayerMovementStats.jump_count += 1
+			controlled_node.velocity.y = PlayerMovementStats.jump_speed
+			controlled_node.animation_machine.travel("Jump_Up")
+			state_machine.change_to("PlayerStateJump")
 		
 		elif Input.is_action_pressed("BLOCK") and PlayerStatsComponent.can_attack:
 			if can_combo and combo_timer > 0:
@@ -140,31 +149,29 @@ func on_input(event: InputEvent) -> void:
 				$"../PlayerStateBlock".time_for_parry()
 
 func execute_down_attack():
-	controlled_node.velocity.y = 5000
+	$"../../Ren_Sprite/DownAttackArea/CollisionShape2D".disabled = false
+	controlled_node.velocity.y = 2000
+	controlled_node.animation_machine.travel("Down_Attack")
 	is_dashing = false
-	#controlled_node.velocity.x = 0
+	rest_stamina(40)
 
 func execute_up_attack():pass
 
 func execute_attack(attack_index: int):
-	print("execute attack")
 	combo_timer = combo_window
 	is_dashing = false
 	#controlled_node.velocity.x = 0
 	
 	match attack_index:
 		0:
-			print("ataque 1")
 			controlled_node.animation_machine.travel("Attack_1")
 			current_attack_duration = attack_1_duration
 			hitstun = 0.09
 		1:
-			print("ataque 2")
 			controlled_node.animation_machine.travel("Attack_2")
 			current_attack_duration = attack_2_duration
 			hitstun = 0.09
 		2:
-			print("ataque 3")
 			controlled_node.animation_machine.travel("Attack_3")
 			current_attack_duration = attack_3_duration
 			hitstun = 0.09
@@ -176,7 +183,6 @@ func execute_attack(attack_index: int):
 
 func _attack_timer_func():
 	await get_tree().create_timer(0.3).timeout
-	print("combo true")
 	can_combo = true 
 
 func rest_stamina(value:float):
@@ -188,7 +194,7 @@ func apply_dash(direction: int, speed: float):
 	dash_timer = attack_dash_duration
 
 func finish_attack(combo_finished:bool): #terminar combo
-	print("FINISH")
+	$"../../Ren_Sprite/DownAttackArea/CollisionShape2D".disabled = true
 	down_attack = false
 	up_attack = false
 	is_attacking = false
@@ -196,6 +202,8 @@ func finish_attack(combo_finished:bool): #terminar combo
 	combo_count = 0
 	is_dashing = false
 	controlled_node.velocity.x = 0
+	
+	if air_combo: PlayerStatsComponent.can_attack = false
 	
 	if not combo_finished:
 		if controlled_node.is_on_floor():
@@ -211,6 +219,7 @@ func finish_attack(combo_finished:bool): #terminar combo
 				state_machine.change_to("PlayerStateBlock")
 				$"../PlayerStateBlock".time_for_parry()
 			else:
+				controlled_node.animation_machine.travel("Idle")
 				state_machine.change_to("PlayerStateIdle")
 		else:
 			state_machine.change_to("PlayerStateFall")

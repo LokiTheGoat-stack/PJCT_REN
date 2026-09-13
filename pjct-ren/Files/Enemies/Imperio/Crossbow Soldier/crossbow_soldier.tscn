@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://01o01dnh10da" path="res://Files/Enemies/Imperio/Crossbow Soldier/crossbow_soldier.gd" id="1_ckcut"]
 [ext_resource type="Material" uid="uid://b1354y6dsjibm" path="res://Files/Enemies/Imperio/Crossbow Soldier/Shaders/crossbowS_shader_material.tres" id="2_fj007"]
-[ext_resource type="Texture2D" uid="uid://bo061ym46bidc" path="res://Files/Art/Test Art/Male/Male Skin1.png" id="3_txwlo"]
+[ext_resource type="Texture2D" uid="uid://dft003h5lsjl0" path="res://Files/Art/Test Art/Female/Female Skin1.png" id="3_fj007"]
 [ext_resource type="Script" uid="uid://bmsaqkiq5ub0g" path="res://Files/Enemies/Imperio/Crossbow Soldier/States/crossbowS_patrol_state.gd" id="5_fj007"]
 [ext_resource type="Script" uid="uid://bgk5hwr4bnut7" path="res://Files/Enemies/Enemies State Machine/enemie_state_machine.gd" id="5_op27g"]
 [ext_resource type="Script" uid="uid://xvy80qlauohr" path="res://Files/Enemies/Imperio/Crossbow Soldier/States/crossbowS_idle_state.gd" id="6_fj007"]
@@ -299,7 +299,7 @@ script = ExtResource("1_ckcut")
 
 [node name="MaleSkin1" type="Sprite2D" parent="Body" unique_id=1014713983]
 material = ExtResource("2_fj007")
-texture = ExtResource("3_txwlo")
+texture = ExtResource("3_fj007")
 hframes = 10
 vframes = 7
 

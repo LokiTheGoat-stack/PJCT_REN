@@ -7,7 +7,6 @@ var gravity: float = 0.0
 var is_on_wall = false
 var wall_normal = Vector2.ZERO
 var last_chance_to_jump: bool = false
-var can_attack: bool = true
 
 #control del delay del salto
 func _last_chance_to_jump():
@@ -46,7 +45,7 @@ func on_physics_process(delta):
 		$"../PlayerStateWall_Slide".wall_normal = wall_normal
 		last_chance_to_jump = false
 		state_machine.change_to("PlayerStateWall_Slide")
-		can_attack = true
+		PlayerStatsComponent.can_attack = true
 	
 	#si estas tocando el suelo cambiar a Walk o Idle
 	if controlled_node.velocity.y >= 0 and controlled_node.is_on_floor():
@@ -60,7 +59,7 @@ func on_physics_process(delta):
 			state_machine.change_to("PlayerStateIdle")
 		last_chance_to_jump = false
 		PlayerMovementStats.jump_count = 0
-		can_attack = true
+		PlayerStatsComponent.can_attack = true
 	
 	controlled_node.move_and_slide()
 
@@ -74,12 +73,6 @@ func on_input(event: InputEvent) -> void:
 		state_machine.change_to("PlayerStateJump")
 		PlayerMovementStats.jump_count += 1
 	
-	#Hacer doble salto
-	#elif Input.is_action_just_pressed("JUMP") and PlayerMovementStats.jump_count == 1:
-	#	controlled_node.animation_machine.travel("Jump_Up") 
-	#	state_machine.change_to("PlayerStateJump")
-	#	PlayerMovementStats.jump_count += 1
-	
 	if PlayerStatsComponent.current_stamina > 0:
 		#Cambiar a Dash
 		if Input.is_action_just_pressed("DASH"):
@@ -87,12 +80,11 @@ func on_input(event: InputEvent) -> void:
 			$"../PlayerStateDash".dash("PlayerStateFall",false,false)
 		
 		#Cambiar a Attack
-		if Input.is_action_just_pressed("ATTACK") and PlayerStatsComponent.can_attack:
+		if Input.is_action_just_pressed("ATTACK") and PlayerStatsComponent.can_combat:
 			if Input.is_action_pressed("DOWN"):
 				state_machine.change_to("PlayerStateAttack")
 				$"../PlayerStateAttack".on_enter(false,"down")
-			else:
-				can_attack = false
+			elif PlayerStatsComponent.can_attack:
 				state_machine.change_to("PlayerStateAttack")
 				$"../PlayerStateAttack".on_enter(true,"normal")
 		

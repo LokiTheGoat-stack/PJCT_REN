@@ -99,6 +99,12 @@ func _on_attack_area_body_entered(body: Node2D) -> void:
 func _on_attack_area_area_entered(area: Area2D) -> void:
 	if area.is_in_group("Enemie_Bullet") and area.can_parry:
 		area.counter(self)
+
+func _on_down_attack_area_body_entered(body: Node2D) -> void:
+	body.take_damage(PlayerStatsComponent.damage * 3,self,$StateMachine/PlayerStateAttack.hitstun,GlobalParameters.HIT)
+func _on_down_attack_area_area_entered(area: Area2D) -> void:
+	if area.is_in_group("Enemie_Bullet") and area.can_parry:
+		area.counter(self)
 #endregion
 
 #region USEFUL
@@ -126,12 +132,12 @@ func damage_effect(damage:float, hitstun, sprite):
 
 func can_combat(can:bool):
 	if not can:
-		PlayerStatsComponent.can_attack = false
+		PlayerStatsComponent.can_combat = false
 		set_collision_layer_value(1,false)
 		$Ren_Sprite/AttackArea.set_collision_mask_value(2,false)
 		$Ren_Sprite/AttackArea.set_collision_mask_value(3,false)
 	else:
-		PlayerStatsComponent.can_attack = true
+		PlayerStatsComponent.can_combat = true
 		set_collision_layer_value(1,true)
 		$Ren_Sprite/AttackArea.set_collision_mask_value(2,true)
 		$Ren_Sprite/AttackArea.set_collision_mask_value(3,true)

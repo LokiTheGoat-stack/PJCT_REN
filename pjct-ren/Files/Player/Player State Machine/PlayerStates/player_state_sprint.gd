@@ -47,13 +47,13 @@ func on_input(event: InputEvent) -> void:
 			phantom_on = false
 		
 		#Cambiar a Attack
-		if Input.is_action_just_pressed("ATTACK") and PlayerStatsComponent.can_attack:
+		if Input.is_action_just_pressed("ATTACK") and PlayerStatsComponent.can_combat:
 			state_machine.change_to("PlayerStateAttack")
 			$"../PlayerStateAttack".on_enter(false,"normal")
 			phantom_on = false
 		
 		#Cambiar a Block
-		if Input.is_action_pressed("BLOCK") and PlayerStatsComponent.can_attack:
+		if Input.is_action_pressed("BLOCK") and PlayerStatsComponent.can_combat:
 			$"../PlayerStateBlock".charge_last_state("PlayerStateWalk")
 			state_machine.change_to("PlayerStateBlock")
 			$"../PlayerStateBlock".time_for_parry()
