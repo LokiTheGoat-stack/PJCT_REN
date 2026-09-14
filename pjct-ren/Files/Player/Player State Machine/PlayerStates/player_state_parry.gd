@@ -3,6 +3,12 @@ extends PlayerStateBase
 @onready var enemies: Node2D = $"../../../Enemies"
 @onready var parry_camera_1: PhantomCamera2D = $"../../Ren_Sprite/ParryCamera/ParryCamera_1"
 @onready var parry_camera_2: PhantomCamera2D = $"../../Ren_Sprite/ParryCamera/ParryCamera_2"
+@onready var SHADER_MATERIAL = load("uid://tvndjc42kayr")
+@onready var canvas_modulate: CanvasModulate = $"../../CanvasModulate"
+
+const SHADED = preload("uid://4ovf7r7m6rx7")
+const UNSHADED = preload("uid://dkardyj33mh5y")
+
 
 var target
 var attack_damage
@@ -20,7 +26,20 @@ func parry(damage:float, node):
 		controlled_node.ren_sprite.scale.x = 1
 	elif node.global_position.x < controlled_node.global_position.x:
 		controlled_node.ren_sprite.scale.x = -1
+	await set_canvas_color(true)
 	start_parry()
+
+func set_canvas_color(value:bool):
+	var tween: Tween = create_tween()
+	
+	match value:
+		true:
+			SHADER_MATERIAL.shader = UNSHADED
+			tween.tween_property(canvas_modulate,"color",Color(0.224, 0.224, 0.224),0.1)
+		false:
+			tween.tween_property(canvas_modulate,"color",Color(1.0, 1.0, 1.0),0.3)
+			SHADER_MATERIAL.shader = SHADED
+		_: pass
 
 func start_parry():
 	controlled_node.sounds._parry()
@@ -35,6 +54,7 @@ func start_parry():
 	finish()
 
 func finish():
+	set_canvas_color(false)
 	controlled_node.animation_machine.travel("Idle")
 	state_machine.change_to("PlayerStateIdle")
 	PlayerStatsComponent.can_recive_damage = true

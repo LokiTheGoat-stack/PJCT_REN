@@ -1702,6 +1702,7 @@ texture = ExtResource("2_qdpqe")
 hframes = 5
 
 [node name="AttackArea" type="Area2D" parent="Ren_Sprite" unique_id=1539410476]
+visible = false
 collision_mask = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ren_Sprite/AttackArea" unique_id=1078341602]
@@ -1711,6 +1712,7 @@ disabled = true
 debug_color = Color(1, 0, 0, 0.56078434)
 
 [node name="DownAttackArea" type="Area2D" parent="Ren_Sprite" unique_id=1860033837]
+visible = false
 collision_mask = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ren_Sprite/DownAttackArea" unique_id=837710198]
@@ -1767,6 +1769,7 @@ parameters/Run_Into/TimeScale/scale = 1.0
 parameters/Run_Outo/TimeScale/scale = 1.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=826343510]
+visible = false
 position = Vector2(0, 5)
 scale = Vector2(1, 1.1199994)
 shape = SubResource("CapsuleShape2D_hylex")
@@ -1907,6 +1910,8 @@ offset_right = 134.0
 offset_bottom = -9.0
 grow_vertical = 0
 texture = ExtResource("30_fq8mf")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=416347669]
 
 [connection signal="area_entered" from="Ren_Sprite/AttackArea" to="." method="_on_attack_area_area_entered"]
 [connection signal="area_shape_entered" from="Ren_Sprite/AttackArea" to="." method="_on_attack_area_area_shape_entered"]

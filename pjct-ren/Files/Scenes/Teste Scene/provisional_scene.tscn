@@ -6095,6 +6095,7 @@ position = Vector2(-1329, -351)
 position = Vector2(-625, -353)
 
 [node name="Player" parent="." unique_id=889305067 instance=ExtResource("2_57m1b")]
+light_mask = 2
 z_index = 10
 position = Vector2(-45, 553)
 collision_mask = 48
