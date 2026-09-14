@@ -41,24 +41,31 @@ func set_facing_direction() -> void:
 #region BODY_CALL
 func take_damage(damage, node, sprite, hitstun): #control del damage
 	var final_damage: float
+	var is_block: bool
 	if node.cant_block: 
 		can_combat(false)
 		final_damage = damage
+		is_block = false
 		PlayerStatsComponent.current_hp -= damage
 	elif not PlayerMovementStats.is_dash and \
 	PlayerStatsComponent.can_recive_damage and \
 	not PlayerStatsComponent.parry_time:
-		can_combat(false)
 		if PlayerMovementStats.is_block and PlayerStatsComponent.current_stamina > 0:
 			if damage < 30: PlayerStatsComponent.current_stamina -= damage * 1.5
 			elif damage >= 30 and damage < 50: PlayerStatsComponent.current_stamina -= 40
 			elif damage >= 50: PlayerStatsComponent.current_stamina -= 50
 			final_damage = (damage * 10) / 100
+			is_block = true
 			PlayerStatsComponent.current_hp -= (damage * 10) / 100
 		else: 
+			can_combat(false)
 			final_damage = damage
+			is_block = false
 			PlayerStatsComponent.current_hp -= damage
-	damage_effect(final_damage,hitstun, sprite)
+	if not PlayerMovementStats.is_block: damage_effect(final_damage,hitstun, sprite, is_block)
+	else:
+		damage_effect(final_damage,hitstun, sprite, is_block)
+		animation_machine.travel("Block_Hit")
 	PlayerStatsComponent.can_recive_damage = true
 
 func stamina_gift(): #aumento de stamina por parry
@@ -81,11 +88,10 @@ func stamina_gift(): #aumento de stamina por parry
 	tween.tween_property(label, "modulate:a", 0.0, 0.8)
 	tween.tween_callback(label.queue_free)
 
-func execute_parry():
+func execute_parry(damage:float, node):
 	PlayerStatsComponent.can_recive_damage = false
-	sounds._parry()
-	await activate_slow_motion(2.0,0.2)
-	PlayerStatsComponent.can_recive_damage = true
+	state_machine.change_to("PlayerStateParry")
+	$StateMachine/PlayerStateParry.parry(damage, node)
 
 func show_HUD(value:bool):
 	if value: $HUD.show()
@@ -109,7 +115,7 @@ func _on_down_attack_area_area_entered(area: Area2D) -> void:
 
 #region USEFUL
 
-func damage_effect(damage:float, hitstun, sprite):
+func damage_effect(damage:float, hitstun, sprite, is_block:bool):
 	sounds.flesh_slice()
 	show_combo_effect(damage,self)
 	if damage <= PlayerStatsComponent.max_hp / 2.5: shake_camera("player_small_hurt")
@@ -123,12 +129,14 @@ func damage_effect(damage:float, hitstun, sprite):
 	ren_sprite.visible = true
 	await get_tree().create_timer(0.08).timeout
 	GlobalParameters.change_shader_parameters(Color.WHITE,0,1,ren_sprite)
-	for i in 15:
-		ren_sprite.visible = false
-		await get_tree().create_timer(0.03).timeout
-		ren_sprite.visible = true
-		await get_tree().create_timer(0.08).timeout
-	can_combat(true)
+	
+	if not is_block:
+		for i in 15:
+			ren_sprite.visible = false
+			await get_tree().create_timer(0.03).timeout
+			ren_sprite.visible = true
+			await get_tree().create_timer(0.08).timeout
+		can_combat(true)
 
 func can_combat(can:bool):
 	if not can:

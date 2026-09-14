@@ -15,7 +15,7 @@ class_name Soldier
 @export var walk_speed: float = 50
 @export var run_speed: float = 100
 @export var hp: float = 100
-@export var attack_damage: float = 25.0
+@export var attack_damage: float = 25
 @export var waypints: Array[Marker2D]
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -33,7 +33,6 @@ var min_distance: float = 25
 var is_waiting: bool = false
 var direction: Vector2
 var current_distance: float
-
 
 #endregion
 
@@ -60,7 +59,6 @@ func _process(delta: float) -> void:
 	if hp <= 0:
 		state_machine.change_to("Death")
 		$StateMachine/Death.die()
-
 #endregion
 
 #region USEFUL
@@ -77,9 +75,8 @@ func _can_parry_me(can_parry:bool):
 func parry():
 	if PlayerStatsComponent.parry_time and can_parry_me and player_in:
 		can_damage = false
-		take_damage(attack_damage * 5, self, PlayerStatsComponent.parry_hitstun, GlobalParameters.HIT)
 		#player.show_combo_effect(attack_damage * 5,self)
-		player.execute_parry()
+		player.execute_parry(attack_damage, self)
 		player.stamina_gift()
 
 func damage_effect(damage:float, hitstun, HIT_sprite: Texture2D):

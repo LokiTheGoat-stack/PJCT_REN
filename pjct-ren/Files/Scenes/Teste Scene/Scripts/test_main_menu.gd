@@ -25,6 +25,7 @@ func _on_play_button_pressed() -> void: #funcionamiento de PLAY
 	
 	$"../Cameras/MenuCamera2".set_priority(0)
 	var player = get_tree().get_first_node_in_group("Player")
+	$"../Player/Camera2D".drag_horizontal_enabled = true
 	player.show_HUD(true)
 	PlayerStatsComponent.can_play = true
 	$"../PauseMenu".process_mode = Node.PROCESS_MODE_ALWAYS

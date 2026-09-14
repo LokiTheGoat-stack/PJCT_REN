@@ -5994,73 +5994,69 @@ tile_set = SubResource("TileSet_vir06")
 
 [node name="Enemies" type="Node2D" parent="." unique_id=759772386]
 
-[node name="P1" type="Node2D" parent="Enemies" unique_id=308860058]
-
-[node name="HeavySoldier" parent="Enemies/P1" unique_id=515751673 node_paths=PackedStringArray("waypints") groups=["Enemies"] instance=ExtResource("61_1102u")]
+[node name="HeavySoldier" parent="Enemies" unique_id=515751673 node_paths=PackedStringArray("waypints") groups=["Enemies"] instance=ExtResource("61_1102u")]
 position = Vector2(6859, 619)
-waypints = [NodePath("../../WaypointsE1/Marker2D"), NodePath("../../WaypointsE1/Marker2D2")]
+waypints = [NodePath("../WaypointsE1/Marker2D"), NodePath("../WaypointsE1/Marker2D2")]
 
-[node name="HeavySoldierShield" parent="Enemies/P1" unique_id=329179893 node_paths=PackedStringArray("waypints") instance=ExtResource("62_1102u")]
+[node name="HeavySoldierShield" parent="Enemies" unique_id=329179893 node_paths=PackedStringArray("waypints") instance=ExtResource("62_1102u")]
 position = Vector2(7871, 620)
-waypints = [NodePath("../../WaypointsE2/Marker2D"), NodePath("../../WaypointsE2/Marker2D2")]
+waypints = [NodePath("../WaypointsE2/Marker2D"), NodePath("../WaypointsE2/Marker2D2")]
 
-[node name="Soldier" parent="Enemies/P1" unique_id=558479106 node_paths=PackedStringArray("waypints") instance=ExtResource("75_4mik6")]
+[node name="Soldier" parent="Enemies" unique_id=558479106 node_paths=PackedStringArray("waypints") instance=ExtResource("75_4mik6")]
 position = Vector2(6526, 635)
-waypints = [NodePath("../../WaypointsE1/Marker2D"), NodePath("../../WaypointsE1/Marker2D2")]
+waypints = [NodePath("../WaypointsE1/Marker2D"), NodePath("../WaypointsE1/Marker2D2")]
 
-[node name="Soldier2" parent="Enemies/P1" unique_id=1003918623 node_paths=PackedStringArray("waypints") instance=ExtResource("75_4mik6")]
+[node name="Soldier2" parent="Enemies" unique_id=1003918623 node_paths=PackedStringArray("waypints") instance=ExtResource("75_4mik6")]
 position = Vector2(8148, 626)
-waypints = [NodePath("../../WaypointsE2/Marker2D"), NodePath("../../WaypointsE2/Marker2D2")]
+waypints = [NodePath("../WaypointsE2/Marker2D"), NodePath("../WaypointsE2/Marker2D2")]
 
-[node name="Soldier3" parent="Enemies/P1" unique_id=128041968 node_paths=PackedStringArray("waypints") instance=ExtResource("75_4mik6")]
+[node name="Soldier3" parent="Enemies" unique_id=128041968 node_paths=PackedStringArray("waypints") instance=ExtResource("75_4mik6")]
 position = Vector2(8031, 619)
-waypints = [NodePath("../../WaypointsE2/Marker2D"), NodePath("../../WaypointsE2/Marker2D2")]
+waypints = [NodePath("../WaypointsE2/Marker2D"), NodePath("../WaypointsE2/Marker2D2")]
 
-[node name="CrossbowSoldier4" parent="Enemies/P1" unique_id=587620325 node_paths=PackedStringArray("waypints") instance=ExtResource("64_4mik6")]
+[node name="CrossbowSoldier4" parent="Enemies" unique_id=587620325 node_paths=PackedStringArray("waypints") instance=ExtResource("64_4mik6")]
 position = Vector2(7658, 547)
-waypints = [NodePath("../../WaypointsE2/Marker2D2"), NodePath("../../WaypointsE2/Marker2D")]
+waypints = [NodePath("../WaypointsE2/Marker2D2"), NodePath("../WaypointsE2/Marker2D")]
 
-[node name="CrossbowSoldier5" parent="Enemies/P1" unique_id=771282345 node_paths=PackedStringArray("waypints") instance=ExtResource("64_4mik6")]
+[node name="CrossbowSoldier5" parent="Enemies" unique_id=771282345 node_paths=PackedStringArray("waypints") instance=ExtResource("64_4mik6")]
 position = Vector2(7133, 571)
-waypints = [NodePath("../../WaypointsE1/Marker2D2"), NodePath("../../WaypointsE1/Marker2D")]
+waypints = [NodePath("../WaypointsE1/Marker2D2"), NodePath("../WaypointsE1/Marker2D")]
 
-[node name="CrossbowSoldier6" parent="Enemies/P1" unique_id=1042686135 node_paths=PackedStringArray("waypints") instance=ExtResource("64_4mik6")]
+[node name="CrossbowSoldier6" parent="Enemies" unique_id=1042686135 node_paths=PackedStringArray("waypints") instance=ExtResource("64_4mik6")]
 position = Vector2(6662, 579)
-waypints = [NodePath("../../WaypointsE1/Marker2D"), NodePath("../../WaypointsE1/Marker2D2")]
+waypints = [NodePath("../WaypointsE1/Marker2D"), NodePath("../WaypointsE1/Marker2D2")]
 
-[node name="P2" type="Node2D" parent="Enemies" unique_id=1137033952]
-
-[node name="CrossbowSoldier" parent="Enemies/P2" unique_id=557018810 node_paths=PackedStringArray("waypints") instance=ExtResource("64_4mik6")]
+[node name="CrossbowSoldier" parent="Enemies" unique_id=557018810 node_paths=PackedStringArray("waypints") instance=ExtResource("64_4mik6")]
 position = Vector2(6824, 244)
-waypints = [NodePath("../../WaypointsE4/Marker2D"), NodePath("../../WaypointsE4/Marker2D2")]
+waypints = [NodePath("../WaypointsE4/Marker2D"), NodePath("../WaypointsE4/Marker2D2")]
 
-[node name="CrossbowSoldier2" parent="Enemies/P2" unique_id=1523279520 node_paths=PackedStringArray("waypints") instance=ExtResource("64_4mik6")]
+[node name="CrossbowSoldier2" parent="Enemies" unique_id=1523279520 node_paths=PackedStringArray("waypints") instance=ExtResource("64_4mik6")]
 position = Vector2(7941, 240)
-waypints = [NodePath("../../WaypointsE3/Marker2D"), NodePath("../../WaypointsE3/Marker2D2")]
+waypints = [NodePath("../WaypointsE3/Marker2D"), NodePath("../WaypointsE3/Marker2D2")]
 
-[node name="CrossbowSoldier3" parent="Enemies/P2" unique_id=1249966406 node_paths=PackedStringArray("waypints") instance=ExtResource("64_4mik6")]
+[node name="CrossbowSoldier3" parent="Enemies" unique_id=1249966406 node_paths=PackedStringArray("waypints") instance=ExtResource("64_4mik6")]
 position = Vector2(8088, 239)
-waypints = [NodePath("../../WaypointsE3/Marker2D2"), NodePath("../../WaypointsE3/Marker2D")]
+waypints = [NodePath("../WaypointsE3/Marker2D2"), NodePath("../WaypointsE3/Marker2D")]
 
-[node name="Soldier3" parent="Enemies/P2" unique_id=1742395712 node_paths=PackedStringArray("waypints") instance=ExtResource("75_4mik6")]
+[node name="Soldier4" parent="Enemies" unique_id=1742395712 node_paths=PackedStringArray("waypints") instance=ExtResource("75_4mik6")]
 position = Vector2(6654, 205)
-waypints = [NodePath("../../WaypointsE4/Marker2D"), NodePath("../../WaypointsE4/Marker2D2")]
+waypints = [NodePath("../WaypointsE4/Marker2D"), NodePath("../WaypointsE4/Marker2D2")]
 
-[node name="Soldier4" parent="Enemies/P2" unique_id=1234651986 node_paths=PackedStringArray("waypints") instance=ExtResource("75_4mik6")]
+[node name="Soldier5" parent="Enemies" unique_id=1234651986 node_paths=PackedStringArray("waypints") instance=ExtResource("75_4mik6")]
 position = Vector2(7152, 207)
-waypints = [NodePath("../../WaypointsE1/Marker2D"), NodePath("../../WaypointsE1/Marker2D2")]
+waypints = [NodePath("../WaypointsE1/Marker2D"), NodePath("../WaypointsE1/Marker2D2")]
 
-[node name="Soldier5" parent="Enemies/P2" unique_id=1074707132 node_paths=PackedStringArray("waypints") instance=ExtResource("75_4mik6")]
+[node name="Soldier6" parent="Enemies" unique_id=1074707132 node_paths=PackedStringArray("waypints") instance=ExtResource("75_4mik6")]
 position = Vector2(7152, 207)
-waypints = [NodePath("../../WaypointsE4/Marker2D2"), NodePath("../../WaypointsE4/Marker2D")]
+waypints = [NodePath("../WaypointsE4/Marker2D2"), NodePath("../WaypointsE4/Marker2D")]
 
-[node name="Soldier6" parent="Enemies/P2" unique_id=1813900193 node_paths=PackedStringArray("waypints") instance=ExtResource("75_4mik6")]
+[node name="Soldier7" parent="Enemies" unique_id=1813900193 node_paths=PackedStringArray("waypints") instance=ExtResource("75_4mik6")]
 position = Vector2(6947, 176)
-waypints = [NodePath("../../WaypointsE4/Marker2D"), NodePath("../../WaypointsE4/Marker2D2")]
+waypints = [NodePath("../WaypointsE4/Marker2D"), NodePath("../WaypointsE4/Marker2D2")]
 
-[node name="HeavySoldierShield2" parent="Enemies/P2" unique_id=1861183339 node_paths=PackedStringArray("waypints") instance=ExtResource("62_1102u")]
-position = Vector2(7751, 206)
-waypints = [NodePath("../../WaypointsE3/Marker2D"), NodePath("../../WaypointsE3/Marker2D2")]
+[node name="HeavySoldier2" parent="Enemies" unique_id=1101483175 node_paths=PackedStringArray("waypints") groups=["Enemies"] instance=ExtResource("61_1102u")]
+position = Vector2(743, 511)
+waypints = [NodePath("../../Marker2D"), NodePath("../../Marker2D2")]
 
 [node name="WaypointsE1" type="Node2D" parent="Enemies" unique_id=1378350268]
 position = Vector2(7888, 640)
@@ -6099,6 +6095,7 @@ position = Vector2(-1329, -351)
 position = Vector2(-625, -353)
 
 [node name="Player" parent="." unique_id=889305067 instance=ExtResource("2_57m1b")]
+z_index = 10
 position = Vector2(-45, 553)
 collision_mask = 48
 
@@ -6106,7 +6103,11 @@ collision_mask = 48
 top_level = true
 position = Vector2(273, 336)
 zoom = Vector2(2.505, 2.505)
-editor_draw_limits = true
+drag_left_margin = 0.15
+drag_top_margin = 1.0
+drag_right_margin = 0.15
+drag_bottom_margin = 1.0
+editor_draw_drag_margin = true
 script = ExtResource("66_kl4qj")
 
 [node name="PhantomCameraHost" type="Node" parent="Player/Camera2D" unique_id=1346573263]
@@ -6138,7 +6139,6 @@ follow_path = NodePath("../Path2D")
 tween_resource = SubResource("Resource_76w4k")
 follow_offset = Vector2(0, -50)
 follow_damping = true
-draw_limits = true
 noise = ExtResource("10_76w4k")
 metadata/_custom_type_script = "uid://bhexx6mj1xv3q"
 
@@ -6157,7 +6157,6 @@ position = Vector2(1439, 364)
 script = ExtResource("7_ds81a")
 zoom = Vector2(0.48, 0.48)
 tween_resource = SubResource("Resource_oaxd2")
-draw_limits = true
 noise = ExtResource("10_76w4k")
 _preview_noise = false
 metadata/_custom_type_script = "uid://bhexx6mj1xv3q"
@@ -6169,7 +6168,6 @@ position = Vector2(2794, 223)
 script = ExtResource("7_ds81a")
 zoom = Vector2(0.26, 0.26)
 tween_resource = SubResource("Resource_oaxd2")
-draw_limits = true
 noise = ExtResource("10_76w4k")
 _preview_noise = false
 metadata/_custom_type_script = "uid://bhexx6mj1xv3q"
@@ -6179,6 +6177,7 @@ position = Vector2(2741, 258)
 shape = SubResource("RectangleShape2D_hylex")
 
 [node name="GroupCamera" type="Node2D" parent="Cameras" unique_id=1201260551 node_paths=PackedStringArray("follow_targets")]
+visible = false
 top_level = true
 position = Vector2(-5, 513)
 script = ExtResource("7_ds81a")
@@ -6187,7 +6186,6 @@ follow_targets = [NodePath("../../Player")]
 tween_resource = SubResource("Resource_48nyd")
 follow_offset = Vector2(40, -40)
 follow_damping = true
-draw_limits = true
 noise = ExtResource("10_76w4k")
 _preview_noise = false
 metadata/_custom_type_script = "uid://bhexx6mj1xv3q"
@@ -6198,7 +6196,6 @@ script = ExtResource("7_ds81a")
 priority = 10
 zoom = Vector2(2.505, 2.505)
 tween_resource = SubResource("Resource_4mik6")
-draw_limits = true
 metadata/_custom_type_script = "uid://bhexx6mj1xv3q"
 
 [node name="MenuCamera2" type="Node2D" parent="Cameras" unique_id=14742456]
@@ -6206,7 +6203,6 @@ position = Vector2(-25, 535)
 script = ExtResource("7_ds81a")
 zoom = Vector2(2.505, 2.505)
 tween_resource = SubResource("Resource_4mik6")
-draw_limits = true
 metadata/_custom_type_script = "uid://bhexx6mj1xv3q"
 
 [node name="SceneSounds" type="Node" parent="." unique_id=1596711060]
@@ -6227,6 +6223,12 @@ shape = SubResource("RectangleShape2D_vir06")
 [node name="PauseMenu" parent="." unique_id=531329687 instance=ExtResource("5_trk7i")]
 
 [node name="TestMainMenu" parent="." unique_id=1136506448 instance=ExtResource("74_4mik6")]
+
+[node name="Marker2D" type="Marker2D" parent="." unique_id=1527603150]
+position = Vector2(505, 559)
+
+[node name="Marker2D2" type="Marker2D" parent="." unique_id=2034554925]
+position = Vector2(1011, 559)
 
 [connection signal="body_entered" from="Player/AreaEnemieDetect" to="Cameras" method="_on_area_enemie_detect_body_entered"]
 [connection signal="body_exited" from="Player/AreaEnemieDetect" to="Cameras" method="_on_area_enemie_detect_body_exited"]

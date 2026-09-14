@@ -34,7 +34,6 @@ var is_waiting: bool = false
 var direction: Vector2
 var current_distance: float
 
-
 #endregion
 
 func _ready() -> void:
@@ -77,9 +76,8 @@ func _can_parry_me(can_parry:bool):
 func parry():
 	if PlayerStatsComponent.parry_time and can_parry_me and player_in:
 		can_damage = false
-		take_damage(attack_damage * 5, self, PlayerStatsComponent.parry_hitstun, GlobalParameters.HIT)
 		#player.show_combo_effect(attack_damage * 5,self)
-		player.execute_parry()
+		player.execute_parry(attack_damage, self)
 		player.stamina_gift()
 
 func damage_effect(damage:float, hitstun, HIT_sprite: Texture2D):

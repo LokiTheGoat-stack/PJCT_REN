@@ -144,7 +144,9 @@ func on_input(event: InputEvent) -> void:
 				is_dashing = false
 				controlled_node.velocity.x = 0
 				
+				PlayerMovementStats.is_block = true
 				$"../PlayerStateBlock".charge_last_state("PlayerStateIdle")
+				controlled_node.animation_machine.travel("Block_Loop")
 				state_machine.change_to("PlayerStateBlock")
 				$"../PlayerStateBlock".time_for_parry()
 
@@ -215,6 +217,7 @@ func finish_attack(combo_finished:bool): #terminar combo
 				if controlled_node.velocity.y != 0: $"../PlayerStateDash".dash("PlayerStateIdle",true,false)
 				else: $"../PlayerStateDash".dash("PlayerStateIdle",true,false)
 			elif Input.is_action_pressed("BLOCK") and PlayerStatsComponent.current_stamina > 0 and PlayerStatsComponent.can_attack:
+				PlayerMovementStats.is_block = true
 				$"../PlayerStateBlock".charge_last_state("PlayerStateIdle")
 				state_machine.change_to("PlayerStateBlock")
 				$"../PlayerStateBlock".time_for_parry()

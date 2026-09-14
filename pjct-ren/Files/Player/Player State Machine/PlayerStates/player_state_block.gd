@@ -19,7 +19,7 @@ func on_physics_process(delta) -> void:
 	
 	if PlayerStatsComponent.current_stamina > 0:PlayerStatsComponent.current_stamina -= 50 * delta
 	elif PlayerStatsComponent.current_stamina <= 0:
-		PlayerStatsComponent.stamia = 0
+		PlayerStatsComponent.current_stamina = 0
 		mana_bar.modulate = Color(1.0, 0.0, 0.0)
 		state_machine.change_to(last_state)
 		is_animation_play = false 
@@ -38,6 +38,10 @@ func on_physics_process(delta) -> void:
 func on_input(event: InputEvent) -> void:
 	#Cambiar a Idle
 	if not Input.is_action_pressed("BLOCK"):
+		match last_state:
+			"PlayerStateIdle": controlled_node.animation_machine.travel("Idle")
+			"PlayerStateWalk": controlled_node.animation_machine.travel("Run")
+			_: pass
 		state_machine.change_to(last_state)
 		is_animation_play = false
 		PlayerMovementStats.is_block = false

@@ -8,8 +8,8 @@ class_name CameraDirector
 
 func _process(delta: float) -> void:
 	#OFFSET de la camara
-	if $"../Player".velocity.x > 0: change_camera_offset("x",30,delta)
-	elif $"../Player".velocity.x < 0: change_camera_offset("x",-30,delta)
+	if $"../Player".velocity.x > 0: change_camera_offset("x",50,delta)
+	elif $"../Player".velocity.x < 0: change_camera_offset("x",-50,delta)
 	if $"../Player".velocity.y > 0: change_camera_offset("y",-20,delta)
 	elif $"../Player".velocity.y < 0: change_camera_offset("y",-30,delta)
 	else: change_camera_offset("y",-50,delta)

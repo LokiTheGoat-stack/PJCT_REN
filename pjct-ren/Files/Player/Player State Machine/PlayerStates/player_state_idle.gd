@@ -46,7 +46,9 @@ func on_input(event: InputEvent) -> void:
 			
 			#Cambiar a Block
 			if Input.is_action_pressed("BLOCK") and PlayerStatsComponent.can_combat:
+				PlayerMovementStats.is_block = true
 				$"../PlayerStateBlock".charge_last_state("PlayerStateIdle")
+				controlled_node.animation_machine.travel("Block_Loop")
 				state_machine.change_to("PlayerStateBlock")
 				$"../PlayerStateBlock".time_for_parry()
 #endregion
