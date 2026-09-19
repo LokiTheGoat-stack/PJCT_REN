@@ -47,6 +47,7 @@
 [ext_resource type="AudioStream" uid="uid://clk1fa08ll0g3" path="res://Files/Sounds/Test/blandido.ogg" id="33_lr0x8"]
 [ext_resource type="AudioStream" uid="uid://cchi7bui0uxly" path="res://Files/Sounds/Test/hitFlesh.ogg" id="34_w1wgp"]
 [ext_resource type="AudioStream" uid="uid://dh7bny4e0qck3" path="res://Files/Sounds/Test/Parry test sound.ogg" id="36_lj38e"]
+[ext_resource type="Script" uid="uid://dqi7mskeb2nn1" path="res://Files/Player/Player State Machine/PlayerStates/player_state_impulse.gd" id="39_2j8k4"]
 [ext_resource type="Texture2D" uid="uid://cdpq43sccosuu" path="res://Files/Art/Ren_Char/HUD/stamina_bar.png" id="41_5vfry"]
 [ext_resource type="Texture2D" uid="uid://cx2nsaf65d0tr" path="res://Files/Art/Ren_Char/HUD/stamina_bar_base.png" id="41_bjujb"]
 [ext_resource type="Texture2D" uid="uid://cg3nq8xys7v18" path="res://Files/Art/Ren_Char/HUD/hp_bar.png" id="43_0binv"]
@@ -62,13 +63,7 @@ radius = 43.185646
 
 [sub_resource type="Resource" id="Resource_rws8s"]
 script = ExtResource("53_2j8k4")
-duration = 0.1
-transition = 7
-ease = 1
-
-[sub_resource type="Resource" id="Resource_u7sdf"]
-script = ExtResource("53_2j8k4")
-duration = 0.05
+duration = 0.02
 transition = 7
 ease = 1
 
@@ -919,7 +914,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_3wgls"]
 resource_name = "Parry"
-length = 0.8
+length = 0.46666667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -951,10 +946,10 @@ tracks/2/path = NodePath(".:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.033333335, 0.06666667, 0.10000001, 0.13333334, 0.16666667, 0.20000002, 0.23333333, 0.26666665, 0.3, 0.33333337, 0.36666667, 0.40000004, 0.43333334, 0.4666667, 0.5, 0.53333336, 0.56666666, 0.59999996, 0.6333333, 0.6666667, 0.7, 0.73333335, 0.7666667),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.033333335, 0.06666667, 0.10000001, 0.13333334, 0.16666667, 0.20000002, 0.23333335, 0.26666668, 0.3, 0.33333334, 0.36666667, 0.40000004, 0.43333337),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
 }
 tracks/3/type = "method"
 tracks/3/imported = false
@@ -963,14 +958,23 @@ tracks/3/path = NodePath("../StateMachine/PlayerStateParry")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0.56666666, 0.6),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.2, 0.23333333, 0.2666667, 0.46666667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "values": [{
+"args": [],
+"method": &"parry_sound"
+}, {
+"args": [false],
+"method": &"set_camera"
+}, {
 "args": [false],
 "method": &"stop_enemies"
 }, {
 "args": [],
 "method": &"damage"
+}, {
+"args": [],
+"method": &"finish"
 }]
 }
 
@@ -1618,6 +1622,8 @@ advance_mode = 2
 switch_mode = 2
 advance_mode = 2
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xmo65"]
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_k01om"]
 states/Attack_1/node = SubResource("AnimationNodeBlendTree_rc42w")
 states/Attack_1/position = Vector2(592, 218.74823)
@@ -1663,8 +1669,8 @@ states/Run_Into/position = Vector2(897, 211.74823)
 states/Run_Outo/node = SubResource("AnimationNodeBlendTree_jfhdu")
 states/Run_Outo/position = Vector2(592, 100)
 states/Start/position = Vector2(141, 100)
-transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_jfhdu"), "Jump_In", "Jump_Up", SubResource("AnimationNodeStateMachineTransition_b7mps"), "Fall_In", "Fall_Down", SubResource("AnimationNodeStateMachineTransition_nq61r"), "Idle", "Jump_In", SubResource("AnimationNodeStateMachineTransition_wupy3"), "Jump_Up", "Fall_In", SubResource("AnimationNodeStateMachineTransition_d2je2"), "Fall_Down", "Fall_Land", SubResource("AnimationNodeStateMachineTransition_o5t8f"), "Fall_Land", "Idle", SubResource("AnimationNodeStateMachineTransition_7gb7o"), "Idle", "Run_Into", SubResource("AnimationNodeStateMachineTransition_ymdj2"), "Run_Into", "Run", SubResource("AnimationNodeStateMachineTransition_8g5nk"), "Run_Outo", "Idle", SubResource("AnimationNodeStateMachineTransition_4y4ix"), "Run", "Run_Outo", SubResource("AnimationNodeStateMachineTransition_mxxul"), "Fall_Land", "Run_Into", SubResource("AnimationNodeStateMachineTransition_mb2i3"), "Run", "Jump_In", SubResource("AnimationNodeStateMachineTransition_xkakj"), "Idle", "Attack_1", SubResource("AnimationNodeStateMachineTransition_lj38e"), "Attack_1", "Attack_2", SubResource("AnimationNodeStateMachineTransition_006p8"), "Attack_2", "Attack_3", SubResource("AnimationNodeStateMachineTransition_ubu71"), "Attack_3", "Attack_3_Out", SubResource("AnimationNodeStateMachineTransition_5vfry"), "Attack_3_Out", "Idle", SubResource("AnimationNodeStateMachineTransition_0binv"), "Idle", "Fall_Down", SubResource("AnimationNodeStateMachineTransition_w2g86"), "Attack_1", "Run_Into", SubResource("AnimationNodeStateMachineTransition_lr0x8"), "Attack_2", "Run_Into", SubResource("AnimationNodeStateMachineTransition_w1wgp"), "Attack_3", "Run_Into", SubResource("AnimationNodeStateMachineTransition_8brd3"), "Run", "Fall_Down", SubResource("AnimationNodeStateMachineTransition_68gp7"), "Jump_Up", "Attack_1", SubResource("AnimationNodeStateMachineTransition_n7hf0"), "Attack_1", "Attack_1_Out", SubResource("AnimationNodeStateMachineTransition_bjujb"), "Attack_1_Out", "Idle", SubResource("AnimationNodeStateMachineTransition_67kig"), "Attack_2_Out", "Idle", SubResource("AnimationNodeStateMachineTransition_0aer2"), "Run_Into", "Idle", SubResource("AnimationNodeStateMachineTransition_u7sdf"), "Run", "Attack_1", SubResource("AnimationNodeStateMachineTransition_2j8k4"), "Fall_Down", "Attack_1", SubResource("AnimationNodeStateMachineTransition_3wgls"), "Attack_2", "Attack_2_Out", SubResource("AnimationNodeStateMachineTransition_dlm32"), "Jump_Up", "Down_Attack", SubResource("AnimationNodeStateMachineTransition_rws8s"), "Fall_Down", "Down_Attack", SubResource("AnimationNodeStateMachineTransition_8a4i2"), "Down_Attack", "Idle", SubResource("AnimationNodeStateMachineTransition_cqt2j"), "Idle", "Block_In", SubResource("AnimationNodeStateMachineTransition_36ob5"), "Block_Out", "Idle", SubResource("AnimationNodeStateMachineTransition_kjklu"), "Block_In", "Block_Loop", SubResource("AnimationNodeStateMachineTransition_e1od2"), "Block_Loop", "Block_Hit", SubResource("AnimationNodeStateMachineTransition_cs24g"), "Block_Loop", "Block_Out", SubResource("AnimationNodeStateMachineTransition_wh4vn"), "Parry", "Idle", SubResource("AnimationNodeStateMachineTransition_poql3"), "Block_Loop", "Parry", SubResource("AnimationNodeStateMachineTransition_671km"), "Block_Hit", "Block_Loop", SubResource("AnimationNodeStateMachineTransition_gw57f")]
-graph_offset = Vector2(-72.81674, -287.333)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_jfhdu"), "Jump_In", "Jump_Up", SubResource("AnimationNodeStateMachineTransition_b7mps"), "Fall_In", "Fall_Down", SubResource("AnimationNodeStateMachineTransition_nq61r"), "Idle", "Jump_In", SubResource("AnimationNodeStateMachineTransition_wupy3"), "Jump_Up", "Fall_In", SubResource("AnimationNodeStateMachineTransition_d2je2"), "Fall_Down", "Fall_Land", SubResource("AnimationNodeStateMachineTransition_o5t8f"), "Fall_Land", "Idle", SubResource("AnimationNodeStateMachineTransition_7gb7o"), "Idle", "Run_Into", SubResource("AnimationNodeStateMachineTransition_ymdj2"), "Run_Into", "Run", SubResource("AnimationNodeStateMachineTransition_8g5nk"), "Run_Outo", "Idle", SubResource("AnimationNodeStateMachineTransition_4y4ix"), "Run", "Run_Outo", SubResource("AnimationNodeStateMachineTransition_mxxul"), "Fall_Land", "Run_Into", SubResource("AnimationNodeStateMachineTransition_mb2i3"), "Run", "Jump_In", SubResource("AnimationNodeStateMachineTransition_xkakj"), "Idle", "Attack_1", SubResource("AnimationNodeStateMachineTransition_lj38e"), "Attack_1", "Attack_2", SubResource("AnimationNodeStateMachineTransition_006p8"), "Attack_2", "Attack_3", SubResource("AnimationNodeStateMachineTransition_ubu71"), "Attack_3", "Attack_3_Out", SubResource("AnimationNodeStateMachineTransition_5vfry"), "Attack_3_Out", "Idle", SubResource("AnimationNodeStateMachineTransition_0binv"), "Idle", "Fall_Down", SubResource("AnimationNodeStateMachineTransition_w2g86"), "Attack_1", "Run_Into", SubResource("AnimationNodeStateMachineTransition_lr0x8"), "Attack_2", "Run_Into", SubResource("AnimationNodeStateMachineTransition_w1wgp"), "Attack_3", "Run_Into", SubResource("AnimationNodeStateMachineTransition_8brd3"), "Run", "Fall_Down", SubResource("AnimationNodeStateMachineTransition_68gp7"), "Jump_Up", "Attack_1", SubResource("AnimationNodeStateMachineTransition_n7hf0"), "Attack_1", "Attack_1_Out", SubResource("AnimationNodeStateMachineTransition_bjujb"), "Attack_1_Out", "Idle", SubResource("AnimationNodeStateMachineTransition_67kig"), "Attack_2_Out", "Idle", SubResource("AnimationNodeStateMachineTransition_0aer2"), "Run_Into", "Idle", SubResource("AnimationNodeStateMachineTransition_u7sdf"), "Run", "Attack_1", SubResource("AnimationNodeStateMachineTransition_2j8k4"), "Fall_Down", "Attack_1", SubResource("AnimationNodeStateMachineTransition_3wgls"), "Attack_2", "Attack_2_Out", SubResource("AnimationNodeStateMachineTransition_dlm32"), "Jump_Up", "Down_Attack", SubResource("AnimationNodeStateMachineTransition_rws8s"), "Fall_Down", "Down_Attack", SubResource("AnimationNodeStateMachineTransition_8a4i2"), "Down_Attack", "Idle", SubResource("AnimationNodeStateMachineTransition_cqt2j"), "Idle", "Block_In", SubResource("AnimationNodeStateMachineTransition_36ob5"), "Block_Out", "Idle", SubResource("AnimationNodeStateMachineTransition_kjklu"), "Block_In", "Block_Loop", SubResource("AnimationNodeStateMachineTransition_e1od2"), "Block_Loop", "Block_Hit", SubResource("AnimationNodeStateMachineTransition_cs24g"), "Block_Loop", "Block_Out", SubResource("AnimationNodeStateMachineTransition_wh4vn"), "Parry", "Idle", SubResource("AnimationNodeStateMachineTransition_poql3"), "Block_Loop", "Parry", SubResource("AnimationNodeStateMachineTransition_671km"), "Block_Hit", "Block_Loop", SubResource("AnimationNodeStateMachineTransition_gw57f"), "Idle", "Parry", SubResource("AnimationNodeStateMachineTransition_xmo65")]
+graph_offset = Vector2(-72.81674, -133.75346)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hylex"]
 radius = 7.0
@@ -1691,7 +1697,7 @@ stream_0/stream = ExtResource("34_w1wgp")
 process_mode = 3
 z_index = 2
 collision_layer = 129
-collision_mask = 22
+collision_mask = 278
 floor_snap_length = 32.0
 safe_margin = 0.5
 script = ExtResource("1_usf6g")
@@ -1703,7 +1709,7 @@ hframes = 5
 
 [node name="AttackArea" type="Area2D" parent="Ren_Sprite" unique_id=1539410476]
 visible = false
-collision_mask = 6
+collision_mask = 70
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ren_Sprite/AttackArea" unique_id=1078341602]
 position = Vector2(26, 2)
@@ -1727,13 +1733,6 @@ position = Vector2(26, -18)
 script = ExtResource("52_u7sdf")
 zoom = Vector2(2.435, 2.435)
 tween_resource = SubResource("Resource_rws8s")
-metadata/_custom_type_script = "uid://bhexx6mj1xv3q"
-
-[node name="ParryCamera_2" type="Node2D" parent="Ren_Sprite/ParryCamera" unique_id=581112007]
-position = Vector2(4, -13)
-script = ExtResource("52_u7sdf")
-zoom = Vector2(2.96, 2.96)
-tween_resource = SubResource("Resource_u7sdf")
 metadata/_custom_type_script = "uid://bhexx6mj1xv3q"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=455791153]
@@ -1774,6 +1773,15 @@ position = Vector2(0, 5)
 scale = Vector2(1, 1.1199994)
 shape = SubResource("CapsuleShape2D_hylex")
 
+[node name="Area2D" type="Area2D" parent="." unique_id=1256634722]
+collision_mask = 256
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=93799846]
+position = Vector2(0, 5)
+scale = Vector2(1, 1.1199994)
+shape = SubResource("CapsuleShape2D_hylex")
+debug_color = Color(0.30384836, 0.62802285, 1.92523e-07, 0.41960785)
+
 [node name="StateMachine" type="Node" parent="." unique_id=1417261840 node_paths=PackedStringArray("default_state")]
 script = ExtResource("2_yic5t")
 default_state = NodePath("PlayerStateIdle")
@@ -1813,6 +1821,9 @@ script = ExtResource("14_apb16")
 
 [node name="PlayerStateParry" type="Node" parent="StateMachine" unique_id=54469521]
 script = ExtResource("25_kkssc")
+
+[node name="PlayerStateImpulse" type="Node" parent="StateMachine" unique_id=1617834026]
+script = ExtResource("39_2j8k4")
 
 [node name="PlayerRayCast" type="Node2D" parent="." unique_id=1611989686]
 visible = false
@@ -1872,9 +1883,9 @@ anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 235.0
-offset_top = -35.0
+offset_top = -29.0
 offset_right = 374.0
-offset_bottom = -7.0
+offset_bottom = -1.0
 grow_vertical = 0
 value = 100.0
 texture_under = ExtResource("41_bjujb")
@@ -1891,9 +1902,9 @@ texture_progress = ExtResource("31_k01om")
 
 [node name="hpbar" type="TextureProgressBar" parent="HUD" unique_id=1587768190]
 offset_left = 99.0
-offset_top = 235.0
+offset_top = 241.0
 offset_right = 238.0
-offset_bottom = 263.0
+offset_bottom = 269.0
 value = 100.0
 fill_mode = 1
 texture_under = ExtResource("44_67kig")
@@ -1918,3 +1929,4 @@ texture = ExtResource("30_fq8mf")
 [connection signal="body_entered" from="Ren_Sprite/AttackArea" to="." method="_on_attack_area_body_entered"]
 [connection signal="area_entered" from="Ren_Sprite/DownAttackArea" to="." method="_on_down_attack_area_area_entered"]
 [connection signal="body_entered" from="Ren_Sprite/DownAttackArea" to="." method="_on_down_attack_area_body_entered"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

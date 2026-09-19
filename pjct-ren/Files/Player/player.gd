@@ -68,12 +68,11 @@ func take_damage(damage, node, sprite, hitstun): #control del damage
 		animation_machine.travel("Block_Hit")
 	PlayerStatsComponent.can_recive_damage = true
 
+
 func stamina_gift(): #aumento de stamina por parry
 	if PlayerStatsComponent.max_stamina > PlayerStatsComponent.current_stamina + 50:
 		PlayerStatsComponent.current_stamina += 50
 	else: PlayerStatsComponent.current_stamina = PlayerStatsComponent.max_stamina
-	
-	
 	
 	var label = Label.new()
 	label.text = "STAMINA + 50"
@@ -88,29 +87,48 @@ func stamina_gift(): #aumento de stamina por parry
 	tween.tween_property(label, "modulate:a", 0.0, 0.8)
 	tween.tween_callback(label.queue_free)
 
+
 func execute_parry(damage:float, node):
 	PlayerStatsComponent.can_recive_damage = false
 	state_machine.change_to("PlayerStateParry")
 	$StateMachine/PlayerStateParry.parry(damage, node)
 
+
 func show_HUD(value:bool):
 	if value: $HUD.show()
 	else: $HUD.hide()
+
+
+func impulse(direction:Vector2,speed:float):
+	state_machine.change_to("PlayerStateImpulse")
+	$StateMachine/PlayerStateImpulse.start_impulse(direction,speed)
 #endregion
 
 #region SIGNALS
+
+
 #colision de los ataques
 func _on_attack_area_body_entered(body: Node2D) -> void:
 	body.take_damage(PlayerStatsComponent.damage,self,$StateMachine/PlayerStateAttack.hitstun,GlobalParameters.HIT)
 func _on_attack_area_area_entered(area: Area2D) -> void:
 	if area.is_in_group("Enemie_Bullet") and area.can_parry:
 		area.counter(self)
+	elif area.is_in_group("Pulse"):
+		if area.global_position.x > global_position.x:
+			impulse(Vector2.LEFT, 1000)
+		elif area.global_position.x < global_position.x:
+			impulse(Vector2.RIGHT, 1000)
 
 func _on_down_attack_area_body_entered(body: Node2D) -> void:
 	body.take_damage(PlayerStatsComponent.damage * 3,self,$StateMachine/PlayerStateAttack.hitstun,GlobalParameters.HIT)
 func _on_down_attack_area_area_entered(area: Area2D) -> void:
 	if area.is_in_group("Enemie_Bullet") and area.can_parry:
 		area.counter(self)
+	elif area.is_in_group("Pulse"):
+		if area.global_position.y > global_position.y:
+			impulse(Vector2.UP, 500)
+		elif area.global_position.y < global_position.y:
+			impulse(Vector2.DOWN, 500)
 #endregion
 
 #region USEFUL
@@ -223,3 +241,7 @@ func add_phantom():
 	tween.tween_callback(phantom.queue_free)
 	tween.tween_callback(tween.kill)
 #endregion
+
+
+func _on_area_2d_area_entered(area: Area2D) -> void:
+	PlayerStatsComponent.current_hp -= 100

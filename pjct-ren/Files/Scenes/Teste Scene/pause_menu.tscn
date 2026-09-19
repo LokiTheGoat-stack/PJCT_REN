@@ -37,7 +37,6 @@ theme_override_font_sizes/font_size = 16
 text = "MAIN MENU 🥶🥶🥶"
 
 [node name="Titulo" type="Sprite2D" parent="." unique_id=1296324600]
-modulate = Color(0.49019608, 0.6, 0.7294118, 1)
 position = Vector2(153, 78)
 texture = ExtResource("2_xot18")
 

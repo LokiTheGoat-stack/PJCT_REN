@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://bbfk8spno7b"]
+
+[ext_resource type="Script" uid="uid://b77mwr42a8joq" path="res://Files/Objects/Impulse/Scripts/up_impulse.gd" id="1_5qxd0"]
+[ext_resource type="Texture2D" uid="uid://doros04gbnwot" path="res://Files/Art/Objects/Impulse/up_impulse.png" id="2_5qxd0"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hylex"]
+radius = 68.06615
+
+[node name="UpImpulse" type="Area2D" unique_id=2131041367]
+script = ExtResource("1_5qxd0")
+
+[node name="Pulse" type="Sprite2D" parent="." unique_id=303369566]
+texture = ExtResource("2_5qxd0")
+
+[node name="CollisionPolygon2D" type="CollisionShape2D" parent="." unique_id=192515830]
+shape = SubResource("CircleShape2D_hylex")
+
+[node name="Mark" type="Node2D" parent="." unique_id=619097365]
+
+[node name="Marker2D" type="Marker2D" parent="Mark" unique_id=1897250634]
+
+[node name="Marker2D2" type="Marker2D" parent="Mark" unique_id=1685235020]
+position = Vector2(0, -50)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

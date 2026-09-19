@@ -101,6 +101,9 @@ func on_input(event: InputEvent) -> void:
 		if Input.is_action_just_pressed("ATTACK") and PlayerStatsComponent.can_attack:
 			if Input.is_action_pressed("LEFT"): current_direction = -1
 			elif Input.is_action_pressed("RIGHT"): current_direction = 1
+			elif Input.is_action_pressed("DOWN"):
+				can_combo = false
+				execute_down_attack()
 			if can_combo:
 				can_combo = false
 				combo_count += 1

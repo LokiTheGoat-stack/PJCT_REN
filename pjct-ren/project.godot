@@ -40,6 +40,8 @@ enabled=PackedStringArray("res://addons/phantom_camera/plugin.cfg")
 Player=""
 Enemies=""
 Enemie_Bullet=""
+Pulse=""
+Impulse=""
 
 [input]
 

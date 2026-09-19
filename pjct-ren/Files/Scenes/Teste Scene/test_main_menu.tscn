@@ -36,9 +36,10 @@ theme_override_font_sizes/font_size = 16
 text = "EXIT 😴😴😴"
 
 [node name="Titulo" type="Sprite2D" parent="." unique_id=294287951]
-modulate = Color(0.49019608, 0.6, 0.7294118, 1)
 position = Vector2(323, 80)
 texture = ExtResource("2_54q5c")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1535241613]
 
 [connection signal="pressed" from="VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]

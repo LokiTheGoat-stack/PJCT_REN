@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://dle51sti7ywgu"]
+
+[ext_resource type="Texture2D" uid="uid://lkbnrhtqirk0" path="res://Files/Art/Objects/Impulse/pulse.png" id="1_13mdt"]
+[ext_resource type="Script" uid="uid://dprelhrjpuf21" path="res://Files/Objects/Impulse/Scripts/pulse.gd" id="1_cq2an"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hylex"]
+radius = 21.0
+
+[node name="Pulse" type="Area2D" unique_id=2131041367]
+collision_layer = 64
+script = ExtResource("1_cq2an")
+
+[node name="Pulse" type="Sprite2D" parent="." unique_id=303369566]
+texture = ExtResource("1_13mdt")
+
+[node name="CollisionPolygon2D" type="CollisionShape2D" parent="." unique_id=192515830]
+shape = SubResource("CircleShape2D_hylex")

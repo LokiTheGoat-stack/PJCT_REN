@@ -1,8 +1,7 @@
 extends PlayerStateBase
 
 @onready var enemies: Node2D = $"../../../Enemies"
-@onready var parry_camera_1: PhantomCamera2D = $"../../Ren_Sprite/ParryCamera/ParryCamera_1"
-@onready var parry_camera_2: PhantomCamera2D = $"../../Ren_Sprite/ParryCamera/ParryCamera_2"
+@onready var parry_camera: PhantomCamera2D = $"../../Ren_Sprite/ParryCamera/ParryCamera_1"
 @onready var SHADER_MATERIAL = load("uid://tvndjc42kayr")
 @onready var canvas_modulate: CanvasModulate = $"../../CanvasModulate"
 
@@ -29,6 +28,7 @@ func parry(damage:float, node):
 	await set_canvas_color(true)
 	start_parry()
 
+
 func set_canvas_color(value:bool):
 	var tween: Tween = create_tween()
 	
@@ -41,17 +41,19 @@ func set_canvas_color(value:bool):
 			SHADER_MATERIAL.shader = SHADED
 		_: pass
 
-func start_parry():
+func parry_sound():
 	controlled_node.sounds._parry()
-	parry_camera_1.set_priority(20)
+
+func set_camera(value:bool):
+	match value:
+		true: parry_camera.set_priority(20)
+		false: parry_camera.set_priority(0)
+		_: pass
+
+func start_parry():
+	set_camera(true)
 	await get_tree().create_timer(0.1).timeout
 	controlled_node.animation_machine.travel("Parry")
-	await controlled_node.activate_slow_motion(0.3,0.07)
-	parry_camera_2.set_priority(30)
-	parry_camera_1.set_priority(0)
-	await get_tree().create_timer(0.4).timeout
-	parry_camera_2.set_priority(0)
-	finish()
 
 func finish():
 	set_canvas_color(false)
