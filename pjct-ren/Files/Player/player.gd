@@ -99,9 +99,9 @@ func show_HUD(value:bool):
 	else: $HUD.hide()
 
 
-func impulse(direction:Vector2,speed:float):
+func impulse(direction:Vector2,speed:float,node):
 	state_machine.change_to("PlayerStateImpulse")
-	$StateMachine/PlayerStateImpulse.start_impulse(direction,speed)
+	$StateMachine/PlayerStateImpulse.start_impulse(direction,speed,node)
 #endregion
 
 #region SIGNALS
@@ -115,9 +115,9 @@ func _on_attack_area_area_entered(area: Area2D) -> void:
 		area.counter(self)
 	elif area.is_in_group("Pulse"):
 		if area.global_position.x > global_position.x:
-			impulse(Vector2.LEFT, 1000)
+			impulse(Vector2.LEFT, 1000,area)
 		elif area.global_position.x < global_position.x:
-			impulse(Vector2.RIGHT, 1000)
+			impulse(Vector2.RIGHT, 1000,area)
 
 func _on_down_attack_area_body_entered(body: Node2D) -> void:
 	body.take_damage(PlayerStatsComponent.damage * 3,self,$StateMachine/PlayerStateAttack.hitstun,GlobalParameters.HIT)
@@ -126,9 +126,9 @@ func _on_down_attack_area_area_entered(area: Area2D) -> void:
 		area.counter(self)
 	elif area.is_in_group("Pulse"):
 		if area.global_position.y > global_position.y:
-			impulse(Vector2.UP, 500)
+			impulse(Vector2.UP, 500,area)
 		elif area.global_position.y < global_position.y:
-			impulse(Vector2.DOWN, 500)
+			impulse(Vector2.DOWN, 500,area)
 #endregion
 
 #region USEFUL

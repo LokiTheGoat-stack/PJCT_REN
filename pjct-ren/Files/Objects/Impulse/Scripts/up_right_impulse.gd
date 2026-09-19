@@ -20,7 +20,7 @@ func _process(delta: float) -> void:
 func _input(event: InputEvent) -> void:
 	if can_interact:
 		if Input.is_action_just_pressed("JUMP"):
-			player.impulse(Vector2(1,-1), 500)
+			player.impulse(Vector2(1,-1), 500,self)
 			can_interact = false
 
 

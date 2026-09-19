@@ -12,11 +12,8 @@ const UNSHADED = preload("uid://dkardyj33mh5y")
 var target
 var attack_damage
 
-#region ALWAYS_ON_FUNC
 
-
-#endregion
-
+#funcion de inicio del estado / establecimiento de parametros
 func parry(damage:float, node):
 	stop_enemies(true)
 	target = node
@@ -28,7 +25,22 @@ func parry(damage:float, node):
 	await set_canvas_color(true)
 	start_parry()
 
+#iniciar animacion
+func start_parry():
+	set_camera(true)
+	await get_tree().create_timer(0.1).timeout
+	controlled_node.animation_machine.travel("Parry")
 
+#salir del estado
+func finish():
+	set_canvas_color(false)
+	controlled_node.animation_machine.travel("Idle")
+	state_machine.change_to("PlayerStateIdle")
+	PlayerStatsComponent.can_recive_damage = true
+
+
+
+#oscurecimiento del ambiente (Canvas Modulate)
 func set_canvas_color(value:bool):
 	var tween: Tween = create_tween()
 	
@@ -41,29 +53,22 @@ func set_canvas_color(value:bool):
 			SHADER_MATERIAL.shader = SHADED
 		_: pass
 
+#sonido de parry
 func parry_sound():
 	controlled_node.sounds._parry()
 
+#acercar camara
 func set_camera(value:bool):
 	match value:
 		true: parry_camera.set_priority(20)
 		false: parry_camera.set_priority(0)
 		_: pass
 
-func start_parry():
-	set_camera(true)
-	await get_tree().create_timer(0.1).timeout
-	controlled_node.animation_machine.travel("Parry")
-
-func finish():
-	set_canvas_color(false)
-	controlled_node.animation_machine.travel("Idle")
-	state_machine.change_to("PlayerStateIdle")
-	PlayerStatsComponent.can_recive_damage = true
-
+#funcion de control del daño
 func damage():
 	target.take_damage(attack_damage * 5, target, PlayerStatsComponent.parry_hitstun, GlobalParameters.HIT)
 
+#parar el procesamiento de los enemigos
 func stop_enemies(value:bool):
 	match value:
 		true:

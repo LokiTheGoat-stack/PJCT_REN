@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://h2grd1et514v"
+path="res://.godot/imported/REN (Main Theme) P2_trans.ogg-8d9f48dfd0f4dad7238c272b75650e9b.oggvorbisstr"
+
+[deps]
+
+source_file="res://Files/Sounds/Music/REN Theme/REN (Main Theme) P2_trans.ogg"
+dest_files=["res://.godot/imported/REN (Main Theme) P2_trans.ogg-8d9f48dfd0f4dad7238c272b75650e9b.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0.0
+bpm=135.0
+beat_count=0
+bar_beats=4

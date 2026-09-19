@@ -3,7 +3,6 @@ extends PlayerStateBase
 @onready var mana_bar: TextureProgressBar = $"../../HUD/manaBar"
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-var is_animation_play: bool = false
 var last_state: String
 
 func time_for_parry():
@@ -21,16 +20,16 @@ func on_physics_process(delta) -> void:
 	elif PlayerStatsComponent.current_stamina <= 0:
 		PlayerStatsComponent.current_stamina = 0
 		mana_bar.modulate = Color(1.0, 0.0, 0.0)
+		match last_state:
+			"PlayerStateIdle": controlled_node.animation_machine.travel("Idle")
+			"PlayerStateWalk": controlled_node.animation_machine.travel("Run_Intro")
+			_: pass
 		state_machine.change_to(last_state)
-		is_animation_play = false 
 	
-	
-	if is_animation_play == false: play_animation()
 	
 	# Si no estas en el piso cambiar al estado Fall
 	if controlled_node.is_on_floor() == false:
 		state_machine.change_to("PlayerStateFall")
-		is_animation_play = false
 	
 	handle_gravity(delta)
 	controlled_node.move_and_slide()
@@ -43,14 +42,9 @@ func on_input(event: InputEvent) -> void:
 			"PlayerStateWalk": controlled_node.animation_machine.travel("Run")
 			_: pass
 		state_machine.change_to(last_state)
-		is_animation_play = false
 		PlayerMovementStats.is_block = false
 	elif Input.is_action_pressed("BLOCK"): PlayerMovementStats.is_block = true
 #endregion
-
-func play_animation() -> void: #control de animacion
-	is_animation_play = true
-	#$"../../AnimationPlayer".play("Block")
 
 func handle_gravity(delta) -> void: #control de gravedad
 	controlled_node.velocity.y += gravity * delta

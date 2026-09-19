@@ -4,10 +4,15 @@ class_name CameraDirector
 @onready var follow_camera: PhantomCamera2D = $FollowCamera
 @onready var group_camera: PhantomCamera2D = $GroupCamera
 
+#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+#TODOS ESTOS SCRIPTS SON PROVISIONALES
+#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
 func _process(delta: float) -> void:
 	#OFFSET de la camara
-	if $"../Player".velocity.x > 0: change_camera_offset("x",50,delta)
-	elif $"../Player".velocity.x < 0: change_camera_offset("x",-50,delta)
+	if $"../Player".velocity.x > 0: change_camera_offset("x",80,delta)
+	elif $"../Player".velocity.x < 0: change_camera_offset("x",-80,delta)
 	if $"../Player".velocity.y > 0: change_camera_offset("y",-20,delta)
 	elif $"../Player".velocity.y < 0: change_camera_offset("y",-30,delta)
 	else: change_camera_offset("y",-50,delta)

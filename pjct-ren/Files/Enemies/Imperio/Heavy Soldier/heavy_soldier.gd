@@ -15,7 +15,7 @@ class_name HeavySoldier
 @export var walk_speed: float = 30
 @export var run_speed: float = 85
 @export var hp: float = 600
-@export var attack_damage: float = 60
+@export var attack_damage: float = 1
 @export var waypints: Array[Marker2D]
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
