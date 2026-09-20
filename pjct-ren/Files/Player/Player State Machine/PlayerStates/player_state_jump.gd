@@ -28,7 +28,6 @@ func on_physics_process(delta) -> void:
 		print("jump_fall")
 		x_speed = PlayerMovementStats.in_air_speed
 		controlled_node.animation_machine.travel("Fall_Down")
-		PlayerMovementStats.jump_count = 0
 		state_machine.change_to("PlayerStateFall")
 
 	#control de colision del raycast
@@ -47,7 +46,6 @@ func on_physics_process(delta) -> void:
 		print("jump_top_fall")
 		x_speed = PlayerMovementStats.in_air_speed
 		controlled_node.animation_machine.travel("Fall_Down")
-		PlayerMovementStats.jump_count = 0
 		state_machine.change_to("PlayerStateFall")
 	
 	#si estas pegado a una pared y no estas tocando el suelo cambiar a Wall_Slide
@@ -63,7 +61,6 @@ func on_input(event: InputEvent) -> void:
 		#Cambiar a Dash
 		if Input.is_action_just_pressed("DASH"):
 			x_speed = PlayerMovementStats.in_air_speed
-			check_can_jump(false)
 			state_machine.change_to("PlayerStateDash")
 			$"../PlayerStateDash".dash("PlayerStateJump",false,false)
 		
@@ -71,18 +68,13 @@ func on_input(event: InputEvent) -> void:
 		if Input.is_action_just_pressed("ATTACK") and PlayerStatsComponent.can_combat:
 			if Input.is_action_pressed("DOWN"):
 				x_speed = PlayerMovementStats.in_air_speed
-				check_can_jump(false)
 				state_machine.change_to("PlayerStateAttack")
 				$"../PlayerStateAttack".on_enter(false,"down")
 			elif PlayerStatsComponent.can_attack:
 				x_speed = PlayerMovementStats.in_air_speed
-				check_can_jump(false)
 				state_machine.change_to("PlayerStateAttack")
 				$"../PlayerStateAttack".on_enter(true,"normal")
 #endregion
-
-func check_can_jump(can_jump:bool):
-	if can_jump: controlled_node.velocity.y = PlayerMovementStats.jump_speed
 
 func play_animation() -> void: #control de animacion
 	controlled_node.animation_machine.travel("Jump_Up")

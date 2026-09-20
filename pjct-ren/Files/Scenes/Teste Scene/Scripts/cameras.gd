@@ -4,10 +4,14 @@ class_name CameraDirector
 @onready var follow_camera: PhantomCamera2D = $FollowCamera
 @onready var group_camera: PhantomCamera2D = $GroupCamera
 
+var current_camera: PhantomCamera2D
+
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 #TODOS ESTOS SCRIPTS SON PROVISIONALES
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
+func _ready() -> void:
+	current_camera = follow_camera
 
 func _process(delta: float) -> void:
 	#OFFSET de la camara
@@ -22,9 +26,9 @@ func change_camera_offset(eje:String,value:float,delta):
 	var tween = create_tween()
 	match eje:
 		"x": 
-			follow_camera.follow_offset.x = lerp(follow_camera.follow_offset.x,value,5.0 * delta)
+			current_camera.follow_offset.x = lerp(follow_camera.follow_offset.x,value,5.0 * delta)
 		"y": 
-			follow_camera.follow_offset.y = lerp(follow_camera.follow_offset.y,value,10.0 * delta)
+			current_camera.follow_offset.y = lerp(follow_camera.follow_offset.y,value,10.0 * delta)
 		_: pass
 
 
@@ -42,8 +46,10 @@ func _on_area_enemie_detect_body_exited(body: Node2D) -> void:
 
 func _on_inicio_plataformas_body_entered(body: Node2D) -> void:
 	$"Inicio Plataformas/PathPlataformasInicio".set_priority(10)
+	current_camera = $"Inicio Plataformas/PathPlataformasInicio"
 func _on_inicio_plataformas_body_exited(body: Node2D) -> void:
 	$"Inicio Plataformas/PathPlataformasInicio".set_priority(0)
+	current_camera = follow_camera
 
 
 

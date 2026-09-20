@@ -81,7 +81,9 @@ func finish_dash():
 		else:
 			controlled_node.animation_machine.travel("Idle")
 			state_machine.change_to("PlayerStateIdle")
-	else: state_machine.change_to("PlayerStateFall")
+	else: 
+		controlled_node.animation_machine.travel("Fall_Down")
+		state_machine.change_to("PlayerStateFall")
 	
 	#cooldown
 	await get_tree().create_timer(PlayerMovementStats.dash_cooldown).timeout

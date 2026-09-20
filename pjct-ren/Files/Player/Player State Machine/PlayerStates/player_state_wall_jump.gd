@@ -24,7 +24,7 @@ func on_physics_process(delta) -> void:
 	elif controlled_node.velocity.y > 0:
 		can_fall = false
 		print("wall_jump_fall")
-		PlayerMovementStats.jump_count = 0
+		controlled_node.animation_machine.travel("Fall_Down")
 		state_machine.change_to("PlayerStateFall")
 	
 	#control de colision del raycast

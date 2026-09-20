@@ -67,11 +67,11 @@ func on_input(event: InputEvent) -> void:
 	#Si despues al caer saltas antes de los 0.09s, cambiar a Jump
 	if Input.is_action_just_pressed("JUMP") and last_chance_to_jump == true:
 		last_chance_to_jump = false
+		PlayerMovementStats.jump_count = 1
 		print("Last chance taked")
 		controlled_node.animation_machine.travel("Jump_Up") 
 		controlled_node.velocity.y = PlayerMovementStats.jump_speed
 		state_machine.change_to("PlayerStateJump")
-		PlayerMovementStats.jump_count += 1
 	
 	if PlayerStatsComponent.current_stamina > 0:
 		#Cambiar a Dash
