@@ -6,6 +6,10 @@ const HIT = preload("uid://le8vxcejnla3")
 
 var current_camera: PhantomCamera2D
 var player_camera: Camera2D
+var current_checkpoint: Marker2D
+
+
+
 
 func hit_effect(target:Node,sprite:Texture2D):
 	

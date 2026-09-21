@@ -1,4 +1,5 @@
 extends CanvasLayer
+class_name PauseMenu
 
 var player
 func _ready() -> void:

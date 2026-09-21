@@ -96,12 +96,13 @@ func on_input(event: InputEvent) -> void:
 	if not is_attacking:
 		return
 	
+	if Input.is_action_pressed("LEFT"): current_direction = -1
+	elif Input.is_action_pressed("RIGHT"): current_direction = 1
+	
 	#inputs del ataque
 	if PlayerStatsComponent.current_stamina > 0:
 		if Input.is_action_just_pressed("ATTACK") and PlayerStatsComponent.can_attack:
-			if Input.is_action_pressed("LEFT"): current_direction = -1
-			elif Input.is_action_pressed("RIGHT"): current_direction = 1
-			elif Input.is_action_pressed("DOWN"):
+			if Input.is_action_pressed("DOWN"):
 				can_combo = false
 				execute_down_attack()
 			if can_combo:

@@ -1666,6 +1666,10 @@ graph_offset = Vector2(138.43301, -106.651245)
 radius = 7.0
 height = 32.0
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vir06"]
+radius = 8.0
+height = 38.0
+
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_bjw75"]
 streams_count = 4
 stream_0/stream = ExtResource("24_qdpqe")
@@ -1687,7 +1691,7 @@ stream_0/stream = ExtResource("34_w1wgp")
 process_mode = 3
 z_index = 2
 collision_layer = 129
-collision_mask = 278
+collision_mask = 22
 safe_margin = 0.5
 script = ExtResource("1_usf6g")
 
@@ -1757,19 +1761,17 @@ parameters/Run_Into/TimeScale/scale = 1.0
 parameters/Run_Outo/TimeScale/scale = 1.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=826343510]
-visible = false
 position = Vector2(0, 5)
 scale = Vector2(1, 1.1199994)
 shape = SubResource("CapsuleShape2D_hylex")
 
-[node name="Area2D" type="Area2D" parent="." unique_id=1256634722]
-collision_mask = 256
+[node name="SceneDamageArea" type="Area2D" parent="." unique_id=1256634722]
+collision_mask = 32
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=93799846]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SceneDamageArea" unique_id=938406788]
 position = Vector2(0, 5)
-scale = Vector2(1, 1.1199994)
-shape = SubResource("CapsuleShape2D_hylex")
-debug_color = Color(0.30384836, 0.62802285, 1.92523e-07, 0.41960785)
+shape = SubResource("CapsuleShape2D_vir06")
+debug_color = Color(0.77381104, 0.4425579, 0, 0.41960785)
 
 [node name="StateMachine" type="Node" parent="." unique_id=1417261840 node_paths=PackedStringArray("default_state")]
 script = ExtResource("2_yic5t")
@@ -1871,9 +1873,9 @@ script = ExtResource("29_ftc0o")
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 235.0
+offset_left = 238.0
 offset_top = -29.0
-offset_right = 374.0
+offset_right = 377.0
 offset_bottom = -1.0
 grow_vertical = 0
 value = 100.0
@@ -1918,4 +1920,4 @@ texture = ExtResource("30_fq8mf")
 [connection signal="body_entered" from="Ren_Sprite/AttackArea" to="." method="_on_attack_area_body_entered"]
 [connection signal="area_entered" from="Ren_Sprite/DownAttackArea" to="." method="_on_down_attack_area_area_entered"]
 [connection signal="body_entered" from="Ren_Sprite/DownAttackArea" to="." method="_on_down_attack_area_body_entered"]
-[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="SceneDamageArea" to="." method="_on_scene_damage_area_body_entered"]

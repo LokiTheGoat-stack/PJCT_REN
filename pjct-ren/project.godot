@@ -96,6 +96,17 @@ PARTY={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="Player"
+2d_physics/layer_2="Enemies"
+2d_physics/layer_3="EnemieProjectile"
+2d_physics/layer_4="PlayerProjectile"
+2d_physics/layer_5="Scene"
+2d_physics/layer_6="SceneDamage"
+2d_physics/layer_7="Pulse"
+2d_physics/layer_8="Alt.Player"
+
 [physics]
 
 3d/physics_engine="Jolt Physics"

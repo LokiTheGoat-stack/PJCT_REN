@@ -21,10 +21,9 @@ func _process(_delta):
 	set_facing_direction()
 	
 	#detectar si el jugador murio
-	if PlayerStatsComponent.is_death == true:
+	if PlayerStatsComponent.current_hp <= 0:
+		state_machine.change_to("PlayerStateDeath")
 		state_machine.can_change = false
-		state_machine.current_state = get_node("PlayerStateDeath")
-		state_machine.state_start()
 
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("PARTY") and phantom_on == false:
@@ -105,7 +104,9 @@ func impulse(direction:Vector2,speed:float,node):
 #endregion
 
 #region SIGNALS
-
+#Colision con pinchos
+func _on_scene_damage_area_body_entered(body: Node2D) -> void:
+	PlayerStatsComponent.current_hp -= 100
 
 #colision de los ataques
 func _on_attack_area_body_entered(body: Node2D) -> void:
@@ -241,7 +242,3 @@ func add_phantom():
 	tween.tween_callback(phantom.queue_free)
 	tween.tween_callback(tween.kill)
 #endregion
-
-
-func _on_area_2d_area_entered(area: Area2D) -> void:
-	PlayerStatsComponent.current_hp -= 100

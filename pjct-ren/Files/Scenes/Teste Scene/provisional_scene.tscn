@@ -66,6 +66,7 @@
 [ext_resource type="PackedScene" uid="uid://cpl6ub22bj385" path="res://Files/Objects/Impulse/UP_right_impulse.tscn" id="56_movgu"]
 [ext_resource type="PackedScene" uid="uid://dle51sti7ywgu" path="res://Files/Objects/Impulse/pulse.tscn" id="57_ig1mh"]
 [ext_resource type="PackedScene" uid="uid://drmeqh3p53r0d" path="res://Files/Objects/Impulse/right_impulse.tscn" id="57_oktcq"]
+[ext_resource type="Script" uid="uid://bhr1vw5u5u84m" path="res://Files/Scenes/Teste Scene/Scripts/check_points.gd" id="62_kl4qj"]
 [ext_resource type="Script" uid="uid://dmkyxl5sgqm8o" path="res://Files/Player/Camera/player_camera.gd" id="66_kl4qj"]
 [ext_resource type="AudioStream" uid="uid://7tutfrj86g8u" path="res://Files/Sounds/Music/REN Theme/REN (Main Theme) P1.ogg" id="70_4mik6"]
 [ext_resource type="PackedScene" uid="uid://crcn40xp6f0qe" path="res://Files/Objects/Impulse/down_impulse.tscn" id="70_c8gs5"]
@@ -75,6 +76,7 @@
 [ext_resource type="PackedScene" uid="uid://byld7i1o8y2c7" path="res://Files/Objects/Impulse/DOWN_right_impulse.tscn" id="72_yn63s"]
 [ext_resource type="AudioStream" uid="uid://dod1blnynyeiu" path="res://Files/Sounds/Music/REN Theme/REN (Main Theme) P3.ogg" id="73_o3kdg"]
 [ext_resource type="PackedScene" uid="uid://dgs1d2e6s3i16" path="res://Files/Scenes/Teste Scene/test_main_menu.tscn" id="74_4mik6"]
+[ext_resource type="PackedScene" uid="uid://fy02yoqlymlm" path="res://Files/Scenes/Teste Scene/death_menu.tscn" id="77_xjq06"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_movgu"]
 texture = ExtResource("1_cmevk")
@@ -5872,7 +5874,7 @@ texture_region_size = Vector2i(32, 32)
 
 [sub_resource type="TileSet" id="TileSet_vir06"]
 tile_size = Vector2i(24, 24)
-physics_layer_0/collision_layer = 256
+physics_layer_0/collision_layer = 32
 physics_layer_1/collision_layer = 16
 physics_layer_1/collision_mask = 135
 navigation_layer_0/layers = 1
@@ -6498,6 +6500,80 @@ horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_lock_ = true
 
+[node name="CheckPoints" type="Node2D" parent="." unique_id=57869546]
+script = ExtResource("62_kl4qj")
+
+[node name="Intro" type="Area2D" parent="CheckPoints" unique_id=1481743595]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CheckPoints/Intro" unique_id=110119615]
+polygon = PackedVector2Array(165, 584, 380, 584, 383, -667, 145, -660)
+
+[node name="Marker2D" type="Marker2D" parent="CheckPoints/Intro" unique_id=941735955]
+position = Vector2(272, 490)
+
+[node name="Sky" type="Area2D" parent="CheckPoints" unique_id=1000175066]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CheckPoints/Sky" unique_id=1209912234]
+position = Vector2(2043, -266)
+polygon = PackedVector2Array(165, 584, 380, 584, 383, -667, 145, -660)
+
+[node name="Marker2D" type="Marker2D" parent="CheckPoints/Sky" unique_id=640291250]
+position = Vector2(2303, 209)
+
+[node name="Dash" type="Area2D" parent="CheckPoints" unique_id=412430675]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CheckPoints/Dash" unique_id=1193111380]
+position = Vector2(4825, -72)
+polygon = PackedVector2Array(165, 584, 244, 586, 269, -657, 145, -660)
+
+[node name="Marker2D" type="Marker2D" parent="CheckPoints/Dash" unique_id=715406805]
+position = Vector2(5080, 226)
+
+[node name="WallJump" type="Area2D" parent="CheckPoints" unique_id=1090895079]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CheckPoints/WallJump" unique_id=804814425]
+position = Vector2(5950, -1034)
+polygon = PackedVector2Array(165, 584, 380, 584, 366, 243, 161, 227)
+
+[node name="Marker2D" type="Marker2D" parent="CheckPoints/WallJump" unique_id=2038014513]
+position = Vector2(6202, -745)
+
+[node name="All" type="Area2D" parent="CheckPoints" unique_id=361232950]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CheckPoints/All" unique_id=1836944680]
+position = Vector2(6991, -1802)
+polygon = PackedVector2Array(165, 584, 380, 584, 366, 243, 161, 227)
+
+[node name="Marker2D" type="Marker2D" parent="CheckPoints/All" unique_id=472623978]
+position = Vector2(7250, -1360)
+
+[node name="All2" type="Area2D" parent="CheckPoints" unique_id=1746553333]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CheckPoints/All2" unique_id=348072029]
+position = Vector2(8310, -2067)
+polygon = PackedVector2Array(165, 584, 380, 584, 366, 243, 161, 227)
+
+[node name="Marker2D" type="Marker2D" parent="CheckPoints/All2" unique_id=341867860]
+position = Vector2(8594, -1617)
+
+[node name="Impulse" type="Area2D" parent="CheckPoints" unique_id=1670442721]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CheckPoints/Impulse" unique_id=789309179]
+position = Vector2(9192, -1822)
+polygon = PackedVector2Array(165, 584, 380, 584, 362, -586, 125, -586)
+
+[node name="Marker2D" type="Marker2D" parent="CheckPoints/Impulse" unique_id=1489561636]
+position = Vector2(9473, -1372)
+
+[node name="Impulse2" type="Area2D" parent="CheckPoints" unique_id=1632990008]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CheckPoints/Impulse2" unique_id=265962446]
+position = Vector2(10886, -2102)
+polygon = PackedVector2Array(161, 439, 372, 438, 362, -586, 125, -586)
+
+[node name="Marker2D" type="Marker2D" parent="CheckPoints/Impulse2" unique_id=905464346]
+position = Vector2(11146, -1865)
+
 [node name="Enemies" type="Node2D" parent="." unique_id=759772386]
 
 [node name="WaypointsE1" type="Node2D" parent="Enemies" unique_id=1378350268]
@@ -6606,7 +6682,6 @@ curve = SubResource("Curve2D_cmevk")
 [node name="CuartoInicio" type="Area2D" parent="Cameras" unique_id=1728703960]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Cameras/CuartoInicio" unique_id=459292552]
-visible = false
 polygon = PackedVector2Array(7250, -843, 7255, -1779, 8495, -1802, 8510, -791)
 
 [node name="CuartoCamera" type="Node2D" parent="Cameras/CuartoInicio" unique_id=1677188292 node_paths=PackedStringArray("follow_target", "follow_path")]
@@ -6664,6 +6739,16 @@ shape = SubResource("RectangleShape2D_vir06")
 
 [node name="TestMainMenu" parent="." unique_id=1136506448 instance=ExtResource("74_4mik6")]
 
+[node name="DeathMenu" parent="." unique_id=1476635404 instance=ExtResource("77_xjq06")]
+
+[connection signal="body_entered" from="CheckPoints/Intro" to="CheckPoints" method="_on_intro_body_entered"]
+[connection signal="body_entered" from="CheckPoints/Sky" to="CheckPoints" method="_on_sky_body_entered"]
+[connection signal="body_entered" from="CheckPoints/Dash" to="CheckPoints" method="_on_dash_body_entered"]
+[connection signal="body_entered" from="CheckPoints/WallJump" to="CheckPoints" method="_on_wall_jump_body_entered"]
+[connection signal="body_entered" from="CheckPoints/All" to="CheckPoints" method="_on_all_body_entered"]
+[connection signal="body_entered" from="CheckPoints/All2" to="CheckPoints" method="_on_all_2_body_entered"]
+[connection signal="body_entered" from="CheckPoints/Impulse" to="CheckPoints" method="_on_impulse_body_entered"]
+[connection signal="body_entered" from="CheckPoints/Impulse2" to="CheckPoints" method="_on_impulse_2_body_entered"]
 [connection signal="body_entered" from="Player/AreaEnemieDetect" to="Cameras" method="_on_area_enemie_detect_body_entered"]
 [connection signal="body_exited" from="Player/AreaEnemieDetect" to="Cameras" method="_on_area_enemie_detect_body_exited"]
 [connection signal="body_entered" from="Cameras/Inicio Plataformas" to="Cameras" method="_on_inicio_plataformas_body_entered"]
