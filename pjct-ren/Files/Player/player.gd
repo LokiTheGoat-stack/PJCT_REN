@@ -233,7 +233,7 @@ func add_phantom():
 	phantom.vframes = ren_sprite.vframes
 	phantom.frame = ren_sprite.frame
 	phantom.centered = true
-	if ren_sprite.flip_h: phantom.flip_h = true
+	phantom.scale.x = ren_sprite.scale.x
 	phantom.global_position = global_position
 	phantom.modulate = ren_sprite.modulate
 	get_parent().add_child(phantom)

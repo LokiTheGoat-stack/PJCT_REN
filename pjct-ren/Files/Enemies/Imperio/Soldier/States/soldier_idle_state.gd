@@ -3,7 +3,7 @@ extends EnemieStateBase
 func on_physics_process(delta: float) -> void:
 	#si esta en modo espera cambiar a Idle
 	if not controlled_node.is_waiting:
-		controlled_node.animation_machine.travel("Walk")
+		controlled_node.animation_machine.travel("Patrol")
 		state_machine.change_to("Patrol")
 	
 	#control del movimiento

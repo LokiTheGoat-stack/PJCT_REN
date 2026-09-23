@@ -2,7 +2,20 @@ extends EnemieStateBase
 
 func on_physics_process(delta: float) -> void:
 	
-	controlled_node.direction = (controlled_node.player.global_position - controlled_node.global_position).normalized()
+	#control raycast
+	if not controlled_node.left_down_raycast.is_colliding():
+		controlled_node.direction = Vector2.ZERO
+	elif not controlled_node.right_down_raycast.is_colliding():
+		controlled_node.direction = Vector2.ZERO
+	elif controlled_node.left_raycast.is_colliding() and \
+	controlled_node.player.global_position.x < controlled_node.global_position.x:
+		controlled_node.direction = Vector2.ZERO
+	elif controlled_node.right_raycast.is_colliding() and \
+	controlled_node.player.global_position.x > controlled_node.global_position.x:
+		controlled_node.direction = Vector2.ZERO
+	else: controlled_node.direction = (controlled_node.player.global_position - controlled_node.global_position).normalized()
+	
+	
 	controlled_node.velocity.x = controlled_node.direction.x * controlled_node.run_speed
 	
 	controlled_node.velocity.y += 1600 * delta

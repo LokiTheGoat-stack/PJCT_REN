@@ -351,7 +351,7 @@ animation = &"Walk"
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_sirgr"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_r2b36"]
-graph_offset = Vector2(-312.04883, -23.050308)
+graph_offset = Vector2(-397.81613, 32.917023)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_p77gp")
 nodes/Animation/position = Vector2(-232.15372, 173.74467)
 nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_sirgr")
@@ -364,6 +364,7 @@ animation = &"Run"
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_kft6k"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_mf0j0"]
+graph_offset = Vector2(-126.69934, 9.746094)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_1hetk")
 nodes/Animation/position = Vector2(42.517467, 139.95334)
 nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_kft6k")
@@ -469,12 +470,16 @@ parameters/Patrol/TimeScale/scale = 1.0
 parameters/Run/TimeScale/scale = 1.0
 
 [node name="Collision" type="CollisionShape2D" parent="." unique_id=105257140]
-visible = false
-position = Vector2(0, 10)
+position = Vector2(0, 9)
 shape = SubResource("CapsuleShape2D_8emse")
 
 [node name="WaitingTimer" type="Timer" parent="." unique_id=1989057521]
 wait_time = 3.0
+one_shot = true
+
+[node name="WalkTimer" type="Timer" parent="." unique_id=79450391]
+wait_time = 6.0
+one_shot = true
 
 [node name="StateMachine" type="Node" parent="." unique_id=1756472651 node_paths=PackedStringArray("default_state")]
 script = ExtResource("14_55dvi")
@@ -498,8 +503,29 @@ script = ExtResource("9_p77gp")
 [node name="Death" type="Node" parent="StateMachine" unique_id=1610356130]
 script = ExtResource("10_sirgr")
 
+[node name="Raycast" type="Node2D" parent="." unique_id=1737273640]
+
+[node name="Left_Raycast" type="RayCast2D" parent="Raycast" unique_id=1854425789]
+target_position = Vector2(-30, 0)
+collision_mask = 48
+
+[node name="LeftDown_Raycast" type="RayCast2D" parent="Raycast" unique_id=1435800920]
+position = Vector2(-28, 31)
+target_position = Vector2(0, 15)
+collision_mask = 48
+
+[node name="Right_Raycast" type="RayCast2D" parent="Raycast" unique_id=727938409]
+target_position = Vector2(30, 0)
+collision_mask = 48
+
+[node name="RightDown_Raycast" type="RayCast2D" parent="Raycast" unique_id=1085002693]
+position = Vector2(28, 31)
+target_position = Vector2(0, 15)
+collision_mask = 48
+
 [connection signal="body_entered" from="Body/AgroArea" to="." method="_on_agro_area_body_entered"]
 [connection signal="body_exited" from="Body/AgroArea" to="." method="_on_agro_area_body_exited"]
 [connection signal="body_entered" from="Body/AttackArea" to="." method="_on_attack_area_body_entered"]
 [connection signal="body_exited" from="Body/AttackArea" to="." method="_on_attack_area_body_exited"]
 [connection signal="timeout" from="WaitingTimer" to="." method="_on_waiting_timer_timeout"]
+[connection signal="timeout" from="WalkTimer" to="." method="_on_walk_timer_timeout"]

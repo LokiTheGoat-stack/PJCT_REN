@@ -41,7 +41,6 @@ func on_physics_process(delta):
 	
 	#si estas pegado a una pared y no estas tocando suelo cambiar a Wall_Slide
 	if is_on_wall and not controlled_node.is_on_floor():
-		print("wall_slide")
 		$"../PlayerStateWall_Slide".wall_normal = wall_normal
 		last_chance_to_jump = false
 		state_machine.change_to("PlayerStateWall_Slide")
@@ -68,7 +67,6 @@ func on_input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("JUMP") and last_chance_to_jump == true:
 		last_chance_to_jump = false
 		PlayerMovementStats.jump_count = 1
-		print("Last chance taked")
 		controlled_node.animation_machine.travel("Jump_Up") 
 		controlled_node.velocity.y = PlayerMovementStats.jump_speed
 		state_machine.change_to("PlayerStateJump")

@@ -343,6 +343,11 @@ shape = SubResource("CapsuleShape2D_xlld4")
 
 [node name="WaitingTimer" type="Timer" parent="." unique_id=589130996]
 wait_time = 3.0
+one_shot = true
+
+[node name="WalkTimer" type="Timer" parent="." unique_id=1029268826]
+wait_time = 6.0
+one_shot = true
 
 [node name="Attack Timer" type="Timer" parent="." unique_id=435004077]
 wait_time = 3.0
@@ -369,9 +374,30 @@ script = ExtResource("9_fj007")
 [node name="Death" type="Node" parent="StateMachine" unique_id=525543892]
 script = ExtResource("10_fj007")
 
+[node name="Raycast" type="Node2D" parent="." unique_id=738658211]
+
+[node name="Left_Raycast" type="RayCast2D" parent="Raycast" unique_id=112354840]
+target_position = Vector2(-30, 0)
+collision_mask = 48
+
+[node name="LeftDown_Raycast" type="RayCast2D" parent="Raycast" unique_id=815175967]
+position = Vector2(-28, 31)
+target_position = Vector2(0, 15)
+collision_mask = 48
+
+[node name="Right_Raycast" type="RayCast2D" parent="Raycast" unique_id=1789058218]
+target_position = Vector2(30, 0)
+collision_mask = 48
+
+[node name="RightDown_Raycast" type="RayCast2D" parent="Raycast" unique_id=1748403137]
+position = Vector2(28, 31)
+target_position = Vector2(0, 15)
+collision_mask = 48
+
 [connection signal="body_entered" from="Body/AgroArea" to="." method="_on_agro_area_body_entered"]
 [connection signal="body_exited" from="Body/AgroArea" to="." method="_on_agro_area_body_exited"]
 [connection signal="body_entered" from="Body/AttackArea" to="." method="_on_attack_area_body_entered"]
 [connection signal="body_exited" from="Body/AttackArea" to="." method="_on_attack_area_body_exited"]
 [connection signal="timeout" from="WaitingTimer" to="." method="_on_waiting_timer_timeout"]
+[connection signal="timeout" from="WalkTimer" to="." method="_on_walk_timer_timeout"]
 [connection signal="timeout" from="Attack Timer" to="." method="_on_attack_timer_timeout"]

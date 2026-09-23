@@ -12,6 +12,12 @@ class_name CrossbowSoldier
 @onready var state_machine: EnemieStateMachine = $StateMachine
 @onready var waiting_timer: Timer = $WaitingTimer
 @onready var attack_timer: Timer = $"Attack Timer"
+@onready var walk_timer: Timer = $WalkTimer
+@onready var left_raycast: RayCast2D = $Raycast/Left_Raycast
+@onready var left_down_raycast: RayCast2D = $Raycast/LeftDown_Raycast
+@onready var right_raycast: RayCast2D = $Raycast/Right_Raycast
+@onready var right_down_raycast: RayCast2D = $Raycast/RightDown_Raycast
+
 
 @export var walk_speed: float = 50
 @export var run_speed: float = 100
@@ -106,9 +112,12 @@ func change_shader_parameters(color:Color, mix:float, alpha:float):
 #region SIGNALS
 func _on_waiting_timer_timeout() -> void:
 	is_waiting = false
-
+func _on_walk_timer_timeout() -> void:
+	is_waiting = true
+	waiting_timer.start()
 func _on_attack_timer_timeout() -> void:
 	$StateMachine/Attack.start_attack()
+
 
 func _on_agro_area_body_entered(body: Node2D) -> void:
 	is_attack = true
