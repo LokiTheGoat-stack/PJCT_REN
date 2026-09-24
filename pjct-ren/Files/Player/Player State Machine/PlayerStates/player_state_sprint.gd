@@ -12,7 +12,6 @@ func on_physics_process(delta) -> void:
 	
 	#Si no hay piso cambiar a Fall
 	if not controlled_node.is_on_floor() and controlled_node.velocity.y > 0:
-		print("walk_fall")
 		controlled_node.animation_machine.travel("Fall_Down")
 		state_machine.change_to("PlayerStateFall")
 		$"../PlayerStateFall"._last_chance_to_jump()
@@ -31,7 +30,6 @@ func on_input(event: InputEvent) -> void:
 	
 	#Cambiar a Jump
 	if Input.is_action_just_pressed("JUMP"):
-		print("walk_jump")
 		PlayerMovementStats.jump_count += 1
 		controlled_node.velocity.y = PlayerMovementStats.jump_speed
 		$"../PlayerStateJump".x_speed = PlayerMovementStats.in_air_speed * 2

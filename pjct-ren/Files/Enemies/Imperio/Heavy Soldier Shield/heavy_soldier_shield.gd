@@ -10,7 +10,13 @@ class_name HeavySoldierShield
 @onready var attack_collision: CollisionShape2D = $Body/AttackArea/CollisionShape2D
 @onready var body_collision: CollisionShape2D = $Collision
 @onready var waiting_timer: Timer = $WaitingTimer
+@onready var walk_timer: Timer = $WalkTimer
 @onready var state_machine: EnemieStateMachine = $StateMachine
+@onready var left_raycast: RayCast2D = $Raycast/Left_Raycast
+@onready var left_down_raycast: RayCast2D = $Raycast/LeftDown_Raycast
+@onready var right_raycast: RayCast2D = $Raycast/Right_Raycast
+@onready var right_down_raycast: RayCast2D = $Raycast/RightDown_Raycast
+
 
 @export var walk_speed: float = 30
 @export var run_speed: float = 45
@@ -129,6 +135,9 @@ func change_shader_parameters(color:Color, mix:float, alpha:float):
 #region SIGNALS
 func _on_waiting_timer_timeout() -> void:
 	is_waiting = false
+func _on_walk_timer_timeout() -> void:
+	is_waiting = true
+	waiting_timer.start()
 
 
 func _on_agro_area_body_entered(body: Node2D) -> void:

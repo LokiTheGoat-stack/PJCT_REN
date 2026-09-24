@@ -1,15 +1,39 @@
 extends EnemieStateBase
 
+var direction: float
+var direction_array: Array[float] = [1.0,-1.0]
+
+func start():
+	if not controlled_node.left_down_raycast.is_colliding():
+		direction = 1.0
+	elif not controlled_node.right_down_raycast.is_colliding():
+		direction = -1.0
+	elif controlled_node.left_raycast.is_colliding():
+		direction = 1.0
+	elif controlled_node.right_raycast.is_colliding():
+		direction = -1.0
+	else: direction = direction_array[randi() % direction_array.size()]
+	controlled_node.walk_timer.start()
+
+
 func on_physics_process(delta: float) -> void:
 	#si esta en modo espera cambiar a Idle
 	if controlled_node.is_waiting:
 		controlled_node.animation_machine.travel("Idle")
 		state_machine.change_to("Idle")
 	
+	#control raycast
+	if not controlled_node.left_down_raycast.is_colliding():
+		direction = 1.0
+	elif not controlled_node.right_down_raycast.is_colliding():
+		direction = -1.0
+	elif controlled_node.left_raycast.is_colliding() and controlled_node.velocity.x < 0:
+		direction = 1.0
+	elif controlled_node.right_raycast.is_colliding() and controlled_node.velocity.x > 0:
+		direction = -1.0
+	
 	#control del movimiento
-	set_waypoint_direction()
-	controlled_node.velocity.x = controlled_node.direction.x * controlled_node.walk_speed
-	get_next_waypoint()
+	controlled_node.velocity.x = direction * controlled_node.walk_speed
 	
 	
 	controlled_node.velocity.y += 1600 * delta

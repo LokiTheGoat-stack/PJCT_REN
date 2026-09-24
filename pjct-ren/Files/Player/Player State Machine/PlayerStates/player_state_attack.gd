@@ -98,6 +98,7 @@ func on_input(event: InputEvent) -> void:
 	
 	if Input.is_action_pressed("LEFT"): current_direction = -1
 	elif Input.is_action_pressed("RIGHT"): current_direction = 1
+	else: current_direction = 0
 	
 	#inputs del ataque
 	if PlayerStatsComponent.current_stamina > 0:
@@ -192,7 +193,7 @@ func _attack_timer_func():
 	can_combo = true 
 
 func rest_stamina(value:float):
-	PlayerStatsComponent.current_stamina -= value
+	if not PlayerStatsComponent.frenesi: PlayerStatsComponent.current_stamina -= value
 
 func apply_dash(direction: int, speed: float):
 	is_dashing = true

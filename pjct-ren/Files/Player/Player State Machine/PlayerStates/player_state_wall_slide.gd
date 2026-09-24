@@ -31,7 +31,6 @@ func on_physics_process(delta) -> void:
 	
 	#si no se esta en el suelo ni pegado a una pared cambiar a Fall
 	elif not controlled_node.is_on_floor() and is_on_wall == false:
-		print("wall_fall")
 		controlled_node.animation_machine.travel("Fall_Down")
 		state_machine.change_to("PlayerStateFall")
 	
@@ -49,9 +48,8 @@ func on_input(event: InputEvent) -> void:
 	
 	#Cambiar a Wall_Jump
 	if Input.is_action_just_pressed("JUMP") and not controlled_node.is_on_floor():
-		print("jump_wall")
 		controlled_node.animation_machine.travel("Jump_Up")
-		controlled_node.velocity.y = PlayerMovementStats.jump_speed 
+		controlled_node.velocity.y = -550
 		state_machine.change_to("PlayerStateWall_Jump")
 		$"../PlayerStateWall_Jump".wall_normal = wall_normal
 		PlayerMovementStats.jump_count = 1

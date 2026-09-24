@@ -11,6 +11,8 @@ class_name Player
 @onready var sounds: PlayerSounds = $Sounds
 
 
+var walk_speed: float
+var damage: float
 var phantom_on: bool = false
 
 func _ready() -> void:
@@ -30,37 +32,48 @@ func _input(event: InputEvent) -> void:
 		phantom_on = true
 		start_party()
 
-func set_facing_direction() -> void:
-	#control de donde mira el personaje
-	if self.velocity.x < 0:
-		ren_sprite.scale.x = -1
-	elif self.velocity.x > 0:
-		ren_sprite.scale.x = 1
-
 #region BODY_CALL
 func take_damage(damage, node, sprite, hitstun): #control del damage
 	var final_damage: float
 	var is_block: bool
+	
 	if node.cant_block: 
-		can_combat(false)
-		final_damage = damage
-		is_block = false
-		PlayerStatsComponent.current_hp -= damage
-	elif not PlayerMovementStats.is_dash and \
-	PlayerStatsComponent.can_recive_damage and \
-	not PlayerStatsComponent.parry_time:
-		if PlayerMovementStats.is_block and PlayerStatsComponent.current_stamina > 0:
-			if damage < 30: PlayerStatsComponent.current_stamina -= damage * 1.5
-			elif damage >= 30 and damage < 50: PlayerStatsComponent.current_stamina -= 40
-			elif damage >= 50: PlayerStatsComponent.current_stamina -= 50
-			final_damage = (damage * 10) / 100
-			is_block = true
-			PlayerStatsComponent.current_hp -= (damage * 10) / 100
-		else: 
+		if PlayerStatsComponent.armor:
+			can_combat(false)
+			final_damage = (damage * PlayerStatsComponent.defense) / 100
+			is_block = false
+			PlayerStatsComponent.current_hp -= (damage * PlayerStatsComponent.defense) / 100
+			PlayerStatsComponent.current_armor -= 1
+		else:
 			can_combat(false)
 			final_damage = damage
 			is_block = false
 			PlayerStatsComponent.current_hp -= damage
+	
+	elif not PlayerMovementStats.is_dash and \
+	PlayerStatsComponent.can_recive_damage and \
+	not PlayerStatsComponent.parry_time:
+		if PlayerMovementStats.is_block and PlayerStatsComponent.current_stamina > 0:
+			if not PlayerStatsComponent.frenesi:
+				if damage < 30: PlayerStatsComponent.current_stamina -= damage * 1.5
+				elif damage >= 30 and damage < 50: PlayerStatsComponent.current_stamina -= 40
+				elif damage >= 50: PlayerStatsComponent.current_stamina -= 50
+				final_damage = (damage * 10) / 100
+				is_block = true
+			PlayerStatsComponent.current_hp -= (damage * 10) / 100
+		else: 
+			if PlayerStatsComponent.armor:
+				can_combat(false)
+				final_damage = (damage * PlayerStatsComponent.defense) / 100
+				is_block = false
+				PlayerStatsComponent.current_hp -= (damage * PlayerStatsComponent.defense) / 100
+				PlayerStatsComponent.current_armor -= 1
+			else:
+				can_combat(false)
+				final_damage = damage
+				is_block = false
+				PlayerStatsComponent.current_hp -= damage
+	
 	if not PlayerMovementStats.is_block: damage_effect(final_damage,hitstun, sprite, is_block)
 	else:
 		damage_effect(final_damage,hitstun, sprite, is_block)
@@ -111,9 +124,19 @@ func _on_scene_damage_area_body_entered(body: Node2D) -> void:
 #colision de los ataques
 func _on_attack_area_body_entered(body: Node2D) -> void:
 	body.take_damage(PlayerStatsComponent.damage,self,$StateMachine/PlayerStateAttack.hitstun,GlobalParameters.HIT)
+	if not PlayerStatsComponent.frenesi:
+		PlayerStatsComponent.current_frenesi += 1
+		if PlayerStatsComponent.current_frenesi > 15: 
+			PlayerStatsComponent.current_frenesi = 15
+		
+		print(str(PlayerStatsComponent.current_frenesi))
 func _on_attack_area_area_entered(area: Area2D) -> void:
 	if area.is_in_group("Enemie_Bullet") and area.can_parry:
 		area.counter(self)
+		if not PlayerStatsComponent.frenesi:
+			PlayerStatsComponent.current_frenesi += 1
+			if PlayerStatsComponent.current_frenesi > 15: 
+				PlayerStatsComponent.current_frenesi = 15
 	elif area.is_in_group("Pulse"):
 		if area.global_position.x > global_position.x:
 			impulse(Vector2.LEFT, 1000,area)
@@ -133,6 +156,13 @@ func _on_down_attack_area_area_entered(area: Area2D) -> void:
 #endregion
 
 #region USEFUL
+func set_facing_direction() -> void:
+	#control de donde mira el personaje
+	if self.velocity.x < 0:
+		ren_sprite.scale.x = -1
+	elif self.velocity.x > 0:
+		ren_sprite.scale.x = 1
+
 
 func damage_effect(damage:float, hitstun, sprite, is_block:bool):
 	sounds.flesh_slice()
@@ -157,6 +187,7 @@ func damage_effect(damage:float, hitstun, sprite, is_block:bool):
 			await get_tree().create_timer(0.08).timeout
 		can_combat(true)
 
+
 func can_combat(can:bool):
 	if not can:
 		PlayerStatsComponent.can_combat = false
@@ -169,12 +200,14 @@ func can_combat(can:bool):
 		$Ren_Sprite/AttackArea.set_collision_mask_value(2,true)
 		$Ren_Sprite/AttackArea.set_collision_mask_value(3,true)
 
+
 func activate_slow_motion(duration:float, scale:float):
 	var original_scale = Engine.time_scale
 	if Engine.time_scale == 1:
 		Engine.time_scale = scale
 		await get_tree().create_timer(duration,true,false,true).timeout
 		Engine.time_scale = original_scale
+
 
 func shake_camera(type:String):
 	match type:
@@ -183,6 +216,7 @@ func shake_camera(type:String):
 		"player_critical_hit": GlobalParameters.player_camera.apply_trauma(0.3,1.0)
 		"player_small_hurt": GlobalParameters.player_camera.apply_trauma(0.1,1.0)
 		"player_hurt": GlobalParameters.player_camera.apply_trauma(0.3,1.0)
+
 
 func show_combo_effect(damage,target):
 	var label = Label.new()
@@ -205,18 +239,51 @@ func show_combo_effect(damage,target):
 
 #region PARTY_MODE
 func start_party():
+	phantom_on = true
 	animated_color()
 	phantom_animation()
+	progress()
+	PlayerStatsComponent.current_stamina = PlayerStatsComponent.max_stamina
+	walk_speed = PlayerMovementStats.running_speed
+	damage = PlayerStatsComponent.damage
+	PlayerMovementStats.running_speed = PlayerMovementStats.running_speed * 1.5
+	PlayerStatsComponent.damage = PlayerStatsComponent.damage * 2
 
 func animated_color():
 	var tween: Tween = create_tween()
-	tween.tween_method(change_tone, 0.0, 1.0, 2.0)
+	tween.tween_method(change_tone, 0.0, 1.0, 1.0)
 	tween.set_loops()
+	await get_tree().create_timer(PlayerStatsComponent.frenesi_duration).timeout
+	tween.kill()
+
+func progress():
+	var max_frenesi = PlayerStatsComponent.current_frenesi
+	var tween: Tween = create_tween()
+	tween.tween_method(frenesi_decress,max_frenesi,0.0,PlayerStatsComponent.frenesi_duration)
+	tween.set_loops()
+	await get_tree().create_timer(PlayerStatsComponent.frenesi_duration).timeout
+	tween.kill()
+	finish_party()
+
+func finish_party():
+	PlayerStatsComponent.frenesi = false
+	GlobalParameters.change_shader_parameters(Color.WHITE,0.0,1.0,ren_sprite)
+	$HUD/FrenesiBar.modulate = Color.WHITE
+	$HUD/StaminaBar.modulate = Color.WHITE
+	phantom_on = false
+	PlayerStatsComponent.damage = damage
+	PlayerMovementStats.running_speed = walk_speed
+
+func frenesi_decress(value:float):
+	PlayerStatsComponent.current_frenesi = value
 
 func change_tone(value: float):
 	var hsv = Color.from_hsv(value, 0.8, 0.9)
+	GlobalParameters.change_shader_parameters(hsv,0.5,1.0,ren_sprite)
 	ren_sprite.modulate = hsv
-	$"../Tileset".modulate = hsv
+	$HUD/FrenesiBar.modulate = hsv
+	$HUD/StaminaBar.modulate = hsv
+	#$"../Tileset".modulate = hsv
 
 func phantom_animation():
 	while true:
@@ -233,7 +300,7 @@ func add_phantom():
 	phantom.vframes = ren_sprite.vframes
 	phantom.frame = ren_sprite.frame
 	phantom.centered = true
-	if ren_sprite.flip_h: phantom.flip_h = true
+	phantom.scale.x = ren_sprite.scale.x
 	phantom.global_position = global_position
 	phantom.modulate = ren_sprite.modulate
 	get_parent().add_child(phantom)
