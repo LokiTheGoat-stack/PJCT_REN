@@ -20,6 +20,7 @@ func dash(state_name: String, back:bool, ground_dash:bool) -> void:
 		can_dash = false
 		if ground_dash: dash_speed = PlayerMovementStats.dash_speed / 1.5
 		else: dash_speed = PlayerMovementStats.dash_speed
+		controlled_node.animation_machine.travel("Dash_Loop")
 		if back: back_dash()
 		elif controlled_node.velocity.x == 0: no_velocity()
 		else: with_velocity()
@@ -34,7 +35,6 @@ func back_dash():
 	else:
 		direction = Vector2.LEFT
 		x_velocity = dash_speed
-	controlled_node.animation_machine.travel("Dash_Loop")
 	finish_dash()
 
 func no_velocity():
@@ -44,7 +44,6 @@ func no_velocity():
 	else:
 		direction = Vector2.RIGHT
 		x_velocity = dash_speed
-	controlled_node.animation_machine.travel("Dash_Loop")
 	finish_dash()
 
 func with_velocity():
@@ -54,7 +53,6 @@ func with_velocity():
 	elif controlled_node.velocity.x > 0:
 		direction = Vector2.RIGHT
 		x_velocity = dash_speed
-	controlled_node.animation_machine.travel("Dash_Loop")
 	finish_dash()
 #endregion
 
