@@ -18,7 +18,6 @@ func on_physics_process(delta) -> void:
 func dash(state_name: String, back:bool, ground_dash:bool) -> void:
 	if can_dash == true:
 		can_dash = false
-		controlled_node.animation_machine.travel("Dash_Loop")
 		if ground_dash: dash_speed = PlayerMovementStats.dash_speed / 1.5
 		else: dash_speed = PlayerMovementStats.dash_speed
 		if back: back_dash()
@@ -35,7 +34,7 @@ func back_dash():
 	else:
 		direction = Vector2.LEFT
 		x_velocity = dash_speed
-	$"../../AnimationPlayer".play("Dash")
+	controlled_node.animation_machine.travel("Dash_Loop")
 	finish_dash()
 
 func no_velocity():
@@ -45,7 +44,7 @@ func no_velocity():
 	else:
 		direction = Vector2.RIGHT
 		x_velocity = dash_speed
-	$"../../AnimationPlayer".play("Dash")
+	controlled_node.animation_machine.travel("Dash_Loop")
 	finish_dash()
 
 func with_velocity():
@@ -55,7 +54,7 @@ func with_velocity():
 	elif controlled_node.velocity.x > 0:
 		direction = Vector2.RIGHT
 		x_velocity = dash_speed
-	$"../../AnimationPlayer".play("Dash")
+	controlled_node.animation_machine.travel("Dash_Loop")
 	finish_dash()
 #endregion
 
@@ -92,7 +91,7 @@ func finish_dash():
 
 func phantom_animation():
 	while true:
-		await get_tree().create_timer(0.016).timeout
+		await get_tree().create_timer(0.02).timeout
 		add_phantom()
 		if phantom_on == false: 
 			break
@@ -111,6 +110,6 @@ func add_phantom():
 	phantom.modulate = Color.BLUE
 	get_parent().add_child(phantom)
 	phantom.z_index = 0
-	tween.tween_property(phantom, "modulate", Color(1.0,1.0,1.0,0.0), 0.5)
+	tween.tween_property(phantom, "modulate", Color(1.0,1.0,1.0,0.0), 0.3)
 	tween.tween_callback(phantom.queue_free)
 	tween.tween_callback(tween.kill)
