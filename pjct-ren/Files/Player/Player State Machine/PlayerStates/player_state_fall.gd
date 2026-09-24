@@ -12,7 +12,7 @@ var last_chance_to_jump: bool = false
 func _last_chance_to_jump():
 	if PlayerMovementStats.jump_count == 0:
 		last_chance_to_jump = true
-		await get_tree().create_timer(0.09).timeout
+		await get_tree().create_timer(0.1).timeout
 		last_chance_to_jump = false
 
 #region ALWAYS_ON_FUNC

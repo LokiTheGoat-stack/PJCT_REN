@@ -10,6 +10,14 @@ class_name Player
 @onready var state_machine: PlayerStateMachine = $StateMachine
 @onready var sounds: PlayerSounds = $Sounds
 
+@onready var wall_ray_cast_right: RayCast2D = $PlayerRayCast/Wall_RayCast_Right
+@onready var wall_ray_cast_left: RayCast2D = $PlayerRayCast/Wall_RayCast_Left
+@onready var top_ray_cast: RayCast2D = $PlayerRayCast/Top_RayCast
+@onready var botton_ray_cast: RayCast2D = $PlayerRayCast/Botton_RayCast
+@onready var ground_raycast_l: RayCast2D = $PlayerRayCast/GroundRaycast_L
+@onready var ground_raycast_r: RayCast2D = $PlayerRayCast/GroundRaycast_R
+
+
 
 var walk_speed: float
 var damage: float

@@ -68,7 +68,7 @@ func set_camera(value:bool):
 func damage():
 	target.take_damage(attack_damage * 5, target, PlayerStatsComponent.parry_hitstun, GlobalParameters.HIT)
 	if not PlayerStatsComponent.frenesi:
-		PlayerStatsComponent.current_frenesi += 2
+		PlayerStatsComponent.current_frenesi += 3
 		if PlayerStatsComponent.current_frenesi > 15: 
 			PlayerStatsComponent.current_frenesi = 15
 

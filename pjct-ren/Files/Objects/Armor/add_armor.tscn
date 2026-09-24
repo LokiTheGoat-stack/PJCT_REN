@@ -93,6 +93,7 @@ _data = {
 }
 
 [node name="AddArmor" type="Area2D" unique_id=908164925]
+collision_mask = 129
 script = ExtResource("1_571pb")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2077603432]

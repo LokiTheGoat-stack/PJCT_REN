@@ -48,11 +48,27 @@ func on_input(event: InputEvent) -> void:
 	
 	#Cambiar a Wall_Jump
 	if Input.is_action_just_pressed("JUMP") and not controlled_node.is_on_floor():
-		controlled_node.animation_machine.travel("Jump_Up")
-		controlled_node.velocity.y = -550
-		state_machine.change_to("PlayerStateWall_Jump")
-		$"../PlayerStateWall_Jump".wall_normal = wall_normal
-		PlayerMovementStats.jump_count = 1
+		if Input.is_action_pressed("RIGHT") and wall_normal == Vector2.LEFT:
+			controlled_node.animation_machine.travel("Jump_Up")
+			controlled_node.velocity.y = -600
+			$"../PlayerStateWall_Jump".climb = true
+			$"../PlayerStateWall_Jump".wall_normal = wall_normal
+			state_machine.change_to("PlayerStateWall_Jump")
+			PlayerMovementStats.jump_count = 1
+		elif Input.is_action_pressed("LEFT") and wall_normal == Vector2.RIGHT:
+			controlled_node.animation_machine.travel("Jump_Up")
+			controlled_node.velocity.y = -600
+			$"../PlayerStateWall_Jump".climb = true
+			$"../PlayerStateWall_Jump".wall_normal = wall_normal
+			state_machine.change_to("PlayerStateWall_Jump")
+			PlayerMovementStats.jump_count = 1
+		else:
+			controlled_node.animation_machine.travel("Jump_Up")
+			controlled_node.velocity.y = -500
+			$"../PlayerStateWall_Jump".climb = false
+			$"../PlayerStateWall_Jump".wall_normal = wall_normal
+			state_machine.change_to("PlayerStateWall_Jump")
+			PlayerMovementStats.jump_count = 1
 #endregion
 
 func handle_gravity(delta) -> void: #control de gravedad

@@ -81,6 +81,7 @@ func finish_dash():
 			state_machine.change_to("PlayerStateIdle")
 	else: 
 		controlled_node.animation_machine.travel("Fall_Down")
+		$"../PlayerStateFall"._last_chance_to_jump()
 		state_machine.change_to("PlayerStateFall")
 	
 	#cooldown
