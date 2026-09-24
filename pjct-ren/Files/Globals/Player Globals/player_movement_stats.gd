@@ -15,7 +15,7 @@ extends Node
 @export var climbing_speed: float = 750.0
 @export var automove_ledge_climb: Vector2 = Vector2(1250, -325)
 @export var dash_speed: float = 800
-@export var dash_time: float = 0.1
+@export var dash_time: float = 0.15
 @export var dash_cooldown: float = 0.5
 
 @export var is_dash: bool = false
