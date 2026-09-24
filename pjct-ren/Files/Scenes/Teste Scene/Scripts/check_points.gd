@@ -25,3 +25,9 @@ func _on_impulse_body_entered(body: Node2D) -> void:
 
 func _on_impulse_2_body_entered(body: Node2D) -> void:
 	GlobalParameters.current_checkpoint = $Impulse2/Marker2D
+
+func _on_all_3_body_entered(body: Node2D) -> void:
+	GlobalParameters.current_checkpoint = $All3/Marker2D
+
+func _on_impulse_3_body_entered(body: Node2D) -> void:
+	GlobalParameters.current_checkpoint = $Impulse3/Marker2D

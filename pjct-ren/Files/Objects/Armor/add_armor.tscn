@@ -1,0 +1,107 @@
+[gd_scene format=3 uid="uid://c4qckw4qytg2i"]
+
+[ext_resource type="Texture2D" uid="uid://bdnf8ufwjlvcl" path="res://Files/Art/Objects/Armor/add_armor.png" id="1_61jgl"]
+[ext_resource type="Script" uid="uid://xwl8bim0yjb5" path="res://Files/Objects/Armor/Scripts/add_armor.gd" id="1_571pb"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hylex"]
+radius = 14.142136
+
+[sub_resource type="Animation" id="Animation_1lbjp"]
+resource_name = "Idle"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AddArmor:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -3), Vector2(0, 0), Vector2(0, -3)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AddArmor:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.1599996, 1), Vector2(1, 1), Vector2(1.1599996, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AddArmor:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-0.15388998, 0.2135154]
+}
+
+[sub_resource type="Animation" id="Animation_5hxll"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AddArmor:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AddArmor:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AddArmor:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_t5r50"]
+_data = {
+&"Idle": SubResource("Animation_1lbjp"),
+&"RESET": SubResource("Animation_5hxll")
+}
+
+[node name="AddArmor" type="Area2D" unique_id=908164925]
+script = ExtResource("1_571pb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2077603432]
+shape = SubResource("CircleShape2D_hylex")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=66791476]
+libraries/ = SubResource("AnimationLibrary_t5r50")
+
+[node name="AddArmor" type="Sprite2D" parent="." unique_id=858464578]
+texture = ExtResource("1_61jgl")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

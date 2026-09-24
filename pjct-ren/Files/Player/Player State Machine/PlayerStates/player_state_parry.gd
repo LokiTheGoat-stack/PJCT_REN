@@ -67,6 +67,10 @@ func set_camera(value:bool):
 #funcion de control del daño
 func damage():
 	target.take_damage(attack_damage * 5, target, PlayerStatsComponent.parry_hitstun, GlobalParameters.HIT)
+	if not PlayerStatsComponent.frenesi:
+		PlayerStatsComponent.current_frenesi += 2
+		if PlayerStatsComponent.current_frenesi > 15: 
+			PlayerStatsComponent.current_frenesi = 15
 
 #parar el procesamiento de los enemigos
 func stop_enemies(value:bool):

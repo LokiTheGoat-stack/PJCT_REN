@@ -1,6 +1,7 @@
 extends PlayerStateBase
 
-@onready var mana_bar: TextureProgressBar = $"../../HUD/manaBar"
+@onready var stamina_bar: TextureProgressBar = $"../../HUD/StaminaBar"
+
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var last_state: String
@@ -19,7 +20,7 @@ func on_physics_process(delta) -> void:
 	if PlayerStatsComponent.current_stamina > 0:PlayerStatsComponent.current_stamina -= 50 * delta
 	elif PlayerStatsComponent.current_stamina <= 0:
 		PlayerStatsComponent.current_stamina = 0
-		mana_bar.modulate = Color(1.0, 0.0, 0.0)
+		stamina_bar.modulate = Color(1.0, 0.0, 0.0)
 		match last_state:
 			"PlayerStateIdle": controlled_node.animation_machine.travel("Idle")
 			"PlayerStateWalk": controlled_node.animation_machine.travel("Run_Intro")

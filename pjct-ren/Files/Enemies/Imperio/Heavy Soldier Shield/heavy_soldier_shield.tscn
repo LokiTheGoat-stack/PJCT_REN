@@ -1657,13 +1657,13 @@ rest = Transform2D(-0.91721404, 0.39839482, -0.39839482, -0.91721404, 1.9999998,
 [node name="Torso" type="Bone2D" parent="Body/Skeleton2D/Cadera" unique_id=1704226481]
 position = Vector2(-2.2699375, 7.736109)
 rotation = 0.26111814
-scale = Vector2(0.9999911, 0.9999911)
+scale = Vector2(0.99999106, 0.99999106)
 rest = Transform2D(0.96610194, 0.25816095, -0.25816095, 0.96610194, -2.2699375, 7.736109)
 
 [node name="RArm" type="Bone2D" parent="Body/Skeleton2D/Cadera/Torso" unique_id=1443106549]
 position = Vector2(-12.211616, 7.271637)
 rotation = -2.7136936
-scale = Vector2(0.99999726, 0.99999726)
+scale = Vector2(0.9999972, 0.9999972)
 rest = Transform2D(-0.9098396, -0.41496018, 0.41496018, -0.9098396, -12.211616, 7.271637)
 
 [node name="RForearm" type="Bone2D" parent="Body/Skeleton2D/Cadera/Torso/RArm" unique_id=1740131684]
@@ -1686,7 +1686,7 @@ rest = Transform2D(0.8144829, 0.58018756, -0.58018756, 0.8144829, 3.0181382, -3.
 [node name="LArm" type="Bone2D" parent="Body/Skeleton2D/Cadera/Torso" unique_id=170506854]
 position = Vector2(9.397674, 11.518836)
 rotation = 3.12767
-scale = Vector2(0.9999949, 0.9999949)
+scale = Vector2(0.99999493, 0.99999493)
 rest = Transform2D(-0.9999031, 0.013922154, -0.013922154, -0.9999031, 9.397674, 11.518836)
 
 [node name="LFoream" type="Bone2D" parent="Body/Skeleton2D/Cadera/Torso/LArm" unique_id=1019397549]
@@ -1715,13 +1715,13 @@ rest = Transform2D(0.43814486, -0.8989044, 0.8989044, 0.43814486, 7.736107, 2.26
 
 [node name="LFoot" type="Bone2D" parent="Body/Skeleton2D/Cadera/LThigh" unique_id=712935319]
 position = Vector2(11.988508, -0.5250449)
-scale = Vector2(0.99999624, 0.99999624)
+scale = Vector2(0.9999962, 0.9999962)
 rest = Transform2D(1, 0, 0, 1, 11.988508, -0.5250449)
 
 [node name="RThigh" type="Bone2D" parent="Body/Skeleton2D/Cadera" unique_id=854487886]
 position = Vector2(-6.0221043, -3.7059784)
 rotation = -1.0202811
-scale = Vector2(0.99999464, 0.99999464)
+scale = Vector2(0.9999945, 0.9999945)
 rest = Transform2D(0.5231264, -0.8522551, 0.8522551, 0.5231264, -6.0221043, -3.7059784)
 
 [node name="RFoot" type="Bone2D" parent="Body/Skeleton2D/Cadera/RThigh" unique_id=975889362]

@@ -2,10 +2,15 @@ extends Node
 
 @export var max_hp: float = 100
 @export var current_hp: float = 100
-@export var armor: bool = false
+@export var armor: bool = true
+@export var max_armor: int = 10
+@export var current_armor: int = 0
 @export var defense: float = 50
 @export var max_stamina: float = 100
 @export var current_stamina: float = 100
+@export var frenesi: bool = false
+@export var current_frenesi: float = 0
+@export var frenesi_duration: float = 8.0
 
 @export var damage: float = 40
 @export var critic_damage: float = 50

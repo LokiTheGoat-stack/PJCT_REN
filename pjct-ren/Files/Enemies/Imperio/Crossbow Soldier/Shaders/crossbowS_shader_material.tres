@@ -3,6 +3,7 @@
 [ext_resource type="Shader" uid="uid://djbgxha7a4nv6" path="res://Files/Enemies/Imperio/Crossbow Soldier/Shaders/crossbowS_texture_shader.gdshader" id="1_l1dqe"]
 
 [resource]
+resource_local_to_scene = true
 shader = ExtResource("1_l1dqe")
 shader_parameter/Color = Color(0, 0, 0, 1)
 shader_parameter/Mix = 0.0
