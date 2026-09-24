@@ -7,6 +7,7 @@ var gravity: float = 0.0
 var is_on_wall = false
 var wall_normal = Vector2.ZERO
 var last_chance_to_jump: bool = false
+var last_chance_sprint_jump: bool = false
 
 #control del delay del salto
 func _last_chance_to_jump():
@@ -69,6 +70,9 @@ func on_input(event: InputEvent) -> void:
 		PlayerMovementStats.jump_count = 1
 		controlled_node.animation_machine.travel("Jump_Up") 
 		controlled_node.velocity.y = PlayerMovementStats.jump_speed
+		if last_chance_sprint_jump: 
+			$"../PlayerStateJump".x_speed = PlayerMovementStats.in_air_speed * 2
+			last_chance_sprint_jump = false
 		state_machine.change_to("PlayerStateJump")
 	
 	if PlayerStatsComponent.current_stamina > 0:

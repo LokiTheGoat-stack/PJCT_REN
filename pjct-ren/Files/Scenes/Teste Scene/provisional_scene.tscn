@@ -7424,6 +7424,7 @@ script = ExtResource("11_0bwlu")
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="SceneSounds" unique_id=1891334047]
 stream = SubResource("AudioStreamInteractive_3xx2f")
 volume_db = -10.0
+bus = &"Music"
 
 [node name="AreaCombate" type="Area2D" parent="SceneSounds" unique_id=2056830270]
 visible = false

@@ -14,6 +14,7 @@ func on_physics_process(delta) -> void:
 	if not controlled_node.is_on_floor() and controlled_node.velocity.y > 0:
 		controlled_node.animation_machine.travel("Fall_Down")
 		state_machine.change_to("PlayerStateFall")
+		$"../PlayerStateFall".last_chance_sprint_jump = true
 		$"../PlayerStateFall"._last_chance_to_jump()
 		phantom_on = false
 	

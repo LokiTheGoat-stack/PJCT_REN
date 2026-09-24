@@ -1927,7 +1927,7 @@ debug_color = Color(1, 0, 0, 0.56078434)
 
 [node name="DownAttackArea" type="Area2D" parent="Ren_Sprite" unique_id=1860033837]
 visible = false
-collision_mask = 6
+collision_mask = 70
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ren_Sprite/DownAttackArea" unique_id=837710198]
 shape = SubResource("CircleShape2D_hylex")
@@ -2087,12 +2087,15 @@ bus = &"SFX"
 [node name="Swing" type="AudioStreamPlayer2D" parent="Sounds" unique_id=1067365043]
 stream = SubResource("AudioStreamRandomizer_hylex")
 volume_db = 5.0
+bus = &"SFX"
 
 [node name="HitFlesh" type="AudioStreamPlayer2D" parent="Sounds" unique_id=497954520]
 stream = SubResource("AudioStreamRandomizer_w1wgp")
+bus = &"SFX"
 
 [node name="Parry" type="AudioStreamPlayer2D" parent="Sounds" unique_id=401949385]
 stream = ExtResource("36_lj38e")
+bus = &"SFX"
 
 [node name="HUD" type="CanvasLayer" parent="." unique_id=617106871]
 visible = false

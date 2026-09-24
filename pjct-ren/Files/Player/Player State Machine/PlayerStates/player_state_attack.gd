@@ -61,9 +61,9 @@ func on_exit():
 
 func on_physics_process(delta: float) -> void:
 	#control de gravedad
-	if down_attack: controlled_node.velocity.y = 2000
-	elif not air_combo: pass #controlled_node.velocity.y += gravity * delta
-	else: controlled_node.velocity.y = 20
+	#if down_attack: controlled_node.velocity.y = 2000
+	#elif not air_combo: pass #controlled_node.velocity.y += gravity * delta
+	if air_combo and not down_attack: controlled_node.velocity.y = 20
 	
 	#impulso del ataque
 	if is_dashing:
@@ -104,6 +104,7 @@ func on_input(event: InputEvent) -> void:
 	if PlayerStatsComponent.current_stamina > 0:
 		if Input.is_action_just_pressed("ATTACK") and PlayerStatsComponent.can_attack:
 			if Input.is_action_pressed("DOWN"):
+				down_attack = true
 				can_combo = false
 				execute_down_attack()
 			if can_combo:
@@ -111,10 +112,10 @@ func on_input(event: InputEvent) -> void:
 				combo_count += 1
 				if combo_count <= 2:
 					execute_attack(combo_count)
-				else:
-					finish_attack(true)
-			else:
-				finish_attack(false)
+				else: pass
+					#finish_attack(true)
+			else: pass
+				#finish_attack(false)
 		
 		elif Input.is_action_pressed("DASH"):
 			is_attacking = false
@@ -156,9 +157,11 @@ func on_input(event: InputEvent) -> void:
 				$"../PlayerStateBlock".time_for_parry()
 
 func execute_down_attack():
+	controlled_node.velocity.y = 0
+	controlled_node.animation_machine.travel("Down_Attack")
+	await  get_tree().create_timer(0.3).timeout
 	$"../../Ren_Sprite/DownAttackArea/CollisionShape2D".disabled = false
 	controlled_node.velocity.y = 2000
-	controlled_node.animation_machine.travel("Down_Attack")
 	is_dashing = false
 	rest_stamina(40)
 
@@ -211,6 +214,7 @@ func finish_attack(combo_finished:bool): #terminar combo
 	controlled_node.velocity.x = 0
 	
 	if air_combo: PlayerStatsComponent.can_attack = false
+	elif down_attack: PlayerStatsComponent.can_attack = true
 	
 	if not combo_finished:
 		if controlled_node.is_on_floor():
