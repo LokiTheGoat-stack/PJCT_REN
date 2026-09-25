@@ -9,8 +9,9 @@ func _ready() -> void:
 
 
 func _on_body_entered(body: Node2D) -> void:
-	PlayerStatsComponent.current_armor += 5
+	PlayerStatsComponent.current_armor += 3
 	if PlayerStatsComponent.current_armor > PlayerStatsComponent.max_armor: 
 		PlayerStatsComponent.current_armor = PlayerStatsComponent.max_armor
 	PlayerStatsComponent.armor = true
+	body.ren_armor.visible = true
 	queue_free()

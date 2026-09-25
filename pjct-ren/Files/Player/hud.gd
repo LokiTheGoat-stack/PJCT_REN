@@ -29,6 +29,7 @@ func _process(delta: float) -> void:
 	if PlayerStatsComponent.current_armor <= 0:
 		PlayerStatsComponent.armor = false
 		PlayerStatsComponent.current_armor = 0
+		$"..".ren_armor.visible = false
 
 
 func _input(event: InputEvent) -> void:

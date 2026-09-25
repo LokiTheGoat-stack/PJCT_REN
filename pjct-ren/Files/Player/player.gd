@@ -4,6 +4,7 @@ class_name Player
 
 @onready var body: Sprite2D = $Ren_Sprites
 @onready var ren_sprite: Sprite2D = $Ren_Sprite
+@onready var ren_armor: Sprite2D = $Ren_Sprite/RenArmor
 @onready var body2: Sprite2D = $TestPlayerSprite
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var animation_machine: AnimationNodeStateMachinePlayback = $AnimationTree["parameters/playback"]

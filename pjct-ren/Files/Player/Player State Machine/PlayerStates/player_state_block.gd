@@ -26,6 +26,7 @@ func on_physics_process(delta) -> void:
 			"PlayerStateWalk": controlled_node.animation_machine.travel("Run_Intro")
 			_: pass
 		state_machine.change_to(last_state)
+		PlayerMovementStats.is_block = false
 	
 	
 	# Si no estas en el piso cambiar al estado Fall
