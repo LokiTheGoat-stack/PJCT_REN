@@ -81,6 +81,7 @@
 [ext_resource type="Texture2D" uid="uid://c8wgm6agw53rv" path="res://Files/Art/Ren_Char/HUD/armor_progress.png" id="53_36ob5"]
 [ext_resource type="Texture2D" uid="uid://barabw2dpmv6l" path="res://Files/Art/Ren_Char/HUD/hp_base.png" id="54_kjklu"]
 [ext_resource type="Texture2D" uid="uid://wqntowyx7och" path="res://Files/Art/Ren_Char/HUD/hp_progress.png" id="55_e1od2"]
+[ext_resource type="Script" uid="uid://batcs5pjctmxv" path="res://Files/Player/Player State Machine/PlayerStates/player_state_inerlude.gd" id="59_o3xbg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w2g86"]
 size = Vector2(66, 43)
@@ -2765,9 +2766,8 @@ states/Start/position = Vector2(141, 100)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_jfhdu"), "Jump_In", "Jump_Up", SubResource("AnimationNodeStateMachineTransition_b7mps"), "Fall_In", "Fall_Down", SubResource("AnimationNodeStateMachineTransition_nq61r"), "Idle", "Jump_In", SubResource("AnimationNodeStateMachineTransition_wupy3"), "Jump_Up", "Fall_In", SubResource("AnimationNodeStateMachineTransition_d2je2"), "Fall_Down", "Fall_Land", SubResource("AnimationNodeStateMachineTransition_o5t8f"), "Fall_Land", "Idle", SubResource("AnimationNodeStateMachineTransition_7gb7o"), "Idle", "Run_Into", SubResource("AnimationNodeStateMachineTransition_ymdj2"), "Run_Into", "Run", SubResource("AnimationNodeStateMachineTransition_8g5nk"), "Run_Outo", "Idle", SubResource("AnimationNodeStateMachineTransition_4y4ix"), "Run", "Run_Outo", SubResource("AnimationNodeStateMachineTransition_mxxul"), "Fall_Land", "Run_Into", SubResource("AnimationNodeStateMachineTransition_mb2i3"), "Run", "Jump_In", SubResource("AnimationNodeStateMachineTransition_xkakj"), "Idle", "Attack_1", SubResource("AnimationNodeStateMachineTransition_lj38e"), "Attack_1", "Attack_2", SubResource("AnimationNodeStateMachineTransition_006p8"), "Attack_2", "Attack_3", SubResource("AnimationNodeStateMachineTransition_ubu71"), "Attack_3", "Attack_3_Out", SubResource("AnimationNodeStateMachineTransition_5vfry"), "Attack_3_Out", "Idle", SubResource("AnimationNodeStateMachineTransition_0binv"), "Idle", "Fall_Down", SubResource("AnimationNodeStateMachineTransition_w2g86"), "Attack_1", "Run_Into", SubResource("AnimationNodeStateMachineTransition_lr0x8"), "Attack_2", "Run_Into", SubResource("AnimationNodeStateMachineTransition_w1wgp"), "Attack_3", "Run_Into", SubResource("AnimationNodeStateMachineTransition_8brd3"), "Run", "Fall_Down", SubResource("AnimationNodeStateMachineTransition_68gp7"), "Jump_Up", "Attack_1", SubResource("AnimationNodeStateMachineTransition_n7hf0"), "Attack_1", "Attack_1_Out", SubResource("AnimationNodeStateMachineTransition_bjujb"), "Attack_1_Out", "Idle", SubResource("AnimationNodeStateMachineTransition_67kig"), "Attack_2_Out", "Idle", SubResource("AnimationNodeStateMachineTransition_0aer2"), "Run_Into", "Idle", SubResource("AnimationNodeStateMachineTransition_u7sdf"), "Run", "Attack_1", SubResource("AnimationNodeStateMachineTransition_2j8k4"), "Attack_2", "Attack_2_Out", SubResource("AnimationNodeStateMachineTransition_dlm32"), "Jump_Up", "Down_Attack", SubResource("AnimationNodeStateMachineTransition_rws8s"), "Fall_Down", "Down_Attack", SubResource("AnimationNodeStateMachineTransition_8a4i2"), "Down_Attack", "Idle", SubResource("AnimationNodeStateMachineTransition_cqt2j"), "Idle", "Block_In", SubResource("AnimationNodeStateMachineTransition_36ob5"), "Block_Out", "Idle", SubResource("AnimationNodeStateMachineTransition_kjklu"), "Block_In", "Block_Loop", SubResource("AnimationNodeStateMachineTransition_e1od2"), "Block_Loop", "Block_Hit", SubResource("AnimationNodeStateMachineTransition_cs24g"), "Block_Loop", "Block_Out", SubResource("AnimationNodeStateMachineTransition_wh4vn"), "Parry", "Idle", SubResource("AnimationNodeStateMachineTransition_poql3"), "Block_Loop", "Parry", SubResource("AnimationNodeStateMachineTransition_671km"), "Block_Hit", "Block_Loop", SubResource("AnimationNodeStateMachineTransition_gw57f"), "Idle", "Parry", SubResource("AnimationNodeStateMachineTransition_xmo65"), "Fall_Down", "Attack_1", SubResource("AnimationNodeStateMachineTransition_3wgls"), "Fall_Land", "Jump_In", SubResource("AnimationNodeStateMachineTransition_5nnbc"), "Dash_Into", "Dash_Loop", SubResource("AnimationNodeStateMachineTransition_2lvyl"), "Dash_Outo", "Idle", SubResource("AnimationNodeStateMachineTransition_u0d3o"), "Dash_Loop", "Dash_Outo", SubResource("AnimationNodeStateMachineTransition_ic7sr"), "Block_Out", "Run", SubResource("AnimationNodeStateMachineTransition_r8ctb"), "Idle", "Dash_Loop", SubResource("AnimationNodeStateMachineTransition_sebo3"), "Run", "Dash_Loop", SubResource("AnimationNodeStateMachineTransition_ny4mj"), "Dash_Outo", "Run", SubResource("AnimationNodeStateMachineTransition_vg5e6"), "Jump_Up", "Dash_Loop", SubResource("AnimationNodeStateMachineTransition_gplvm"), "Fall_Down", "Dash_Loop", SubResource("AnimationNodeStateMachineTransition_f7wnc"), "Dash_Outo", "Fall_Down", SubResource("AnimationNodeStateMachineTransition_rvxac"), "Fall_In", "Dash_Loop", SubResource("AnimationNodeStateMachineTransition_fvulr"), "Run_Into", "Dash_Loop", SubResource("AnimationNodeStateMachineTransition_2kysy"), "Fall_Land", "Dash_Loop", SubResource("AnimationNodeStateMachineTransition_7i4fb"), "Attack_1", "Dash_Loop", SubResource("AnimationNodeStateMachineTransition_wffjd"), "Attack_2", "Dash_Loop", SubResource("AnimationNodeStateMachineTransition_o3xbg"), "Attack_3", "Dash_Loop", SubResource("AnimationNodeStateMachineTransition_2lcjj")]
 graph_offset = Vector2(506.8934, -153.03183)
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hylex"]
-radius = 7.0
-height = 32.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ycxdn"]
+size = Vector2(11, 31.250015)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vir06"]
 radius = 8.0
@@ -2872,10 +2872,9 @@ parameters/Run_Into/TimeScale/scale = 1.0
 parameters/Run_Outo/TimeScale/scale = 1.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=826343510]
-visible = false
-position = Vector2(0, 5)
+position = Vector2(0.5, 5.499999)
 scale = Vector2(1, 1.1199994)
-shape = SubResource("CapsuleShape2D_hylex")
+shape = SubResource("RectangleShape2D_ycxdn")
 
 [node name="SceneDamageArea" type="Area2D" parent="." unique_id=1256634722]
 visible = false
@@ -2908,6 +2907,9 @@ script = ExtResource("6_usf6g")
 [node name="PlayerStateDash" type="Node" parent="StateMachine" unique_id=884836020]
 script = ExtResource("8_hklmv")
 
+[node name="PlayerStateInerlude" type="Node" parent="StateMachine" unique_id=1439560756]
+script = ExtResource("59_o3xbg")
+
 [node name="PlayerStateWall_Slide" type="Node" parent="StateMachine" unique_id=871843932]
 script = ExtResource("10_b00hk")
 
@@ -2931,9 +2933,29 @@ script = ExtResource("39_2j8k4")
 
 [node name="PlayerRayCast" type="Node2D" parent="." unique_id=1611989686]
 
+[node name="TopRayCast_Right" type="RayCast2D" parent="PlayerRayCast" unique_id=1266531334]
+position = Vector2(0, -13)
+target_position = Vector2(15, 0)
+collision_mask = 16
+
+[node name="TopRayCast_Left" type="RayCast2D" parent="PlayerRayCast" unique_id=215566854]
+position = Vector2(0, -13)
+target_position = Vector2(-15, 0)
+collision_mask = 16
+
+[node name="BottomRayCast_Right" type="RayCast2D" parent="PlayerRayCast" unique_id=285320740]
+position = Vector2(0, 23)
+target_position = Vector2(15, 0)
+collision_mask = 16
+
+[node name="BottomRayCast_Left" type="RayCast2D" parent="PlayerRayCast" unique_id=1881376698]
+position = Vector2(0, 23)
+target_position = Vector2(-15, 0)
+collision_mask = 16
+
 [node name="Wall_RayCast_Right" type="RayCast2D" parent="PlayerRayCast" unique_id=1810497926]
 position = Vector2(0, 7)
-target_position = Vector2(14, 0)
+target_position = Vector2(15, 0)
 collision_mask = 16
 
 [node name="Wall_RayCast_Left" type="RayCast2D" parent="PlayerRayCast" unique_id=1898026732]
@@ -2946,7 +2968,7 @@ position = Vector2(0, -3)
 target_position = Vector2(0, -18)
 collision_mask = 16
 
-[node name="Botton_RayCast" type="RayCast2D" parent="PlayerRayCast" unique_id=1827843079]
+[node name="Bottom_RayCast" type="RayCast2D" parent="PlayerRayCast" unique_id=1827843079]
 position = Vector2(0, 17)
 target_position = Vector2(0, 12)
 collision_mask = 16

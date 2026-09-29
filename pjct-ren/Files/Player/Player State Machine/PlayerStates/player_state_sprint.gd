@@ -29,14 +29,20 @@ func on_input(event: InputEvent) -> void:
 		state_machine.change_to("PlayerStateIdle")
 		phantom_on = false
 	
-	#Cambiar a Jump
+	#Cambiar a Jump o climb
 	if Input.is_action_just_pressed("JUMP"):
-		PlayerMovementStats.jump_count += 1
-		controlled_node.velocity.y = PlayerMovementStats.jump_speed
-		$"../PlayerStateJump".x_speed = PlayerMovementStats.in_air_speed * 2
-		controlled_node.animation_machine.travel("Jump_Up")
-		state_machine.change_to("PlayerStateJump")
-		phantom_on = false
+		if controlled_node.wall_ray_cast_right.is_colliding() or \
+		controlled_node.wall_ray_cast_left.is_colliding():
+			$"../PlayerStateInerlude".interlude_type = "climb"
+			state_machine.change_to("PlayerStateInerlude")
+			phantom_on = false
+		else:
+			PlayerMovementStats.jump_count += 1
+			controlled_node.velocity.y = PlayerMovementStats.jump_speed
+			$"../PlayerStateJump".x_speed = PlayerMovementStats.in_air_speed * 2
+			controlled_node.animation_machine.travel("Jump_Up")
+			state_machine.change_to("PlayerStateJump")
+			phantom_on = false
 	
 	if PlayerStatsComponent.current_stamina > 0:
 		#Cambiar a Dash

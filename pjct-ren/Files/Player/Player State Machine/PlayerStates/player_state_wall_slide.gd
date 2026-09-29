@@ -24,10 +24,16 @@ func on_physics_process(delta) -> void:
 		is_on_wall = true
 		wall_normal = Vector2.LEFT
 	
-	#si se toca el suelo cambiar a Idle
+	#si se toca el suelo cambiar a Idle o walk
 	if controlled_node.is_on_floor():
-		controlled_node.animation_machine.travel("Idle")
-		state_machine.change_to("PlayerStateIdle")
+		if Input.is_action_pressed("LEFT") or Input.is_action_pressed("RIGHT"):
+			controlled_node.velocity.x = 0
+			$"../PlayerStateWalk".min_speed = PlayerMovementStats.running_speed
+			controlled_node.animation_machine.travel("Run")
+			state_machine.change_to("PlayerStateWalk")
+		else:
+			controlled_node.animation_machine.travel("Idle")
+			state_machine.change_to("PlayerStateIdle")
 	
 	#si no se esta en el suelo ni pegado a una pared cambiar a Fall
 	elif not controlled_node.is_on_floor() and is_on_wall == false:

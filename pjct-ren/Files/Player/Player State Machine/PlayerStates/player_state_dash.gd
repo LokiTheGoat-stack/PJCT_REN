@@ -25,6 +25,7 @@ func dash(state_name: String, back:bool, ground_dash:bool) -> void:
 		elif controlled_node.velocity.x == 0: no_velocity()
 		else: with_velocity()
 		PlayerMovementStats.is_dash = true
+		change_layer_collision(false)
 	else: state_machine.change_to(state_name)
 
 #region DIRECTION_CONTROL
@@ -56,11 +57,23 @@ func with_velocity():
 	finish_dash()
 #endregion
 
+#cambiar layer de colision
+func change_layer_collision(value:bool):
+	match value:
+		false:
+			GlobalParameters.change_collision(controlled_node,"layer",9,true)
+			GlobalParameters.change_collision(controlled_node,"layer",1,false)
+		true:
+			GlobalParameters.change_collision(controlled_node,"layer",1,true)
+			GlobalParameters.change_collision(controlled_node,"layer",9,false)
+		_: pass
+
 func finish_dash():
 	if not PlayerStatsComponent.frenesi: PlayerStatsComponent.current_stamina -= 20
 	phantom_on = true
 	phantom_animation()
 	await get_tree().create_timer(PlayerMovementStats.dash_time).timeout
+	change_layer_collision(true)
 	PlayerMovementStats.is_dash = false
 	phantom_on = false
 	controlled_node.velocity = Vector2.ZERO
@@ -81,7 +94,6 @@ func finish_dash():
 			state_machine.change_to("PlayerStateIdle")
 	else: 
 		controlled_node.animation_machine.travel("Fall_Down")
-		$"../PlayerStateFall".last_chance_sprint_jump = true
 		$"../PlayerStateFall"._last_chance_to_jump()
 		state_machine.change_to("PlayerStateFall")
 	

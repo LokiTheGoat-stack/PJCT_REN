@@ -7,6 +7,7 @@
 radius = 83.00603
 
 [node name="DownImpulse" type="Area2D" unique_id=2131041367]
+collision_mask = 385
 script = ExtResource("1_4k13b")
 
 [node name="Pulse" type="Sprite2D" parent="." unique_id=303369566]

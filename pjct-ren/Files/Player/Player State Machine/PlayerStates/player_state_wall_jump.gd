@@ -54,18 +54,26 @@ func on_input(event: InputEvent) -> void:
 			$"../PlayerStateDash".dash("PlayerStateJump",false,false)
 
 
-func new_wall_slide_verification(): #verifivar si se puede hacer Wall_Slide 
+func new_wall_slide_verification(): #verifivar si se puede hacer Wall_Slide o agarre
 		await get_tree().create_timer(0.1).timeout
 		if is_on_wall and not controlled_node.is_on_floor():
-			$"../PlayerStateWall_Slide".wall_normal = wall_normal
-			state_machine.change_to("PlayerStateWall_Slide")
+			if (not controlled_node.top_ray_cast_right.is_colliding() and wall_normal == Vector2.LEFT) or \
+			(not controlled_node.top_ray_cast_left.is_colliding() and wall_normal == Vector2.RIGHT):
+				$"../PlayerStateInerlude".agarre_direction = wall_normal
+				$"../PlayerStateInerlude".interlude_type = "agarre"
+				state_machine.change_to("PlayerStateInerlude")
+			else:
+				$"../PlayerStateWall_Slide".wall_normal = wall_normal
+				state_machine.change_to("PlayerStateWall_Slide")
 
 func new_climb_peak_verification(): #verificar si ya no se puede escalar
 	await get_tree().create_timer(0.05).timeout
-	if not is_on_wall:
-		can_fall = false
-		controlled_node.animation_machine.travel("Fall_Down")
-		state_machine.change_to("PlayerStateFall")
+	if (not controlled_node.top_ray_cast_right.is_colliding() and wall_normal == Vector2.LEFT) or \
+		(not controlled_node.top_ray_cast_left.is_colliding() and wall_normal == Vector2.RIGHT):
+			can_fall = false
+			$"../PlayerStateInerlude".agarre_direction = wall_normal
+			$"../PlayerStateInerlude".interlude_type = "agarre"
+			state_machine.change_to("PlayerStateInerlude")
 
 func handle_gravity(delta) -> void: #control de gravedad
 	controlled_node.velocity.y += gravity * delta

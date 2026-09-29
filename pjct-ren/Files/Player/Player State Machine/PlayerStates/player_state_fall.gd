@@ -40,12 +40,19 @@ func on_physics_process(delta):
 		is_on_wall = true
 		wall_normal = Vector2.LEFT
 	
-	#si estas pegado a una pared y no estas tocando suelo cambiar a Wall_Slide
+	#si estas pegado a una pared y no estas tocando suelo cambiar a Wall_Slide o agarre
 	if is_on_wall and not controlled_node.is_on_floor():
-		$"../PlayerStateWall_Slide".wall_normal = wall_normal
-		last_chance_to_jump = false
-		state_machine.change_to("PlayerStateWall_Slide")
-		PlayerStatsComponent.can_attack = true
+		if (not controlled_node.top_ray_cast_right.is_colliding() and wall_normal == Vector2.LEFT) or \
+		(not controlled_node.top_ray_cast_left.is_colliding() and wall_normal == Vector2.RIGHT):
+			$"../PlayerStateInerlude".agarre_direction = wall_normal
+			$"../PlayerStateInerlude".interlude_type = "agarre"
+			state_machine.change_to("PlayerStateInerlude")
+			PlayerStatsComponent.can_attack = true
+		else:
+			$"../PlayerStateWall_Slide".wall_normal = wall_normal
+			last_chance_to_jump = false
+			state_machine.change_to("PlayerStateWall_Slide")
+			PlayerStatsComponent.can_attack = true
 	
 	#si estas tocando el suelo cambiar a Walk o Idle
 	if controlled_node.velocity.y >= 0 and controlled_node.is_on_floor():

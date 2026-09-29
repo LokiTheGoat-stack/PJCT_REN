@@ -7,6 +7,7 @@
 radius = 72.11102
 
 [node name="RightImpulse" type="Area2D" unique_id=2131041367]
+collision_mask = 385
 script = ExtResource("1_jnoha")
 
 [node name="Pulse" type="Sprite2D" parent="." unique_id=303369566]

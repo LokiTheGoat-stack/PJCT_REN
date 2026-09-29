@@ -11,12 +11,16 @@ class_name Player
 @onready var state_machine: PlayerStateMachine = $StateMachine
 @onready var sounds: PlayerSounds = $Sounds
 
+@onready var top_ray_cast_right: RayCast2D = $PlayerRayCast/TopRayCast_Right
+@onready var top_ray_cast_left: RayCast2D = $PlayerRayCast/TopRayCast_Left
 @onready var wall_ray_cast_right: RayCast2D = $PlayerRayCast/Wall_RayCast_Right
 @onready var wall_ray_cast_left: RayCast2D = $PlayerRayCast/Wall_RayCast_Left
 @onready var top_ray_cast: RayCast2D = $PlayerRayCast/Top_RayCast
-@onready var botton_ray_cast: RayCast2D = $PlayerRayCast/Botton_RayCast
+@onready var bottom_ray_cast: RayCast2D = $PlayerRayCast/Bottom_RayCast
 @onready var ground_raycast_l: RayCast2D = $PlayerRayCast/GroundRaycast_L
 @onready var ground_raycast_r: RayCast2D = $PlayerRayCast/GroundRaycast_R
+@onready var bottom_ray_cast_right: RayCast2D = $PlayerRayCast/BottomRayCast_Right
+@onready var bottom_ray_cast_left: RayCast2D = $PlayerRayCast/BottomRayCast_Left
 
 
 
@@ -200,14 +204,14 @@ func damage_effect(damage:float, hitstun, sprite, is_block:bool):
 func can_combat(can:bool):
 	if not can:
 		PlayerStatsComponent.can_combat = false
-		set_collision_layer_value(1,false)
-		$Ren_Sprite/AttackArea.set_collision_mask_value(2,false)
-		$Ren_Sprite/AttackArea.set_collision_mask_value(3,false)
+		GlobalParameters.change_collision(self,"layer",1,false)
+		GlobalParameters.change_collision($Ren_Sprite/AttackArea,"mask",2,false)
+		GlobalParameters.change_collision($Ren_Sprite/AttackArea,"mask",3,false)
 	else:
 		PlayerStatsComponent.can_combat = true
-		set_collision_layer_value(1,true)
-		$Ren_Sprite/AttackArea.set_collision_mask_value(2,true)
-		$Ren_Sprite/AttackArea.set_collision_mask_value(3,true)
+		GlobalParameters.change_collision(self,"layer",1,true)
+		GlobalParameters.change_collision($Ren_Sprite/AttackArea,"mask",2,true)
+		GlobalParameters.change_collision($Ren_Sprite/AttackArea,"mask",3,true)
 
 
 func activate_slow_motion(duration:float, scale:float):

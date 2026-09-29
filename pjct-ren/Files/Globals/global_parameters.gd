@@ -26,3 +26,9 @@ func change_shader_parameters(color:Color, mix:float, alpha:float, sprite):
 	sprite_material.set_shader_parameter("Color", color)
 	sprite_material.set_shader_parameter("Mix", mix)
 	sprite_material.set_shader_parameter("Alpha", alpha)
+
+func change_collision(node:Node,property:String,pro_number:int,value:bool):
+	match property:
+		"layer": node.set_collision_layer_value(pro_number,value)
+		"mask": node.set_collision_mask_value(pro_number,value)
+		_: pass

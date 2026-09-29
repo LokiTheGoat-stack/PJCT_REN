@@ -7,6 +7,7 @@
 radius = 40.04997
 
 [node name="LeftImpulse" type="Area2D" unique_id=2131041367]
+collision_mask = 385
 script = ExtResource("1_8oexi")
 
 [node name="Pulse" type="Sprite2D" parent="." unique_id=303369566]

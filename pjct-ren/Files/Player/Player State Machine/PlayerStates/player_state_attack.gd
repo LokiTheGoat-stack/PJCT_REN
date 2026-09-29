@@ -126,8 +126,8 @@ func on_input(event: InputEvent) -> void:
 			if air_combo: PlayerStatsComponent.can_attack = false
 			
 			state_machine.change_to("PlayerStateDash")
-			if controlled_node.velocity.y != 0: $"../PlayerStateDash".dash("PlayerStateIdle",true,false)
-			else: $"../PlayerStateDash".dash("PlayerStateIdle",true,false)
+			if controlled_node.velocity.y != 0: $"../PlayerStateDash".dash("PlayerStateIdle",false,true)
+			else: $"../PlayerStateDash".dash("PlayerStateIdle",false,true)
 		
 		elif Input.is_action_just_pressed("JUMP") and can_combo:
 			is_attacking = false
@@ -223,8 +223,8 @@ func finish_attack(combo_finished:bool): #terminar combo
 				state_machine.change_to("PlayerStateWalk")
 			elif Input.is_action_pressed("DASH") and PlayerStatsComponent.current_stamina > 0:
 				state_machine.change_to("PlayerStateDash")
-				if controlled_node.velocity.y != 0: $"../PlayerStateDash".dash("PlayerStateIdle",true,false)
-				else: $"../PlayerStateDash".dash("PlayerStateIdle",true,false)
+				if controlled_node.velocity.y != 0: $"../PlayerStateDash".dash("PlayerStateIdle",true,true)
+				else: $"../PlayerStateDash".dash("PlayerStateIdle",true,true)
 			elif Input.is_action_pressed("BLOCK") and PlayerStatsComponent.current_stamina > 0 and PlayerStatsComponent.can_attack:
 				PlayerMovementStats.is_block = true
 				$"../PlayerStateBlock".charge_last_state("PlayerStateIdle")

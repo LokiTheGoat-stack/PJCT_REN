@@ -111,6 +111,7 @@ FRENESI={
 2d_physics/layer_6="SceneDamage"
 2d_physics/layer_7="Pulse"
 2d_physics/layer_8="Alt.Player"
+2d_physics/layer_9="PlayerDash"
 
 [physics]
 

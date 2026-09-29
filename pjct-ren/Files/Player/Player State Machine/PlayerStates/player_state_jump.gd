@@ -46,11 +46,18 @@ func on_physics_process(delta) -> void:
 		controlled_node.animation_machine.travel("Fall_Down")
 		state_machine.change_to("PlayerStateFall")
 	
-	#si estas pegado a una pared y no estas tocando el suelo cambiar a Wall_Slide
+	#si estas pegado a una pared y no estas tocando el suelo cambiar a Wall_Slide o agarre
 	elif is_on_wall and not controlled_node.is_on_floor():
-		x_speed = PlayerMovementStats.in_air_speed
-		$"../PlayerStateWall_Slide".wall_normal = wall_normal
-		state_machine.change_to("PlayerStateWall_Slide")
+		if (not controlled_node.top_ray_cast_right.is_colliding() and wall_normal == Vector2.LEFT) or \
+		(not controlled_node.top_ray_cast_left.is_colliding() and wall_normal == Vector2.RIGHT):
+			x_speed = PlayerMovementStats.in_air_speed
+			$"../PlayerStateInerlude".agarre_direction = wall_normal
+			$"../PlayerStateInerlude".interlude_type = "agarre"
+			state_machine.change_to("PlayerStateInerlude")
+		else:
+			x_speed = PlayerMovementStats.in_air_speed
+			$"../PlayerStateWall_Slide".wall_normal = wall_normal
+			state_machine.change_to("PlayerStateWall_Slide")
 	
 	controlled_node.move_and_slide()
 
