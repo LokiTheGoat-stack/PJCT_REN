@@ -13,7 +13,7 @@ const gravity = 980.0
 
 var combo_count: int = 0
 var can_combo: bool = true
-var current_direction: int = 1
+var current_direction: float = 1
 var is_attacking: bool = false
 var attack_timer: float = 0.0
 var combo_timer: float = 0.0
@@ -23,6 +23,7 @@ var current_attack_duration: float = 0.0
 var air_combo: bool
 var down_attack: bool = false
 var up_attack: bool = false
+var walk_attack: bool = false
 var hitstun: float = 0
 
 func _ready():
@@ -30,8 +31,7 @@ func _ready():
 
 #examinar parametros del estado
 func on_enter(air:bool, attack_type:String):
-	if attack_type == "down": down_attack = true
-	elif attack_type == "up": up_attack = true
+	
 	combo_count = 0
 	can_combo = true
 	is_attacking = true
@@ -47,10 +47,17 @@ func on_enter(air:bool, attack_type:String):
 	
 	match attack_type:
 		"normal": execute_attack(0)
-		"down": execute_down_attack()
-		"up": execute_up_attack()
+		"down":
+			down_attack = true
+			execute_down_attack()
+		"up":
+			up_attack = true
+			execute_up_attack()
+		"walk":
+			walk_attack = true
+			execute_walk_attack(0)
+		"sprint": execute_sprint_attack()
 		_: pass
-	
 
 #resetear parametros para salir
 func on_exit():
@@ -60,45 +67,51 @@ func on_exit():
 	is_dashing = false
 
 func on_physics_process(delta: float) -> void:
-	#control de gravedad
-	#if down_attack: controlled_node.velocity.y = 2000
-	#elif not air_combo: pass #controlled_node.velocity.y += gravity * delta
-	if air_combo and not down_attack: controlled_node.velocity.y = 20
+	#control de direccion y movimiento
+	current_direction = Input.get_axis("LEFT","RIGHT")
+	if current_direction != 0: walk_attack = true
+	else: walk_attack = false
+	if walk_attack:
+		controlled_node.velocity.x = current_direction * (PlayerMovementStats.running_speed - 50)
 	
-	#impulso del ataque
+	
+	#control de gravedad
+	if not down_attack:
+		match air_combo:
+			true: controlled_node.velocity.y = 20
+			false: controlled_node.velocity.y = gravity * delta
+			_: pass
+	
+	
+	#actualizacion del dash timer
 	if is_dashing:
 		dash_timer -= delta
 		if dash_timer <= 0:
 			is_dashing = false
 			controlled_node.velocity.x = 0
-	else:
+	elif not walk_attack:
 		controlled_node.velocity.x = 0
 	
 	#actualizacion de timers
 	attack_timer -= delta
 	combo_timer -= delta
 	
+	
 	#verificar si expiro el combo para pasar a idle
 	if attack_timer <= 0 and is_attacking and not down_attack:
 		if combo_timer <= 0:
 			finish_attack(false)
 	
-	controlled_node.move_and_slide()
-	
-	# si caes cambiar a fall
+	# si tocas el suelo en el ataque en caidam, terminar el ataque
 	if down_attack and controlled_node.is_on_floor():
 		finish_attack(false)
-	#elif not controlled_node.is_on_floor() and not down_attack:
-	#	state_machine.change_to("PlayerStateFall")
+	
+	controlled_node.move_and_slide()
 
 func on_input(event: InputEvent) -> void:
 	#solo procesar input si se ataca
 	if not is_attacking:
 		return
-	
-	if Input.is_action_pressed("LEFT"): current_direction = -1
-	elif Input.is_action_pressed("RIGHT"): current_direction = 1
-	else: current_direction = 0
 	
 	#inputs del ataque
 	if PlayerStatsComponent.current_stamina > 0:
@@ -107,21 +120,23 @@ func on_input(event: InputEvent) -> void:
 				down_attack = true
 				can_combo = false
 				execute_down_attack()
-			if can_combo:
-				can_combo = false
-				combo_count += 1
-				if combo_count <= 2:
-					execute_attack(combo_count)
-				else: pass
-					#finish_attack(true)
-			else: pass
-				#finish_attack(false)
+			elif can_combo:
+				if walk_attack:
+					can_combo = false
+					combo_count += 1
+					execute_walk_attack(combo_count)
+				else:
+					can_combo = false
+					combo_count += 1
+					if combo_count <= 2:
+						execute_attack(combo_count)
 		
 		elif Input.is_action_pressed("DASH"):
 			is_attacking = false
 			can_combo = false
 			combo_count = 0
 			is_dashing = false
+			walk_attack = false
 			controlled_node.velocity.x = 0
 			if air_combo: PlayerStatsComponent.can_attack = false
 			
@@ -134,6 +149,7 @@ func on_input(event: InputEvent) -> void:
 			can_combo = false
 			combo_count = 0
 			is_dashing = false
+			walk_attack = false
 			controlled_node.velocity.x = 0
 			if air_combo: PlayerStatsComponent.can_attack = false
 			
@@ -148,6 +164,7 @@ func on_input(event: InputEvent) -> void:
 				can_combo = false
 				combo_count = 0
 				is_dashing = false
+				walk_attack = false
 				controlled_node.velocity.x = 0
 				
 				PlayerMovementStats.is_block = true
@@ -166,6 +183,25 @@ func execute_down_attack():
 	rest_stamina(40)
 
 func execute_up_attack():pass
+
+func execute_walk_attack(attack_index:int):
+	combo_timer = combo_window
+	is_dashing = false
+	
+	if attack_index % 2 == 0 or attack_index == 0:
+		controlled_node.animation_machine.travel("Move_Attack_1")
+		current_attack_duration = attack_1_duration
+		hitstun = 0.09
+	else:
+		controlled_node.animation_machine.travel("Move_Attack_2")
+		current_attack_duration = attack_2_duration
+		hitstun = 0.09
+	
+	
+	attack_timer = current_attack_duration
+	_attack_timer_func()
+
+func execute_sprint_attack(): pass
 
 func execute_attack(attack_index: int):
 	combo_timer = combo_window
@@ -200,6 +236,7 @@ func rest_stamina(value:float):
 
 func apply_dash(direction: int, speed: float):
 	is_dashing = true
+	controlled_node.velocity.x = 0
 	controlled_node.velocity.x = current_direction * attack_dash_speed
 	dash_timer = attack_dash_duration
 
@@ -211,6 +248,7 @@ func finish_attack(combo_finished:bool): #terminar combo
 	can_combo = false
 	combo_count = 0
 	is_dashing = false
+	walk_attack = false
 	controlled_node.velocity.x = 0
 	
 	if air_combo: PlayerStatsComponent.can_attack = false

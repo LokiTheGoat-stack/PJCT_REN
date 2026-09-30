@@ -51,7 +51,7 @@ func on_input(event: InputEvent) -> void:
 		if Input.is_action_just_pressed("ATTACK") and PlayerStatsComponent.can_combat:
 			min_speed = 0
 			state_machine.change_to("PlayerStateAttack")
-			$"../PlayerStateAttack".on_enter(false,"normal")
+			$"../PlayerStateAttack".on_enter(false,"walk")
 		
 		#Cambiar a Block
 		if Input.is_action_pressed("BLOCK") and PlayerStatsComponent.can_combat:
